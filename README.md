@@ -1,9 +1,9 @@
 # Security Considerations in the IP-based Internet of Things
 
-This is the working area for the Individual internet-draft, "Security Considerations in the IP-based Internet of Things".
+This is the working area for the proposed Research Group internet-draft, "Security Considerations in the IP-based Internet of Things".
 
-* [Editor's copy](https://t2trg.github.io/iot-seccons/)
-* [Individual Draft] (https://tools.ietf.org/html/draft-irtf-iot-seccons-latest)
+* [Editor's copy](https://t2trg.github.io/iot-seccons/)[![Build Status](https://travis-ci.org/t2trg/iot-seccons.svg?branch=master)](https://travis-ci.org/t2trg/iot-seccons)
+* [Individual Draft, once submitted] (https://tools.ietf.org/html/draft-irtf-iot-seccons-latest)
 
 
 ## Building the Draft
@@ -22,8 +22,8 @@ instructions](https://github.com/martinthomson/i-d-template/blob/master/doc/SETU
 
 Before submitting feedback, please familiarize yourself with our current issues
 list and review the [working group
-documents](https://datatracker.ietf.org/wg/iot/documents/) and [mailing
-list discussion](https://mailarchive.ietf.org/arch/browse/iot/). If you're
+documents](https://datatracker.ietf.org/rg/t2trg/documents/) and [mailing
+list discussion](https://mailarchive.ietf.org/arch/browse/t2trg/). If you're
 new to this, you may also want to read the [Tao of the
 IETF](https://www.ietf.org/tao.html).
 
@@ -32,7 +32,7 @@ terms outlined below.
 
 1. The best way to provide feedback (editorial or design) and ask questions is
 sending an e-mail to our mailing list
-([info](https://www.ietf.org/mailman/listinfo/iot)). This will ensure that
+([info](https://www.ietf.org/mailman/listinfo/t2trg)). This will ensure that
 the entire Working Group sees your input in a timely fashion.
 
 2. If you have **editorial** suggestions (i.e., those that do not change the
@@ -58,6 +58,8 @@ providing a link to the issue in the message body.
 
 
 ## NOTE WELL
+
+The below NOTE WELL for the IETF also applies to the IRTF.
 
 Any submission to the [IETF](https://www.ietf.org/) intended by the Contributor
 for publication as all or part of an IETF Internet-Draft or RFC and any
