@@ -1,28 +1,15 @@
 ---
 abbrev: Security Considerations for the IoT
 title: Security Considerations in the IP-based Internet of Things
-docname: draft-garcia-core-security-06
+docname: draft-irtf-t2trg-iot-seccons
+cat: info
+stand_alone: true
 informative:
   RFC6568: 
   RFC2818: 
   RFC6345: 
-  ID-CoAP:
-    title: Constrained Application Protocol (CoAP)
-    author:
-    - ins: Z. Shelby
-    - ins: K. Hartke
-    - ins: C. Bormann
-    date: 2013-06
-    seriesinfo:
-      draft-ietf-core-coap-18: ''
-  ID-CoAPMulticast:
-    title: Group Communication for CoAP
-    author:
-    - ins: A. Rahman
-    - ins: E. Dijk
-    date: 2013-07
-    seriesinfo:
-      draft-ietf-core-groupcomm-12: "(work in progress)"
+  RFC7252:
+  RFC7390:
   ID-Daniel:
     title: IPv6 over Low Power WPAN Security Analysis
     author:
@@ -49,16 +36,7 @@ informative:
     date: 2012-07
     seriesinfo:
       draft-hartke-core-codtls-02: "(work in progress)"
-  ID-Moskowitz:
-    title: Host Identity Protocol Version 2
-    author:
-    - ins: R. Moskowitz
-    - ins: T. Heer
-    - ins: P. Jokela
-    - ins: T. Henderson
-    date: 2013-09
-    seriesinfo:
-      draft-ietf-hip-rfc5201-bis-13: "(work in progress)"
+  RFC7401:
   ID-Nikander:
     title: A Bound End-to-End Tunnel(BEET) mode for ESP
     author:
@@ -115,14 +93,13 @@ informative:
   RFC4016: 
   RFC5246: 
   RFC4251: 
-  RFC4306: 
+  RFC7296: 
   RFC4555: 
   RFC4621: 
   RFC4738: 
   RFC4919: 
   RFC4944: 
   RFC5191: 
-  RFC5201: 
   RFC5206: 
   RFC5238: 
   RFC5713: 
@@ -691,7 +668,7 @@ the efficient transmission and adaptation of IPv6 packets over IEEE 802.15.4
 networks {{RFC4944}}.  The CoRE working group {{WG-CoRE}} provides a framework
 for resource-oriented applications intended to run on constrained IP network
 (6LoWPAN). One of its main tasks is the definition of a lightweight version
-of the HTTP protocol, the Constrained Application Protocol (CoAP) {{ID-CoAP}},
+of the HTTP protocol, the Constrained Application Protocol (CoAP) {{RFC7252}},
 that runs over UDP and enables efficient application-level communication
 for things.
 
@@ -703,7 +680,7 @@ ideology and technology.  While a wide range of specialized as well as general-p
 key exchange and security solutions exist for the Internet domain, we discuss
 a number of protocols and procedures that have been recently discussed in
 the context of the above working groups.  The considered protocols are IKEv2/IPsec
-{{RFC4306}}, TLS/SSL {{RFC5246}}, DTLS {{RFC5238}}, HIP {{RFC5201}}{{ID-Moskowitz}},
+{{RFC7296}}, TLS/SSL {{RFC5246}}, DTLS {{RFC5238}}, HIP {{RFC7401}},
 PANA {{RFC5191}}, and EAP {{RFC3748}} in this Internet-Draft.  Application layer
 solutions such as SSH {{RFC4251}} also exist, however, these are currently
 not considered.  {{fig3}} depicts the relationships between the discussed
@@ -870,7 +847,7 @@ used or the underlying application demands a low delay.
 
 Independently from the development in the IoT domain, all discussed security
 protocols show efforts to reduce the cryptographic cost of the required public-key-based
-key exchanges and signatures with ECC{{RFC5246}}{{RFC5903}}{{ID-Moskowitz}}{{ID-HIP}}.
+key exchanges and signatures with ECC{{RFC5246}}{{RFC5903}}{{RFC7401}}{{ID-HIP}}.
  Moreover, all protocols have been revised in the last years to enable crypto
 agility, making cryptographic primitives interchangeable.  Diet HIP takes
 the reduction of the cryptographic load one step further by focusing on cryptographic
@@ -1328,7 +1305,7 @@ of time.  This step can involve the secure transmission of keying materials
 used for network security at different layers.  The information exchanged
 in the network is considered to be valuable and it should be protected in
 the sense of pairwise links.  Commands should be secured and broadcast should
-be secured with entity authentication {{ID-CoAPMulticast}}.  Network should
+be secured with entity authentication {{RFC7390}}.  Network should
 be protected from attacks.  A further extension to this use case is to allow
 for remote management.  A "backend manager" is in charge of managing SW or
 information exchanged or collected within the 6LoWPAN/CoAP network. This
