@@ -1466,7 +1466,7 @@ means that a pair of devices can setup a security relationship on the fly,
 without interaction with a central device elsewhere within the system.  In
 many cases, it is handy to have a distributed bootstrapping protocol based
 on existing security protocols (e.g., DTLS in CoAP) required for other purposes:
-this reduces the amount of required software.  A centralized boostrapping
+this reduces the amount of required software.  A centralized bootstrapping
 protocol is one in which a central device manages the security relationships
 within a network.  This can happen locally, e.g., handled by the 6LBR, or
 remotely, e.g., from a server connected via the Internet.  The security bootstrapping
@@ -1499,7 +1499,7 @@ for the different security profiles is as follows.
 |SecProf_4 |* As in SecProf_3.                                       |
 +----------+---------------------------------------------------------+
 ~~~~
-{: #fig9 title="Security boostrapping methods in different security profiles"}
+{: #fig9 title="Security bootstrapping methods in different security profiles"}
 
 ## Network Security {#sec6-4}
 
