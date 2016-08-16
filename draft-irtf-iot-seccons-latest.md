@@ -242,26 +242,20 @@ author:
   city: Eindhoven,   5656 AA
   country: The Netherlands
   email: sandeep.kumar@philips.com
-- name: Sye Loong Keoh
-  ins: S. Keoh
-  org: University of Glasgow Singapore
-  street: Republic PolyTechnic, 9 Woodlands Ave 9
-  city: Singapore 838964
-  country: SG
-  email: SyeLoong.Keoh@glasgow.ac.uk
-- name: Rene Hummen
-  ins: R. Hummen
-  org: RWTH Aachen University
-  street: Templergraben 55
-  city: Aachen,   52056
-  country: Germany
-  email: rene.hummen@cs.rwth-aachen.de
-- name: Rene Struik
-  ins: R. Struik
-  org: Struik Security Consultancy
-  street: Toronto,
-  country: Canada
-  email: rstruik.ext@gmail.com
+- name: Mohit Sethi
+  ins: M. Sethi
+  org: Ericsson
+  street: 
+  city: 
+  country: 
+  email: 
+- name: Oliver Pfaff
+  ins: O. Pfaff
+  org: Siemens
+  street: 
+  city: 
+  country: 
+  email: 
 pi:
 - toc
 - sortrefs
@@ -1781,4 +1775,5 @@ This document contains no request to IANA.
 # Acknowledgements {#sec10}
 
 We gratefully acknowledge feedback and fruitful discussion with Tobias Heer
-and Robert Moskowitz.
+and Robert Moskowitz. Acknowledge the additional authors of the previous version of this document
+Sye Loong Keoh, Rene Hummen and Rene Struik.
