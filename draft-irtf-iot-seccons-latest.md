@@ -400,7 +400,7 @@ Bootstrapping  /      Maintenance &   \     Maintenance &
 
 This section explores the security threats and vulnerabilities of a network
 of things in the IoTs.  Security threats have been analyzed in related IP
-protocols including HTTPS {{RFC2818}}, 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS
+protocols including HTTPS {{RFC2818}}, COAP{{RFC7252}} 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS
 security threats {{RFC3833}}, SIP {{RFC3261}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}.
  Nonetheless, the challenge is about their impacts on scenarios of the IoTs.
  In this section, we specifically discuss the threats that could compromise
@@ -442,7 +442,7 @@ the scope of Internet protocols but we gather them here for the sake of complete
    channel is not sufficiently protected or in the event of session key compromise
    due to a long period of usage without key renewal or updates.
 
-4. Man-in-the-middle attack: The commissioning phase may also be vulnerable
+4. Man-in-the-middle attack: Both the commissioning phase and operational phases may also be vulnerable
    to man-in-the-middle attacks, e.g., when keying material between communicating
    entities is exchanged in the clear and the security of the key establishment
    protocol depends on the tacit assumption that no third party is able to eavesdrop
@@ -522,7 +522,7 @@ apply to the IoTs.
 |Model       |                  |ACE-OAuth(draft)  |Extraction of     |
 |            |                  |                  |security params   |
 +------------+------------------+------------------+------------------+
-|Application |                  |RFC2818           |RFC2818, Firmware |
+|Application |                  |RFC2818, RFC7252  |RFC2818, Firmware |
 |Layer       |                  |OSCOAP(draft)     |replacement       |
 +------------+------------------+------------------+------------------+
 |Transport   |                  | Eavesdropping &  |Eavesdropping     |
@@ -646,7 +646,108 @@ for secure communication.  Things can then securely communicate with each
 other during their operational phase by means of the employed network and
 application security mechanisms.
 
-# Security Levels for the IP-based Internet of Things {#sec6}
+
+# State of the Art {#sec4}
+
+Nowadays, there exists a multitude of control protocols for the IoT. For
+BAC systems, the ZigBee standard {{ZB}}, BACNet {{BACNET}}, or DALI {{DALI}} play
+key roles.  Recent trends, however, focus on an all-IP approach for system
+control.
+
+In this setting, a number of IETF working groups are designing new protocols
+for resource constrained networks of smart things.  The 6LoWPAN working group
+{{WG-6LoWPAN}} concentrates on the definition of methods and protocols for
+the efficient transmission and adaptation of IPv6 packets over IEEE 802.15.4
+networks {{RFC4944}}.  The CoRE working group {{WG-CoRE}} provides a framework
+for resource-oriented applications intended to run on constrained IP network
+(6LoWPAN). One of its main tasks is the definition of a lightweight version
+of the HTTP protocol, the Constrained Application Protocol (CoAP) {{RFC7252}},
+that runs over UDP and enables efficient application-level communication
+for things.
+Also IRTF groups are actively contributing to improve IoT security. 
+For instance, the T2TRG  {{T2TRG}} is investigating object security for CoAP. 
+
+Additionally industry alliances like Thread {{Thread}} are creating constrained IP protocol stacks based on the IETF work. 
+
+## IP-based Security Solutions {#sec4-1}
+
+In the context of the IP-based IoT solutions, consideration of TCP/IP security
+protocols is important as these protocols are designed to fit the IP network
+ideology and technology.  There are a wide range of specialized as well as general-purpose
+key exchange and security solutions exist for the Internet domain such as IKEv2/IPsec
+{{RFC7296}}, TLS/SSL {{RFC5246}}, DTLS {{RFC5238}}, HIP {{RFC7401}},
+PANA {{RFC5191}}, and EAP {{RFC3748}}.  Some of these solutions are also been investigated now, such as, e.g., OSCOAP. {{fig3}} depicts the relationships between the discussed
+protocols in the context of the security terminology introduced in {{sec3-1}}.
+
+
+~~~~
+            ..........................
+            :           +-----------+:
+            :       *+*>|Application|*****     *** Bootstrapping
+            :       *|  +-----------+:   *     ### Transport Security 
+            :       *|  +-----------+:   *     === Network security
+            :       *|->| Transport |:   *     ... Object security
+            :    * _*|  +-----------+:   *
+            :    *|  |  +-----------+:   *
+            :    *|  |->|  Network  |:   *--> -PANA/EAP
+            :    *|  |  +-----------+:   *    -HIP
+            :    *|  |  +-----------+:   *
+            :    *|  +->|     L2    |:   *     ## DTLS
+            :    *|     +-----------+:   *     .. OSCOAP
+            :+--------+              :   *
+            :|Security| Configuration:   *     [] HIP,IKEv2
+            :|Service |   Entity     :   *     [] ESP/AH
+            :+--------+              :   *
+            :........................:   *
+                                         *
+.........................                *    .........................
+:+--------+             :                *    :             +--------+:
+:|Security|   Node B    :    Secure      *    :   Node A    |Security|:
+:|Service |             :    routing     *    :             |Service |:
+:+--------+             :   framework    *    :             +--------+:
+:    |     +-----------+:        |       **** :+-----------+     |*   :
+:    |  +->|Application|:........|............:|Application|<*+* |*   :
+:    |  |  +----##-----+:        |            :+----##-----+  |* |*   :
+:    |  |  +----##-----+:        |            :+----##-----+  |* |*   :
+:    |  |->| Transport |#########|#############| Transport |<-|* |*   :
+:    |__|  +----[]-----+:  ......|..........  :+----[]-----+  |*_|*   :
+:       |  +====[]=====+=====+===========+=====+====[]=====+  | *     :
+:       |->|| Network  |:  : |  Network  | :  :|  Network ||<-|       :
+:       |  +|----------+:  : +-----------+ :  :+----------|+  |       :
+:       |  +|----------+:  : +-----------+ :  :+----------|+  |       :
+:       +->||    L2    |:  : |     L2    | :  :|     L2   ||<-+       :
+:          +===========+=====+===========+=====+===========+          :
+:.......................:  :...............:  :.......................:
+           Relationships between IP-based security protocols.
+~~~~
+{: #fig4}
+
+The Internet Key Exchange (IKEv2)/IPsec and the Host Identity protocol (HIP)
+reside at or above the network layer in the OSI model. Both protocols are
+able to perform an authenticated key exchange and set up the IPsec transforms
+for secure payload delivery.  Currently, there are also ongoing efforts to
+create a HIP variant coined Diet HIP {{ID-HIP}} that takes lossy low-power
+networks into account at the authentication and key exchange level.
+
+Transport Layer Security (TLS) and its datagram-oriented variant DTLS secure
+transport-layer connections.  TLS provides security for TCP and requires
+a reliable transport, while DTLS secures and uses datagram-oriented protocols
+such as UDP.  Both protocols are intentionally kept similar and share the
+same ideology and cipher suites.
+
+The Extensible Authentication Protocol (EAP) is an authentication framework
+supporting multiple authentication methods.  EAP runs directly over the data
+link layer and, thus, does not require the deployment of IP.  It supports
+duplicate detection and retransmission, but does not allow for packet fragmentation.
+ The Protocol for Carrying Authentication for Network Access (PANA) is a
+network-layer transport for EAP that enables network access authentication
+between clients and the network infrastructure.  In EAP terms, PANA is a
+UDP-based EAP lower layer that runs between the EAP peer and the EAP authenticator.
+
+In addition, there is also new activities in IETF and W3C to define security protocols better tailored to IoT or for specific deployment situations. The ACE WG is designing an authorization mechanism based on OAuth for constrained devices. There is work on Object Security based CoAP protection mechanism being defined in OSCOAP. <<similar work in W3C - Oliver?>>  
+
+
+# Security Levels for the IP-based Internet of Things {#sec5}
 
 Different applications have different security requirements and needs and,
 depending on various factors, such as device capability, availability of
@@ -814,7 +915,7 @@ summarize the expected security features or capabilities for each the security
 profile with regards to "Security Architecture", "Security Model", "Security
 Bootstrapping", "Network Security", and "Application Security".
 
-## Security Architecture {#sec6-1}
+## Security Architecture {#sec5-1}
 
 Most things might be required to support both centralized and distributed
 operation patterns.  Distributed thing-to-thing communication might happen
@@ -883,7 +984,7 @@ access to the network. The last two security suites (SecProf_3 and SecProf_4)
 further allow for the management of devices or some keying materials from
 the backend.
 
-## Security Model {#sec6-2}
+## Security Model {#sec5-2}
 
 While some applications might involve very resource-constrained things such
 as, e.g., a humidity, pollution sensor, other applications might target more
@@ -918,7 +1019,7 @@ require different sets of security mechanisms.
 ~~~~
 {: #fig8 title="Thing security models in different security profiles."}
 
-## Security Bootstrapping and Management {#sec6-3}
+## Security Bootstrapping and Management {#sec5-3}
 
 Bootstrapping refers to the process by which a thing initiates its life within
 a security domain and includes the initialization of secure and/or authentic
@@ -994,7 +1095,7 @@ for the different security profiles is as follows.
 ~~~~
 {: #fig9 title="Security bootstrapping methods in different security profiles"}
 
-## Network Security {#sec6-4}
+## Network Security {#sec5-4}
 
 Network security refers to the mechanisms used to ensure the secure transport
 of 6LoWPAN frames.  This involves a multitude of issues ranging from secure
@@ -1042,7 +1143,7 @@ for a more flexible selection of security needs at L2 and L3.
 ~~~~
 {: #fig10 title="Network security needs in different security profiles"}
 
-## Application Security {#sec6-5}
+## Application Security {#sec5-5}
 
 In the context of 6LoWPAN/CoAP networks, application security refers firstly
 to the configuration of DTLS used to protect the exchanged information. 
@@ -1107,105 +1208,8 @@ extends the previous set of requirements considering security mechanisms
 to deal with translations between TLS and DTLS or for the provision of secure
 multicast within a 6LoWPAN/CoAP network from the backend.
 
-# State of the Art {#sec4}
 
-Nowadays, there exists a multitude of control protocols for the IoT. For
-BAC systems, the ZigBee standard {{ZB}}, BACNet {{BACNET}}, or DALI {{DALI}} play
-key roles.  Recent trends, however, focus on an all-IP approach for system
-control.
-
-In this setting, a number of IETF working groups are designing new protocols
-for resource constrained networks of smart things.  The 6LoWPAN working group
-{{WG-6LoWPAN}} concentrates on the definition of methods and protocols for
-the efficient transmission and adaptation of IPv6 packets over IEEE 802.15.4
-networks {{RFC4944}}.  The CoRE working group {{WG-CoRE}} provides a framework
-for resource-oriented applications intended to run on constrained IP network
-(6LoWPAN). One of its main tasks is the definition of a lightweight version
-of the HTTP protocol, the Constrained Application Protocol (CoAP) {{RFC7252}},
-that runs over UDP and enables efficient application-level communication
-for things.
-
-Additionally industry alliances like Thread {{Thread}} are creating constrained IP protocol stacks based on the IETF work. 
-
-## IP-based Security Solutions {#sec4-1}
-
-In the context of the IP-based IoT solutions, consideration of TCP/IP security
-protocols is important as these protocols are designed to fit the IP network
-ideology and technology.  There are a wide range of specialized as well as general-purpose
-key exchange and security solutions exist for the Internet domain such as IKEv2/IPsec
-{{RFC7296}}, TLS/SSL {{RFC5246}}, DTLS {{RFC5238}}, HIP {{RFC7401}},
-PANA {{RFC5191}}, and EAP {{RFC3748}}. {{fig3}} depicts the relationships between the discussed
-protocols in the context of the security terminology introduced in {{sec3-1}}.
-
-
-~~~~
-            ..........................
-            :           +-----------+:
-            :       *+*>|Application|*****     *** Bootstrapping
-            :       *|  +-----------+:   *     ### Transport Security
-            :       *|  +-----------+:   *     === Network security
-            :       *|->| Transport |:   *
-            :    * _*|  +-----------+:   *
-            :    *|  |  +-----------+:   *
-            :    *|  |->|  Network  |:   *--> -PANA/EAP
-            :    *|  |  +-----------+:   *    -HIP
-            :    *|  |  +-----------+:   *
-            :    *|  +->|     L2    |:   *     ## DTLS
-            :    *|     +-----------+:   *     
-            :+--------+              :   *
-            :|Security| Configuration:   *     [] HIP,IKEv2
-            :|Service |   Entity     :   *     [] ESP/AH
-            :+--------+              :   *
-            :........................:   *
-                                         *
-.........................                *    .........................
-:+--------+             :                *    :             +--------+:
-:|Security|   Node B    :                *    :   Node A    |Security|:
-:|Service |             :                *    :             |Service |:
-:+--------+             :     Secure     *    :             +--------+:
-:    |     +-----------+:     routing    *    :+-----------+     |*   :
-:    |  +->|Application|:    framework   ******|Application|<*+* |*   :
-:    |  |  +----##-----+:        |            :+----##-----+  |* |*   :
-:    |  |  +----##-----+:        |            :+----##-----+  |* |*   :
-:    |  |->| Transport |#########|#############| Transport |<-|* |*   :
-:    |__|  +----[]-----+:  ......|..........  :+----[]-----+  |*_|*   :
-:       |  +====[]=====+=====+===========+=====+====[]=====+  | *     :
-:       |->|| Network  |:  : |  Network  | :  :|  Network ||<-|       :
-:       |  +|----------+:  : +-----------+ :  :+----------|+  |       :
-:       |  +|----------+:  : +-----------+ :  :+----------|+  |       :
-:       +->||    L2    |:  : |     L2    | :  :|     L2   ||<-+       :
-:          +===========+=====+===========+=====+===========+          :
-:.......................:  :...............:  :.......................:
-           Relationships between IP-based security protocols.
-~~~~
-{: #fig4}
-
-The Internet Key Exchange (IKEv2)/IPsec and the Host Identity protocol (HIP)
-reside at or above the network layer in the OSI model. Both protocols are
-able to perform an authenticated key exchange and set up the IPsec transforms
-for secure payload delivery.  Currently, there are also ongoing efforts to
-create a HIP variant coined Diet HIP {{ID-HIP}} that takes lossy low-power
-networks into account at the authentication and key exchange level.
-
-Transport Layer Security (TLS) and its datagram-oriented variant DTLS secure
-transport-layer connections.  TLS provides security for TCP and requires
-a reliable transport, while DTLS secures and uses datagram-oriented protocols
-such as UDP.  Both protocols are intentionally kept similar and share the
-same ideology and cipher suites.
-
-The Extensible Authentication Protocol (EAP) is an authentication framework
-supporting multiple authentication methods.  EAP runs directly over the data
-link layer and, thus, does not require the deployment of IP.  It supports
-duplicate detection and retransmission, but does not allow for packet fragmentation.
- The Protocol for Carrying Authentication for Network Access (PANA) is a
-network-layer transport for EAP that enables network access authentication
-between clients and the network infrastructure.  In EAP terms, PANA is a
-UDP-based EAP lower layer that runs between the EAP peer and the EAP authenticator.
-
-In addition, there is also new activities in IETF and W3C to define security protocols better tailored to IoT or for specific deployment situations. The ACE WG is designing an authorization mechanism based on OAuth for constrained devices. There is work on Object Security based CoAP protection mechanism being defined in OSCOAP. <<similar work in W3C - Oliver?>>  
-
-
-# Challenges and Security Considerations for a Secure Internet of Things {#sec5}
+# Challenges and Security Considerations for a Secure Internet of Things {#sec6}
 <<Oliver and Mohit add stuff in this section>>
 
 In this section, we take a closer look at the various security challenges
@@ -1220,7 +1224,7 @@ in some areas rather than giving an abstract discussion about general properties
 of the protocols.  In this regard, the discussion handles issues that are
 most important from the authors' perspectives.
 
-## Constraints and Heterogeneous Communication {#sec5-1}
+## Constraints and Heterogeneous Communication {#sec6-1}
 
 Coupling resource constrained networks and the powerful Internet is a challenge
 because the resulting heterogeneity of both networks complicates protocol
@@ -1228,7 +1232,7 @@ design and system operation.  In the following we briefly discuss the resource
 constraints of IoT devices and the consequences for the use of Internet Protocols
 in the IoT domain.
 
-### Tight Resource Constraints {#sec5-1-1}
+### Tight Resource Constraints {#sec6-1-1}
 
 The IoT is a resource-constrained network that relies on lossy and low-bandwidth
 channels for communication between small nodes, regarding CPU, memory, and
@@ -1274,7 +1278,7 @@ attacks.  Since the energy consumption of IoT devices differs from other
 device classes, judgments on the energy consumption of a particular protocol
 cannot be made without tailor-made IoT implementations.
 
-### Denial-of-Service Resistance {#sec5-1-2}
+### Denial-of-Service Resistance {#sec6-1-2}
 
 The tight memory and processing constraints of things naturally alleviate
 resource exhaustion attacks.  Especially in unattended T2T communication,
@@ -1302,7 +1306,7 @@ cannot and are excluded from communicating with the victim.  Still, puzzle-based
 approaches are a viable option for sheltering IoT devices against unintended
 overload caused by misconfigured or malfunctioning things.
 
-### Protocol Translation and End-to-End Security {#sec5-1-3}
+### Protocol Translation and End-to-End Security {#sec6-1-3}
 
 Even though 6LoWPAN and CoAP progress towards reducing the gap between Internet
 protocols and the IoT, they do not target protocol specifications that are
@@ -1351,13 +1355,13 @@ There are essentially four solutions for this problem:
 To the best of our knowledge, none of the mentioned security protocols provides
 a fully customizable solution in this problem space.  
 
-## Bootstrapping of a Security Domain {#sec5-2}
+## Bootstrapping of a Security Domain {#sec6-2}
 
 Creating a security domain from a set of previously unassociated IoT devices
 is a key operation in the lifecycle of a thing and in the IoT network. This aspect is further elaborated and discussed in the T2TRG draft on bootstrapping {{bootstrap-draft}}.
 
 
-## Operation {#sec5-3}
+## Operation {#sec6-3}
 
 After the bootstrapping phase, the system enters the operational phase. 
 During the operational phase, things can relate to the state information
@@ -1365,7 +1369,7 @@ created during the bootstrapping phase in order to exchange information securely
 and in an authenticated fashion.  In this section, we discuss aspects of
 communication patterns and network dynamics during this phase.
 
-### End-to-End Security {#sec5-3-1}
+### End-to-End Security {#sec6-3-1}
 
 Providing end-to-end security is of great importance to address and secure
 individual T2T or H2T communication within one IoT domain. Moreover, end-to-end
@@ -1376,9 +1380,9 @@ and integrity protection above the network layer and the transport layer
 respectively.  Once bootstrapped, these functions can be carried out without
 online connections to third parties, making the protocols applicable for
 decentralized use in the IoT.  However, protocol translation by intermediary
-nodes may invalidate end-to-end protection measures (see {{sec5-1}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{OSCOAP}} is a potential solution in this space.
+nodes may invalidate end-to-end protection measures (see {{sec5-1}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
 
-### Group Membership and Security {#sec5-3-2}
+### Group Membership and Security {#sec6-3-2}
 
 In addition to end-to-end security, group key negotiation is an important
 security service for the T2Ts and Ts2T communication patterns in the IoT
@@ -1389,7 +1393,7 @@ not focus on group-key establishment.  However, the Diffie-Hellman keys that
 are used in IKEv2 and HIP could be used for group Diffie-Hellman key-negotiations.
  Conceptually, solutions that provide secure group communication at the network
 layer (IPsec/IKEv2, HIP/Diet HIP) may have an advantage regarding the cryptographic
-overhead compared to application-focused security solutions (TLS/ DTLS).
+overhead compared to application-focused security solutions (TLS/ DTLS or OSCOAP).
  This is due to the fact that application-focused solutions require cryptographic
 operations per group application, whereas network layer approaches may allow
 to share secure group associations between multiple applications (e.g., for
@@ -1407,7 +1411,7 @@ channels.  However, such a centralized approach may not be applicable in
 a distributed environment, where the choice of one or several coordinators
 and the management of the group key is not trivial.
 
-### Mobility and IP Network Dynamics {#sec5-3-3}
+### Mobility and IP Network Dynamics {#sec6-3-3}
 
 It is expected that many things (e.g., wearable sensors, and user devices)
 will be mobile in the sense that they are attached to different networks
