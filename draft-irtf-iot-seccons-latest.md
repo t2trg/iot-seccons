@@ -1098,7 +1098,28 @@ Although this may seem far fetched given the commercial interests and market dyn
 ## Penetration testing {#sec6-7}
 Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform penetration testing on their IoT devices. Nonetheless, since the devices are resource-constrained they often barf of crash even when minimal tests are performed. It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices. 
 
+## Long-term resistance to cryptographic analysis {#sec6-8}
 
+Many IoT systems that are being deployed today will remain operational
+for many years. With the advancements made in the field of quantum
+computers, it is possible that we may indeed have large-scale easily
+available quantum computers in future for performing cryptanalysis on
+existing cryptographic algorithms and cipher suites. If this happens, it
+would mean that functionalities enabled by means of RSA/ECC would need
+to be updated to quantum-resistant alternatives. While such future
+planning is hard, it may be a necessity in certain critical IoT
+deployments which are expected to last decades or more. Although
+increasing the key-size of the different algorithms is definitely an
+option, it would also incur additional computation overhead and network
+traffic. This would be undesirable in most scenarios. There have been
+recent advancements in quantum-resistant cryptography, we highlight a
+few here:
+
+1. 
+
+2. 
+
+3. 
 
 # Next Steps towards a Flexible and Secure Internet of Things {#sec7}
 
