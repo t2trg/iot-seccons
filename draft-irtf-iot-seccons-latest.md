@@ -10,6 +10,7 @@ informative:
   RFC6345: 
   RFC7252:
   RFC7390:
+  RFC7696:
   ID-Daniel:
     title: IPv6 over Low Power WPAN Security Analysis
     author:
@@ -1120,6 +1121,8 @@ few here:
 2. 
 
 3. 
+
+RFC7696 provides guidelines for cryptographic algorithm agility.
 
 # Next Steps towards a Flexible and Secure Internet of Things {#sec7}
 
