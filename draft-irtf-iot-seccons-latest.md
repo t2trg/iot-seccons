@@ -277,14 +277,19 @@ informative:
   cctv:
     title: "Backdoor In MVPower DVR Firmware Sends CCTV Stills To an Email Address In China"
     seriesinfo:
-      Web: https://hardware.slashdot.org/story/16/02/17/0422259/backdoor-in-mvpower-dvr-firmware-sends-cctv-stills-to-an-email-address-in-china                 
+      Web: https://hardware.slashdot.org/story/16/02/17/0422259/backdoor-in-mvpower-dvr-firmware-sends-cctv-stills-to-an-email-address-in-china   
+  ETSI_GR_QSC_001:
+	title: Quantum-Safe Cryptography (QSC);Quantum-safe algorithmic framework 
+    date: June 2016
+    seriesinfo: European Telecommunications Standards Institute (ETSI)
+	               
 author:
 - name: Oscar Garcia-Morchon
   ins: O. Garcia-Morchon
   org: Philips Research
-  street: High Tech Campus
-  city: Eindhoven,   5656 AA
-  country: The Netherlands
+  street: Canal Park 2
+  city: Cambridge,   02141
+  country: United States
   email: oscar.garcia@philips.com
 - name: Sandeep S. Kumar
   ins: S. Kumar
@@ -676,6 +681,7 @@ application. These security profiles are summarized in the table below:
 
 ~~~~
            +---------------------------------------------------------+
+           | Exemnplary      |          		                     |
            | Application     |          Description                  |
 +----------+---------------------------------------------------------+
 |SecProf_1 |Home usage       |Enables operation between home things  |
@@ -699,8 +705,8 @@ application. These security profiles are summarized in the table below:
 The classification in the table considers different potential applications
 and situations in which their security needs change due to different operational features (network size, existence of a central device, connectivity to the Internet, importance of the exchanged information, etc) or threat model (what are the assets that an attacker looks for). As already pointed out, this set of scenarios is exemplary and they should be further discussed based on a broader consensus.
 
-The security suite (SecProf_1) is catered for environments in which
-6LoWPAN/CoAP can be used to enable communication between things in an ad-hoc
+The security suite (SecProf_1) is catered for environments in which IP protocols (e.g.,
+6LoWPAN/CoAP) can be used to enable communication between things in an ad-hoc
 manner and the security requirements are minimal. An example, is a home
 application in which two devices should exchange information and no further
 connection with other devices (local or with a backend) is required. In
@@ -715,26 +721,25 @@ for the securing domain management refers to the creation of a centrally
 managed security domain without any connectivity to the Internet. The central
 device used for management can serve as, e.g., a key distribution center
 including policies for key update, storage, etc. The presence of a central
-device can help in the management of larger networks. Network security becomes more relevant in this scenario since the 6LoWPAN/CoAP network can be prone to Denial of Service attacks (e.g., flooding if L2 is not protected) or routing attacks.
+device can help in the management of larger networks. Network security becomes more relevant in this scenario since the IP network (e.g., 6LoWPAN/CoAP network) can be prone to Denial of Service attacks (e.g., flooding if L2 is not protected) or routing attacks.
 
 SecProf_3 considers that a central device is always required for network
 management. Example applications of this profile include building control
 and automation, sensor networks for industrial use, environmental monitoring,
-etc. As before, the network manager can be located in the 6LoWPAN/CoAP network and handle key management. In this case, the first association of devices to the network is required to be done in a secure way. In other words, the threat model requires measurements to protect against any vulnerable period of time. This step can involve the secure transmission of keying materials used for network security at different layers. The information exchanged in the network is considered to be valuable and it should be protected in the sense of pairwise links. Commands should be secured and broadcast should be secured with entity authentication {{RFC7390}}. Network should be protected from attacks. A further extension to this use case is to allow for remote management. A "backend manager" is in charge of managing SW or information exchanged or collected within the 6LoWPAN/CoAP network. This requires connection of devices to the Internet over a 6LBR involving a number of new threats that were not present before. A list of potential attacks include: resource-exhaustion attacks from the Internet; amplification attacks; trust issues related a HTTP-CoAP proxy {{ID-proHTTPCoAP}}, etc. This use case requires protecting the communication from a device in the backend to a device in the 6LoWPAN/CoAP network, end-to-end. This use case also requires measures to provide the 6LBR with the capability of dropping fake requests coming from the Internet. This becomes especially challenging when the 6LBR is not trusted and access to the exchanged information is limited; and even more in the case of a HTTP-CoAP proxy since protocol translation is required. This use case should take care of protecting information accessed from the backend due to privacy issues (e.g., information such as type of devices, location, usage, type and amount of exchanged information, or mobility patterns can be gathered at the backend threatening the privacy sphere of users) so that only required information is disclosed.
+etc. As before, the network manager can be located in the IP network (e.g., 6LoWPAN/CoAP network) and handle key management. In this case, the first association of devices to the network is required to be done in a secure way. In other words, the threat model requires measurements to protect against any vulnerable period of time. This step can involve the secure transmission of keying materials used for network security at different layers. The information exchanged in the network is considered to be valuable and it should be protected in the sense of pairwise links. Commands should be secured and broadcast should be secured with entity authentication {{RFC7390}}. Network should be protected from attacks. A further extension to this use case is to allow for remote management. A "backend manager" is in charge of managing SW or information exchanged or collected within the IP network, e.g., a 6LoWPAN/CoAP network. This requires connection of devices to the Internet over a 6LBR involving a number of new threats that were not present before. A list of potential attacks include: resource-exhaustion attacks from the Internet; amplification attacks; trust issues related a HTTP-CoAP proxy {{ID-proHTTPCoAP}}, etc. This use case requires protecting the communication from a device in the backend to a device in the IP network, e.g., a 6LoWPAN/CoAP network, end-to-end. This use case also requires measures to provide the 6LBR with the capability of dropping fake requests coming from the Internet. This becomes especially challenging when the 6LBR is not trusted and access to the exchanged information is limited; and even more in the case of a HTTP-CoAP proxy since protocol translation is required. This use case should take care of protecting information accessed from the backend due to privacy issues (e.g., information such as type of devices, location, usage, type and amount of exchanged information, or mobility patterns can be gathered at the backend threatening the privacy sphere of users) so that only required information is disclosed.
 
 The last security suite (SecProf_4) essentially represents interoperability
 of all the security profiles defined previously. It considers applications
 with some additional requirements regarding operation such as: (i) ad-hoc
 establishment of security relationships between things (potentially from
 different manufacturers) in non- secure environments or (ii) dynamic roaming
-of things between different 6LoWPAN/CoAP security domains. Such operational
+of things between different IP network security domains. Such operational
 requirements pose additional security requirements, e.g., in addition to
-secure bootstrapping of a device within a 6LoWPAN/CoAP security domain and
+secure bootstrapping of a device within an IP, e.g., 6LowPan/CoAP, security domain and
 the secure transfer of network operational key, there is a need to enable
 inter-domains secure communication to facilitate data sharing.
 
-The above description illustrates how different applications of 6LoWPAN/CoAP
-networks involve different security needs. In the following sections, we
+The above description illustrates how different applications of IP networks, e.g., 6LoWPAN/CoAP networks, involve different security needs. In the following sections, we
 summarize the expected security features or capabilities for each the security
 profile with regards to "Security Architecture", "Security Model", "Security
 Bootstrapping", "Network Security", and "Application Security".
@@ -1099,29 +1104,21 @@ Although this may seem far fetched given the commercial interests and market dyn
 ## Penetration testing {#sec6-7}
 Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform penetration testing on their IoT devices. Nonetheless, since the devices are resource-constrained they often barf of crash even when minimal tests are performed. It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices. 
 
-## Long-term resistance to cryptographic analysis {#sec6-8}
+## Quantum-resistance {#sec6-8}
 
 Many IoT systems that are being deployed today will remain operational
 for many years. With the advancements made in the field of quantum
-computers, it is possible that we may indeed have large-scale easily
-available quantum computers in future for performing cryptanalysis on
-existing cryptographic algorithms and cipher suites. If this happens, it
-would mean that functionalities enabled by means of RSA/ECC would need
-to be updated to quantum-resistant alternatives. While such future
-planning is hard, it may be a necessity in certain critical IoT
+computers, it is possible that large-scale quantum computers are available in the future for performing cryptanalysis on existing cryptographic algorithms and cipher suites. 
+If this happened, it would have two consequences. First, functionalities enabled by means of RSA/ECC - namely key exchange, public-key encryption and signature - would not be secure anymore due to Shor's algorithm. Second, the security level of symmetric algorithms will decrease, e.g., the security of a block cipher with a key size of b bits will only offer b/2 bits of security due to Grover's algorithm.
+
+This would require to update to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. While such future planning is hard, it may be a necessity in certain critical IoT
 deployments which are expected to last decades or more. Although
 increasing the key-size of the different algorithms is definitely an
 option, it would also incur additional computation overhead and network
 traffic. This would be undesirable in most scenarios. There have been
-recent advancements in quantum-resistant cryptography, we highlight a
-few here:
+recent advancements in quantum-resistant cryptography.
 
-1. 
-
-2. 
-
-3. 
-
+We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography.
 RFC7696 provides guidelines for cryptographic algorithm agility.
 
 # Next Steps towards a Flexible and Secure Internet of Things {#sec7}
