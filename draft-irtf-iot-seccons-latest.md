@@ -279,10 +279,10 @@ informative:
     seriesinfo:
       Web: https://hardware.slashdot.org/story/16/02/17/0422259/backdoor-in-mvpower-dvr-firmware-sends-cctv-stills-to-an-email-address-in-china   
   ETSI_GR_QSC_001:
-	title: Quantum-Safe Cryptography (QSC);Quantum-safe algorithmic framework 
-    date: June 2016
+    title: Quantum-Safe Cryptography (QSC);Quantum-safe algorithmic framework 
+    date: 2016-06
     seriesinfo: European Telecommunications Standards Institute (ETSI)
-	               
+                   
 author:
 - name: Oscar Garcia-Morchon
   ins: O. Garcia-Morchon
@@ -1088,10 +1088,10 @@ The FTC staff report on Internet of Things - Privacy & Security in a Connected W
 
 While powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world, a more considerate effort is needed for resource-constrained devices that don't have any operating system and are typically not equipped with a memory management unit or similar tools. The IAB also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. 
 
-## Traffic monitoring {#sec6-5}
+## Verifying device behavior {#sec6-5}
 Users often have a false sense of privacy when using new Internet of Things (IoT) appliances such as Internet-connected smart televisions, speakers and cameras. Recent revelations have shown that this user belief is often unfounded. Many IoT device vendors have been caught collecting sensitive private data through these connected appliances with or without appropriate user warnings {{cctv}}.
 
-An IoT device user/owner would like to monitor and know if the device is calling home. The calling home feature may be necessary in some scenarios, such as during the initial configuration of the device. However, the user should be kept aware of the data that the device is sending back to the vendor. For example, the user should be ensured that his/her TV is not sending data when he/she inserts a new USB stick. 
+An IoT device user/owner would like to monitor and know if the device is calling home (i.e. verify its operational behavior). The calling home feature may be necessary in some scenarios, such as during the initial configuration of the device. However, the user should be kept aware of the data that the device is sending back to the vendor. For example, the user should be ensured that his/her TV is not sending data when he/she inserts a new USB stick. 
 
 Providing such information to the users in an understandable fashion is challenging. This is because the IoT device are not only resource-constrained in terms of their computational capability, but also in terms of the user interface available. Also, the network infrastructure where these devices are deployed will vary significantly from one user environment to another. Therefore, where and how this monitoring feature is implemented still remains an open question. 
 
