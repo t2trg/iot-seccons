@@ -322,10 +322,10 @@ pi:
 
 --- abstract
 
-A direct interpretation of the Internet of Things concept refers to the usage
+The Internet of Things concept refers to the usage
 of standard Internet protocols to allow for human-to-thing or thing-to-thing
 communication. Although the security needs are well-recognized, it is still
-not fully clear how existing IP-based security protocols can be applied to
+not fully clear how existing IP-based security protocols should be applied to
 this new setting. This Internet-Draft first provides an overview of security
 architecture, its deployment model and general security needs in the context
 of the lifecycle of a thing. Then, it presents challenges and requirements
@@ -356,7 +356,7 @@ With this, this Internet-Draft pursues several goals. First, we aim at presentin
 The rest of the Internet-Draft is organized as follows. {{sec3}} depicts
 the lifecycle of a thing and gives general definitions for the main security
 aspects within the IoT domain. In {{sec4}}, we review existing protocols
-and work done in the area of security for wireless sensor networks. {{sec5}}
+and relevant related work. {{sec5}}
 identifies general challenges and needs for an IoT security protocol design
 and discusses existing protocols and protocol proposals against the identified
 requirements. {{sec6}} proposes a number of illustrative security suites
@@ -962,7 +962,6 @@ require confidentiality) to reduce the impact of security in the system operatio
 
 
 # Challenges and Security Considerations for a Secure Internet of Things {#sec6}
-<<Oliver and Mohit add stuff in this section>>
 
 In this section, we take a closer look at the various security challenges
 in the operational and technical features of the IoT and then discuss how
@@ -1121,52 +1120,6 @@ recent advancements in quantum-resistant cryptography.
 We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography.
 RFC7696 provides guidelines for cryptographic algorithm agility.
 
-# Needs for Evolution {#sec7}
-IoT provides distributed systems. Distributed system security dates back to the 60/70ies. So there is lots of prior art. This section identifies aspects that distinguish securing IoT systems from, securing IT systems.
-
-## Authentication {#sec7.1}
-The [NIST SP-800-63](https://pages.nist.gov/800-63-3/) documents explain the authentication landscape for human users (concepts, components, interactions, processes etc.) and present the best-current-practice resources for this purpose. This section uses this as a baseline for identifying authentication challenges in IoT. It also employs some NIST SP-800-63 structure for this purpose:
-
-### Enrollment and Identity Proofing {#sec7.1.1}
-[NIST SP-800-63A](https://pages.nist.gov/800-63-3/sp800-63a.html) describes the concerns of enrollment and identity-proofing. They present a prerequisite for the authentication of actors in distributed systems. The process description for human users relies on the utilization of evidences from the physical World e.g. ID-cards, birth certificates. So-called Identity Assurance Levels allow to scale the utilization of such evidences and to make statements about them.
-For IoT analogous resources need to be established to inherit from the given model and extend to towards things as system actors. Depending on the assets at stake in IoT that could scale from low-assurance models where the IoT system user has no real evidence or proof about applicants (i.e. things that shall obtain credentials in order to fulfill certain functions in an IoT system) to high-assurance models where the presentation of certain (third-party) evidences is needed in order to obtain such credentials.
-Such evidences (form-factors, contents/meaning etc.) would need to be commonly understood in a domain or market segment e.g. among user(s)/owner(s)/operator(s)/vendor(s) of IoT system resp. manufacturer(s)/vendor(s) of IoT components. Note that the real World evidences which are utilized in (human) user-to-system authentication took centuries to evolve (e.g. see [Passport Hsitory](https://en.wikipedia.org/wiki/Passport#History)). Equivalent means/resources/practices for IoT do not yet exist and need to be established.
-
-### Authentication and Lifecycle Management {#sec7.1.2}
-[NIST SP-800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html) describes the (entity) authentication process as well as the lifecycle of authenticator objects. It requires the use of secret information (e.g. passwords/PINs, shared secret keys, private keys) for the purpose of (human) user-to-system authentication. So-called Authentication Assurance Levels allow to scale the utilization of such information and to express the achieved confidence.
-The authentication process is conducted by means of multiparty protocols. Compared to the discipline of enrollment and identity proofing, the IoT gap is smaller: (human) user-to-system  authentication typically assumes the human users to memorize initial secrets required to use an authenticator object or a supporting device such as PINs for smart/SIM-card, entry codes for password safes. This cannot be assumed in IoT: concealing secret information upon an IoT component presents a specific challenge esp. when IoT components are deployed in environments where attackers have physical access to them. Beyond this challenge the multiparty protocols need be selected or designed in a way that allows things to act in the roles of a claimant (and/or verifier). This is a task that is relatively straight-forward compared to enrollment, identity proofing and the concealment of secret information. However the allocation of authentication exchanges in the protocol stack requires attention as it is determining the security “span” that can be achieved. This needs to match the given use case and desired protection. A particular design concern is to determine whether this shall happen on application-level or on lower levels of the stack. The usual trade-off decision needs to be made with respect to that:
-* Application-level authentication exchanges increase the achievable security “span” but also the overall system complexity in multi-application protocol environments
-* Lower-level authentication exchanges can help to reduce the overall system complexity but may imply security “span” limitations
-
-### Federation and Assertions {#sec7.1.3}
-[NIST SP-800-63C](https://pages.nist.gov/800-63-3/sp800-63c.html) describes an advanced authentication model that relies on a work-split between a party that is responsible for conducting initial (entity) authentication in the role of a verifier and relying parties serving the actual objects-of-interest. This model is dominant in (human) user-to-system  authentication – for a variety of reasons. It introduces derived objects (called assertions) that express the event of an authentication. The protection of these additional objects (signed and/or encrypted, bearer vs. holder-of-key aka proof-of-possession) is critical for the overall system security. So-called Federation Assurance Levels allow to express corresponding requirements.
-Due to the (possible) complexity of the authentication process and the resource limitations of things authentication in IoT systems is likely to employ corresponding authentication system models. They come as (at least) 3-party protocols and require claimants (a thing) to be aware of 2 other parties (relying party that exposes the object-of-interest, verifier that establishes initial [entity] authentication), support back/forth redirections between them, distinguish 2 kinds of authentication objects (initial authentication credentials, assertions). Since the claimant also is constrained in IoT it may require a helper component to be able to participate in such interactions, Corresponding exchanges need to be defined and integrated with the native protocols utilized in IoT systems.
-
-## Authorization {#sec7.2}
-NIST SP-800-63 does not elaborate on authorization and clearly separates authentication from authorization (“Authentication does not determine the claimant’s authorizations or access privileges; this is a separate decision”). The common approach in authorization is to assume the owner of an object to be the authority that controls authorization strategies and policies for this object. In case of shared ownership the owners are assumed to jointly exercise this authority. This may include means to delegate the use of an object-of-interest to other system actors (with/without limitations in usage) or delegate the authorization to authorize to others (with/without limitations in control).
-This perception of authorization is assumed to also apply for IoT. In contrast to IT which usually deals with digital objects where reproduction and relocation of item instances comes at almost no cost, IoT deals with physical objects where reproduction, relocation of item instances comes at cost. This emphasizes aspects such as change-of-ownership and delegation of authority that are not (yet) common in IT. Further challenges are related to system composition: in traditional OT, the ownership of OT components typically matches the ownership of the overall OT system. This matching cannot be assumed for (advanced) IoT systems of solutions where components of various owners (possibly temporarily, ad-hoc) cooperate to fulfill certain tasks as a composite system.
-Authorization systems for IoT should also be assumed to incarnate in different ways according to the ownership model: things owned by legal entities (aka IIoT) vs. things owned by individual human users:
-*	Individual users can be policing actors in authorization processes. Corresponding authorization systems often support a posteriori approaches where access requests appear first and are decided then. This assumes the owner to be synchronously available and presents a best-current practice in the Web
-*	Legal entities cannot be such act in this capacity and need to be proxied by representatives such as administrators. Corresponding authorization systems usually establish authorization strategies beforehand decide about access requests based on authorization policies that are usually static and invariant for longer periods of time.
-Authorization in IoT will also depend on the considered use case:
-*	Thing-to-service: in this case it is likely that the thing (as a service caller) needs to integrate with the given security model by which the service authenticates and authorizes its callers. From a service perspective this ‘just’ introduces a new class of callers – standalone things in addition to human users represented by their user agents. Things are assumed to share protocol support with services which often means the need to support HTTP and hence usually implies things to be class 2/1 according RFC 7228. Assuming the service implements a TTP-based authentication model then a new family of assertion object types appears (user vs. thing assertions, possibly sharing the same syntax). The things need to have secrets in order to authenticate at an (already existing) TTP, to be able to protect them and to have passed applicable enrollment and identity proofing processes (see above)
-*	Thing-to-thing: requires to establish an authorization functionality in which the owner(s) of a thing that presents a callee resp. object-of-interest is able to provide her/his (individually-owned things) or its (legal entity-owned things) authorization strategies and enforce them (see above)
-
-## Confidentiality  {#sec7.3}
-Confidentiality is another requirement than authentication but their solutions use the same ingredients esp. secret information known by resp. shared among the system participants (public/private keys and/or shared secret keys) and cryptographic algorithms. The given challenges are similar than for authentication:
-* Application-level (helps granularity, achievable security “span”) vs. lower-level security (helps re-use)
-* Direct vs. TTP-enabled security
-In contrast to authentication which often has a TTP-preference (see above), confidentiality tends to be implemented directly between the ends of communication. Security protocols that deliver (entity) authentication and (message) confidentiality as a single means do exist. But the diverging preferences between authentication (often: application-level and TTP-enabled) and confidentiality (often: lower-level and direct) can make this synthesis difficult. In any case corresponding transformations need to be defined and integrated with the native protocols utilized in IoT systems. The selection of the cryptographic algorithms and objects expressing their processing results needs to take given constraints (processor, memory, energy) into account. The above-mentioned issue with respect to concealing secret information (shared secret keys, private keys) also applies with respect to confidentiality.
-
-## Mechanism Agility {#sec7.4}
-IoT components can be long-lived. Beyond the generic system updating challenge this especially comes with a risk that cryptographic algorithms employed in the implementation of authentication and confidentiality reach their end-of-life before the component does. This risk requires to address the concern of cryptographic mechanism agility. RFC 7696 provides guidelines for this concern.
-
-## System Heritage {#sec7.5}
-IoT systems can be assumed to come with different heritages:
-*	Greenfield: new use cases with new components/systems without legacy. This is often the case in consumer IoT scenarios e.g. smart home, wearables
-*	Brownfield: new use cases for existing components/systems with a legacy (possibly large investments). This is typical in industrial IoT scenarios e.g. industrial control systems
-In the latter case the existing systems usually comprise rich metadata about system components and their relation. Security-enabling is a need during an OT to IIoT transition but the to-be-added security system needs to respect/accommodate existing metadata and relationship data and should only add not yet existing objects such as credentials/authenticators and their management.
-
 
 # Next Steps towards a Flexible and Secure Internet of Things {#sec8}
 
@@ -1192,3 +1145,4 @@ This document contains no request to IANA.
 
 We gratefully acknowledge feedback and fruitful discussion with Tobias Heer
 and Robert Moskowitz. Acknowledge the additional authors of the previous version of this document Sye Loong Keoh, Rene Hummen and Rene Struik.
+
