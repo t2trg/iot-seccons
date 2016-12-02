@@ -353,14 +353,13 @@ This Internet Draft presents an overview of the security aspects of the envision
 
 With this, this Internet-Draft pursues several goals. First, we aim at presenting a comprehensive view of the interactions and relationships between an IoT application and security. Second, we aim at describing challenges for a secure IoT in the specific context of the lifecycle of a resource-constrained device. The final goal of this draft is to discuss the security considerations that need to be taken into consideration towards a secure IoT.
 
-The rest of the Internet-Draft is organized as follows. {{sec3}} depicts
-the lifecycle of a thing and gives general definitions for the main security
-aspects within the IoT domain. In {{sec4}}, we review existing protocols
-and relevant related work. {{sec5}}
-identifies general challenges and needs for an IoT security protocol design
-and discusses existing protocols and protocol proposals against the identified
-requirements. {{sec6}} proposes a number of illustrative security suites
-describing how different applications involve distinct security needs. {{sec7}} includes final remarks and conclusions.
+The rest of the Internet-Draft is organized as follows. 
+{{sec3}} depicts the lifecycle of a thing and gives general definitions for the main security building blocks within the IoT domain. 
+In {{sec4}}, we discuss threats and methodologies for managing risks when designing a secure IoT system. 
+{{sec5}} reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations in IoT security. 
+{{sec6}} proposes a number of illustrative security profiles describing how different applications would require distinct security solutions.
+{{sec7}} identifies existing challenges for a secure IoT and discusses potential solutions. 
+{{sec7}} includes final remarks and conclusions.
 
 # Motivation and background {#sec3}
 
