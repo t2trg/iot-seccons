@@ -707,23 +707,23 @@ Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructur
 
 1. GSMA IoT security guidelines {{GSMAsecurity}}: GSMA has published a set of security guidelines for the benefit of new IoT product and service providers. The guideline are aimed at device manufacturers, service providers, developers and network operators. An enterprise can complete IoT Security Self-Assessment to demonstrate that its products and services are aligned with the security guidelines of the GSMA. 
 
-2. BITAG Internet of Things (IoT) Security and Privacy Recommendations {{BITAG}}:
+2. BITAG Internet of Things (IoT) Security and Privacy Recommendations {{BITAG}}: Broadband Internet Technical Advisory Group (BITAG) has also published recommendations for ensuring security and privacy of IoT device users. BITAG observes that many IoT devices are shipped from the factory with software that is already outdated and vulnerable. The report also states that many devices with vulnerabilities will not be fixed either because the manufacturer does not provide updates or because the user does not apply them. The recommendations include that IoT devices should function without cloud and Internet connectivity, and that all IoT devices should have methods for automatic secure software updates.
 
-3. CSA New Security Guidance for Early Adopters of the IoT {{CSA}}:
+3. CSA New Security Guidance for Early Adopters of the IoT {{CSA}}: The Cloud Security Alliance (CSA) recommendations for early adopters of IoT encourages enterprises to implement security at different layers of the protocol stack. It also recommends implementation of an authentication/authorization framework for IoT deployments. A complete list of recommendations is available in the report {{CSA}}. 
 
-4. U.S. Department of Homeland Security {{DHS}}:
+4. U.S. Department of Homeland Security {{DHS}}: DHS has put forth six strategic principles that would enable IoT developers, manufacturers, service providers and consumers to maintain security as they develop, manufacture, implement or use network-connected IoT devices.
 
-5. NIST {{NIST-Guide}}
+5. NIST {{NIST-Guide}}: The NIST special publication urges enterprise and US federal agencies to address security throughout the systems engineering process. The publication builds upon the ISO/IEC/IEEE 15288 standard and augments each process in the system lifecyle with security enhancements. 
 
-6. OWASP {{OWASP}}
+6. OWASP {{OWASP}}: Open Web Application Security Project (OWASP) provides security guidance for IoT manufactures, developers and consumers. OWASP also includes guidelines for those who intend to test and analyze IoT devices and applications. 
 
-7. IoT Security foundation {{IoTSecFoundation}}:
+7. IoT Security foundation {{IoTSecFoundation}}: IoT security foundation has published a document that enlists various considerations that need to be taken into account when developing IoT applications. For example, the document states that IoT device could use hardware-root of trust to ensure that only authorized software runs on the device. 
 
-8. NHTSA {{NHTSA}}:
+8. NHTSA {{NHTSA}}: The US National Highway Traffic Safety Administration Traffic Safety Administration provides a set of non-binding guidance to the automotive industry for improving the cyber security of vehicles. While some of the guidelines are general, the document provides specific recommendations for the automotive industry such as how various automotive manufacturer can share cyber security vulnerabilities discovered. 
 
-9. BCP for IoT devices {{ID-Moore}}
+9. BCP for IoT devices {{ID-Moore}}: This Internet draft provides a list of minimum requirements that vendors of Internet of Things (IoT) devices should to take into account while developing applications, services and firmware updates in order to reduce the frequency and severity of security incidents that arise from compromised IoT devices. 
 
-We also highlight some important general guidelines that are more or less. 
+Other guideline and recommendation documents may exist or may later be published. This list should be considered non-exhaustive. 
 
 
 ## IoT Security Regulations {#sec5-4}
