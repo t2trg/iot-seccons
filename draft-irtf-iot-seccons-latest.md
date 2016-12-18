@@ -68,6 +68,15 @@ informative:
     date: 2012-01
     seriesinfo:
       draft-ietf-roll-security-framework-07: ''
+  ID-Moore:
+    title: Best Current Practices for Securing Internet of Things (IoT) Devices
+    author:
+    - ins: K. Moore
+    - ins: R. Barnes
+    - ins: H. Tschofenig
+    date: 2016-10
+    seriesinfo:
+      draft-moore-iot-security-bcp-00: ''    
   ID-Williams:
     title: Mobile DTLS
     author:
@@ -154,6 +163,9 @@ informative:
     author:
     - ins: M. Dworkin
     date: 2005
+  SPEKE:
+    title: 'IEEE P1363.2: Password-based Cryptography'
+    date: 2008
   PROC-Chan:
     title: Random Key Predistribution Schemes for Sensor Networks
     author:
@@ -249,7 +261,43 @@ informative:
   Thread:
     title: Thread Alliance
     seriesinfo:
-      Web: http://threadgroup.org/ 
+      Web: http://threadgroup.org/
+  NHTSA:
+    title: Cybersecurity Best Practices for Modern Vehicles
+    seriesinfo:
+      Web: https://www.nhtsa.gov/staticfiles/nvs/pdf/812333_CybersecurityForModernVehicles.pdf     
+  NIST-Guide:
+    title: Systems Security Engineering
+    author:
+    - ins: R. Ross
+    - ins: M. McEVILLEY
+    - ins: J. C. Oren
+    seriesinfo:
+      Web: http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-160.pdf   
+  DHS:
+    title: Strategic Principles For Securing the Internet of Things (IoT)
+    seriesinfo:
+      Web: https://www.dhs.gov/sites/default/files/publications/Strategic_Principles_for_Securing_the_Internet_of_Things-2016-1115-FINAL....pdf   
+  OWASP:
+    title: IoT Security Guidance
+    seriesinfo:
+      Web: https://www.owasp.org/index.php/IoT_Security_Guidance     
+  IoTSecFoundation:
+    title: Establishing Principles for Internet of Things Security
+    seriesinfo:
+      Web: https://iotsecurityfoundation.org/establishing-principles-for-internet-of-things-security/           
+  GSMAsecurity:
+    title: GSMA IoT Security Guidelines
+    seriesinfo:
+      Web: http://www.gsma.com/connectedliving/future-iot-networks/iot-security-guidelines/
+  BITAG:
+    title: Internet of Things (IoT) Security and Privacy Recommendations
+    seriesinfo:
+      Web: http://www.bitag.org/report-internet-of-things-security-privacy-recommendations.php
+  CSA:
+    title: Security Guidance for Early Adopters of the Internet of Things (IoT)
+    seriesinfo:
+      Web: https://downloads.cloudsecurityalliance.org/whitepapers/Security_Guidance_for_Early_Adopters_of_the_Internet_of_Things.pdf      
   SchneierSecurity:
     title: The Internet of Things Is Wildly Insecure—And Often Unpatchable
     seriesinfo:
@@ -655,7 +703,28 @@ In addition, there is also new activities in IETF and W3C to define security pro
 
 ## IoT Security Guidelines {#sec5-3}
 
-We can include here pointers to IoT security guidelines as created by different bodies.
+Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructure from compromised IoT devices has prompted many different standards bodies and consortia to provide guidelines for developers and the Internet community at large to build secure IoT devices and services. The different guidelines available are as follows:
+
+1. GSMA IoT security guidelines {{GSMAsecurity}}: GSMA has published a set of security guidelines for the benefit of new IoT product and service providers. The guideline are aimed at device manufacturers, service providers, developers and network operators. An enterprise can complete IoT Security Self-Assessment to demonstrate that its products and services are aligned with the security guidelines of the GSMA. 
+
+2. BITAG Internet of Things (IoT) Security and Privacy Recommendations {{BITAG}}:
+
+3. CSA New Security Guidance for Early Adopters of the IoT {{CSA}}:
+
+4. U.S. Department of Homeland Security {{DHS}}:
+
+5. NIST {{NIST-Guide}}
+
+6. OWASP {{OWASP}}
+
+7. IoT Security foundation {{IoTSecFoundation}}:
+
+8. NHTSA {{NHTSA}}:
+
+9. BCP for IoT devices {{ID-Moore}}
+
+We also highlight some important general guidelines that are more or less. 
+
 
 ## IoT Security Regulations {#sec5-4}
 
@@ -864,7 +933,7 @@ chip contact, etc.). Here, one commonly assumes this communication channel
 is secure, since eavesdropping and/or manipulation of this interface would
 generally require access to the physical medium and, thereby, to one or both
 of the devices themselves. This mechanism was used with the so-called original "resurrecting duckling" model, as introduced in {{PROC-Stajano-99}}. This technique may also be used securely in wireless, rather than wired, set-ups, if the prospect of eavesdropping and/or manipulating this channel are dim (a so-called "location-limited" channel {{PROC-Smetters-04}}{{PROC-Smetters-02}}). Examples hereof include the communication of secret keys in the clear using near field communication (NFC) - where the physical channel is purported to have very limited range (roughly 10cm), thereby thwarting eavesdropping by far-away adversarial devices, and in-the-clear communication during a small time window (triggered by, e.g., a button-push) - where eavesdropping is presumed absent during this small time window. With the use of public-key based techniques, assumptions on the communication channel can be relaxed even further, since then the cryptographic technique itself provides for confidentiality of the channel set-up and the location-limited channel - or use of certificates - rules out man-in-the-middle attacks, thereby providing authenticity {{PROC-Smetters-02}}. The same result can be obtained using password-based
-public-key protocols [SPEKE], where authenticity depends on the (weak) password not being guessed during execution of the protocol. 
+public-key protocols {{SPEKE}}, where authenticity depends on the (weak) password not being guessed during execution of the protocol. 
 
 It should be noted that while most of these techniques realize a secure and authentic channel for passing parameters, these generally do not provide for explicit authorization. As an example, with use of certificate-based public-key based techniques, one may obtain hard evidence on whom one shares secret and/or authentic parameters with, but this does not answer the question as to whether one wishes to share this information at all with this specifically identified device (the latter usually involves a human-decision element). Thus, the bootstrapping mechanisms above should generally be complemented by mechanisms that regulate (security policies for) authorization. Furthermore, the type of bootstrapping is very related to the required type of security architecture. Distributed bootstrapping means that a pair of devices can setup a security relationship on the fly, without interaction with a central device elsewhere within the system. In many cases, it is handy to have a distributed bootstrapping protocol based on existing security protocols (e.g., DTLS in CoAP) required for other purposes: this reduces the amount of required software. A centralized bootstrapping protocol is one in which a central device manages the security relationships within a network. This can happen locally, e.g., handled by the 6LBR, or remotely, e.g., from a server connected via the Internet. The security bootstrapping for the different security profiles is as follows.
 
