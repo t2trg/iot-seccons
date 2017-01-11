@@ -200,6 +200,15 @@ informative:
     date: 2002
     seriesinfo:
       Paper: NDSS
+  Ziegeldorf:
+    title: 'Privacy in the Internet of Things: Threats and Challenges'
+    author:
+    - ins: J.H. Ziegeldorf
+    - ins: O. Garcia-Morchon
+    - ins: K. Wehrle,
+    date: 2013
+    seriesinfo:
+      Paper: Security and Communication Networks - Special Issue on Security in a Completely Interconnected World
   PROC-Smetters-04:
     title: 'Network-in-a-Box: How to Set Up a Secure Wireless Network in Under a Minute'
     author:
@@ -698,7 +707,7 @@ supporting multiple authentication methods. EAP runs directly over the data
 link layer and, thus, does not require the deployment of IP. It supports
 duplicate detection and retransmission, but does not allow for packet fragmentation. The Protocol for Carrying Authentication for Network Access (PANA) is a network-layer transport for EAP that enables network access authentication between clients and the network infrastructure. In EAP terms, PANA is a UDP-based EAP lower layer that runs between the EAP peer and the EAP authenticator.
 
-In addition, there is also new activities in IETF and W3C to define security protocols better tailored to IoT or for specific deployment situations. The ACE WG is designing an authorization mechanism based on OAuth for constrained devices. There is work on Object Security based CoAP protection mechanism being defined in OSCOAP. <<similar work in W3C - Oliver?>> 
+In addition, there is also new activities in IETF and W3C to define security protocols better tailored to IoT or for specific deployment situations. The ACE WG is designing an authorization mechanism based on OAuth for constrained devices. There is work on Object Security based CoAP protection mechanism being defined in OSCOAP. 
 
 
 ## IoT Security Guidelines {#sec5-3}
@@ -1079,8 +1088,7 @@ The size and number of messages should be minimized to reduce memory requirement
 
 Small CPUs and scarce memory limit the usage of resource-expensive cryptoprimitives such as public-key cryptography as used in most Internet security standards. This is especially true, if the basic cryptoblocks need to be frequently used or the underlying application demands a low delay.
 
-Independently from the development in the IoT domain, all discussed security
-protocols show efforts to reduce the cryptographic cost of the required public-key-based key exchanges and signatures with ECC{{RFC5246}}{{RFC5903}}{{RFC7401}}{{ID-HIP}}. Moreover, all protocols have been revised in the last years to enable crypto agility, making cryptographic primitives interchangeable. However, these improvements are only a first step in reducing the computation and communication overhead of Internet protocols. The question remains if other approaches can be applied to leverage key agreement in these heavily resource-constrained environments.
+Independently from the development in the IoT domain, all discussed security protocols show efforts to reduce the cryptographic cost of the required public-key-based key exchanges and signatures with ECC{{RFC5246}}{{RFC5903}}{{RFC7401}}{{ID-HIP}}. Moreover, all protocols have been revised in the last years to enable crypto agility, making cryptographic primitives interchangeable. However, these improvements are only a first step in reducing the computation and communication overhead of Internet protocols. The question remains if other approaches can be applied to leverage key agreement in these heavily resource-constrained environments.
 
 A further fundamental need refers to the limited energy budget available
 to IoT nodes. Careful protocol (re)design and usage is required to reduce
@@ -1163,23 +1171,18 @@ IETF working group MSEC in the context of the MIKEY architecture {{WG-MSEC}}{{RF
 
 ### Mobility and IP Network Dynamics {#sec7-3-3}
 
-It is expected that many things (e.g., wearable sensors, and user devices)
-will be mobile in the sense that they are attached to different networks
-during the lifetime of a security association. Built-in mobility signaling
-can greatly reduce the overhead of the cryptographic protocols because unnecessary and costly re- establishments of the session (possibly including handshake and key agreement) can be avoided. IKEv2 supports host mobility with the MOBIKE {{RFC4555}}{{RFC4621}} extension. MOBIKE refrains from applying heavyweight cryptographic extensions for mobility. However, MOBIKE mandates the use of IPsec tunnel mode which requires to transmit an additional IP header in each packet. This additional overhead could be alleviated by using header compression methods or the Bound End- to-End Tunnel (BEET) mode {{ID-Nikander}}, a hybrid of tunnel and transport mode with smaller packet headers.
+It is expected that many things (e.g., wearable sensors, and user devices) will be mobile in the sense that they are attached to different networks
+during the lifetime of a security association. Built-in mobility signaling can greatly reduce the overhead of the cryptographic protocols because unnecessary and costly re- establishments of the session (possibly including handshake and key agreement) can be avoided. IKEv2 supports host mobility with the MOBIKE {{RFC4555}}{{RFC4621}} extension. MOBIKE refrains from applying heavyweight cryptographic extensions for mobility. However, MOBIKE mandates the use of IPsec tunnel mode which requires to transmit an additional IP header in each packet. This additional overhead could be alleviated by using header compression methods or the Bound End- to-End Tunnel (BEET) mode {{ID-Nikander}}, a hybrid of tunnel and transport mode with smaller packet headers.
 
-HIP offers a simple yet effective mobility management by allowing hosts to
-signal changes to their associations {{RFC5206}}. However, slight adjustments
-might be necessary to reduce the cryptographic costs, for example, by making
-the public-key signatures in the mobility messages optional. Diet HIP does
-not define mobility yet but it is sufficiently similar to HIP to employ the
-same mechanisms. TLS and DTLS do not have standards for mobility support,
-however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which nodes operate. In many cases, mobility support by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. However, if individual things change their point of network attachment while communicating, mobility support may gain importance.
+HIP offers a simple yet effective mobility management by allowing hosts to signal changes to their associations {{RFC5206}}. However, slight adjustments
+might be necessary to reduce the cryptographic costs, for example, by making the public-key signatures in the mobility messages optional. Diet HIP does
+not define mobility yet but it is sufficiently similar to HIP to employ the same mechanisms. 
+TLS and DTLS do not have standards for mobility support, however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which nodes operate. In many cases, mobility support by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. However, if individual things change their point of network attachment while communicating, mobility support may gain importance.
 
 ## Software update {#sec7-4}
 IoT devices have a reputation for being insecure at the time of manufacture. Yet they are often expected to stay functional in live deployments for years and even decades. Additionally, these devices typically operate unattended with direct Internet connectivity. Therefore, a remote software update mechanism to fix vulnerabilities, to update configuration settings, and for adding new functionality is needed. 
 
-Schneier {{SchneierSecurity}} in his essay expresses concerns about the status of software and firmware update mechanisms for Internet of Things (IoT) devices. He highlights several challenges that hinder mechanisms for secure software update of IoT devices. First, there is a lack of incentives for manufactures, vendors and others on the supply chain to issue updates for their devices. Second, parts of the software running on the IoT devices is simply a binary blob without any source code available. Since the complete source code isn't available, no patches can be written for that piece of code. Third, even when updates are available, users generally have to manually download and install those updates. However, users are never alerted about security updates and many times don't have the necessary expertise to manually administer the required updates.
+Schneier {{SchneierSecurity}} in his essay expresses concerns about the status of software and firmware update mechanisms for Internet of Things (IoT) devices. He highlights several challenges that hinder mechanisms for secure software update of IoT devices. First, there is a lack of incentives for manufactures, vendors and others on the supply chain to issue updates for their devices. Second, parts of the software running on the IoT devices is simply a binary blob without any source code available. Since the complete source code isn not available, no patches can be written for that piece of code. Third, even when updates are available, users generally have to manually download and install those updates. However, users are never alerted about security updates and many times do not have the necessary expertise to manually administer the required updates.
 
 The FTC staff report on Internet of Things - Privacy & Security in a Connected World {{FTCreport}} and the Article 29 Working Party Opinion 8/2014 on the on Recent Developments on the Internet of Things {{Article29}} also document the challenges for secure remote software update of IoT devices. They note that even providing such a software update capability may add new vulnerabilities for constrained devices. For example, a buffer overflow vulnerability in the implementation of a software update protocol (TR69) {{TR69}} and an expired certificate in a hub device {{wink}} demonstrate how the software update process itself can introduce vulnerabilities. 
 
@@ -1190,25 +1193,28 @@ Users often have a false sense of privacy when using new Internet of Things (IoT
 
 An IoT device user/owner would like to monitor and know if the device is calling home (i.e. verify its operational behavior). The calling home feature may be necessary in some scenarios, such as during the initial configuration of the device. However, the user should be kept aware of the data that the device is sending back to the vendor. For example, the user should be ensured that his/her TV is not sending data when he/she inserts a new USB stick. 
 
-Providing such information to the users in an understandable fashion is challenging. This is because the IoT device are not only resource-constrained in terms of their computational capability, but also in terms of the user interface available. Also, the network infrastructure where these devices are deployed will vary significantly from one user environment to another. Therefore, where and how this monitoring feature is implemented still remains an open question. 
+Providing such information to the users in an understandable fashion is challenging. This is because the IoT devices are not only resource-constrained in terms of their computational capability, but also in terms of the user interface available. Also, the network infrastructure where these devices are deployed will vary significantly from one user environment to another. Therefore, where and how this monitoring feature is implemented still remains an open question. 
 
 ## End-of-life {#sec7-6}
-Like all commercial devices, most IoT devices will be end-of-lifed by vendors. This may be planned or unplanned (for example when the vendor or manufacturer goes bankrupt). A user should still be able to use and perhaps even update the device. This requires for some form of authorization handover.
+Like all commercial devices, most IoT devices will be end-of-lifed by vendors or even network operators. This may be planned or unplanned (for example when the vendor or manufacturer goes bankrupt or when a network operator moves to a different type of networking technology). A user should still be able to use and perhaps even update the device. This requires for some form of authorization handover.
 
 Although this may seem far fetched given the commercial interests and market dynamics, we have examples from the mobile world where the devices have been functional and up-to-date long after the original vendor stopped supporting the device. CyanogenMod for Android devices and OpenWrt for home routers are two such instances where users have been able to use and update their devices even after they were end-of-lifed. Admittedly these are not easy for an average users to install and configure on their devices. With the deployment of millions of IoT devices, simpler mechanisms are needed to allow users to add new root-of-trusts and install software and firmware from other sources once the device has been end-of-lifed.
 
 
-## Penetration testing {#sec7-7}
-Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform penetration testing on their IoT devices. Nonetheless, since the devices are resource-constrained they often barf of crash even when minimal tests are performed. It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices. 
+## Testing: bug hunting and vulnerabilities {#sec7-7}
+Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform extenshive testing on their IoT devices and networks. 
+Nonetheless, since the devices are resource-constrained and manufactured by multiple ventors, some of them very small, devices might be shipped with very limited testing, so that bugs can remain and can be exploited at a later stage. 
+It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices to give end users the confidence that the purchased devices are robust.
+It is also an open question how combination of devices of multiple vendors might actually lead to dangerous network configurations, e.g., if combination of specific devices can trigger unexpected behaiviours.
 
 ## Quantum-resistance {#sec7-8}
 
-Many IoT systems that are being deployed today will remain operational
-for many years. With the advancements made in the field of quantum
+Many IoT systems that are being deployed today will remain operational for many years. 
+With the advancements made in the field of quantum
 computers, it is possible that large-scale quantum computers are available in the future for performing cryptanalysis on existing cryptographic algorithms and cipher suites. 
 If this happened, it would have two consequences. First, functionalities enabled by means of RSA/ECC - namely key exchange, public-key encryption and signature - would not be secure anymore due to Shor's algorithm. Second, the security level of symmetric algorithms will decrease, e.g., the security of a block cipher with a key size of b bits will only offer b/2 bits of security due to Grover's algorithm.
 
-This would require to update to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. While such future planning is hard, it may be a necessity in certain critical IoT
+This would require to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. While such future planning is hard, it may be a necessity in certain critical IoT
 deployments which are expected to last decades or more. Although
 increasing the key-size of the different algorithms is definitely an
 option, it would also incur additional computation overhead and network
@@ -1218,6 +1224,25 @@ recent advancements in quantum-resistant cryptography.
 We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography.
 RFC7696 provides guidelines for cryptographic algorithm agility.
 
+## Privacy protection {#sec7-9}
+
+Users will be surrounded by tens of connected devices. Even if the communication links are encrypted and protected, information about the users might be collected for different purposes affecting their privacy.
+In{{Ziegeldorf}}, privacy in the IoT is defined as the threefold guarantee to the user for:
+1. awareness of privacy risks imposed by smart things and services surrounding the data subject,
+2. individual control over the collection and processing of personal information bz the surrounding smart things
+3. awareness and control of subsequent use and dissemination of personal information by those entities to any entity outside the subject's personal control sphere.
+
+Based on this definition, several privacy threats and challenges are identified in the work of Ziegeldorf:
+
+1. Identification - refers to the identification of the users and their objects.
+2. Localization - relates to the capability of locating a user and even tracking him.
+3. Profiling - is about creating a profile of the user and her preferences.
+4. Interaction - occurs when a user has been profiled and a given interaction is preferered, presenting (e.g., visually) some information that discloses private information. 
+5. Lifecycle transitions - take place when devices are, e.g., sold without properly removing private data.
+6. Inventory attacks - happen if specific information about (smart) objects in posession of a user is disclosed.
+7. Linkage - is about when information of two of more IoT systems is combined so that a broader view on the personal data is created.
+
+When IoT systes are deployed, the above issues should be considered to ensure that private data remains private. How this is achieved remains an open issue.
 
 # Next Steps towards a Flexible and Secure Internet of Things {#sec8}
 
