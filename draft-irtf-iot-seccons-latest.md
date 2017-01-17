@@ -1180,6 +1180,7 @@ not define mobility yet but it is sufficiently similar to HIP to employ the same
 TLS and DTLS do not have standards for mobility support, however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which nodes operate. In many cases, mobility support by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. However, if individual things change their point of network attachment while communicating, mobility support may gain importance.
 
 ## Software update {#sec7-4}
+
 IoT devices have a reputation for being insecure at the time of manufacture. Yet they are often expected to stay functional in live deployments for years and even decades. Additionally, these devices typically operate unattended with direct Internet connectivity. Therefore, a remote software update mechanism to fix vulnerabilities, to update configuration settings, and for adding new functionality is needed. 
 
 Schneier {{SchneierSecurity}} in his essay expresses concerns about the status of software and firmware update mechanisms for Internet of Things (IoT) devices. He highlights several challenges that hinder mechanisms for secure software update of IoT devices. First, there is a lack of incentives for manufactures, vendors and others on the supply chain to issue updates for their devices. Second, parts of the software running on the IoT devices is simply a binary blob without any source code available. Since the complete source code isn not available, no patches can be written for that piece of code. Third, even when updates are available, users generally have to manually download and install those updates. However, users are never alerted about security updates and many times do not have the necessary expertise to manually administer the required updates.
@@ -1189,6 +1190,7 @@ The FTC staff report on Internet of Things - Privacy & Security in a Connected W
 While powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world, a more considerate effort is needed for resource-constrained devices that don't have any operating system and are typically not equipped with a memory management unit or similar tools. The IAB also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. 
 
 ## Verifying device behavior {#sec7-5}
+
 Users often have a false sense of privacy when using new Internet of Things (IoT) appliances such as Internet-connected smart televisions, speakers and cameras. Recent revelations have shown that this user belief is often unfounded. Many IoT device vendors have been caught collecting sensitive private data through these connected appliances with or without appropriate user warnings {{cctv}}.
 
 An IoT device user/owner would like to monitor and know if the device is calling home (i.e. verify its operational behavior). The calling home feature may be necessary in some scenarios, such as during the initial configuration of the device. However, the user should be kept aware of the data that the device is sending back to the vendor. For example, the user should be ensured that his/her TV is not sending data when he/she inserts a new USB stick. 
@@ -1202,10 +1204,11 @@ Although this may seem far fetched given the commercial interests and market dyn
 
 
 ## Testing: bug hunting and vulnerabilities {#sec7-7}
-Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform extenshive testing on their IoT devices and networks. 
-Nonetheless, since the devices are resource-constrained and manufactured by multiple ventors, some of them very small, devices might be shipped with very limited testing, so that bugs can remain and can be exploited at a later stage. 
-It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices to give end users the confidence that the purchased devices are robust.
-It is also an open question how combination of devices of multiple vendors might actually lead to dangerous network configurations, e.g., if combination of specific devices can trigger unexpected behaiviours.
+Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform extenshive testing on their IoT devices, networks, and systems. 
+Nonetheless, since the devices are resource-constrained and manufactured by multiple ventors, some of them very small, devices might be shipped with very limited testing, so that bugs can remain and can be exploited at a later stage.
+This leads to two main types of challenges:
+1. It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices to give end users the confidence that the purchased devices are robust.
+2. It is also an open question how combination of devices of multiple vendors might actually lead to dangerous network configurations, e.g., if combination of specific devices can trigger unexpected behaiviours.
 
 ## Quantum-resistance {#sec7-8}
 
@@ -1243,6 +1246,32 @@ Based on this definition, several privacy threats and challenges are identified 
 7. Linkage - is about when information of two of more IoT systems is combined so that a broader view on the personal data is created.
 
 When IoT systes are deployed, the above issues should be considered to ensure that private data remains private. How this is achieved remains an open issue.
+
+## Data leakage {#sec7-10}
+
+IoT devices are resource contrained and often deployed in unattended environments or can just be bought in the Internet.
+Therefore, an attacker can have direct access to the device and apply more advance techniques that a traditional black box model does not consider such as side-channel attacks or code disassembly. 
+By doing this, the attacker can try to retrieve data such as:
+
+1. long term keys that might be used perform attacks on devices deployed in other locations. 
+2. source code that might let the user determine bugs or find exploits to perform other types of attacks, or just sell it,
+3. propiertary algorithms that could be counterfeited or modified to perform advanced attacks.
+
+Protection against such data leakage patterns is not trivial since devices are inherently resource-constrained.
+An open question is which techniques can be used to protect IoT devices in such a strong attack model.
+
+## Trustworthy IoT Operation {#sec7-11}
+
+Flaws in the design and implementation of a secure IoT device and network can lead to secure vulnerabilities.
+An example is a flaw is the distribution of an Internet-connected IoT device in which a default password is used in all devices.
+Many IoT devices can be found in the Internet by means of tools such as Shodan, and if they have any vulnerability, it can then be exploited at scale, e.g., to launch DDoS attacks.
+This is not fiction but reality as Dyn, a mayor DNS was attacked by means of a DDoS attack originated from a large IoT botnet composed of thousands of compromised IP-cameras.
+Open questions in this area are:
+
+1. How to prevent large scale vulnerabilties in IoT devices?
+2. How to prevent attackers from exploiting vulnerabilities in IoT devices at large scale?
+3. If the vulnerability has been exploited, how do we stop a large scale attack before any damage is caused?
+
 
 # Next Steps towards a Flexible and Secure Internet of Things {#sec8}
 
