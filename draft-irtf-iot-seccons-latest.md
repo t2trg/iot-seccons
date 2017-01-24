@@ -339,7 +339,11 @@ informative:
     title: Quantum-Safe Cryptography (QSC);Quantum-safe algorithmic framework 
     date: 2016-06
     seriesinfo: European Telecommunications Standards Institute (ETSI)
-                   
+  FCC:
+    title: Federal Communications Comssion Response 12-05-2016 
+    date: 12-02-2016 
+    seriesinfo: FCC
+ 
 author:
 - name: Oscar Garcia-Morchon
   ins: O. Garcia-Morchon
@@ -735,9 +739,21 @@ Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructur
 Other guideline and recommendation documents may exist or may later be published. This list should be considered non-exhaustive. 
 
 
-## IoT Security Regulations {#sec5-4}
+## Guidelines and IoT Security Regulations {#sec5-4}
 
-I would include here relevant recomendations by NIST on FIS security. Today NIST alreay have lots of SP and FIPS that we can consider here too. They have some stuff for IoT, but not much... we can also point this out.
+Despide the need for security in the Internet is nothing new and multiple guidelines exist, the fact is that many IoT devices and systems are not fully secure.
+There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to the delivered security level. This can have multiple reasons, for instance, lack of expertise or budget. This, however, poses a severe threat when such devices are deployed. 
+The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become unsecure if a device gains access in some way at some point of time.
+Even if all devices in a given environment are secure, it does not prevent external (passive) attacks originated in unsecure devices. 
+
+Recently {{FCC}} the FCC has been stated the need for higher regulation for IoT systems. In fact this might be a missing component, at least in Federal Information Systems (FIS).
+Today, security in US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST derived a number of documents to establish how to categorize FIS and determine minimum security requirements (FIPS-PUB-199 and FIPS-PUB-200). Minimum security requirements for FIS are specified in NIST SP 800-53r4. 
+However, it is very likely that existing regulations do not take into account the specific challenges of IoT devices and networks.
+
+Even if such a regulation is put in place, the question is how such a regulation can be applied in practice to non-federal deployments, such as industrial, homes, offices, or smart cites.
+Each of them exhibits unique features, involves very diverse types of users, has different operational requirements, and combines IoT devices from multiple manufactures. 
+
+Thus, it seems that future regulations should consider such diverse deployment scenarios.
 
 
 # IoT Security Profiles {#sec6}
@@ -1273,21 +1289,16 @@ Open questions in this area are:
 3. If the vulnerability has been exploited, how do we stop a large scale attack before any damage is caused?
 
 
-# Next Steps towards a Flexible and Secure Internet of Things {#sec8}
+# Conclusions and Next Steps {#sec8}
 
-This Internet Draft included an overview of both operational and security
-requirements of things in the Internet of Things, discussed a general threat
-model and security issues, and introduced a number of potential security
-suites fitting different types of IoT deployments.
-
-We conclude this document by giving our assessment of the current status
-of IoT security with respect to addressing the IP security challenges.
-<<TBD>>
+This Internet Draft provides an overview of both operational and security requirements in the IP-based Internet of Things.
+We discuss a general threat model, security issues, and state of the art.
+We further introduce a number of potential security profiles fitting different types of IoT deployments and discuss key security challenges.
 
 # Security Considerations {#sec9}
 
 This document reflects upon the requirements and challenges of the security
-architectural framework for Internet of Things.
+architectural framework for the Internet of Things.
 
 # IANA Considerations {#sec10}
 
