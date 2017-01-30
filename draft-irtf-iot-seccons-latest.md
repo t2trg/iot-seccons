@@ -132,6 +132,7 @@ informative:
   RFC5238: 
   RFC5713: 
   RFC5903: 
+  RFC2119:
   AUTO-ID:
     title: AUTO-ID LABS
     date: 2010-09
@@ -209,6 +210,18 @@ informative:
     date: 2013
     seriesinfo:
       Paper: Security and Communication Networks - Special Issue on Security in a Completely Interconnected World
+  d2dsecurity:
+    title: 'Security and Privacy in Device-to-Device (D2D) Communication: A Review'
+    author:
+    - ins: M. Haus
+    - ins: M. Waqas
+    - ins: A. Ding
+    - ins: Y. Li
+    - ins: S. Tarkoma
+    - ins: J. Ott
+    date: 2016
+    seriesinfo:
+      Paper: IEEE Communications Surveys and Tutorials
   PROC-Smetters-04:
     title: 'Network-in-a-Box: How to Set Up a Secure Wireless Network in Under a Minute'
     author:
@@ -228,14 +241,6 @@ informative:
     date: 1999-11
     seriesinfo:
       7th: International Workshop Proceedings
-  RFC2119:
-    title: Key words for use in RFCs to Indicate Requirement Levels
-    author:
-    - ins: S. Bradner
-    date: 1997-03
-    seriesinfo:
-      BCP: '14'
-      RFC: '2119'
   THESIS-Langheinrich:
     title: Personal Privacy in Ubiquitous Computing
     author:
@@ -262,6 +267,22 @@ informative:
     title: MSEC Working Group
     seriesinfo:
       Web: http://datatracker.ietf.org/wg/msec/
+  IEEE802ah:
+    title: 'Status of Project IEEE 802.11ah, IEEE P802.11- Task Group AH-Meeting Update.'
+    seriesinfo:
+      Web: http://www.ieee802.org/11/Reports/tgah_update.htm      
+  nbiot:
+    title: 'NarrowBand IoT'
+    seriesinfo:
+      Web: http://www.3gpp.org/ftp/tsg_ran/TSG_RAN/TSGR_69/Docs/RP-151621.zip 
+  lora:
+    title: 'LoRa - Wide Area Networks for IoT'
+    seriesinfo:
+      Web: https://www.lora-alliance.org/     
+  sigfox:
+    title: 'Sigfox - The Global Communications Service Provider for the Internet of Things (IoT)'
+    seriesinfo:
+      Web: https://www.sigfox.com/
   ZB:
     title: ZigBee Alliance
     date: 2011-02
@@ -600,11 +621,9 @@ the potential point of vulnerabilities at different layers of the communication 
 {: #fig3 title="Classification of threats according to the lifecycle phases and security building blocks."}
 
 Dealing with above threats and finding suitable security mitigations is challenging: there are very sofisticated threats that a very powerful attacker could use; also, new threats and exploits appear in a daily basis.
-Therefore, the existence of proper secure product creation processes that allow managing and minimizing risks during the lifecycle of the IoT devices is at least as important as being aware of the theats.
-A non-exhaustive list of relevant processes include: 
+Therefore, the existence of proper secure product creation processes that allow managing and minimizing risks during the lifecycle of the IoT devices is at least as important as being aware of the theats. A non-exhaustive list of relevant processes include: 
 
-1. A Business Impact Analysis (BIA) assesses the consequences of lost of basic security attributes, namely, confidentiality, integrity and availability in an IoT system. These consequences might include impact on people data, data lost, sales lost, increased expenses, regulatory fines, customer dissatisfaction, etc.
-Performing a business impact analyis allow determinining the business relevance of having a proper security design placing security on the focus.
+1. A Business Impact Analysis (BIA) assesses the consequences of lost of basic security attributes, namely, confidentiality, integrity and availability in an IoT system. These consequences might include impact on people data, data lost, sales lost, increased expenses, regulatory fines, customer dissatisfaction, etc. Performing a business impact analyis allow determinining the business relevance of having a proper security design placing security on the focus.
 
 2. A Risk Assessment (RA) analyzes security threats to the IoT system, considering their likelihood and impact, and deriving for each of them a risk level. Risks classified as moderate or high must be mitigated, i.e., security architecture should be able to deal with that threat bringing the risk to a low level. Note that threats are usually classified according to their goal: confidentiality, integrity, and availability. For instance, a specific threat to recover a symmetric-key used in the system relates to confidentiality.
 
@@ -612,20 +631,19 @@ Performing a business impact analyis allow determinining the business relevance 
 
 4. Procedures for incident reporting and mitigation refer to the methodologies that allow becoming aware of any security issues that affect an IoT system. Furthermore, this includes steps towards the actual deployment of patches that mitigate the identified vulnerabilities.
 
-BIA, RA, and PIA are usually to be realized during the creation of a new IoT system, introduction of new technologies in the IoT system, or deplozment of significant system upgrades. 
-In general, it is recommended to re-assess them in a regular basis taking into account new use cases or threats. 
+BIA, RA, and PIA are usually to be realized during the creation of a new IoT system, introduction of new technologies in the IoT system, or deplozment of significant system upgrades. In general, it is recommended to re-assess them in a regular basis taking into account new use cases or threats. 
 
 
 # State of the Art {#sec5}
 
-This section is organized as follows.
-Section {{sec5-1}} summarizes state of the art on IP-based systems, within IETF and in other standardization bodies.
-Section {{sec5-2}} summarizes state of the art on IP-based security protocols and their usage.
-Section {{sec5-3}} discusses guidelines for securing the IoT as proposed by other bodies.
-Section {{sec5-4}} analyzes status of other relevant standards, in particular, those by NIST regarding IoT and IoT security.
+This section is organized as follows. Section {{sec5-1}} summarizes state of the art on IP-based systems, within IETF and in other standardization bodies.
+Section {{sec5-2}} summarizes state of the art on IP-based security protocols and their usage. Section {{sec5-3}} discusses guidelines for securing the IoT as proposed by other bodies. Section {{sec5-4}} analyzes status of other relevant standards, in particular, those by NIST regarding IoT and IoT security.
 
+## New network architectures and paradigm {#sec5-1}
 
-## IP-based IoT Protocols and Standards {#sec5-1}
+There is a multitude of new link layer protocols that aim to address the resource-constrained nature of IoT devices. For example, the IEEE 802.11 ah {{IEEE802ah}} has been specified for extended range and lower energy consumption to support Internet of Things (IoT) devices. Similary, Low-Power Wide-Area Network (LPWAN) protocols such as LoRa {{lora}}, Sigfox {{sigfox}}, NarrowBand IoT (NB-IoT) are all designed for resource-constrained devices that require long range and low bit rates. While these protocols allow the IoT devices to conserve energy and operate efficiently, they also add additional security challenges. For example, the relatively small MTU can make security handshakes with large X509 certificates a significant overhead. At the same time, new communication paradigms also allow IoT devices to communicate directly amongst themselves with or without support from the network. This communication paradigm is also referred to as Device-to-Device (D2D) communication. D2D is primarily driven by network operators that want to utilize short range communication to improve the network performance and for supporting proximity based services. Haus et al. {{d2dsecurity}} identify several security and privacy challenges with such new communication paradigms. 
+
+## IP-based IoT Protocols and Standards {#sec5-2}
 
 Nowadays, there exists a multitude of control protocols for the IoT. For
 BAC systems, the ZigBee standard {{ZB}}, BACNet {{BACNET}}, or DALI {{DALI}} play key roles. Recent trends, however, focus on an all-IP approach for system control.
@@ -644,7 +662,8 @@ for things. Also IRTF groups are actively contributing to improve IoT security.
 
 Additionally industry alliances like Thread {{Thread}} are creating constrained IP protocol stacks based on the IETF work. 
 
-## Existing IP-based Security Protocols and Solutions {#sec5-2}
+
+## Existing IP-based Security Protocols and Solutions {#sec5-3}
 
 In the context of the IP-based IoT solutions, consideration of TCP/IP security
 protocols is important as these protocols are designed to fit the IP network
@@ -714,7 +733,7 @@ duplicate detection and retransmission, but does not allow for packet fragmentat
 In addition, there is also new activities in IETF and W3C to define security protocols better tailored to IoT or for specific deployment situations. The ACE WG is designing an authorization mechanism based on OAuth for constrained devices. There is work on Object Security based CoAP protection mechanism being defined in OSCOAP. 
 
 
-## IoT Security Guidelines {#sec5-3}
+## IoT Security Guidelines {#sec5-4}
 
 Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructure from compromised IoT devices has prompted many different standards bodies and consortia to provide guidelines for developers and the Internet community at large to build secure IoT devices and services. The different guidelines available are as follows:
 
@@ -739,34 +758,24 @@ Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructur
 Other guideline and recommendation documents may exist or may later be published. This list should be considered non-exhaustive. 
 
 
-## Guidelines and IoT Security Regulations {#sec5-4}
+## Guidelines and IoT Security Regulations {#sec5-5}
 
-Despide the need for security in the Internet is nothing new and multiple guidelines exist, the fact is that many IoT devices and systems are not fully secure.
-There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to the delivered security level. This can have multiple reasons, for instance, lack of expertise or budget. This, however, poses a severe threat when such devices are deployed. 
-The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become unsecure if a device gains access in some way at some point of time.
-Even if all devices in a given environment are secure, it does not prevent external (passive) attacks originated in unsecure devices. 
+Despide the need for security in the Internet is nothing new and multiple guidelines exist, the fact is that many IoT devices and systems are not fully secure. There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to the delivered security level. This can have multiple reasons, for instance, lack of expertise or budget. This, however, poses a severe threat when such devices are deployed. The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become unsecure if a device gains access in some way at some point of time. Even if all devices in a given environment are secure, it does not prevent external (passive) attacks originated in unsecure devices. 
 
-Recently {{FCC}} the FCC has been stated the need for higher regulation for IoT systems. In fact this might be a missing component, at least in Federal Information Systems (FIS).
-Today, security in US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST derived a number of documents to establish how to categorize FIS and determine minimum security requirements (FIPS-PUB-199 and FIPS-PUB-200). Minimum security requirements for FIS are specified in NIST SP 800-53r4. 
-However, it is very likely that existing regulations do not take into account the specific challenges of IoT devices and networks.
+Recently {{FCC}} the FCC has been stated the need for higher regulation for IoT systems. In fact this might be a missing component, at least in Federal Information Systems (FIS). Today, security in US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST derived a number of documents to establish how to categorize FIS and determine minimum security requirements (FIPS-PUB-199 and FIPS-PUB-200). Minimum security requirements for FIS are specified in NIST SP 800-53r4. However, it is very likely that existing regulations do not take into account the specific challenges of IoT devices and networks.
 
-Even if such a regulation is put in place, the question is how such a regulation can be applied in practice to non-federal deployments, such as industrial, homes, offices, or smart cites.
-Each of them exhibits unique features, involves very diverse types of users, has different operational requirements, and combines IoT devices from multiple manufactures. 
+Even if such a regulation is put in place, the question is how such a regulation can be applied in practice to non-federal deployments, such as industrial, homes, offices, or smart cites. Each of them exhibits unique features, involves very diverse types of users, has different operational requirements, and combines IoT devices from multiple manufactures. 
 
 Thus, it seems that future regulations should consider such diverse deployment scenarios.
 
 
 # IoT Security Profiles {#sec6}
 
-There is a wide range of IoT applications including building automation systems, healthcare, smart cities, logistics, etc.
-For each of those applications, properties such as device capability, network infrastructure, or available security services can be completely different.
-Furthermore, each of those applications is featured by a different number of actors deployed in very different environments and with ver different purposes.
+There is a wide range of IoT applications including building automation systems, healthcare, smart cities, logistics, etc. For each of those applications, properties such as device capability, network infrastructure, or available security services can be completely different. Furthermore, each of those applications is featured by a different number of actors deployed in very different environments and with ver different purposes.
 
-Consequently, when a Business Impact Analysis or Risk Assessment are realized, not only the types of threats will change, but also their likelihood and potential impact.
-This determines that different applications tend to require different or complementary types of security mechanisms mitigating the identified risks.
+Consequently, when a Business Impact Analysis or Risk Assessment are realized, not only the types of threats will change, but also their likelihood and potential impact. This determines that different applications tend to require different or complementary types of security mechanisms mitigating the identified risks.
 
-For example, IoT applications may have different needs regarding authentication and confidentiality. 
-While some application might not require any authentication at all, others might require strong end-to-end authentication. In terms of secure bootstrapping of keys, some applications might assume the existence and online availability of a central key-distribution-center (KDC) within the 6LoWPAN network to distribute and manage keys; while other applications cannot rely on such a central party or their availability.
+For example, IoT applications may have different needs regarding authentication and confidentiality. While some application might not require any authentication at all, others might require strong end-to-end authentication. In terms of secure bootstrapping of keys, some applications might assume the existence and online availability of a central key-distribution-center (KDC) within the 6LoWPAN network to distribute and manage keys; while other applications cannot rely on such a central party or their availability.
 
 This section defines security profiles fitting the security needs of applications with the same characteristics and requirements. 
 This is done to (i) guide the design process of different application types by identifying open gaps; (ii) allow for later interoperability; and (iii) prevent possible security misconfigurations. 
@@ -796,9 +805,7 @@ We compare the security capabilities in each of the security profiles according 
 
 IMPORTANT: Note that each of these security profiles aim at summarizing the required security requirements for different applications and at providing a set of initial security features. In other words, these profiles reflect the need for different security configurations, depending on the threat and trust models of the underlying applications. In this sense, this section does not provide an overview of existing protocols as done in previous sections of the Internet Draft, but it rather explicitly describes what should be in place to ensure secure system operation. Observe also that this list of security profiles is not exhaustive and that it should be considered just as an example not related to existing legal regulations for any existing application. 
 
-The remainder of this section is organized as follows.
-Section {{sec6-1}} first describes four generic security profiles and discuss how different applications of IP networks, e.g., 6LoWPAN/CoAP networks, involve different security needs.
-The following five subsections summarize the expected security features or capabilities for each the security profile with regards to "Security Architecture", "Security Model", "Security Bootstrapping", "Network Security", and "Application Security".
+The remainder of this section is organized as follows. Section {{sec6-1}} first describes four generic security profiles and discuss how different applications of IP networks, e.g., 6LoWPAN/CoAP networks, involve different security needs. The following five subsections summarize the expected security features or capabilities for each the security profile with regards to "Security Architecture", "Security Model", "Security Bootstrapping", "Network Security", and "Application Security".
 
 
 ## Profiles Security Profiles {#sec6-1}
@@ -809,7 +816,7 @@ We define four generic security profiles as summarized in the table below:
 
 ~~~~
            +---------------------------------------------------------+
-           | Exemnplary      |          		                     |
+           | Exemnplary      |                                       |
            | Application     |          Description                  |
 +----------+---------------------------------------------------------+
 |SecProf_1 |Home usage       |Enables operation between home things  |
@@ -1192,8 +1199,7 @@ during the lifetime of a security association. Built-in mobility signaling can g
 
 HIP offers a simple yet effective mobility management by allowing hosts to signal changes to their associations {{RFC5206}}. However, slight adjustments
 might be necessary to reduce the cryptographic costs, for example, by making the public-key signatures in the mobility messages optional. Diet HIP does
-not define mobility yet but it is sufficiently similar to HIP to employ the same mechanisms. 
-TLS and DTLS do not have standards for mobility support, however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which nodes operate. In many cases, mobility support by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. However, if individual things change their point of network attachment while communicating, mobility support may gain importance.
+not define mobility yet but it is sufficiently similar to HIP to employ the same mechanisms. TLS and DTLS do not have standards for mobility support, however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which nodes operate. In many cases, mobility support by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. However, if individual things change their point of network attachment while communicating, mobility support may gain importance.
 
 ## Software update {#sec7-4}
 
@@ -1220,33 +1226,25 @@ Although this may seem far fetched given the commercial interests and market dyn
 
 
 ## Testing: bug hunting and vulnerabilities {#sec7-7}
-Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform extenshive testing on their IoT devices, networks, and systems. 
-Nonetheless, since the devices are resource-constrained and manufactured by multiple ventors, some of them very small, devices might be shipped with very limited testing, so that bugs can remain and can be exploited at a later stage.
+Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform extenshive testing on their IoT devices, networks, and systems. Nonetheless, since the devices are  resource-constrained and manufactured by multiple ventors, some of them very small, devices might be shipped with very limited testing, so that bugs can remain and can be exploited at a later stage.
 This leads to two main types of challenges:
 1. It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices to give end users the confidence that the purchased devices are robust.
 2. It is also an open question how combination of devices of multiple vendors might actually lead to dangerous network configurations, e.g., if combination of specific devices can trigger unexpected behaiviours.
 
 ## Quantum-resistance {#sec7-8}
 
-Many IoT systems that are being deployed today will remain operational for many years. 
-With the advancements made in the field of quantum
-computers, it is possible that large-scale quantum computers are available in the future for performing cryptanalysis on existing cryptographic algorithms and cipher suites. 
-If this happened, it would have two consequences. First, functionalities enabled by means of RSA/ECC - namely key exchange, public-key encryption and signature - would not be secure anymore due to Shor's algorithm. Second, the security level of symmetric algorithms will decrease, e.g., the security of a block cipher with a key size of b bits will only offer b/2 bits of security due to Grover's algorithm.
+Many IoT systems that are being deployed today will remain operational for many years. With the advancements made in the field of quantum computers, it is possible that large-scale quantum computers are available in the future for performing cryptanalysis on existing cryptographic algorithms and cipher suites. If this happened, it would have two consequences. First, functionalities enabled by means of RSA/ECC - namely key exchange, public-key encryption and signature - would not be secure anymore due to Shor's algorithm. Second, the security level of symmetric algorithms will decrease, e.g., the security of a block cipher with a key size of b bits will only offer b/2 bits of security due to Grover's algorithm.
 
-This would require to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. While such future planning is hard, it may be a necessity in certain critical IoT
-deployments which are expected to last decades or more. Although
-increasing the key-size of the different algorithms is definitely an
-option, it would also incur additional computation overhead and network
-traffic. This would be undesirable in most scenarios. There have been
-recent advancements in quantum-resistant cryptography.
+This would require to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. While such future planning is hard, it may be a necessity in certain critical IoT deployments which are expected to last decades or more. Although increasing the key-size of the different algorithms is definitely an
+option, it would also incur additional computation overhead and network traffic. This would be undesirable in most scenarios. There have been recent advancements in quantum-resistant cryptography.
 
 We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography.
 RFC7696 provides guidelines for cryptographic algorithm agility.
 
 ## Privacy protection {#sec7-9}
 
-Users will be surrounded by tens of connected devices. Even if the communication links are encrypted and protected, information about the users might be collected for different purposes affecting their privacy.
-In{{Ziegeldorf}}, privacy in the IoT is defined as the threefold guarantee to the user for:
+Users will be surrounded by tens of connected devices. Even if the communication links are encrypted and protected, information about the users might be collected for different purposes affecting their privacy. 
+In {{Ziegeldorf}}, privacy in the IoT is defined as the threefold guarantee to the user for:
 1. awareness of privacy risks imposed by smart things and services surrounding the data subject,
 2. individual control over the collection and processing of personal information bz the surrounding smart things
 3. awareness and control of subsequent use and dissemination of personal information by those entities to any entity outside the subject's personal control sphere.
@@ -1265,9 +1263,7 @@ When IoT systes are deployed, the above issues should be considered to ensure th
 
 ## Data leakage {#sec7-10}
 
-IoT devices are resource contrained and often deployed in unattended environments or can just be bought in the Internet.
-Therefore, an attacker can have direct access to the device and apply more advance techniques that a traditional black box model does not consider such as side-channel attacks or code disassembly. 
-By doing this, the attacker can try to retrieve data such as:
+IoT devices are resource contrained and often deployed in unattended environments or can just be bought in the Internet. Therefore, an attacker can have direct access to the device and apply more advance techniques that a traditional black box model does not consider such as side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:
 
 1. long term keys that might be used perform attacks on devices deployed in other locations. 
 2. source code that might let the user determine bugs or find exploits to perform other types of attacks, or just sell it,
@@ -1278,11 +1274,7 @@ An open question is which techniques can be used to protect IoT devices in such 
 
 ## Trustworthy IoT Operation {#sec7-11}
 
-Flaws in the design and implementation of a secure IoT device and network can lead to secure vulnerabilities.
-An example is a flaw is the distribution of an Internet-connected IoT device in which a default password is used in all devices.
-Many IoT devices can be found in the Internet by means of tools such as Shodan, and if they have any vulnerability, it can then be exploited at scale, e.g., to launch DDoS attacks.
-This is not fiction but reality as Dyn, a mayor DNS was attacked by means of a DDoS attack originated from a large IoT botnet composed of thousands of compromised IP-cameras.
-Open questions in this area are:
+Flaws in the design and implementation of a secure IoT device and network can lead to secure vulnerabilities. An example is a flaw is the distribution of an Internet-connected IoT device in which a default password is used in all devices. Many IoT devices can be found in the Internet by means of tools such as Shodan, and if they have any vulnerability, it can then be exploited at scale, e.g., to launch DDoS attacks. This is not fiction but reality as Dyn, a mayor DNS was attacked by means of a DDoS attack originated from a large IoT botnet composed of thousands of compromised IP-cameras. Open questions in this area are:
 
 1. How to prevent large scale vulnerabilties in IoT devices?
 2. How to prevent attackers from exploiting vulnerabilities in IoT devices at large scale?
@@ -1291,9 +1283,7 @@ Open questions in this area are:
 
 # Conclusions and Next Steps {#sec8}
 
-This Internet Draft provides an overview of both operational and security requirements in the IP-based Internet of Things.
-We discuss a general threat model, security issues, and state of the art.
-We further introduce a number of potential security profiles fitting different types of IoT deployments and discuss key security challenges.
+This Internet Draft provides an overview of both operational and security requirements in the IP-based Internet of Things. We discuss a general threat model, security issues, and state of the art. We further introduce a number of potential security profiles fitting different types of IoT deployments and discuss key security challenges.
 
 # Security Considerations {#sec9}
 
