@@ -387,6 +387,10 @@ informative:
     title: 'LoRa - Wide Area Networks for IoT'
     seriesinfo:
       Web: https://www.lora-alliance.org/     
+  nist_lightweight_project:
+    title: 'NIST lightweight Project'
+    seriesinfo:
+      Web: www.nist.gov/programs-projects/lightweight-cryptography, www.nist.gov/sites/default/files/documents/2016/10/17/sonmez-turan-presentation-lwc2016.pdf      
   sigfox:
     title: 'Sigfox - The Global Communications Service Provider for the Internet of Things (IoT)'
     seriesinfo:
@@ -853,7 +857,7 @@ In addition, there is also new activities in IETF and W3C to define security pro
 
 ## IoT Security Guidelines {#sec5-3}
 
-Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructure from compromised IoT devices has prompted many different standards bodies and consortia to provide guidelines for developers and the Internet community at large to build secure IoT devices and services. The different guidelines available are as follows:
+Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructure from compromised IoT devices has prompted many different standards bodies and consortia to provide guidelines for developers and the Internet community at large to build secure IoT devices and services. The different guidelines and ongoing projects as follows:
 
 1. GSMA IoT security guidelines {{GSMAsecurity}}: GSMA has published a set of security guidelines for the benefit of new IoT product and service providers. The guideline are aimed at device manufacturers, service providers, developers and network operators. An enterprise can complete IoT Security Self-Assessment to demonstrate that its products and services are aligned with the security guidelines of the GSMA. 
 
@@ -865,15 +869,17 @@ Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructur
 
 5. NIST {{NIST-Guide}}: The NIST special publication urges enterprise and US federal agencies to address security throughout the systems engineering process. The publication builds upon the ISO/IEC/IEEE 15288 standard and augments each process in the system lifecyle with security enhancements. 
 
-6. OWASP {{OWASP}}: Open Web Application Security Project (OWASP) provides security guidance for IoT manufactures, developers and consumers. OWASP also includes guidelines for those who intend to test and analyze IoT devices and applications. 
+6. NIST {{nist_lightweight_project}}: NIST is running a project on lightweight cryptography with the purpose of: (i) identifying application areas for which standard cryptographic algorithms are too heavy, classifying them according to some application profiles to be determined; (ii) determining limitations in those existing cryptographic standards; and (iii) standarizing lightweight algorithms that can be used in specific application profiles. 
 
-7. IoT Security foundation {{IoTSecFoundation}}: IoT security foundation has published a document that enlists various considerations that need to be taken into account when developing IoT applications. For example, the document states that IoT device could use hardware-root of trust to ensure that only authorized software runs on the device. 
+7. OWASP {{OWASP}}: Open Web Application Security Project (OWASP) provides security guidance for IoT manufactures, developers and consumers. OWASP also includes guidelines for those who intend to test and analyze IoT devices and applications. 
 
-8. NHTSA {{NHTSA}}: The US National Highway Traffic Safety Administration provides a set of non-binding guidance to the automotive industry for improving the cyber security of vehicles. While some of the guidelines are general, the document provides specific recommendations for the automotive industry such as how various automotive manufacturer can share cyber security vulnerabilities discovered. 
+8. IoT Security foundation {{IoTSecFoundation}}: IoT security foundation has published a document that enlists various considerations that need to be taken into account when developing IoT applications. For example, the document states that IoT device could use hardware-root of trust to ensure that only authorized software runs on the device. 
 
-9. BCP for IoT devices {{ID-Moore}}: This Internet draft provides a list of minimum requirements that vendors of Internet of Things (IoT) devices should to take into account while developing applications, services and firmware updates in order to reduce the frequency and severity of security incidents that arise from compromised IoT devices. 
+9. NHTSA {{NHTSA}}: The US National Highway Traffic Safety Administration provides a set of non-binding guidance to the automotive industry for improving the cyber security of vehicles. While some of the guidelines are general, the document provides specific recommendations for the automotive industry such as how various automotive manufacturer can share cyber security vulnerabilities discovered. 
 
-10. ENISA {{ENISA_ICS}}: The European Union Agency for Network and Information Security published a document on communication network dependencies for ICS/SCADA systems in which security vulnerabilities, guidelines and general recommendations are summarized.
+10. BCP for IoT devices {{ID-Moore}}: This Internet draft provides a list of minimum requirements that vendors of Internet of Things (IoT) devices should to take into account while developing applications, services and firmware updates in order to reduce the frequency and severity of security incidents that arise from compromised IoT devices. 
+
+11. ENISA {{ENISA_ICS}}: The European Union Agency for Network and Information Security published a document on communication network dependencies for ICS/SCADA systems in which security vulnerabilities, guidelines and general recommendations are summarized.
 
 Other guideline and recommendation documents may exist or may later be published. This list should be considered non-exhaustive. 
 
@@ -891,14 +897,15 @@ Thus, it seems that future regulations should consider such diverse deployment s
 
 # IoT Security Profiles {#sec6}
 
-here is a wide range of IoT applications including building automation systems, healthcare, smart cities, logistics, etc. For each of those applications, properties such as device capability, network infrastructure, or available security services can be completely different. Furthermore, each of those applications is featured by a different number of actors deployed in very different environments and with very different purposes.
+There is a wide range of IoT applications including building automation systems, healthcare, smart cities, logistics, etc. For each of those applications, properties such as device capability, network infrastructure, or available security services can be completely different. Furthermore, each of those applications is featured by a different number of actors deployed in very different environments and with very different purposes.
 
 Consequently, when a Business Impact Analysis or Risk Assessment are realized, not only the types of threats will change, but also their likelihood and potential impact. This determines that different applications tend to require different or complementary types of security mechanisms mitigating the identified risks.
 
 For example, IoT applications may have different needs regarding authentication and confidentiality. While some application might not require any authentication at all, others might require strong end-to-end authentication. In terms of secure bootstrapping of keys, some applications might assume the existence and online availability of a central key-distribution-center (KDC) within the 6LoWPAN network to distribute and manage keys; while other applications cannot rely on such a central party or their availability.
 
-This section defines security profiles fitting the security needs of applications with the same characteristics and requirements. 
-This is done to (i) guide the design process of different application types by identifying open gaps; (ii) allow for later interoperability; and (iii) prevent possible security misconfiguration. 
+This section describes some exemplary security profiles fitting the security needs of applications with the same characteristics and requirements. 
+This approach is similar to that in the security profiles in {{nist_lightweight_project}}.
+Such security profiles can help to (i) guide the design process of different application types by identifying open gaps; (ii) allow for later interoperability; and (iii) prevent possible security misconfiguration. 
 Each security profile is identified by:
 
 1. a short description,
@@ -921,7 +928,7 @@ We compare the security capabilities in each of the security profiles according 
 
 5. Application security.
 
-IMPORTANT: Note that each of these security profiles aim at summarizing the required security requirements for different applications and at providing a set of initial security features. In other words, these profiles reflect the need for different security configurations, depending on the threat and trust models of the underlying applications. In this sense, this section does not provide an overview of existing protocols as done in previous sections of the Internet Draft, but it rather explicitly describes what should be in place to ensure secure system operation. Observe also that this list of security profiles is not exhaustive and that it should be considered just as an example not related to existing legal regulations for any existing application. 
+IMPORTANT: Note that each of these exemplary profiles aims at summarizing the required security requirements for different exemplary applicaton areas and at providing a set of initial security features. In other words, these profiles reflect the need for different security configurations, depending on the threat and trust models of the underlying applications. In this sense, this section does not provide an overview of existing protocols as done in previous sections of the Internet Draft, but it rather explicitly describes what should be in place to ensure secure system operation. Observe also that this list of security profiles is not exhaustive and that it should be considered just as an example not related to existing legal regulations for any existing application. 
 
 The remainder of this section is organized as follows. Section {{sec6-1}} first describes four generic security profiles and discuss how different applications of IP networks, e.g., 6LoWPAN/CoAP networks, involve different security needs. The following five subsections summarize the expected security features or capabilities for each the security profile with regards to "Security Architecture", "Security Model", "Security Bootstrapping", "Network Security", and "Application Security".
 
@@ -1368,12 +1375,12 @@ Flaws in the design and implementation of a secure IoT device and network can le
 
 # Conclusions and Next Steps {#sec8}
 
-This Internet Draft provides an overview of both operational and security requirements in the IP-based Internet of Things. 
-We discuss a general threat model, security issues, and state of the art. 
+This Internet Draft provides IoT security researchers, system designers and implements with an overview of both operational and security requirements in the IP-based Internet of Things. 
+We discuss a general threat model, security issues, state of the art, and tools to mitigate security threats. 
 We further introduce a number of potential security profiles fitting different types of IoT deployments and discuss key security challenges.
 
 Although big steps have been realized during the last years, as summarized in Section {{sec5-1}} and many organizations are publishing general recommendations (Section {{sec5-3}}) describing how the IoT should be secured, there are many challenges ahead that require further attention.
-Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring a trustworthy IoT operation. All these problems are important; however, different deployment environment have different operational and security demands. Thus, we recommend the definition and standardization of security profiles, e.g., further building on those introduced in Section {{sec6}}, to ensure minimum security capabilities in different environments while ensuring interoperability.
+Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring a trustworthy IoT operation. All these problems are important; however, different deployment environment have different operational and security demands. Thus, a potential approach is the definition and standardization of security profiles, e.g., similar to the exemplary profiles introduced in Section {{sec6}}, to ensure minimum security capabilities in different environments while ensuring interoperability.
 
 
 # Security Considerations {#sec9}
