@@ -5,6 +5,36 @@ docname: draft-irtf-t2trg-iot-seccons
 cat: info
 stand_alone: true
 informative:
+  ID-dietesp:
+    title: "Diet-ESP: a flexible and compressed format for IPsec/ESP"
+    author:
+    - ins: D. Migault
+    - ins: T. Guggemos
+    - ins: C. Bormann
+    date: 2016-08
+    seriesinfo:
+       draft-mglt-6lo-diet-esp-02
+  ID-senml:
+    title: "Media Types for Sensor Measurement Lists (SenML)"
+    author:
+    - ins: C. Jennings
+    - ins: Z. Shelby
+    - ins: J. Arkko
+    - ins: A. Keranen
+    - ins: C. Bormann
+    date: 2016-10
+    seriesinfo:
+      draft-ietf-core-resource-directory-09
+  ID-rd:
+    title: "CoRE Resource Directory"
+    author:
+    - ins: Z. Shelby
+    - ins: M. Koster
+    - ins: C. Bormann
+    - ins: P. Stok
+    date: 2016-10
+    seriesinfo:
+      draft-ietf-core-resource-directory-09
   ID-cose:
     title: "CBOR Object Signing and Encryption (COSE)"
     author:
@@ -181,7 +211,8 @@ informative:
   RFC6347:
   RFC6550:
   RFC6551:
-  RFC6568: 
+  RFC6568:
+  RFC6690: 
   RFC6749:
   RFC7049:
   RFC7158:
@@ -330,6 +361,11 @@ informative:
     date: 2011-03
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/lwig/charter/   
+  RG-T2TRG:
+    title: IRTF Thing-to-Thing (T2TRG) Research Group
+    date: 2015-12
+    seriesinfo:
+      Web: https://datatracker.ietf.org/rg/t2trg/charter/
   WG-ACE:
     title: IETF Authentication and Authorization for Constrained Environments (ACE) Working Group
     date: 2014-06
@@ -708,12 +744,11 @@ for resource constrained networks of smart things. The 6LoWPAN working group
 the efficient transmission and adaptation of IPv6 packets over IEEE 802.15.4
 networks {{RFC4944}}. 
 
-The CoRE working group {{WG-CoRE}} provides a framework for resource-oriented applications intended to run on constrained IP network (6LoWPAN). One of its main tasks is the definition of a lightweight version of the HTTP protocol, the Constrained Application Protocol (CoAP) {{RFC7252}}, that runs over UDP and enables efficient application-level communication
-for things. 
+The CoRE working group {{WG-CoRE}} provides a framework for resource-oriented applications intended to run on constrained IP network (6LoWPAN). One of its main tasks is the definition of a lightweight version of the HTTP protocol, the Constrained Application Protocol (CoAP) {{RFC7252}}, that runs over UDP and enables efficient application-level communication for things. 
 
-There is also ongoing work to define an authorization and access-control framework for resource-constrained nodes. The Authentication and Authorization for Constrained Environments (ACE) {{WG-ACE}} working group is defining a solution to allow only authorized access to resources that are hosted on a smart object server and are identified by a URI. The current proposal {{ID-aceoauth}} is based on the OAuth 2.0 framework {{RFC6749}}. 
+In many smart object networks, the smart objects are dispersed and have intermittent reachability either because of network outages or because they sleep during their operational phase to save energy. In such scenarios, direct discovery of resources hosted on the constrained server might not be possible. To overcome this barrier, the CoRE working group is specifying the concept of a Resource Directory (RD) {{ID-rd}}. The Resource Directory hosts descriptions of resources which are located on other nodes. These resource descriptions are specified as CoRE link format {{RFC6690}} URIs.
 
-The CoAP base specification {{RFC7252}} provides a description of how DTLS can be used for securing CoAP. It proposes three different modes for using DTLS: the Presharedkey mode, where nodes have pre-provisioned keys for initiating a DTLS session with another node, RawPublicKey mode, where nodes have asymmetric-key pairs but no certificates to verify the ownership, and Certificate mode, where public keys are certified by a certification authority. In addition, Tschofenig and Fossati {{RFC7925}} specify an implementation profile for TLS version 1.2 and DTLS version 1.2 that offers communications security for resource-constrained nodes that are part of IoT.
+While CoAP defines a standard communication protocol, a format for representing sensor measurements and parameters over CoAP is required. The Sensor Measurement Lists (SenML) {{ID-senml}} is a specification that is currently being written to define media types for simple sensor measurements and parameters. It has a minimalistic design so that constrained devices with limited computational capabilities can easily encode their measurements and, at the same time, servers can efficiently collect large numbers of measurements.
 
 In many IoT deployments, the resource-constrained smart objects are connected to the Internet via a gateway that is directly reachable. For example, an IEEE 802.11 Access Point (AP) typically connects the client devices to the Internet over just one wireless hop. However, some deployments of smart object networks require routing between the smart objects themselves. The IETF has therefore defined the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL) {{RFC6550}}. RPL provides support for multipoint-to-point traffic from resource-constrained smart objects towards a more resourceful central control point, as well as point-to-multipoint traffic in the reverse direction. It also supports point-to-point traffic between the resource-constrained devices. A set of routing metrics and constraints for path calculation in RPL are also specified {{RFC6551}}.
 
@@ -728,6 +763,13 @@ An alternative to JSON, Concise Binary Object Representation (CBOR) {{RFC7049}} 
 
 The Light-Weight Implementation Guidance (LWIG) working group {{WG-LWIG}} is collecting experiences from implementors of IP stacks in constrained devices. The working group has already produced documents such as RFC7815 {{RFC7815}} which defines how a minimal Internet Key Exchange Version 2 (IKEv2) initiator can be implemented.
 
+The Thing-2-Thing Research Group (T2TRG) {{RG-T2TRG}} is investigating the remaining research issues that need to be addressed in order to quickly turn the vision of IoT into a reality where resource-constrained nodes can communicate with each other and with other more capable nodes on the Internet.
+
+There is ongoing work to define an authorization and access-control framework for resource-constrained nodes. The Authentication and Authorization for Constrained Environments (ACE) {{WG-ACE}} working group is defining a solution to allow only authorized access to resources that are hosted on a smart object server and are identified by a URI. The current proposal {{ID-aceoauth}} is based on the OAuth 2.0 framework {{RFC6749}}. 
+
+The CoAP base specification {{RFC7252}} provides a description of how DTLS can be used for securing CoAP. It proposes three different modes for using DTLS: the Presharedkey mode, where nodes have pre-provisioned keys for initiating a DTLS session with another node, RawPublicKey mode, where nodes have asymmetric-key pairs but no certificates to verify the ownership, and Certificate mode, where public keys are certified by a certification authority. In addition, Tschofenig and Fossati {{RFC7925}} specify an implementation profile for TLS version 1.2 and DTLS version 1.2 that offers communications security for resource-constrained nodes that are part of IoT.
+
+Migault et al.{ID-dietesp} are working on a compressed version of IPsec so that it can easily be used by resource-constrained IoT devices. They rely on the Internet Key Exchange Protocol version 2 (IKEv2) for negotiating the compression format.
 
 Additionally industry alliances and other standardization bodies are creating constrained IP protocol stacks based on the IETF work. Some important examples of this include: 
 
