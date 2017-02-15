@@ -5,12 +5,53 @@ docname: draft-irtf-t2trg-iot-seccons
 cat: info
 stand_alone: true
 informative:
-  RFC6568: 
-  RFC2818: 
-  RFC6345: 
-  RFC7252:
-  RFC7390:
-  RFC7696:
+  ID-cose:
+    title: "CBOR Object Signing and Encryption (COSE)"
+    author:
+    - ins: J. Schaad
+    date: 2016-11
+    seriesinfo:
+      draft-ietf-cose-msg-24
+  ID-6lodect:
+    title: "Transmission of IPv6 Packets over DECT Ultra Low Energy"
+    author:
+    - ins: P. Mariager
+    - ins: J. Petersen
+    - ins: Z. Shelby
+    - ins: M. Logt
+    - ins: D. Barthel
+    date: 2016-12
+    seriesinfo:
+      draft-ietf-6lo-dect-ule-09
+  ID-6lonfc:
+    title: "Transmission of IPv6 Packets over Near Field Communication"
+    author:
+    - ins: Y. Choi
+    - ins: Y. Hong
+    - ins: J. Youn
+    - ins: D. Kim
+    - ins: J. Choi
+    date: 2016-10
+    seriesinfo:
+      draft-ietf-6lo-nfc-05  
+  ID-6tisch:
+    title: "An Architecture for IPv6 over the TSCH mode of IEEE 802.15.4"
+    author:
+    - ins: P. Thubert
+    date: 2017-01
+    seriesinfo:
+      draft-ietf-6tisch-architecture-11  
+  ID-aceoauth:
+    title: Authentication and Authorization for Constrained Environments (ACE)
+    author:
+    - ins: L. Seitz
+    - ins: G. Selander
+    - ins: E. Wahlstroem
+    - ins: S. Erdtman
+    - ins: H. Tschofenig
+    date: 2011-03
+    seriesinfo:
+      draft-ietf-ace-oauth-authz-05
   ID-Daniel:
     title: IPv6 over Low Power WPAN Security Analysis
     author:
@@ -21,14 +62,14 @@ informative:
     - ins: J. Laganier
     date: 2011-03
     seriesinfo:
-      Internet: Draft draft-daniel-6lowpan-security-analysis-05
+      draft-daniel-6lowpan-security-analysis-05
   ID-HIP:
     title: HIP Diet EXchange (DEX)
     author:
     - ins: R. Moskowitz
     date: 2012-05
     seriesinfo:
-      draft-moskowitz-hip-rg-dex-06: "(work in progress)"
+      draft-moskowitz-hip-rg-dex-06
   ID-Hartke:
     title: Datagram Transport Layer Security in Constrained Environments
     author:
@@ -36,7 +77,7 @@ informative:
     - ins: O. Bergmann
     date: 2012-07
     seriesinfo:
-      draft-hartke-core-codtls-02: "(work in progress)"
+      draft-hartke-core-codtls-02
   RFC7401:
   ID-Nikander:
     title: A Bound End-to-End Tunnel(BEET) mode for ESP
@@ -45,7 +86,7 @@ informative:
     - ins: J. Melen
     date: 2008-08
     seriesinfo:
-      draft-nikander-esp-beet-mode-09: ''
+      draft-nikander-esp-beet-mode-09
   ID-OFlynn:
     title: Security Bootstrapping of Resource-Constrained Devices
     author:
@@ -56,7 +97,7 @@ informative:
     - ins: R. Cragie
     date: 2010-11
     seriesinfo:
-      draft-oflynn-core-bootstrapping-03: "(work in progress)"
+      draft-oflynn-core-bootstrapping-03
   ID-Tsao:
     title: A Security Framework for Routing over Low Power and Lossy Networks
     author:
@@ -67,7 +108,7 @@ informative:
     - ins: A. Lozano
     date: 2012-01
     seriesinfo:
-      draft-ietf-roll-security-framework-07: ''
+      draft-ietf-roll-security-framework-07
   ID-Moore:
     title: Best Current Practices for Securing Internet of Things (IoT) Devices
     author:
@@ -76,7 +117,7 @@ informative:
     - ins: H. Tschofenig
     date: 2016-10
     seriesinfo:
-      draft-moore-iot-security-bcp-00: ''    
+      draft-moore-iot-security-bcp-00
   ID-Williams:
     title: Mobile DTLS
     author:
@@ -84,7 +125,7 @@ informative:
     - ins: J. Barrett
     date: 2009-03
     seriesinfo:
-      draft-barrett-mobile-dtls-00: ''
+      draft-barrett-mobile-dtls-00
   ID-proHTTPCoAP:
     title: Best practices for HTTP-CoAP mapping implementation
     author:
@@ -95,7 +136,7 @@ informative:
     - ins: E. Dijk
     date: 2013-02
     seriesinfo:
-      draft-castellani-core-http-mapping-07(work: in progress)
+      draft-castellani-core-http-mapping-07
   ID-OSCOAP:
     title: Object Security of CoAP (OSCOAP)
     author:
@@ -118,14 +159,14 @@ informative:
     date: 2016-07
     seriesinfo:
       draft-sarikaya-t2trg-sbootstrapping-01
+  RFC2119:
+  RFC2818: 
   RFC3261: 
   RFC3748: 
   RFC3756: 
   RFC3833: 
-  RFC4016: 
-  RFC5246: 
+  RFC4016:  
   RFC4251: 
-  RFC7296: 
   RFC4555: 
   RFC4621: 
   RFC4738: 
@@ -133,10 +174,27 @@ informative:
   RFC4944: 
   RFC5191: 
   RFC5206: 
-  RFC5238: 
+  RFC5246:
   RFC5713: 
   RFC5903: 
-  RFC2119:
+  RFC6345: 
+  RFC6347:
+  RFC6550:
+  RFC6551:
+  RFC6568: 
+  RFC6749:
+  RFC7049:
+  RFC7158:
+  RFC7252:
+  RFC7296:
+  RFC7390:
+  RFC7515:
+  RFC7517:
+  RFC7519:
+  RFC7668:
+  RFC7696:
+  RFC7815:
+  RFC7925: 
   AUTO-ID:
     title: AUTO-ID LABS
     date: 2010-09
@@ -267,6 +325,16 @@ informative:
     date: 2011-02
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/core/charter/
+  WG-LWIG:
+    title: IETF Light-Weight Implementation Guidance (LWIG) Working Group
+    date: 2011-03
+    seriesinfo:
+      Web: https://datatracker.ietf.org/wg/lwig/charter/   
+  WG-ACE:
+    title: IETF Authentication and Authorization for Constrained Environments (ACE) Working Group
+    date: 2014-06
+    seriesinfo:
+      Web: https://datatracker.ietf.org/wg/ace/charter/
   WG-MSEC:
     title: MSEC Working Group
     seriesinfo:
@@ -296,6 +364,22 @@ informative:
     title: Thread Alliance
     seriesinfo:
       Web: http://threadgroup.org/
+  IIoT:
+    title: Industrial Internet Consortium
+    seriesinfo:
+      Web: http://www.iiconsortium.org/      
+  IPSO:
+    title: IPSO Alliance
+    seriesinfo:
+      Web: http://www.ipso-alliance.org
+  OneM2M:
+    title: OneM2M
+    seriesinfo:
+      Web: http://www.onem2m.org/
+  OCF:
+    title: Open Connectivity Foundation
+    seriesinfo:
+      Web: https://openconnectivity.org/      
   NHTSA:
     title: Cybersecurity Best Practices for Modern Vehicles
     seriesinfo:
@@ -627,23 +711,35 @@ networks {{RFC4944}}.
 The CoRE working group {{WG-CoRE}} provides a framework for resource-oriented applications intended to run on constrained IP network (6LoWPAN). One of its main tasks is the definition of a lightweight version of the HTTP protocol, the Constrained Application Protocol (CoAP) {{RFC7252}}, that runs over UDP and enables efficient application-level communication
 for things. 
 
-The ACE working group 
+There is also ongoing work to define an authorization and access-control framework for resource-constrained nodes. The Authentication and Authorization for Constrained Environments (ACE) {{WG-ACE}} working group is defining a solution to allow only authorized access to resources that are hosted on a smart object server and are identified by a URI. The current proposal {{ID-aceoauth}} is based on the OAuth 2.0 framework {{RFC6749}}. 
 
-recently concluded DICE working group produced 
+The CoAP base specification {{RFC7252}} provides a description of how DTLS can be used for securing CoAP. It proposes three different modes for using DTLS: the Presharedkey mode, where nodes have pre-provisioned keys for initiating a DTLS session with another node, RawPublicKey mode, where nodes have asymmetric-key pairs but no certificates to verify the ownership, and Certificate mode, where public keys are certified by a certification authority. In addition, Tschofenig and Fossati {{RFC7925}} specify an implementation profile for TLS version 1.2 and DTLS version 1.2 that offers communications security for resource-constrained nodes that are part of IoT.
 
-6lo
+In many IoT deployments, the resource-constrained smart objects are connected to the Internet via a gateway that is directly reachable. For example, an IEEE 802.11 Access Point (AP) typically connects the client devices to the Internet over just one wireless hop. However, some deployments of smart object networks require routing between the smart objects themselves. The IETF has therefore defined the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL) {{RFC6550}}. RPL provides support for multipoint-to-point traffic from resource-constrained smart objects towards a more resourceful central control point, as well as point-to-multipoint traffic in the reverse direction. It also supports point-to-point traffic between the resource-constrained devices. A set of routing metrics and constraints for path calculation in RPL are also specified {{RFC6551}}.
 
-RPL
 
-LWIP implementation guidance
+In addition to defining a routing protocol, the IETF has also specified how IPv6 packets can be transmitted over various link layer protocols that are commonly employed for resource-constrained smart object networks. There is also ongoing work to specify IPv6 connectivity for a Non-Broadcast Multi-Access (NBMA) mesh network that is formed by IEEE 802.15.4 TimeSlotted Channel Hopping (TSCH} links {{ID-6tisch}}. Other link layer protocols for which IETF has specified or is currently specifying IPv6 support include Bluetooth {{RFC7668}}, Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE) air interface {{ID-6lodect}}, and Near Field Communication (NFC) {{ID-6lonfc}}.
 
+
+JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC7158}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding public keys, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
+
+
+An alternative to JSON, Concise Binary Object Representation (CBOR) {{RFC7049}} is a concise binary data format that is used for serialization of structured data. It is designed for extremely resource-constrained nodes and therefore it aims to provide a fairly small message size with minimal implementation code, and extensibility without the need for version negotiation. There is ongoing work to specify CBOR Object Signing and Encryption (COSE) {{ID-cose}}, which would provide services similar to JWS and JWT.
+
+The Light-Weight Implementation Guidance (LWIG) working group {{WG-LWIG}} is collecting experiences from implementors of IP stacks in constrained devices. The working group has already produced documents such as RFC7815 {{RFC7815}} which defines how a minimal Internet Key Exchange Version 2 (IKEv2) initiator can be implemented.
 
 
 Additionally industry alliances and other standardization bodies are creating constrained IP protocol stacks based on the IETF work. Some important examples of this include: 
-1. Thread {{Thread}}:
-2. Industrial IoT:
-3. IPSO:
-4. OneM2M:
+
+1. Thread {{Thread}}: Specifies the Thread protocol that is intended for a variety of IoT devices. It is an IPv6-based network protocol that runs over IEEE 802.15.4.
+
+2. Industrial Internet Consortium {{IIoT}}: The consortium defines reference architectures and security frameworks for development, adoption and widespread use of Industrial Internet technologies based on existing IETF standards.
+
+3. Internet Protocol for Smart Objects IPSO {{IPSO}}: The alliance specifies  a common object model that would enable application software any device to inter operate with other conforming devices.
+
+4. OneM2M {{OneM2M}}: The standards body defines technical and API specifications for IoT devices. It aims to create a service layer that can run on any IoT device hardware and software.
+
+5. Open Connectivity Foundation (OCF) {{OCF}}: The foundation develops standards and certifications primarily for IoT devices that use Constrained Application Protocol (CoAP) as the application layer protocol. 
 
 
 
@@ -651,7 +747,7 @@ Additionally industry alliances and other standardization bodies are creating co
 
 In the context of the IP-based IoT solutions, consideration of TCP/IP security
 protocols is important as these protocols are designed to fit the IP network
-ideology and technology. There are a wide range of specialized as well as general-purpose key exchange and security solutions exist for the Internet domain such as IKEv2/IPsec {{RFC7296}}, TLS/SSL {{RFC5246}}, DTLS {{RFC5238}}, HIP {{RFC7401}}, PANA {{RFC5191}}, and EAP {{RFC3748}}. Some of these solutions are also been investigated now, such as, e.g., OSCOAP. {{fig3}} depicts the relationships between the discussed protocols in the context of the security terminology introduced in {{sec3}}.
+ideology and technology. There are a wide range of specialized as well as general-purpose key exchange and security solutions exist for the Internet domain such as IKEv2/IPsec {{RFC7296}}, TLS {{RFC5246}}, DTLS {{RFC6347}}, HIP {{RFC7401}}, PANA {{RFC5191}}, and EAP {{RFC3748}}. Some of these solutions are also been investigated now, such as, e.g., OSCOAP. {{fig3}} depicts the relationships between the discussed protocols in the context of the security terminology introduced in {{sec3}}.
 
 
 ~~~~
