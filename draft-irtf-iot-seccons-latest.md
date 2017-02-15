@@ -510,14 +510,7 @@ author:
   street: Hirsalantie 11
   city: Jorvas
   country: Finland
-  email: mohit@piuha.net
-- name: Oliver Pfaff
-  ins: O. Pfaff
-  org: Siemens
-  street: 
-  city: 
-  country: 
-  email: 
+  email: mohit@piuha.net 
 pi:
 - toc
 - sortrefs
@@ -1372,7 +1365,15 @@ Flaws in the design and implementation of a secure IoT device and network can le
 
 # Conclusions and Next Steps {#sec8}
 
-This Internet Draft provides an overview of both operational and security requirements in the IP-based Internet of Things. We discuss a general threat model, security issues, and state of the art. We further introduce a number of potential security profiles fitting different types of IoT deployments and discuss key security challenges.
+This Internet Draft provides an overview of both operational and security requirements in the IP-based Internet of Things. 
+We discuss a general threat model, security issues, and state of the art. 
+We further introduce a number of potential security profiles fitting different types of IoT deployments and discuss key security challenges.
+
+Although big steps have been realized during the last years, as summarized in Section {{sec5-1}} and many organizations are publishing general recommendations (Section {{sec5-3}} describing how the IoT should be secured, there are many challenges ahead that require further attention.
+Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring a trustworthy IoT operation.
+All these problems are important; however, different deployment environment have different operational and security demands. 
+Thus, we recommend the definition and standarization of security profiles, e.g., further building on those introduced in Section {{sec6}}, to ensure minimum security capabilities in different environments while ensuring interoperability.
+
 
 # Security Considerations {#sec9}
 
