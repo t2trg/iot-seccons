@@ -525,15 +525,7 @@ pi:
 
 --- abstract
 
-The Internet of Things concept refers to the usage
-of standard Internet protocols to allow for human-to-thing or thing-to-thing
-communication. Although the security needs are well-recognized, it is still
-not fully clear how existing IP-based security protocols should be applied to
-this new setting. This Internet-Draft first provides an overview of security
-architecture, its deployment model and general security needs in the context
-of the lifecycle of a thing. Then, it presents challenges and requirements
-for the successful roll-out of new applications and usage of standard IP-based
-security protocols when applied to get a functional Internet of Things.
+The Internet of Things concept refers to the usage of standard Internet protocols to allow for human-to-thing or thing-to-thing communication. Although the security needs are well-recognized, it is still not fully clear how existing IP-based security protocols should be applied to this new setting. This Internet-Draft first provides an overview of security architecture, its deployment model and general security needs in the context of the lifecycle of a thing. Then, it presents challenges and requirements for the successful roll-out of new applications and usage of standard IP-based security protocols when applied to get a functional Internet of Things.
 
 
 --- middle
@@ -711,8 +703,7 @@ The following table summarizes the above generic security threats and the potent
 ~~~~
 {: #fig3 title="Classification of threats according to the lifecycle phases and security building blocks."}
 
-Dealing with above threats and finding suitable security mitigations is challenging: there are very sophisticated threats that a very powerful attacker could use; also, new threats and exploits appear in a daily basis.
-Therefore, the existence of proper secure product creation processes that allow managing and minimizing risks during the lifecycle of the IoT devices is at least as important as being aware of the threats. A non-exhaustive list of relevant processes include: 
+Dealing with above threats and finding suitable security mitigations is challenging: there are very sophisticated threats that a very powerful attacker could use; also, new threats and exploits appear in a daily basis. Therefore, the existence of proper secure product creation processes that allow managing and minimizing risks during the lifecycle of the IoT devices is at least as important as being aware of the threats. A non-exhaustive list of relevant processes include: 
 
 1. A Business Impact Analysis (BIA) assesses the consequences of lost of basic security attributes, namely, confidentiality, integrity and availability in an IoT system. These consequences might include impact on people data, data lost, sales lost, increased expenses, regulatory fines, customer dissatisfaction, etc. Performing a business impact analysis allow determining the business relevance of having a proper security design placing security on the focus.
 
@@ -732,14 +723,10 @@ Section {{sec5-2}} summarizes state of the art on IP-based security protocols an
 
 ## IP-based IoT Protocols and Standards {#sec5-1}
 
-Nowadays, there exists a multitude of control protocols for the IoT. For
-BAC systems, the ZigBee standard {{ZB}}, BACNet {{BACNET}}, or DALI {{DALI}} play key roles. Recent trends, however, focus on an all-IP approach for system control.
+Nowadays, there exists a multitude of control protocols for the IoT. For BAC systems, the ZigBee standard {{ZB}}, BACNet {{BACNET}}, or DALI {{DALI}} play key roles. Recent trends, however, focus on an all-IP approach for system control.
 
-In this setting, a number of IETF working groups are designing new protocols
-for resource constrained networks of smart things. The 6LoWPAN working group
-{{WG-6LoWPAN}} concentrates on the definition of methods and protocols for
-the efficient transmission and adaptation of IPv6 packets over IEEE 802.15.4
-networks {{RFC4944}}. 
+In this setting, a number of IETF working groups are designing new protocols for resource constrained networks of smart things. The 6LoWPAN working group
+{{WG-6LoWPAN}} concentrates on the definition of methods and protocols for the efficient transmission and adaptation of IPv6 packets over IEEE 802.15.4 networks {{RFC4944}}. 
 
 The CoRE working group {{WG-CoRE}} provides a framework for resource-oriented applications intended to run on constrained IP network (6LoWPAN). One of its main tasks is the definition of a lightweight version of the HTTP protocol, the Constrained Application Protocol (CoAP) {{RFC7252}}, that runs over UDP and enables efficient application-level communication for things. 
 
@@ -778,8 +765,7 @@ Additionally industry alliances and other standardization bodies are creating co
 
 ## Existing IP-based Security Protocols and Solutions {#sec5-2}
 
-In the context of the IP-based IoT solutions, consideration of TCP/IP security
-protocols is important as these protocols are designed to fit the IP network
+In the context of the IP-based IoT solutions, consideration of TCP/IP security protocols is important as these protocols are designed to fit the IP network
 ideology and technology. There are a wide range of specialized as well as general-purpose key exchange and security solutions exist for the Internet domain such as IKEv2/IPsec {{RFC7296}}, TLS {{RFC5246}}, DTLS {{RFC6347}}, HIP {{RFC7401}}, PANA {{RFC5191}}, and EAP {{RFC3748}}. Some of these solutions are also been investigated now, such as, e.g., OSCOAP. 
 
 There is ongoing work to define an authorization and access-control framework for resource-constrained nodes. The Authentication and Authorization for Constrained Environments (ACE) {{WG-ACE}} working group is defining a solution to allow only authorized access to resources that are hosted on a smart object server and are identified by a URI. The current proposal {{ID-aceoauth}} is based on the OAuth 2.0 framework {{RFC6749}}. 
@@ -834,23 +820,12 @@ Migault et al.{ID-dietesp} are working on a compressed version of IPsec so that 
 ~~~~
 {: #fig4}
 
-The Internet Key Exchange (IKEv2)/IPsec and the Host Identity protocol (HIP)
-reside at or above the network layer in the OSI model. Both protocols are
-able to perform an authenticated key exchange and set up the IPsec transforms
-for secure payload delivery. Currently, there are also ongoing efforts to
-create a HIP variant coined Diet HIP {{ID-HIP}} that takes lossy low-power
-networks into account at the authentication and key exchange level.
+The Internet Key Exchange (IKEv2)/IPsec and the Host Identity protocol (HIP) reside at or above the network layer in the OSI model. Both protocols are able to perform an authenticated key exchange and set up the IPsec transforms for secure payload delivery. Currently, there are also ongoing efforts to create a HIP variant coined Diet HIP {{ID-HIP}} that takes lossy low-power networks into account at the authentication and key exchange level.
 
-Transport Layer Security (TLS) and its datagram-oriented variant DTLS secure
-transport-layer connections. TLS provides security for TCP and requires
-a reliable transport, while DTLS secures and uses datagram-oriented protocols
-such as UDP. Both protocols are intentionally kept similar and share the
-same ideology and cipher suites.
+Transport Layer Security (TLS) and its datagram-oriented variant DTLS secure transport-layer connections. TLS provides security for TCP and requires a reliable transport, while DTLS secures and uses datagram-oriented protocols such as UDP. Both protocols are intentionally kept similar and share the same ideology and cipher suites.
 
-The Extensible Authentication Protocol (EAP) is an authentication framework
-supporting multiple authentication methods. EAP runs directly over the data
-link layer and, thus, does not require the deployment of IP. It supports
-duplicate detection and retransmission, but does not allow for packet fragmentation. The Protocol for Carrying Authentication for Network Access (PANA) is a network-layer transport for EAP that enables network access authentication between clients and the network infrastructure. In EAP terms, PANA is a UDP-based EAP lower layer that runs between the EAP peer and the EAP authenticator.
+The Extensible Authentication Protocol (EAP) is an authentication framework supporting multiple authentication methods. EAP runs directly over the data
+link layer and, thus, does not require the deployment of IP. It supports duplicate detection and retransmission, but does not allow for packet fragmentation. The Protocol for Carrying Authentication for Network Access (PANA) is a network-layer transport for EAP that enables network access authentication between clients and the network infrastructure. In EAP terms, PANA is a UDP-based EAP lower layer that runs between the EAP peer and the EAP authenticator.
 
 In addition, there is also new activities in IETF and W3C to define security protocols better tailored to IoT or for specific deployment situations. The ACE WG is designing an authorization mechanism based on OAuth for constrained devices. There is work on Object Security based CoAP protection mechanism being defined in OSCOAP. 
 
@@ -869,7 +844,7 @@ Recent large scale Denial of Service (DoS) Attacks on the Internet Infrastructur
 
 5. NIST {{NIST-Guide}}: The NIST special publication urges enterprise and US federal agencies to address security throughout the systems engineering process. The publication builds upon the ISO/IEC/IEEE 15288 standard and augments each process in the system lifecyle with security enhancements. 
 
-6. NIST {{nist_lightweight_project}}: NIST is running a project on lightweight cryptography with the purpose of: (i) identifying application areas for which standard cryptographic algorithms are too heavy, classifying them according to some application profiles to be determined; (ii) determining limitations in those existing cryptographic standards; and (iii) standarizing lightweight algorithms that can be used in specific application profiles. 
+6. NIST {{nist_lightweight_project}}: NIST is running a project on lightweight cryptography with the purpose of: (i) identifying application areas for which standard cryptographic algorithms are too heavy, classifying them according to some application profiles to be determined; (ii) determining limitations in those existing cryptographic standards; and (iii) standardizing lightweight algorithms that can be used in specific application profiles. 
 
 7. OWASP {{OWASP}}: Open Web Application Security Project (OWASP) provides security guidance for IoT manufactures, developers and consumers. OWASP also includes guidelines for those who intend to test and analyze IoT devices and applications. 
 
@@ -928,7 +903,7 @@ We compare the security capabilities in each of the security profiles according 
 
 5. Application security.
 
-IMPORTANT: Note that each of these exemplary profiles aims at summarizing the required security requirements for different exemplary applicaton areas and at providing a set of initial security features. In other words, these profiles reflect the need for different security configurations, depending on the threat and trust models of the underlying applications. In this sense, this section does not provide an overview of existing protocols as done in previous sections of the Internet Draft, but it rather explicitly describes what should be in place to ensure secure system operation. Observe also that this list of security profiles is not exhaustive and that it should be considered just as an example not related to existing legal regulations for any existing application. 
+IMPORTANT: Note that each of these exemplary profiles aims at summarizing the required security requirements for different exemplary application areas and at providing a set of initial security features. In other words, these profiles reflect the need for different security configurations, depending on the threat and trust models of the underlying applications. In this sense, this section does not provide an overview of existing protocols as done in previous sections of the Internet Draft, but it rather explicitly describes what should be in place to ensure secure system operation. Observe also that this list of security profiles is not exhaustive and that it should be considered just as an example not related to existing legal regulations for any existing application. 
 
 The remainder of this section is organized as follows. Section {{sec6-1}} first describes four generic security profiles and discuss how different applications of IP networks, e.g., 6LoWPAN/CoAP networks, involve different security needs. The following five subsections summarize the expected security features or capabilities for each the security profile with regards to "Security Architecture", "Security Model", "Security Bootstrapping", "Network Security", and "Application Security".
 
