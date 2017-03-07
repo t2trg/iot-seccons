@@ -500,11 +500,11 @@ informative:
 author:
 - name: Oscar Garcia-Morchon
   ins: O. Garcia-Morchon
-  org: Philips Research
-  street: Canal Park 2
-  city: Cambridge,   02141
-  country: United States
-  email: oscar.garcia@philips.com
+  org: Philips IP&S
+  street: High Tech Campus 5
+  city: Eindhoven,   5656 AA
+  country: The Netherlands
+  email: oscar.garcia-morchon@philips.com
 - name: Sandeep S. Kumar
   ins: S. Kumar
   org: Philips Research
