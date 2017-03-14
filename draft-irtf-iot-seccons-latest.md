@@ -1,6 +1,6 @@
 ---
-abbrev: Security Considerations for the IoT
-title: Security Considerations in the IP-based Internet of Things
+abbrev: IoT Security
+title: State of the Art and Challenges for the Internet of Things
 docname: draft-irtf-t2trg-iot-seccons
 cat: info
 stand_alone: true
@@ -148,6 +148,14 @@ informative:
     date: 2016-10
     seriesinfo:
       draft-moore-iot-security-bcp-00
+  ID-MUD:
+    title: Manufacturer Usage Description Specification
+    author:
+    - ins: E. Lear
+    - ins: R. Droms
+    - ins: D. Domascanu
+    date: 2017-03
+    seriesinfo:
   ID-Williams:
     title: Mobile DTLS
     author:
@@ -529,7 +537,12 @@ pi:
 
 --- abstract
 
-The Internet of Things concept refers to the usage of standard Internet protocols to allow for human-to-thing or thing-to-thing communication. Although the security needs are well-recognized, it is still not fully clear how existing IP-based security protocols should be applied to this new setting. This Internet-Draft first provides an overview of security architecture, its deployment model and general security needs in the context of the lifecycle of a thing. Then, it presents challenges and requirements for the successful roll-out of new applications and usage of standard IP-based security protocols when applied to get a functional Internet of Things.
+The Internet of Things concept refers to the usage of standard Internet protocols to allow for human-to-thing or thing-to-thing communication. 
+The security needs are well-recognized and great standardization steps have been accomplished in the last years, e.g., by standarizing DTLS to provide end-to-end security to CoAP. 
+However, security challenges still exist and there are some use cases that lack a suitable solution. 
+
+This document first provides an overview of security architecture, its deployment model, security needs in the context of the lifecycle of a thing, as well as the state of the art on IoT security.
+Then, we discuss the concept of security profiles for the successful roll-out of secure IoT applications and describe remaining security challenges in the IoT.
 
 
 --- middle
@@ -1351,6 +1364,9 @@ Flaws in the design and implementation of a secure IoT device and network can le
 2. How to prevent attackers from exploiting vulnerabilities in IoT devices at large scale?
 3. If the vulnerability has been exploited, how do we stop a large scale attack before any damage is caused?
 
+Some ideas are being explored to addess this issue. One of this approaches refers to the specification of Manufacturer Usage Description (MUD) files {{ID-MUD}}. 
+The idea behind MUD files is simple: devices would disclose the location of its MUD file to the network during installation.
+The network can then (i) retrieve those files, (ii) learn from the manufacturers the intended usage of the devices, e.g., which services they require to access, and then (iii) create suitable filters. 
 
 # Conclusions and Next Steps {#sec8}
 
