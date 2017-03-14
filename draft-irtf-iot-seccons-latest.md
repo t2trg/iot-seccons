@@ -537,12 +537,7 @@ pi:
 
 --- abstract
 
-The Internet of Things concept refers to the usage of standard Internet protocols to allow for human-to-thing or thing-to-thing communication. 
-The security needs are well-recognized and great standardization steps have been accomplished in the last years, e.g., by standarizing DTLS to provide end-to-end security to CoAP. 
-However, security challenges still exist and there are some use cases that lack a suitable solution. 
-
-This document first provides an overview of security architecture, its deployment model, security needs in the context of the lifecycle of a thing, as well as the state of the art on IoT security.
-Then, we discuss the concept of security profiles for the successful roll-out of secure IoT applications and describe remaining security challenges in the IoT.
+The Internet of Things concept refers to the usage of standard Internet protocols to allow for human-to-thing or thing-to-thing communication. The security needs are well-recognized and and many standardization steps have been taken, for example, specification of CoAP over DTLS. However, security challenges still exist and there are some use cases that lack a suitable solution. This document first provides an overview of security architecture, its deployment model, security needs in the context of the lifecycle of a thing, as well as the state of the art on IoT security. Then, we discuss the concept of security profiles for the successful roll-out of secure IoT applications and describe remaining security challenges in the IoT.
 
 
 --- middle
