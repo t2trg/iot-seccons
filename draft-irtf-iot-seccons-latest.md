@@ -612,7 +612,7 @@ In the particular context of the IoT, security must not only focus on the requir
 
 3. Security bootstrapping: denotes the process by which a thing securely joins an IoT system at a given location and point in time. For instance, bootstrapping of a connected camera can include the authentication and authorization of a device as well as the transfer of security parameters allowing for its trusted operation in a given network.  
 
-4. Network security: describes the mechanisms applied within a network to ensure trusted operation of the IoT. Specifically, it prevents attackers from endangering or modifying the expected operation of networked things. For instance, network security can include a number of mechanisms ranging from data link layer security, MAC filtering, secure routing, and network layer security.
+4. Network security: describes the mechanisms applied within a network to ensure trusted operation of the IoT. Specifically, it prevents attackers from endangering or modifying the expected operation of an smart object, it also protects the network itself from malicious things. For instance, network security can include a number of mechanisms ranging from data link layer security, secure routing, and network layer security.
 
 5. Application security: describes mechanisms to allow transfer of application data at the transport or upper layers (object security). For instance, assuming an smart object such as an environmental sensor connected to a backend system, it can mean the exchange of secure blocks of data such as measurements by the sensor or a software update. This data is exchanged end-to-end independently of communication pattern, for e.g through proxies or other store-and-forward mechanisms.
 
@@ -773,7 +773,7 @@ Additionally industry alliances and other standardization bodies are creating co
 
 5. Open Connectivity Foundation (OCF) {{OCF}}: The foundation develops standards and certifications primarily for IoT devices that use Constrained Application Protocol (CoAP) as the application layer protocol. 
 
-6. Fairhair Alliance{{Fairhair}}: Specifies a middle-ware for IoT based Building Automation and Lighting System that can interoperate with different application standards for the professional domain.
+6. Fairhair Alliance {{Fairhair}}: Specifies a middle-ware for IoT based Building Automation and Lighting System that can interoperate with different application standards for the professional domain.
 
 
 ## Existing IP-based Security Protocols and Solutions {#sec5-2}
@@ -1323,9 +1323,9 @@ We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-re
 
 ## Privacy protection {#sec7-9}
 
-Users will be surrounded by tens of connected devices. Even if the communication links are encrypted and protected, information about the users might be collected for different purposes affecting their privacy. In {{Ziegeldorf}}, privacy in the IoT is defined as the threefold guarantee to the user for:
+Users will be surrounded by hundreds of connected devices. Even if the communication links are encrypted and protected, information about the users might be collected for different purposes affecting their privacy. In {{Ziegeldorf}}, privacy in the IoT is defined as the threefold guarantee to the user for:
 1. awareness of privacy risks imposed by smart things and services surrounding the data subject,
-2. individual control over the collection and processing of personal information by the surrounding smart things
+2. individual control over the collection and processing of personal information by the surrounding smart things,
 3. awareness and control of subsequent use and dissemination of personal information by those entities to any entity outside the subject's personal control sphere.
 
 Based on this definition, several privacy threats and challenges are identified in the work of Ziegeldorf:
@@ -1384,6 +1384,5 @@ This document contains no request to IANA.
 
 # Acknowledgments {#sec11}
 
-We gratefully acknowledge feedback and fruitful discussion with Tobias Heer
-and Robert Moskowitz. Acknowledge the additional authors of the previous version of this document Sye Loong Keoh, Rene Hummen and Rene Struik.
+We gratefully acknowledge feedback and fruitful discussion with Tobias Heer, Robert Moskowitz, and Thorsten Dahm. We acknowledge the additional authors of the previous version of this document Sye Loong Keoh, Rene Hummen and Rene Struik. 
 
