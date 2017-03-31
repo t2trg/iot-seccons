@@ -1216,28 +1216,32 @@ variable difficulties. Puzzle-based defence mechanisms are less dependent
 on the network topology but perform poorly if CPU resources in the network
 are heterogeneous (e.g., if a powerful Internet host attacks a thing). Increasing the puzzle difficulty under attack conditions can easily lead to situations, where a powerful attacker can still solve the puzzle while weak IoT clients cannot and are excluded from communicating with the victim. Still, puzzle-based approaches are a viable option for sheltering IoT devices against unintended overload caused by misconfiguration or malfunctioning things.
 
-### Protocol Translation and End-to-End Security {#sec7-1-3}
+### End-to-End Security, protocol translation, and the role of middleboxes {#sec7-1-3}
 
-Even though 6LoWPAN and CoAP progress towards reducing the gap between Internet protocols and the IoT, they do not target protocol specifications that are identical to their Internet counterparts due to performance reasons. Hence, more or less subtle differences between IoT protocols and Internet protocols will remain. While these differences can easily be bridged with protocol translators at gateways, they become major obstacles if end-to-end security measures between IoT devices and Internet hosts are used.
+The term end-to-end security offers multiple interpretations.
+Here, we consider end-to-end security in the context end-to-end IP connectivity.
+Note that this does not necessarily mean from sensor to actuator. 
 
-Cryptographic payload processing applies message authentication codes or
-encryption to packets. These protection methods render the protected parts
-of the packets immutable as rewriting is either not possible because a) the
-relevant information is encrypted and inaccessible to the gateway or b) rewriting integrity-protected parts of the packet would invalidate the end-to-end integrity protection.
+Even though 6LoWPAN and CoAP progress towards reducing the gap between Internet protocols and the IoT, they do not target protocol specifications that are identical to their Internet counterparts due to performance reasons. Hence, more or less subtle differences between IoT protocols and Internet protocols will remain. While these differences can easily be bridged with protocol translators at middleboxes, they become major obstacles if end-to-end security measures between IoT devices and Internet hosts are used.
 
-There are essentially four solutions for this problem:
+Regarding end-to-end security in the context of confidentiality and integrity protection, the packets are processed applying message authentication codes or encryption. These protection methods render the protected parts of the packets immutable as rewriting is either not possible because a) the relevant information is encrypted and inaccessible to the gateway or b) rewriting integrity-protected parts of the packet would invalidate the end-to-end integrity protection.
+There are essentially five approaches to handle such end-to-end confidentiality and integrity protection while letting middleboxes access/modify data for different purposes:
 
-1. Sharing credentials with gateways enables gateways to transform (e.g., decompress, convert, etc.) packets and re-apply the security measures after transformation. This method abandons end-to-end security and is only applicable to simple scenarios with a rudimentary security model.
+1. Sharing credentials with middleboxes enables middleboxes to transform (e.g., decompress, convert, etc.) packets and re-apply the security measures after transformation. This method abandons end-to-end security and is only applicable to simple scenarios with a rudimentary security model.
 
-2. Reusing the Internet wire format in the IoT makes conversion between IoT and Internet protocols unnecessary. However, it leads to poor performance because IoT specific optimizations (e.g., stateful or stateless compression) are not possible.
+2. Reusing the Internet wire format in the IoT makes conversion between IoT and Internet protocols unnecessary. However, it can lead to poor performance in some use cases because IoT specific optimizations (e.g., stateful or stateless compression) are not possible.
 
 3. Selectively protecting vital and immutable packet parts with a MAC or with encryption requires a careful balance between performance and security. Otherwise, this approach will either result in poor performance (protect as much as possible) or poor security (compress and transform as much as possible).
 
-4. Message authentication codes that sustain transformation can be realized by considering the order of transformation and protection (e.g., by creating a signature before compression so that the gateway can decompress the packet without recalculating the signature). This enables IoT specific optimizations but is more complex and may require application-specific transformations before security is applied. Moreover, it cannot be used with encrypted data because the lack of cleartext prevents gateways from transforming packets.
- 
-5. Object security based mechanisms can bridge the protocol worlds, but still requires that the two worlds use the same object security formats. Currently the IoT based object security format based on COSE is different from the Internet based JOSE or CMS. Legacy devices on the Internet side will need to update to the newer IoT protocols to enable real end-to-end security.
 
-To the best of our knowledge, none of the mentioned security protocols provides a fully customizable solution in this problem space. 
+4. Message authentication codes that sustain transformation can be realized by considering the order of transformation and protection (e.g., by creating a signature before compression so that the gateway can decompress the packet without recalculating the signature). {{ID-OSCOAP}} proposes a solution in this direction, also preventing proxies from changing relevant CoAP fields. Such an approach enables IoT specific optimizations but is more complex and may require application-specific transformations before security is applied. Moreover, it cannot be used with encrypted data because the lack of cleartext prevents gateways from transforming packets.
+ 
+5. Object security based mechanisms can bridge the protocol worlds, but still requires that the two worlds use the same object security formats. Currently the IoT based object security format based on COSE {{ID-cose}} is different from the Internet based JOSE or CMS. Legacy devices on the Internet side will need to update to the newer IoT protocols to enable real end-to-end security. Furthermore, middleboxes do not have any access to the data and this approach does not prevent an attacker from modifying relevant fields in CoAP.
+
+To the best of our knowledge, none of the mentioned security approches that focus on the confidentiality and integrity of the communication exchange between two IP end-points provides a fully customizable solution in this problem space. 
+
+We note that end-to-end security could also be considered in the context of availability: making sure that the messages are delivered.
+In this case, the end-points cannot control this, but the middleboxes play a fundamental role to make sure that exchanged messages are not dropped, e.g., due to a DDoS attack.
 
 ### New network architectures and paradigm {#sec7-1-4}
 
@@ -1257,8 +1261,9 @@ created during the bootstrapping phase in order to exchange information securely
 
 ### End-to-End Security {#sec7-3-1}
 
-Providing end-to-end security is of great importance to address and secure
-individual T2T or H2T communication within one IoT domain. Moreover, end-to-end security associations are an important measure to bridge the gap between the IoT and the Internet. IKEv2 and HIP, TLS and DTLS provide end-to-end security services including peer entity authentication, end-to-end encryption and integrity protection above the network layer and the transport layer respectively. Once bootstrapped, these functions can be carried out without online connections to third parties, making the protocols applicable for decentralized use in the IoT. However, protocol translation by intermediary nodes may invalidate end-to-end protection measures (see {{sec5-1}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{ID-OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
+Providing end-to-end security is of great importance to address and secure individual T2T or H2T communication within one IoT domain. 
+Moreover, end-to-end security associations are an important measure to bridge the gap between the IoT and the Internet. 
+IKEv2, TLS and DTLS provide end-to-end security services including peer entity authentication, end-to-end encryption and integrity protection above the network layer and the transport layer respectively. Once bootstrapped, these functions can be carried out without online connections to third parties, making the protocols applicable for decentralized use in the IoT. However, protocol translation by intermediary nodes may invalidate end-to-end protection measures (see {{sec7-1-3}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{ID-OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
 
 ### Group Membership and Security {#sec7-3-2}
 
