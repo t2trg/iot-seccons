@@ -537,7 +537,7 @@ pi:
 
 --- abstract
 
-The Internet of Things concept refers to the usage of standard Internet protocols to allow for human-to-thing or thing-to-thing communication. The security needs are well-recognized and and many standardization steps have been taken, for example, specification of CoAP over DTLS. However, security challenges still exist and there are some use cases that lack a suitable solution. This document first provides an overview of security architecture, its deployment model, security needs in the context of the lifecycle of a thing, as well as the state of the art on IoT security. Then, we discuss the concept of security profiles for the successful roll-out of secure IoT applications and describe remaining security challenges in the IoT.
+The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS). However, security challenges still exist and there are some use cases that lack a suitable solution. In this document, we first discuss the various stages in the lifecycle of a thing. We then look at the security building blocks available for securing the different layers of the Internet protocol suite. Next, we document the various security threats to a thing and the challenges that one might face in order to protect against these threats. Lastly, we discuss the concept of security profiles for the successful roll-out of secure IoT applications.
 
 
 --- middle
@@ -1196,7 +1196,7 @@ A further fundamental need refers to the limited energy budget available
 to IoT nodes. Careful protocol (re)design and usage is required to reduce
 not only the energy consumption during normal operation, but also under DoS
 attacks. Since the energy consumption of IoT devices differs from other
-device classes, judgements on the energy consumption of a particular protocol
+device classes, judgments on the energy consumption of a particular protocol
 cannot be made without tailor-made IoT implementations.
 
 ### Denial-of-Service Resistance {#sec7-1-2}
@@ -1208,11 +1208,11 @@ such attacks are difficult to notice before the service becomes unavailable
 DTLS, IKEv2, HIP, and Diet HIP implement return routability checks based
 on a cookie mechanism to delay the establishment of state at the responding
 host until the address of the initiating host is verified. The effectiveness
-of these defences strongly depends on the routing topology of the network. Return routability checks are particularly effective if hosts cannot receive packets addressed to other hosts and if IP addresses present meaningful information as is the case in today's Internet. However, they are less effective in broadcast media or when attackers can influence the routing and addressing of hosts (e.g., if hosts contribute to the routing infrastructure in ad-hoc networks and meshes).
+of these defenses strongly depends on the routing topology of the network. Return routability checks are particularly effective if hosts cannot receive packets addressed to other hosts and if IP addresses present meaningful information as is the case in today's Internet. However, they are less effective in broadcast media or when attackers can influence the routing and addressing of hosts (e.g., if hosts contribute to the routing infrastructure in ad-hoc networks and meshes).
 
 In addition, HIP implements a puzzle mechanism that can force the initiator
 of a connection (and potential attacker) to solve cryptographic puzzles with
-variable difficulties. Puzzle-based defence mechanisms are less dependent
+variable difficulties. Puzzle-based defense mechanisms are less dependent
 on the network topology but perform poorly if CPU resources in the network
 are heterogeneous (e.g., if a powerful Internet host attacks a thing). Increasing the puzzle difficulty under attack conditions can easily lead to situations, where a powerful attacker can still solve the puzzle while weak IoT clients cannot and are excluded from communicating with the victim. Still, puzzle-based approaches are a viable option for sheltering IoT devices against unintended overload caused by misconfiguration or malfunctioning things.
 
@@ -1238,7 +1238,7 @@ There are essentially five approaches to handle such end-to-end confidentiality 
  
 5. Object security based mechanisms can bridge the protocol worlds, but still requires that the two worlds use the same object security formats. Currently the IoT based object security format based on COSE {{ID-cose}} is different from the Internet based JOSE or CMS. Legacy devices on the Internet side will need to update to the newer IoT protocols to enable real end-to-end security. Furthermore, middleboxes do not have any access to the data and this approach does not prevent an attacker from modifying relevant fields in CoAP.
 
-To the best of our knowledge, none of the mentioned security approches that focus on the confidentiality and integrity of the communication exchange between two IP end-points provides a fully customizable solution in this problem space. 
+To the best of our knowledge, none of the mentioned security approaches that focus on the confidentiality and integrity of the communication exchange between two IP end-points provides a fully customizable solution in this problem space. 
 
 We note that end-to-end security could also be considered in the context of availability: making sure that the messages are delivered.
 In this case, the end-points cannot control this, but the middleboxes play a fundamental role to make sure that exchanged messages are not dropped, e.g., due to a DDoS attack.
@@ -1261,9 +1261,7 @@ created during the bootstrapping phase in order to exchange information securely
 
 ### End-to-End Security {#sec7-3-1}
 
-Providing end-to-end security is of great importance to address and secure individual T2T or H2T communication within one IoT domain. 
-Moreover, end-to-end security associations are an important measure to bridge the gap between the IoT and the Internet. 
-IKEv2, TLS and DTLS provide end-to-end security services including peer entity authentication, end-to-end encryption and integrity protection above the network layer and the transport layer respectively. Once bootstrapped, these functions can be carried out without online connections to third parties, making the protocols applicable for decentralized use in the IoT. However, protocol translation by intermediary nodes may invalidate end-to-end protection measures (see {{sec7-1-3}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{ID-OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
+Providing end-to-end security is of great importance to address and secure individual T2T or H2T communication within one IoT domain. Moreover, end-to-end security associations are an important measure to bridge the gap between the IoT and the Internet. IKEv2, TLS and DTLS provide end-to-end security services including peer entity authentication, end-to-end encryption and integrity protection above the network layer and the transport layer respectively. Once bootstrapped, these functions can be carried out without online connections to third parties, making the protocols applicable for decentralized use in the IoT. However, protocol translation by intermediary nodes may invalidate end-to-end protection measures (see {{sec7-1-3}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{ID-OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
 
 ### Group Membership and Security {#sec7-3-2}
 
@@ -1364,7 +1362,7 @@ Flaws in the design and implementation of a secure IoT device and network can le
 2. How to prevent attackers from exploiting vulnerabilities in IoT devices at large scale?
 3. If the vulnerability has been exploited, how do we stop a large scale attack before any damage is caused?
 
-Some ideas are being explored to addess this issue. One of this approaches refers to the specification of Manufacturer Usage Description (MUD) files {{ID-MUD}}. 
+Some ideas are being explored to address this issue. One of this approaches refers to the specification of Manufacturer Usage Description (MUD) files {{ID-MUD}}. 
 The idea behind MUD files is simple: devices would disclose the location of its MUD file to the network during installation.
 The network can then (i) retrieve those files, (ii) learn from the manufacturers the intended usage of the devices, e.g., which services they require to access, and then (iii) create suitable filters. 
 
