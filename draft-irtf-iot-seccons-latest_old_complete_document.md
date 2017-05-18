@@ -537,7 +537,7 @@ pi:
 
 --- abstract
 
-The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS). However, security challenges still exist and there are some use cases that lack a suitable solution. In this document, we first discuss the various stages in the lifecycle of a thing. We then look at the security building blocks available for securing the different layers of the Internet protocol suite. Next, we document the various security threats to a thing and the challenges that one might face in order to protect against these threats. Lastly, we discuss next steps to ensure a secure IoT.
+The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS). However, security challenges still exist and there are some use cases that lack a suitable solution. In this document, we first discuss the various stages in the lifecycle of a thing. We then look at the security building blocks available for securing the different layers of the Internet protocol suite. Next, we document the various security threats to a thing and the challenges that one might face in order to protect against these threats. Lastly, we discuss the concept of security profiles for the successful roll-out of secure IoT applications.
 
 
 --- middle
@@ -561,10 +561,10 @@ In particular, we review the most pressing aspects and functionalities that are 
 
 With this, this Internet-Draft pursues several goals. First, we aim at presenting a comprehensive view of the interactions and relationships between an IoT application and security. Second, we aim at describing challenges for a secure IoT in the specific context of the lifecycle of a resource-constrained device. The final goal of this draft is to discuss the security considerations that need to be taken into consideration towards a secure IoT.
 
-The rest of the Internet-Draft is organized as follows. {{sec3}} depicts the lifecycle of a thing and gives general definitions for the main security building blocks within the IoT domain. In {{sec4}}, we discuss threats and methodologies for managing risks when designing a secure IoT system. {{sec5}} reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations in IoT security. {{sec6}} identifies existing challenges for a secure IoT and discusses potential solutions. {{sec7}} includes final remarks and conclusions.
-
+The rest of the Internet-Draft is organized as follows. {{sec3}} depicts the lifecycle of a thing and gives general definitions for the main security building blocks within the IoT domain. In {{sec4}}, we discuss threats and methodologies for managing risks when designing a secure IoT system. {{sec5}} reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations in IoT security. {{sec6}} proposes a number of illustrative security profiles describing how different applications would require distinct security solutions. {{sec7}} identifies existing challenges for a secure IoT and discusses potential solutions. {{sec7}} includes final remarks and conclusions.
 
 # Motivation and background {#sec3}
+
 
 
 ## The Thing Lifecycle {#sec3-1}
@@ -882,18 +882,306 @@ Even if such a regulation is put in place, the question is how such a regulation
 Therefore future regulations should consider such diverse deployment scenarios.
 
 
-# Challenges for a Secure IoT {#sec6}
+# IoT Security Profiles {#sec6}
+
+There is a wide range of IoT applications including building automation systems, healthcare, smart cities, logistics, etc. For each of these applications, properties such as device capability, network infrastructure, or available security services can be completely different. Furthermore, each of those applications is featured by a different number of actors deployed in very different environments and with very different purposes.
+
+Consequently, when a Business Impact Analysis or Risk Assessment is performed, not only the types of threats will be different, but also their likelihood and potential impact. This determines that different applications tend to require different or complementary types of security mechanisms mitigating the identified risks.
+
+For example, IoT applications may have different needs regarding authentication and confidentiality. While some application might not require any confidentiality at all, others might require strong end-to-end confidentiality. In terms of secure bootstrapping of keys, some applications might assume the existence and online availability of a central key-distribution-center (KDC) within the network to distribute and manage keys; while other applications cannot rely on such a central party or on their availability.
+
+This section describes some exemplary security profiles fitting the security needs of applications with the same characteristics and requirements. 
+This approach is similar to that in the security profiles in {{nist_lightweight_project}}.
+Such security profiles can help to (i) guide the design process of different application types by identifying open gaps; (ii) allow for later interoperability; and (iii) prevent possible security misconfiguration. 
+Each security profile is identified by:
+
+1. a short description,
+
+2. an exemplary application that might use/require such a security profile,
+
+3. the security requirements for each of the above security aspects according to our classification in {{sec3-2}}.
+
+These security profiles can serve to guide the standardization process, since these explicitly describe the basic functionalities and protocols required to get different use cases up and running. They can allow for later interoperability since different manufacturers can describe the implemented security profile in their products. Finally, the security profiles can avoid possible security misconfiguration, since each security profile can be bound to a different application domain so that security protocols are clearly defined and under which circumstances they are applied.
+
+We compare the security capabilities in each of the security profiles according to security building blocks introduced {{sec3-2}}, namely:
+
+1. Security architecture,
+
+2. Security model,
+
+3. Security bootstrapping,
+
+4. Network security, and
+
+5. Application security.
+
+IMPORTANT: Note that each of these exemplary profiles aims at summarizing the required security requirements for different exemplary application areas and at providing a set of initial security features. In other words, these profiles reflect the need for different security configurations, depending on the threat and trust models of the underlying applications. In this sense, this section does not provide an overview of existing protocols as done in previous sections, but it rather explicitly describes what should be in place to ensure secure system operation. Observe also that this list of security profiles is not exhaustive and that it should be considered just as an example not related to existing legal regulations for any existing application. 
+
+The remainder of this section is organized as follows. Section {{sec6-1}} first describes four generic security profiles and discuss how different applications of IP networks, e.g., 6LoWPAN/CoAP networks, involve different security needs. The following five subsections summarize the expected security features or capabilities for each the security profile with regards to "Security Architecture", "Security Model", "Security Bootstrapping", "Network Security", and "Application Security".
+
+
+## Profiles Security Profiles {#sec6-1}
+
+We consider four generic security profiles as summarized in the table below:
+
+
+
+~~~~
+           +---------------------------------------------------------+
+           | Exemplary       |                                       |
+           | Application     |          Description                  |
++----------+---------------------------------------------------------+
+|SecProf_1 |Home usage       |Enables operation between home things  |
+|          |                 |without interaction with central device|
++----------+-----------------+---------------------------------------+
+|SecProf_2 |Managed Home     |Enables operation between home things. |
+|          | usage           |Interaction with a central and local   |
+|          |                 |device is possible                     |
++----------+-----------------+---------------------------------------+
+|SecProf_3 |Industrial usage |Enables operation between things.      |
+|          |                 |Relies on central (local or backend)   |
+|          |                 |device for security                    |
++----------+-----------------+---------------------------------------+
+|SecProf_4 |Advanced         |Enables ad-hoc operation between things|
+|          |Industrial usage |and relies on central device or        |
+|          |                 |on a collection of control devices     |
++----------+-----------------+---------------------------------------+
+~~~~
+{: #fig6 title="Security profiles and application areas."}
+
+The classification in the table considers different potential applications in which security mechanism are chosen according to the operational features (network size, existence of a central device, connectivity to the Internet, importance of the exchanged information, etc.) and threat model (what are the assets that an attacker looks for). As already pointed out, this set of scenarios is just exemplary and they should be further discussed based on a broader consensus.
+
+The security suite (SecProf_1) is catered for environments in which IP protocols (e.g.,
+6LoWPAN/CoAP) can be used to enable communication between things in an ad-hoc
+manner and the security requirements are minimal. An example, is a home
+application in which two devices should exchange information and no further
+connection with other devices (local or with a backend) is required. In
+this scenario, value of the exchanged information is low and usually
+happens in a confined room, thus, it is possible to have a short period of
+time during which initial secrets can be exchanged in the clear. Due to
+this fact, there is no requirement to enable devices from different manufacturers to inter operate in a secure way (keys are just exchanged). 
+The expected network size of applications using this profile is expected to be small such that the provision of network security, e.g., secure routing, is of low importance.
+
+The next security suite (SecProf_2) represents an evolution of SecProf_1
+in which, e.g., home devices, can be managed. A first possibility
+for the securing domain management refers to the creation of a centrally
+managed security domain without any connectivity to the Internet. The central
+device used for management can serve as, e.g., a key distribution center
+including policies for key update, storage, etc. The presence of a central
+device can help in the management of larger networks. Network security becomes more relevant in this scenario since the IP network (e.g., 6LoWPAN/CoAP network) can be prone to Denial of Service attacks (e.g., flooding if L2 is not protected) or routing attacks. Similarly, the network of devices could also be the source of a DDoS attack and a central device connecting to the Internet can block traffic of ongoing attacks.
+
+SecProf_3 considers that a central device is always required for managing the system. Example applications of this profile include building control and automation, sensor networks for industrial use, environmental monitoring, etc. As before, the manager can be located in the same network (e.g., 6LoWPAN/CoAP network) and handle key management. In this case, the first association of devices to the network is required to be done in a secure way, i.e., requiring authentication and authorization. This step can involve the secure transmission of keying materials used for network security at different layers. The information exchanged in the network is considered to be valuable and it should be protected in the sense of pairwise links. Commands should be secured and broadcast should be secured with entity authentication {{RFC7390}}. Network should be protected from routing attacks. A further extension to this use case is to allow for remote management. A "backend manager" is in charge of securely managing SW or information exchanged or collected within the network, e.g., a 6LoWPAN/CoAP network. This requires connection of devices to the Internet over a 6LBR involving a number of new threats that were not present before. A list of potential attacks include: resource-exhaustion attacks from the Internet; amplification attacks; trust issues related a HTTP-CoAP proxy {{ID-proHTTPCoAP}}, etc. This use case requires protecting the communication from a device in the backend to a device in the IP network, e.g., a 6LoWPAN/CoAP network, end-to-end. This use case also requires measures to provide the 6LBR with the capability of dropping fake requests coming from the Internet. This becomes especially challenging when the 6LBR is not trusted and access to the exchanged information is limited; and even more in the case of a HTTP-CoAP proxy since protocol translation is required. This use case should take care of protecting information accessed from the backend due to privacy issues (e.g., information such as type of devices, location, usage, type and amount of exchanged information, or mobility patterns can be gathered at the backend threatening the privacy sphere of users) so that only required information is disclosed.
+
+The last security suite (SecProf_4) essentially represents interoperability of all the security profiles defined previously. It considers applications with some additional requirements regarding operation such as: (i) ad-hoc establishment of security relationships between things (potentially from different manufacturers) in non-secure environments or (ii) dynamic roaming of things between different IP network security domains. Such operational requirements pose additional security requirements, e.g., in addition to secure bootstrapping of a device within an IP, e.g., 6LowPan/CoAP, security domain and the secure transfer of network operational key, there is a need to enable inter-domains secure communication to facilitate data sharing.
+In this scenario, there is also a higher pressure to ensure that an attacker cannot compromise deployed devices and extract or modify any type of private data such as cryptographic keys, data, or proprietary algorithms. 
+
+## Security Architecture {#sec6-2}
+
+Most things might be required to support both centralized and distributed operation patterns. Distributed thing-to-thing communication might happen on demand, for instance, when two things form an ad-hoc security domain to cooperatively fulfill a certain task. Likewise, nodes may communicate with a backend service located in the Internet without a central security manager. 
+The same nodes may also be part of a centralized architecture with a dedicated node being responsible for the security management for group communication between things in the IoT domain. In today's IoT, most common architectures are fully centralized in the sense that all the security relationships within a segment are handled by a central party. In the ZigBee standard, this entity is the trust center. Current proposals for 6LoWPAN/CoRE identify the 6LoWPAN Border Router (6LBR) as such a device.
+
+A centralized architecture allows for central management of devices and keying materials as well as for the backup of cryptographic keys. However, it also imposes some limitations. First, it represents a single point of failure. This is a major drawback, e.g., when key agreement between two devices requires online connectivity to the central node. Second, it limits the possibility to create ad-hoc security domains without dedicated security infrastructure. Third, it codifies a more static world view, where device roles are cast in stone, rather than a more dynamic world view that recognizes that networks and devices, and their roles and ownership, may change over time (e.g., due to device replacement and hand-over of control).
+
+Decentralized architectures, on the other hand, allow creating ad-hoc security domains that might not require a single online management entity and are operative in a much more stand-alone manner. The ad- hoc security domains can be added to a centralized architecture at a later point in time, allowing
+for central or remote management.
+
+
+The choice of security architecture has many implications regarding key management, access control, or security scope. A distributed (or ad-hoc) architecture means that security relationships between things are setup on the fly between a number of objects and kept in a decentralized fashion, i.e., there is no central authority that can interfere with the system operation. A locally centralized security architecture means that a central device, e.g., the 6LBR, handles the keys for all the devices in the security domain. Alternatively, a central security architecture could also refer to the fact that smart objects are managed from the backend. It can also refer to a public-key infrastructure used to manage identities and digital certificates associated to the different devices.
+
+The security architecture for the different security profiles is classified as follows.
+
+
+
+~~~~
+           +---------------------------------------------------------+
+           |                 Description                             |
++----------+---------------------------------------------------------+
+|SecProf_1 |                Distributed                              |
++----------+---------------------------------------------------------+
+|SecProf_2 |     Distributed able to move centralized (local)        |
++----------+---------------------------------------------------------+
+|SecProf_3 |         Centralized (local &/or backend)                |
++----------+---------------------------------------------------------+
+|SecProf_4 |      Distributed & centralized (local &/or backend)     |
++----------+---------------------------------------------------------+
+~~~~
+{: #fig7 title="Security architectures in different security profiles."}
+
+In "SecProf_1", management mechanisms for the distributed assignment and management of keying materials is required. Since this is a very simple use case, access control to the formed security domain can be enabled by means of a common secret known to all devices. In the next security suite (SecProf_2), a central device can assume key management responsibilities and handle the
+access to the network. The last two security suites (SecProf_3 and SecProf_4) further allow for the management of devices or some operational keying materials from the backend. Identity and public-key management can be realized by means of a public-key infrastructure or a more decentralized solution based on block-chain.
+
+## Security Model {#sec6-3}
+
+While some applications might involve very resource-constrained things such as, e.g., a humidity, pollution sensor, other applications might target more powerful devices aimed at more exposed applications. Security parameters such as keying materials, certificates, etc. must be protected in the thing, for example by means of tamper-resistant hardware. Keys may be shared across a thing's networking stack to provide authenticity and confidentiality in each networking layer. This would minimize the number of key establishment/agreement handshake and incurs less overhead for constrained thing. While more advanced applications may require key separation at different networking layers, and possibly process separation and sandboxing to isolate one application from another. In this sense, this section reflects the fact that different applications require different sets of security mechanisms. A very important requirement refers to the protection of application related parameters, data, and algorithms running on a smart object that should be protected from extraction or manipulation.
+
+~~~~
+           +---------------------------------------------------------+
+           |Description                                              |
++----------+---------------------------------------------------------+
+|SecProf_1 |No tamper resistant                                      |
+|          |Sharing keys between layers                              |
++----------+---------------------------------------------------------+
+|SecProf_2 |No tamper resistant                                      |
+|          |Sharing keys between layers                              |
++----------+---------------------------------------------------------+
+|SecProf_3 |Tamper resistant                                         |
+|          |Key and process separation                               |
+|          |Data and algorithm protection from manipulation/copy     |
++----------+---------------------------------------------------------+
+|SecProf_4 |(no) Tamper resistant                                    |
+|          |Sharing keys between layers/Key and process separation   |
+|          |Sandbox                                                  |
+|          |Data and algorithm protection from manipulation/copy     |
++----------+---------------------------------------------------------+
+~~~~
+{: #fig8 title="Thing security models in different security profiles."}
+
+## Security Bootstrapping and Management {#sec6-4}
+
+Bootstrapping refers to the process by which a thing initiates its life within
+a security domain and includes the initialization of secure and/or authentic
+parameters bound to the thing and at least one other device in the network.
+Here, different mechanisms may be used to achieve confidentiality and/or
+authenticity of these parameters, depending on deployment scenario assumptions
+and the communication channel(s) used for passing these parameters. The
+simplest mechanism for initial set-up of secure and authentic parameters
+is via communication in the clear using a physical interface (USB, wire,
+chip contact, etc.). Here, one commonly assumes this communication channel
+is secure, since eavesdropping and/or manipulation of this interface would
+generally require access to the physical medium and, thereby, to one or both
+of the devices themselves. This mechanism was used with the so-called original "resurrecting duckling" model, as introduced in {{PROC-Stajano-99}}. This technique may also be used securely in wireless, rather than wired, set-ups, if the prospect of eavesdropping and/or manipulating this channel are dim (a so-called "location-limited" channel {{PROC-Smetters-04}}{{PROC-Smetters-02}}). Examples hereof include the communication of secret keys in the clear using near field communication (NFC) - where the physical channel is purported to have very limited range (roughly 10cm), thereby thwarting eavesdropping by far-away adversarial devices, and in-the-clear communication during a small time window (triggered by, e.g., a button-push) - where eavesdropping is presumed absent during this small time window. With the use of public-key based techniques, assumptions on the communication channel can be relaxed even further, since then the cryptographic technique itself provides for confidentiality of the channel set-up and the location-limited channel - or use of certificates - rules out man-in-the-middle attacks, thereby providing authenticity {{PROC-Smetters-02}}. The same result can be obtained using password-based
+public-key protocols {{SPEKE}}, where authenticity depends on the (weak) password not being guessed during execution of the protocol. 
+
+It should be noted that while most of these techniques realize a secure and authentic channel for passing parameters, these generally do not provide for explicit authorization. As an example, with use of certificate-based public-key based techniques, one may obtain hard evidence on whom one shares secret and/or authentic parameters with, but this does not answer the question as to whether one wishes to share this information at all with this specifically identified device (the latter usually involves a human-decision element). Thus, the bootstrapping mechanisms above should generally be complemented by mechanisms that regulate (security policies for) authorization. Furthermore, the type of bootstrapping is very related to the required type of security architecture. Distributed bootstrapping means that a pair of devices can setup a security relationship on the fly, without interaction with a central device elsewhere within the system. In many cases, it is handy to have a distributed bootstrapping protocol based on existing security protocols (e.g., DTLS in CoAP) required for other purposes: this reduces the amount of required software. A centralized bootstrapping protocol is one in which a central device manages the security relationships within a network. This can happen locally, e.g., handled by the 6LBR, or remotely, e.g., from a server connected via the Internet. The security bootstrapping for the different security profiles is as follows.
+
+~~~~
+           +---------------------------------------------------------+
+           |Description                                              |
++----------+---------------------------------------------------------+
+|SecProf_1 |* Distributed, (e.g., Resurrecting duckling)             |
+|          |* First key distribution happens in the clear            |
++----------+---------------------------------------------------------+
+|SecProf_2 |* Distributed, (e.g., Resurrecting duckling )            |
+|          |* Centralized (local), 6LBR acts as KDC                  |
+|          |* First key distribution occurs in the clear, if the KDC |
+|          |  is available, the KDC can manage network access        |
++----------+---------------------------------------------------------+
+|SecProf_3 |* 6LBR acts as KDC. It handles node joining, provides    |
+|          |  them with keying material from L2 to application layers|
+|          |* Bootstrapping occurs in a secure way - either in secure|
+|          |  environment or the security mechanisms ensure that     |
+|          |  eavesdropping is not possible.                         |
+|          |* KDC and backend can implement secure methods for       |
+|          |  network access                                         |
++----------+---------------------------------------------------------+
+|SecProf_4 |* As in SecProf_3.                                       |
++----------+---------------------------------------------------------+
+~~~~
+{: #fig9 title="Security bootstrapping methods in different security profiles"}
+
+## Network Security {#sec6-5}
+
+Network security refers to the mechanisms used to ensure the secure transport
+of network packets such as 6LoWPAN frames. This involves a multitude of issues ranging from secure discovery, frame authentication, routing security, detection of replay, secure group communication, etc. Network security is important to thwart potential attacks such as denial-of-service (e.g., through message flooding) or routing attacks.
+
+The Internet Draft {{ID-Tsao}} presents a very good overview of attacks and
+security needs classified according to the confidentiality, integrity, and
+availability needs. A potential limitation is that there exist no differentiation in security between different use cases and the framework is limited to L3. The security suites gathered in the present ID aim at solving this by allowing for a more flexible selection of security needs at L2 and L3.
+
+~~~~
+           +---------------------------------------------------------+
+           |Description                                              |
++----------+---------------------------------------------------------+
+|SecProf_1 |* Network key creating a home security domain at L2      |
+|          |  ensuring authentication and freshness of exchanged data|
+|          |* Secure multicast does not ensure origin authentication |
+|          |* No need for secure routing at L3                       |
++----------+---------------------------------------------------------+
+|SecProf_2 |* Network key creating a home security domain at L2      |
+|          |  ensuring authentication and freshness of exchanged data|
+|          |* Secure multicast does not ensure origin authentication |
+|          |* No need for secure routing at L3                       |
++----------+---------------------------------------------------------+
+|SecProf_3 |* Network key creating an industry security domain at L2 |
+|          |  ensuring authentication and freshness of exchanged data|
+|          |* Secure routing needed (integrity & availability) at L3 |
+|          |  within 6LoWPAN/CoAP                                    |
+|          |* Secure multicast requires origin authentication        |
++----------+---------------------------------------------------------+
+|SecProf_4 |* Network key creating an industry security domain at L2 |
+|          |  ensuring authentication and freshness of exchanged data|
+|          |* Inter-domain authentication/secure handoff             |
+|          |* Secure routing needed at L3                            |
+|          |* Secure multicast requires origin authentication        |
+|          |* 6LBR (HTTP-CoAP proxy) requires verification of        |
+|          |  forwarded messages and messages leaving or entering the|
+|          |  6LoWPAN/CoAP network.                                  |
++----------+---------------------------------------------------------+
+~~~~
+{: #fig10 title="Network security needs in different security profiles"}
+
+## Application Security {#sec6-6}
+
+In the context of 6LoWPAN/CoAP networks, application security refers firstly
+to the configuration of an application layer protocol, such as DTLS, to protect the exchanged information. It further refers to the measures required in potential translation points (e.g., a (HTTP-CoAP) proxy) where information can be collected and the privacy sphere of users in a given security domain is endangered. Application security for the different security profiles is as follows.
+
+
+
+~~~~
+           +---------------------------------------------------------+
+           |Description                                              |
++----------+---------------------------------------------------------+
+|SecProf_1 |  -                                                      |
++----------+---------------------------------------------------------+
+|SecProf_2 |* DTLS is used for end-to-end application security       |
+|          |  between management device and things and between things|
+|          |* DTLS ciphersuites configurable to provide              |
+|          |  confidentiality and/or authentication and/or freshness |
+|          |* Key transport and policies for generation of session   |
+|          |  keys are required                                      |
++----------+---------------------------------------------------------+
+|SecProf_3 |* Requirements as in SecProf_2 and                       |
+|          |* DTLS is used for end-to-end application security       |
+|          |  between management device and things and between things|
+|          |* Communication between KDC and each thing secured by    |
+|          |  pairwise keys                                          |
+|          |* Group keys for communication in a group distributed    |
+|          |  by KDC                                                 |
+|          |* Privacy protection should be provided in translation   |
+|          |  points                                                 |
++----------+---------------------------------------------------------+
+|SecProf_4 |* Requirements as in SecProf_3 and                       |
+|          |* TLS or DTLS can be used to send commands from the      |
+|          |  backend to the 6LBR or things in a 6LoWPAN/CoAP network|
+|          |* End-to-end secure connectivity from backend required   |
+|          |* Secure broadcast in a network from backend required    |
++----------+---------------------------------------------------------+
+~~~~
+{: #fig11 title="Application security methods in different security profiles"}
+
+The first two security profiles do not include any security at the application
+layer. The reason is that, in the first case, security is not provided and,
+in the second case, it seems reasonable to provide basic security at L2.
+ In the third security profile (SecProf_2), DTLS becomes the way of protecting
+messages at application layer between things and with the KDC running on
+a 6LBR. A key option refers to the capability of easily configuring DTLS
+to provide a subset of security services (e.g., some applications do not
+require confidentiality) to reduce the impact of security in the system operation of resource-constrained things. In addition to basic key management mechanisms running within the KDC, communication protocols for key transport or key update are required. These protocols could be based on DTLS. The next security suite (SecProf_3) requires pairwise keys for communication between things within the security domain. Finally, privacy protection should be taken into account to limit access to valuable information --- such as identifiers, type of collected data, traffic patterns --- in potential translation points (proxies) or in the backend. The last security suite (SecProf_4) further extends the previous set of requirements considering security mechanisms to deal with translations between TLS and DTLS or for the provision of secure multicast within a 6LoWPAN/CoAP network from the backend.
+
+
+
+# Challenges for a Secure IoT {#sec7}
 
 In this section, we take a closer look at the various security challenges
 in the operational and technical features of the IoT and then discuss how
 existing Internet security protocols cope with these technical and conceptual
 challenges through the lifecycle of a thing. Figure 2 summarizes which requirements need to be met in the lifecycle phases as well as some of the considered protocols. This discussion should neither be understood as a comprehensive evaluation of all protocols, nor can it cover all possible aspects of IoT security. Yet, it aims at showing concrete limitations of existing Internet security protocols in some areas rather than giving an abstract discussion about general properties of the protocols. In this regard, the discussion handles issues that are most important from the authors' perspectives.
 
-## Constraints and Heterogeneous Communication {#sec6-1}
+## Constraints and Heterogeneous Communication {#sec7-1}
 
 Coupling resource constrained networks and the powerful Internet is a challenge because the resulting heterogeneity of both networks complicates protocol design and system operation. In the following we briefly discuss the resource constraints of IoT devices and the consequences for the use of Internet Protocols in the IoT domain.
 
-### Tight Resource Constraints {#sec6-1-1}
+### Tight Resource Constraints {#sec7-1-1}
 
 The IoT is a resource-constrained network that relies on lossy and low-bandwidth channels for communication between small nodes, regarding CPU, memory, and energy budget. These characteristics directly impact the threats to and the design of security protocols for the IoT domain. First, the use of small packets, e.g., IEEE 802.15.4 supports 127-byte sized packets at the physical layer, may result in fragmentation of larger packets of security protocols. This may open new attack vectors for state exhaustion DoS attacks, which is especially tragic, e.g., if the fragmentation is caused by large key exchange messages of security protocols. Moreover, packet fragmentation commonly downgrades the overall system performance due to fragment losses and the need for retransmissions. For instance, fate-sharing packet flight as implemented by DTLS might aggravate the resulting performance loss.
 
@@ -911,7 +1199,7 @@ attacks. Since the energy consumption of IoT devices differs from other
 device classes, judgments on the energy consumption of a particular protocol
 cannot be made without tailor-made IoT implementations.
 
-### Denial-of-Service Resistance {#sec6-1-2}
+### Denial-of-Service Resistance {#sec7-1-2}
 
 The tight memory and processing constraints of things naturally alleviate
 resource exhaustion attacks. Especially in unattended T2T communication,
@@ -928,7 +1216,7 @@ variable difficulties. Puzzle-based defense mechanisms are less dependent
 on the network topology but perform poorly if CPU resources in the network
 are heterogeneous (e.g., if a powerful Internet host attacks a thing). Increasing the puzzle difficulty under attack conditions can easily lead to situations, where a powerful attacker can still solve the puzzle while weak IoT clients cannot and are excluded from communicating with the victim. Still, puzzle-based approaches are a viable option for sheltering IoT devices against unintended overload caused by misconfiguration or malfunctioning things.
 
-### End-to-End Security, protocol translation, and the role of middleboxes {#sec6-1-3}
+### End-to-End Security, protocol translation, and the role of middleboxes {#sec7-1-3}
 
 The term end-to-end security offers multiple interpretations.
 Here, we consider end-to-end security in the context end-to-end IP connectivity.
@@ -955,27 +1243,27 @@ To the best of our knowledge, none of the mentioned security approaches that foc
 We note that end-to-end security could also be considered in the context of availability: making sure that the messages are delivered.
 In this case, the end-points cannot control this, but the middleboxes play a fundamental role to make sure that exchanged messages are not dropped, e.g., due to a DDoS attack.
 
-### New network architectures and paradigm {#sec6-1-4}
+### New network architectures and paradigm {#sec7-1-4}
 
 There is a multitude of new link layer protocols that aim to address the resource-constrained nature of IoT devices. For example, the IEEE 802.11 ah {{IEEE802ah}} has been specified for extended range and lower energy consumption to support Internet of Things (IoT) devices. Similarly, Low-Power Wide-Area Network (LPWAN) protocols such as LoRa {{lora}}, Sigfox {{sigfox}}, NarrowBand IoT (NB-IoT) {{nbiot}} are all designed for resource-constrained devices that require long range and low bit rates. While these protocols allow the IoT devices to conserve energy and operate efficiently, they also add additional security challenges. For example, the relatively small MTU can make security handshakes with large X509 certificates a significant overhead. At the same time, new communication paradigms also allow IoT devices to communicate directly amongst themselves with or without support from the network. This communication paradigm is also referred to as Device-to-Device (D2D) or Machine-to-Machine (M2M) or Thing-to-Thing (T2T) communication. D2D is primarily driven by network operators that want to utilize short range communication to improve the network performance and for supporting proximity based service
 
-## Bootstrapping of a Security Domain {#sec6-2}
+## Bootstrapping of a Security Domain {#sec7-2}
 
 Creating a security domain from a set of previously unassociated IoT devices
 is a key operation in the lifecycle of a thing and in the IoT network. This aspect is further elaborated and discussed in the T2TRG draft on bootstrapping {{ID-bootstrap}}.
 
 
-## Operation {#sec6-3}
+## Operation {#sec7-3}
 
 After the bootstrapping phase, the system enters the operational phase. 
 During the operational phase, things can relate to the state information
 created during the bootstrapping phase in order to exchange information securely and in an authenticated fashion. In this section, we discuss aspects of communication patterns and network dynamics during this phase.
 
-### End-to-End Security {#sec6-3-1}
+### End-to-End Security {#sec7-3-1}
 
-Providing end-to-end security is of great importance to address and secure individual T2T or H2T communication within one IoT domain. Moreover, end-to-end security associations are an important measure to bridge the gap between the IoT and the Internet. IKEv2, TLS and DTLS provide end-to-end security services including peer entity authentication, end-to-end encryption and integrity protection above the network layer and the transport layer respectively. Once bootstrapped, these functions can be carried out without online connections to third parties, making the protocols applicable for decentralized use in the IoT. However, protocol translation by intermediary nodes may invalidate end-to-end protection measures (see {{sec6-1-3}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{ID-OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
+Providing end-to-end security is of great importance to address and secure individual T2T or H2T communication within one IoT domain. Moreover, end-to-end security associations are an important measure to bridge the gap between the IoT and the Internet. IKEv2, TLS and DTLS provide end-to-end security services including peer entity authentication, end-to-end encryption and integrity protection above the network layer and the transport layer respectively. Once bootstrapped, these functions can be carried out without online connections to third parties, making the protocols applicable for decentralized use in the IoT. However, protocol translation by intermediary nodes may invalidate end-to-end protection measures (see {{sec7-1-3}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{ID-OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
 
-### Group Membership and Security {#sec6-3-2}
+### Group Membership and Security {#sec7-3-2}
 
 In addition to end-to-end security, group key negotiation is an important
 security service for the T2Ts and Ts2T communication patterns in the IoT
@@ -988,7 +1276,7 @@ are used in IKEv2 and HIP could be used for group Diffie-Hellman key-negotiation
 A number of group key solutions have been developed in the context of the
 IETF working group MSEC in the context of the MIKEY architecture {{WG-MSEC}}{{RFC4738}}. These are specifically tailored for multicast and group broadcast applications in the Internet and should also be considered as candidate solutions for group key agreement in the IoT. The MIKEY architecture describes a coordinator entity that disseminates symmetric keys over pair-wise end-to-end secured channels. However, such a centralized approach may not be applicable in a distributed environment, where the choice of one or several coordinators and the management of the group key is not trivial.
 
-### Mobility and IP Network Dynamics {#sec6-3-3}
+### Mobility and IP Network Dynamics {#sec7-3-3}
 
 It is expected that many things (e.g., wearable sensors, and user devices) will be mobile in the sense that they are attached to different networks
 during the lifetime of a security association. Built-in mobility signaling can greatly reduce the overhead of the cryptographic protocols because unnecessary and costly re- establishments of the session (possibly including handshake and key agreement) can be avoided. IKEv2 supports host mobility with the MOBIKE {{RFC4555}}{{RFC4621}} extension. MOBIKE refrains from applying heavyweight cryptographic extensions for mobility. However, MOBIKE mandates the use of IPsec tunnel mode which requires to transmit an additional IP header in each packet. This additional overhead could be alleviated by using header compression methods or the Bound End- to-End Tunnel (BEET) mode {{ID-Nikander}}, a hybrid of tunnel and transport mode with smaller packet headers.
@@ -997,7 +1285,7 @@ HIP offers a simple yet effective mobility management by allowing hosts to signa
 might be necessary to reduce the cryptographic costs, for example, by making the public-key signatures in the mobility messages optional. Diet HIP does
 not define mobility yet but it is sufficiently similar to HIP to employ the same mechanisms. TLS and DTLS do not have standards for mobility support, however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which nodes operate. In many cases, mobility support by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. However, if individual things change their point of network attachment while communicating, mobility support may gain importance.
 
-## Software update {#sec6-4}
+## Software update {#sec7-4}
 
 IoT devices have a reputation for being insecure at the time of manufacture. Yet they are often expected to stay functional in live deployments for years and even decades. Additionally, these devices typically operate unattended with direct Internet connectivity. Therefore, a remote software update mechanism to fix vulnerabilities, to update configuration settings, and for adding new functionality is needed. 
 
@@ -1007,7 +1295,7 @@ The FTC staff report on Internet of Things - Privacy & Security in a Connected W
 
 While powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world, a more considerate effort is needed for resource-constrained devices that don't have any operating system and are typically not equipped with a memory management unit or similar tools. The IAB also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. 
 
-## Verifying device behavior {#sec6-5}
+## Verifying device behavior {#sec7-5}
 
 Users often have a false sense of privacy when using new Internet of Things (IoT) appliances such as Internet-connected smart televisions, speakers and cameras. Recent revelations have shown that this user belief is often unfounded. Many IoT device vendors have been caught collecting sensitive private data through these connected appliances with or without appropriate user warnings {{cctv}}.
 
@@ -1015,19 +1303,19 @@ An IoT device user/owner would like to monitor and know if the device is calling
 
 Providing such information to the users in an understandable fashion is challenging. This is because the IoT devices are not only resource-constrained in terms of their computational capability, but also in terms of the user interface available. Also, the network infrastructure where these devices are deployed will vary significantly from one user environment to another. Therefore, where and how this monitoring feature is implemented still remains an open question. 
 
-## End-of-life {#sec6-6}
+## End-of-life {#sec7-6}
 Like all commercial devices, most IoT devices will be end-of-lifed by vendors or even network operators. This may be planned or unplanned (for example when the vendor or manufacturer goes bankrupt or when a network operator moves to a different type of networking technology). A user should still be able to use and perhaps even update the device. This requires for some form of authorization handover.
 
 Although this may seem far fetched given the commercial interests and market dynamics, we have examples from the mobile world where the devices have been functional and up-to-date long after the original vendor stopped supporting the device. CyanogenMod for Android devices and OpenWrt for home routers are two such instances where users have been able to use and update their devices even after they were end-of-lifed. Admittedly these are not easy for an average users to install and configure on their devices. With the deployment of millions of IoT devices, simpler mechanisms are needed to allow users to add new root-of-trusts and install software and firmware from other sources once the device has been end-of-lifed.
 
 
-## Testing: bug hunting and vulnerabilities {#sec6-7}
+## Testing: bug hunting and vulnerabilities {#sec7-7}
 Given that the IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform extensive testing on their IoT devices, networks, and systems. Nonetheless, since the devices are resource-constrained and manufactured by multiple vendors, some of them very small, devices might be shipped with very limited testing, so that bugs can remain and can be exploited at a later stage. This leads to two main types of challenges:
 
 1. It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices to give end users the confidence that the purchased devices are robust.
 2. It is also an open question how combination of devices of multiple vendors might actually lead to dangerous network configurations, e.g., if combination of specific devices can trigger unexpected behavior.
 
-## Quantum-resistance {#sec6-8}
+## Quantum-resistance {#sec7-8}
 
 Many IoT systems that are being deployed today will remain operational for many years. With the advancements made in the field of quantum computers, it is possible that large-scale quantum computers are available in the future for performing cryptanalysis on existing cryptographic algorithms and cipher suites. If this happened, it would have two consequences. First, functionalities enabled by means of RSA/ECC - namely key exchange, public-key encryption and signature - would not be secure anymore due to Shor's algorithm. Second, the security level of symmetric algorithms will decrease, e.g., the security of a block cipher with a key size of b bits will only offer b/2 bits of security due to Grover's algorithm.
 
@@ -1036,7 +1324,7 @@ option, it would also incur additional computation overhead and network traffic.
 
 We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography. RFC7696 provides guidelines for cryptographic algorithm agility.
 
-## Privacy protection {#sec6-9}
+## Privacy protection {#sec7-9}
 
 Users will be surrounded by hundreds of connected devices. Even if the communication links are encrypted and protected, information about the users might be collected for different purposes affecting their privacy. In {{Ziegeldorf}}, privacy in the IoT is defined as the threefold guarantee to the user for:
 1. awareness of privacy risks imposed by smart things and services surrounding the data subject,
@@ -1055,7 +1343,7 @@ Based on this definition, several privacy threats and challenges are identified 
 
 When IoT systems are deployed, the above issues should be considered to ensure that private data remains private. How this is achieved remains an open issue.
 
-## Data leakage {#sec6-10}
+## Data leakage {#sec7-10}
 
 IoT devices are resource constrained and often deployed in unattended environments or can just be bought in the Internet. Therefore, an attacker can have direct access to the device and apply more advance techniques that a traditional black box model does not consider such as side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:
 
@@ -1066,7 +1354,7 @@ IoT devices are resource constrained and often deployed in unattended environmen
 Protection against such data leakage patterns is not trivial since devices are inherently resource-constrained.
 An open question is which techniques can be used to protect IoT devices in such a strong attack model.
 
-## Trustworthy IoT Operation {#sec6-11}
+## Trustworthy IoT Operation {#sec7-11}
 
 Flaws in the design and implementation of a secure IoT device and network can lead to secure vulnerabilities. An example is a flaw is the distribution of an Internet-connected IoT device in which a default password is used in all devices. Many IoT devices can be found in the Internet by means of tools such as Shodan, and if they have any vulnerability, it can then be exploited at scale, e.g., to launch DDoS attacks. This is not fiction but reality as Dyn, a mayor DNS was attacked by means of a DDoS attack originated from a large IoT botnet composed of thousands of compromised IP-cameras. Open questions in this area are:
 
@@ -1078,27 +1366,26 @@ Some ideas are being explored to address this issue. One of this approaches refe
 The idea behind MUD files is simple: devices would disclose the location of its MUD file to the network during installation.
 The network can then (i) retrieve those files, (ii) learn from the manufacturers the intended usage of the devices, e.g., which services they require to access, and then (iii) create suitable filters. 
 
-# Conclusions and Next Steps {#sec7}
+# Conclusions and Next Steps {#sec8}
 
 This Internet Draft provides IoT security researchers, system designers and implements with an overview of both operational and security requirements in the IP-based Internet of Things. 
 We discuss a general threat model, security issues, state of the art, and tools to mitigate security threats. 
-We further analyze key security challenges.
+We further introduce a number of potential security profiles fitting different types of IoT deployments and discuss key security challenges.
 
 Although big steps have been realized during the last years, as summarized in Section {{sec5-1}} and many organizations are publishing general recommendations (Section {{sec5-3}}) describing how the IoT should be secured, there are many challenges ahead that require further attention.
-Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring a trustworthy IoT operation. All these problems are important; however, different deployment environment have different operational and security demands. Thus, a potential approach is the definition and standardization of security profiles, each with specific mitigation strategies according to the risk assessment associated to the security profile.
-Such an approach would ensure minimum security capabilities in different environments while ensuring interoperability.
+Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring a trustworthy IoT operation. All these problems are important; however, different deployment environment have different operational and security demands. Thus, a potential approach is the definition and standardization of security profiles, e.g., similar to the exemplary profiles introduced in Section {{sec6}}, to ensure minimum security capabilities in different environments while ensuring interoperability.
 
 
-# Security Considerations {#sec8}
+# Security Considerations {#sec9}
 
 This document reflects upon the requirements and challenges of the security
 architectural framework for the Internet of Things.
 
-# IANA Considerations {#sec9}
+# IANA Considerations {#sec10}
 
 This document contains no request to IANA.
 
-# Acknowledgments {#sec10}
+# Acknowledgments {#sec11}
 
-We gratefully acknowledge feedback and fruitful discussion with Tobias Heer, Robert Moskowitz, Thorsten Dahm, Hannes Tschofenig, Barry Raveendran and Eliot Lear. We acknowledge the additional authors of the previous version of this document Sye Loong Keoh, Rene Hummen and Rene Struik. 
+We gratefully acknowledge feedback and fruitful discussion with Tobias Heer, Robert Moskowitz, and Thorsten Dahm. We acknowledge the additional authors of the previous version of this document Sye Loong Keoh, Rene Hummen and Rene Struik. 
 
