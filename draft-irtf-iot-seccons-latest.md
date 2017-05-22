@@ -436,11 +436,15 @@ informative:
     title: Cybersecurity Best Practices for Modern Vehicles
     seriesinfo:
       Web: https://www.nhtsa.gov/staticfiles/nvs/pdf/812333_CybersecurityForModernVehicles.pdf     
+  NIST-FIS:
+    title: Security and Privacy Controls for Federal Information Systems and Organizations
+    seriesinfo:
+      Web: http://dx.doi.org/10.6028/NIST.SP.800-53r4        
   NIST-Guide:
     title: Systems Security Engineering
     author:
     - ins: R. Ross
-    - ins: M. McEVILLEY
+    - ins: M. McEvilley
     - ins: J. C. Oren
     seriesinfo:
       Web: http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-160.pdf   
@@ -537,7 +541,7 @@ pi:
 
 --- abstract
 
-The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS). However, security challenges still exist and there are some use cases that lack a suitable solution. In this document, we first discuss the various stages in the lifecycle of a thing. We then look at the security building blocks available for securing the different layers of the Internet protocol suite. Next, we document the various security threats to a thing and the challenges that one might face in order to protect against these threats. Lastly, we discuss next steps to ensure a secure IoT.
+The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS). However, security challenges still exist and there are some use cases that lack a suitable solution. In this document, we first discuss the various stages in the lifecycle of a thing. We then look at the security building blocks available for securing the different layers of the Internet protocol suite. Next, we document the various security threats to a thing and the challenges that one might face in order to protect against these threats. Lastly, we discuss the next steps needed to ensure roll out of secure Internet of Things services.
 
 
 --- middle
@@ -551,17 +555,16 @@ Levels" {{RFC2119}}.
 
 # Introduction {#sec2}
 
-The Internet of Things (IoT) denotes the interconnection of highly heterogeneous networked entities and networks following a number of communication patterns such as: human-to-human (H2H), human-to-thing (H2T), thing-to-thing (T2T), or thing-to-things (T2Ts). The term IoT was first coined by the Auto-ID center {{AUTO-ID}} in 1999. Since then, the development of the underlying concepts has ever increased its pace. Nowadays, the IoT presents a strong focus of research with various initiatives working on the (re)design, application, and usage of standard Internet technology in the IoT.
+The Internet of Things (IoT) denotes the interconnection of highly heterogeneous networked entities and networks following a number of communication patterns such as: human-to-human (H2H), human-to-thing (H2T), thing-to-thing (T2T), or thing-to-things (T2Ts). The term IoT was first coined by the Auto-ID center {{AUTO-ID}} in 1999. Since then, the development of the underlying concepts and technologies has ever increased the pace of its adoption. It is not surprising that IoT has received significant attention from the research community to (re)design, apply, and use of standard Internet technology and protocols for IoT.
 
 The introduction of IPv6 and web services as fundamental building blocks
-for IoT applications {{RFC6568}} promises to bring a number of basic advantages including: (i) a homogeneous protocol ecosystem that allows simple integration with Internet hosts; (ii) simplified development of very different appliances; (iii) an unified interface for applications, removing the need for application-level proxies. Such features greatly simplify the deployment of the envisioned scenarios ranging from building automation to production environments to personal area networks, in which very different things such as a temperature sensor, a luminaire, or an RFID tag might interact with each other, with a human carrying a smart phone, or with backend services.
+for IoT applications {{RFC6568}} promises to bring a number of basic advantages including: (i) a homogeneous protocol ecosystem that allows simple integration with Internet hosts; (ii) simplified development for devices that significantly vary in their capabilities; (iii) an unified interface for applications, removing the need for application-level proxies. These building blocks greatly simplify the deployment of the envisioned scenarios ranging from building automation to production environments to personal area networks, in which very different things such as a temperature sensor, a luminaire, or an RFID tag might interact with each other, with a human carrying a smart phone, or with backend services.
 
-This Internet Draft presents an overview of the security aspects of the envisioned all-IP architecture as well as of the lifecycle of an IoT device, a "thing", within this architecture. 
-In particular, we review the most pressing aspects and functionalities that are required for a secure all-IP solution.
+This Internet Draft presents an overview of the security aspects of the envisioned all-IP architecture as well as of the lifecycle of an IoT device, a "thing", within this architecture. In particular, we review the most crucial aspects and functionalities that are required for a secure all-IP solution.
 
-With this, this Internet-Draft pursues several goals. First, we aim at presenting a comprehensive view of the interactions and relationships between an IoT application and security. Second, we aim at describing challenges for a secure IoT in the specific context of the lifecycle of a resource-constrained device. The final goal of this draft is to discuss the security considerations that need to be taken into consideration towards a secure IoT.
+With this, this Internet-Draft pursues several goals. First, we aim at presenting a comprehensive view of the interactions and relationships between an IoT application and security. Second, we aim at describing challenges for a secure IoT in the specific context of the lifecycle of a resource-constrained device. The final goal of this draft is to discuss the security considerations that are necessary for deploying secure IoT services.
 
-The rest of the Internet-Draft is organized as follows. {{sec3}} depicts the lifecycle of a thing and gives general definitions for the main security building blocks within the IoT domain. In {{sec4}}, we discuss threats and methodologies for managing risks when designing a secure IoT system. {{sec5}} reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations in IoT security. {{sec6}} identifies existing challenges for a secure IoT and discusses potential solutions. {{sec7}} includes final remarks and conclusions.
+The rest of the Internet-Draft is organized as follows. {{sec3}} depicts the lifecycle of a thing and gives general definitions for the main security building blocks within the IoT domain. In {{sec4}}, we discuss threats and methodologies for managing risks when designing a secure IoT system. {{sec5}} reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations in IoT security. {{sec6}} identifies remaining challenges for a secure IoT and discusses potential solutions. {{sec7}} includes final remarks and conclusions.
 
 
 # Motivation and background {#sec3}
@@ -571,9 +574,8 @@ The rest of the Internet-Draft is organized as follows. {{sec3}} depicts the lif
 
 The lifecycle of a thing refers to the operational phases of a thing in the context of a given application or use case. {{fig1}} shows the generic phases of the lifecycle of a thing. This generic lifecycle is applicable to very different IoT applications and scenarios.
 
-We consider an example, a Building Automation and Control (BAC) system, to illustrate the lifecycle and the meaning of these different phases. 
-A BAC system consists of a network of interconnected nodes that performs various functions in the domains of HVAC (Heating, Ventilating, and Air Conditioning), lighting, safety etc. The nodes vary in functionality and a majority of them represent resource constrained devices such as sensors and luminaries. Some devices may also be battery operated or battery-less nodes, demanding for a focus on low energy consumption and on sleeping devices.
-In our example, the life of a thing starts when it is manufactured. Due to the different application areas (i.e., HVAC, lighting, safety) nodes are tailored to a specific task. It is therefore unlikely that one single manufacturer will create all nodes in a building. Hence, interoperability as well as trust bootstrapping between nodes of different vendors is important. The thing is later installed and commissioned within a network by an installer during the bootstrapping phase. Specifically, the device identity and the secret keys used during normal operation are provided to the device during this phase. Different subcontractors may install different IoT devices for different purposes. Furthermore, the installation and bootstrapping procedures may not be a defined event but may stretch over an extended period of time. After being bootstrapped, the device and the system of things are in operational mode and execute the functions of the BAC system. During this operational phase, the device is under the control of the system owner. For devices with lifetimes spanning several years, occasional maintenance cycles may be required. During each maintenance phase, the software on the device can be upgraded or applications running on the device can be reconfigured. The maintenance tasks can thereby be performed either locally or from a backend system by means of an end-to-end connection. Depending on the operational changes of the device, it may be required to re-bootstrap at the end of a maintenance cycle. The device continues to loop through the operational phase and the eventual maintenance phase until the device is decommissioned at the end of its lifecycle. However, the end-of-life of a device does not necessarily mean that it is defective but rather denotes a need to replace and upgrade the network to next-generation devices in order to provide additional  functionality. Therefore the device can be removed and re-commissioned to be used in a different system under a different owner by starting the lifecycle all over again. 
+We consider for example, a Building Automation and Control (BAC) system, to illustrate the lifecycle and the meaning of these different phases. 
+A BAC system consists of a network of interconnected nodes that performs various functions in the domains of HVAC (Heating, Ventilating, and Air Conditioning), lighting, safety etc. The nodes vary in functionality and a majority of them represent resource-constrained devices such as sensors and luminaries. Some devices may be battery operated or may rely energy harvesting. This requires us to also consider devices that that sleep during their operation to save energy. In our example, the life of a thing starts when it is manufactured. Due to the different application areas (i.e., HVAC, lighting, safety) nodes are tailored to a specific task. It is therefore unlikely that one single manufacturer will create all nodes in a building. Hence, interoperability as well as trust bootstrapping between nodes of different vendors is important. The thing is later installed and commissioned within a network by an installer during the bootstrapping phase. Specifically, the device identity and the secret keys used during normal operation are provided to the device during this phase. Different subcontractors may install different IoT devices for different purposes. Furthermore, the installation and bootstrapping procedures may not be a defined event but may stretch over an extended period of time. After being bootstrapped, the device and the system of things are in operational mode and execute the functions of the BAC system. During this operational phase, the device is under the control of the system owner. For devices with lifetimes spanning several years, occasional maintenance cycles may be required. During each maintenance phase, the software on the device can be upgraded or applications running on the device can be reconfigured. The maintenance tasks can thereby be performed either locally or from a backend system by means of an end-to-end connection. Depending on the operational changes of the device, it may be required to re-bootstrap at the end of a maintenance cycle. The device continues to loop through the operational phase and the eventual maintenance phase until the device is decommissioned at the end of its lifecycle. However, the end-of-life of a device does not necessarily mean that it is defective but rather denotes a need to replace and upgrade the network to next-generation devices in order to provide additional  functionality. Therefore the device can be removed and re-commissioned to be used in a different system under a different owner by starting the lifecycle all over again. 
 
 
 
@@ -730,8 +732,7 @@ BIA, RA, and PIA are usually to be realized during the creation of a new IoT sys
 
 # State of the Art {#sec5}
 
-This section is organized as follows. Section {{sec5-1}} summarizes state of the art on IP-based systems, within IETF and in other standardization bodies.
-Section {{sec5-2}} summarizes state of the art on IP-based security protocols and their usage. Section {{sec5-3}} discusses guidelines for securing the IoT as proposed by other bodies. Section {{sec5-4}} analyzes status of other relevant standards, in particular, those by NIST regarding IoT and IoT security.
+This section is organized as follows. {{sec5-1}} summarizes state of the art on IP-based systems, within IETF and in other standardization bodies. {{sec5-2}} summarizes state of the art on IP-based security protocols and their usage. {{sec5-3}} discusses guidelines for securing the IoT as proposed by other bodies. {{sec5-4}} analyzes status of other relevant standards, in particular, those by NIST regarding IoT and IoT security.
 
 ## IP-based IoT Protocols and Standards {#sec5-1}
 
@@ -876,7 +877,7 @@ Other guideline and recommendation documents may exist or may later be published
 
 Despise the need for security in the Internet is nothing new and multiple guidelines exist, the fact is that many IoT devices and systems are not fully secure. There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to the delivered security level, lack of expertise or budget. This, however, poses a severe threat when such devices are deployed. The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become insecure if a compromised device gains access to the system at some point of time. Even if all devices in a given environment are secure, it does not prevent external (passive) attacks originating due to insecure devices. 
 
-Recently {{FCC}} the FCC has stated the need for higher regulation for IoT systems. In fact this might be a missing component, at least in Federal Information Systems (FIS). Today, security in US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST derived a number of documents to establish how to categorize FIS and determine minimum security requirements (FIPS-PUB-199 and FIPS-PUB-200). Minimum security requirements for FIS are specified in NIST SP 800-53r4. However, it is very likely that existing regulations do not take into account the specific challenges of IoT devices and networks.
+Recently {{FCC}} the FCC has stated the need for higher regulation for IoT systems. In fact this might be a missing component, at least in Federal Information Systems (FIS). Today, security in US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST derived a number of documents to establish how to categorize FIS and determine minimum security requirements (FIPS-PUB-199 and FIPS-PUB-200). Minimum security requirements for FIS are specified in NIST SP 800-53r4 {{NIST-FIS}}. However, it is very likely that existing regulations do not take into account the specific challenges of IoT devices and networks.
 
 Even if such a regulation is put in place, the question is how such a regulation can be applied in practice to non-federal deployments, such as industrial, homes, offices, or smart cites. Each of them exhibits unique features, involves very diverse types of users, has different operational requirements, and combines IoT devices from multiple manufacturers. 
 Therefore future regulations should consider such diverse deployment scenarios.
@@ -930,14 +931,13 @@ are heterogeneous (e.g., if a powerful Internet host attacks a thing). Increasin
 
 ### End-to-End Security, protocol translation, and the role of middleboxes {#sec6-1-3}
 
-The term end-to-end security offers multiple interpretations.
+The term end-to-end security often has multiple interpretations.
 Here, we consider end-to-end security in the context end-to-end IP connectivity.
 Note that this does not necessarily mean from sensor to actuator. 
 
 Even though 6LoWPAN and CoAP progress towards reducing the gap between Internet protocols and the IoT, they do not target protocol specifications that are identical to their Internet counterparts due to performance reasons. Hence, more or less subtle differences between IoT protocols and Internet protocols will remain. While these differences can easily be bridged with protocol translators at middleboxes, they become major obstacles if end-to-end security measures between IoT devices and Internet hosts are used.
 
-Regarding end-to-end security in the context of confidentiality and integrity protection, the packets are processed applying message authentication codes or encryption. These protection methods render the protected parts of the packets immutable as rewriting is either not possible because a) the relevant information is encrypted and inaccessible to the gateway or b) rewriting integrity-protected parts of the packet would invalidate the end-to-end integrity protection.
-There are essentially five approaches to handle such end-to-end confidentiality and integrity protection while letting middleboxes access/modify data for different purposes:
+Regarding end-to-end security in the context of confidentiality and integrity protection, the packets are processed by applying message authentication codes or encryption. These protection methods render the protected parts of the packets immutable as rewriting is either not possible because a) the relevant information is encrypted and inaccessible to the gateway or b) rewriting integrity-protected parts of the packet would invalidate the end-to-end integrity protection. There are essentially five approaches to handle such end-to-end confidentiality and integrity protection while letting middleboxes access/modify data for different purposes:
 
 1. Sharing credentials with middleboxes enables middleboxes to transform (e.g., decompress, convert, etc.) packets and re-apply the security measures after transformation. This method abandons end-to-end security and is only applicable to simple scenarios with a rudimentary security model.
 
@@ -1029,12 +1029,12 @@ Given that the IoT devices often have inadvertent vulnerabilities, both users an
 
 ## Quantum-resistance {#sec6-8}
 
-Many IoT systems that are being deployed today will remain operational for many years. With the advancements made in the field of quantum computers, it is possible that large-scale quantum computers are available in the future for performing cryptanalysis on existing cryptographic algorithms and cipher suites. If this happened, it would have two consequences. First, functionalities enabled by means of RSA/ECC - namely key exchange, public-key encryption and signature - would not be secure anymore due to Shor's algorithm. Second, the security level of symmetric algorithms will decrease, e.g., the security of a block cipher with a key size of b bits will only offer b/2 bits of security due to Grover's algorithm.
+Many IoT systems that are being deployed today will remain operational for many years. With the advancements made in the field of quantum computers, it is possible that large-scale quantum computers are available in the future for performing cryptanalysis on existing cryptographic algorithms and cipher suites. If and when this happens, it would have two consequences. First, functionalities enabled by means of RSA/ECC - namely key exchange, public-key encryption and signature - would not be secure anymore due to Shor's algorithm. Second, the security level of symmetric algorithms will decrease, e.g., the security of a block cipher with a key size of b bits will only offer b/2 bits of security due to Grover's algorithm.
 
-This would require to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. While such future planning is hard, it may be a necessity in certain critical IoT deployments which are expected to last decades or more. Although increasing the key-size of the different algorithms is definitely an
-option, it would also incur additional computation overhead and network traffic. This would be undesirable in most scenarios. There have been recent advancements in quantum-resistant cryptography.
+This would require us to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. While such future planning is hard, it may be a necessity in certain critical IoT deployments which are expected to last decades or more. Although increasing the key-size of the different algorithms is definitely an
+option, it would also incur additional computational overhead and network traffic. This would be undesirable in most scenarios. There have been recent advancements in quantum-resistant cryptography.
 
-We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography. RFC7696 provides guidelines for cryptographic algorithm agility.
+We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography. {{RFC7696}} provides guidelines for cryptographic algorithm agility.
 
 ## Privacy protection {#sec6-9}
 
@@ -1053,18 +1053,17 @@ Based on this definition, several privacy threats and challenges are identified 
 6. Inventory attacks - happen if specific information about (smart) objects in possession of a user is disclosed.
 7. Linkage - is about when information of two of more IoT systems is combined so that a broader view on the personal data is created.
 
-When IoT systems are deployed, the above issues should be considered to ensure that private data remains private. How this is achieved remains an open issue.
+When IoT systems are deployed, the above issues should be considered to ensure that private data remains private. How to achieve this in practice is still an area of ongoing research.
 
 ## Data leakage {#sec6-10}
 
-IoT devices are resource constrained and often deployed in unattended environments or can just be bought in the Internet. Therefore, an attacker can have direct access to the device and apply more advance techniques that a traditional black box model does not consider such as side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:
+IoT devices are resource-constrained and often deployed in unattended environments. Some of these devices can also be purchased off-the-shelf or online without any credential-provisioning process. Therefore, an attacker can have direct access to the device and apply more advance techniques that a traditional black box model does not consider such as side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:
 
 1. long term keys that might be used perform attacks on devices deployed in other locations. 
 2. source code that might let the user determine bugs or find exploits to perform other types of attacks, or just sell it,
 3. proprietary algorithms that could be counterfeited or modified to perform advanced attacks.
 
-Protection against such data leakage patterns is not trivial since devices are inherently resource-constrained.
-An open question is which techniques can be used to protect IoT devices in such a strong attack model.
+Protection against such data leakage patterns is not trivial since devices are inherently resource-constrained. An open question is which techniques can be used to protect IoT devices in such an adversarial model.
 
 ## Trustworthy IoT Operation {#sec6-11}
 
@@ -1080,13 +1079,9 @@ The network can then (i) retrieve those files, (ii) learn from the manufacturers
 
 # Conclusions and Next Steps {#sec7}
 
-This Internet Draft provides IoT security researchers, system designers and implements with an overview of both operational and security requirements in the IP-based Internet of Things. 
-We discuss a general threat model, security issues, state of the art, and tools to mitigate security threats. 
-We further analyze key security challenges.
+This Internet Draft provides IoT security researchers, system designers and implements with an overview of both operational and security requirements in the IP-based Internet of Things. We discuss a general threat model, security issues, and state of the art to mitigate security threats. We further analyze key security challenges.
 
-Although big steps have been realized during the last years, as summarized in Section {{sec5-1}} and many organizations are publishing general recommendations (Section {{sec5-3}}) describing how the IoT should be secured, there are many challenges ahead that require further attention.
-Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring a trustworthy IoT operation. All these problems are important; however, different deployment environment have different operational and security demands. Thus, a potential approach is the definition and standardization of security profiles, each with specific mitigation strategies according to the risk assessment associated to the security profile.
-Such an approach would ensure minimum security capabilities in different environments while ensuring interoperability.
+Although plenty of steps have been realized during the last few years ( summarized in {{sec5-1}}) and many organizations are publishing general recommendations ({{sec5-3}}) describing how the IoT should be secured, there are many challenges ahead that require further attention. Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring trustworthy IoT operation. All these problems are important; however, different deployment environments have different operational and security demands. Thus, a potential approach is the definition and standardization of security profiles, each with specific mitigation strategies according to the risk assessment associated with the security profile. Such an approach would ensure minimum security capabilities in different environments while ensuring interoperability.
 
 
 # Security Considerations {#sec8}
