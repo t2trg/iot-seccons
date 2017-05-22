@@ -875,7 +875,7 @@ Other guideline and recommendation documents may exist or may later be published
 
 ## Guidelines and IoT Security Regulations {#sec5-4}
 
-Despise the need for security in the Internet is nothing new and multiple guidelines exist, the fact is that many IoT devices and systems are not fully secure. There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to the delivered security level, lack of expertise or budget. This, however, poses a severe threat when such devices are deployed. The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become insecure if a compromised device gains access to the system at some point of time. Even if all devices in a given environment are secure, it does not prevent external (passive) attacks originating due to insecure devices. 
+Despite the acknowledgement that security in the Internet is needed and multiple guidelines exist, the fact is that many IoT devices and systems are not fully secure. There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to the delivered security level, lack of expertise or budget. This, however, poses a severe threat when such devices are deployed. The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become insecure if a compromised device gains access to the system at some point in time. Even if all other devices in a given environment are secure, it does not prevent external (passive) attacks originating due to insecure devices. 
 
 Recently {{FCC}} the FCC has stated the need for higher regulation for IoT systems. In fact this might be a missing component, at least in Federal Information Systems (FIS). Today, security in US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST derived a number of documents to establish how to categorize FIS and determine minimum security requirements (FIPS-PUB-199 and FIPS-PUB-200). Minimum security requirements for FIS are specified in NIST SP 800-53r4 {{NIST-FIS}}. However, it is very likely that existing regulations do not take into account the specific challenges of IoT devices and networks.
 
@@ -909,7 +909,7 @@ A further fundamental need refers to the limited energy budget available
 to IoT nodes. Careful protocol (re)design and usage is required to reduce
 not only the energy consumption during normal operation, but also under DoS
 attacks. Since the energy consumption of IoT devices differs from other
-device classes, judgments on the energy consumption of a particular protocol
+device classes, judgements on the energy consumption of a particular protocol
 cannot be made without tailor-made IoT implementations.
 
 ### Denial-of-Service Resistance {#sec6-1-2}
@@ -973,7 +973,7 @@ created during the bootstrapping phase in order to exchange information securely
 
 ### End-to-End Security {#sec6-3-1}
 
-Providing end-to-end security is of great importance to address and secure individual T2T or H2T communication within one IoT domain. Moreover, end-to-end security associations are an important measure to bridge the gap between the IoT and the Internet. IKEv2, TLS and DTLS provide end-to-end security services including peer entity authentication, end-to-end encryption and integrity protection above the network layer and the transport layer respectively. Once bootstrapped, these functions can be carried out without online connections to third parties, making the protocols applicable for decentralized use in the IoT. However, protocol translation by intermediary nodes may invalidate end-to-end protection measures (see {{sec6-1-3}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{ID-OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
+Providing end-to-end IP security is of great importance to address and secure individual T2T or H2T communication within one IoT domain. Moreover, end-to-end security associations are an important measure to bridge the gap between the IoT and the Internet. IKEv2, TLS and DTLS provide end-to-end security services including peer entity authentication, end-to-end encryption and integrity protection above the network layer and the transport layer respectively. Once bootstrapped, these functions can be carried out without online connections to third parties, making the protocols applicable for decentralized use in the IoT. However, protocol translation by intermediary nodes may invalidate end-to-end protection measures (see {{sec6-1-3}}). Also these protocols require end-to-end connectivity between the devices and do not support store-and-forward scenarios. Object security is an option for such scenarios and the work on OSCOAP {{ID-OSCOAP}} is a potential solution in this space, in particular, in the context of forwarding proxies.
 
 ### Group Membership and Security {#sec6-3-2}
 
