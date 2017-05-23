@@ -539,6 +539,8 @@ pi:
 
 The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS). However, security challenges still exist and there are some use cases that lack a suitable solution. In this document, we first discuss the various stages in the lifecycle of a thing. We then look at the security building blocks available for securing the different layers of the Internet protocol suite. Next, we document the various security threats to a thing and the challenges that one might face in order to protect against these threats. Lastly, we discuss the concept of security profiles for the successful roll-out of secure IoT applications.
 
+This document is a product of the IRTF Thing-to-Thing Research Group (T2TRG).
+
 
 --- middle
 
