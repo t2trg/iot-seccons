@@ -5,198 +5,32 @@ docname: draft-irtf-t2trg-iot-seccons
 cat: info
 stand_alone: true
 informative:
-  ID-dietesp:
-    title: "Diet-ESP: a flexible and compressed format for IPsec/ESP"
-    author:
-    - ins: D. Migault
-    - ins: T. Guggemos
-    - ins: C. Bormann
-    date: 2016-08
-    seriesinfo:
-       draft-mglt-6lo-diet-esp-02
-  ID-senml:
-    title: "Media Types for Sensor Measurement Lists (SenML)"
-    author:
-    - ins: C. Jennings
-    - ins: Z. Shelby
-    - ins: J. Arkko
-    - ins: A. Keranen
-    - ins: C. Bormann
-    date: 2016-10
-    seriesinfo:
-      draft-ietf-core-resource-directory-09
-  ID-rd:
-    title: "CoRE Resource Directory"
-    author:
-    - ins: Z. Shelby
-    - ins: M. Koster
-    - ins: C. Bormann
-    - ins: P. Stok
-    date: 2016-10
-    seriesinfo:
-      draft-ietf-core-resource-directory-09
-  ID-cose:
-    title: "CBOR Object Signing and Encryption (COSE)"
-    author:
-    - ins: J. Schaad
-    date: 2016-11
-    seriesinfo:
-      draft-ietf-cose-msg-24
-  ID-6lodect:
-    title: "Transmission of IPv6 Packets over DECT Ultra Low Energy"
-    author:
-    - ins: P. Mariager
-    - ins: J. Petersen
-    - ins: Z. Shelby
-    - ins: M. Logt
-    - ins: D. Barthel
-    date: 2016-12
-    seriesinfo:
-      draft-ietf-6lo-dect-ule-09
-  ID-6lonfc:
-    title: "Transmission of IPv6 Packets over Near Field Communication"
-    author:
-    - ins: Y. Choi
-    - ins: Y. Hong
-    - ins: J. Youn
-    - ins: D. Kim
-    - ins: J. Choi
-    date: 2016-10
-    seriesinfo:
-      draft-ietf-6lo-nfc-05  
-  ID-6tisch:
-    title: "An Architecture for IPv6 over the TSCH mode of IEEE 802.15.4"
-    author:
-    - ins: P. Thubert
-    date: 2017-01
-    seriesinfo:
-      draft-ietf-6tisch-architecture-11  
-  ID-aceoauth:
-    title: Authentication and Authorization for Constrained Environments (ACE)
-    author:
-    - ins: L. Seitz
-    - ins: G. Selander
-    - ins: E. Wahlstroem
-    - ins: S. Erdtman
-    - ins: H. Tschofenig
-    date: 2011-03
-    seriesinfo:
-      draft-ietf-ace-oauth-authz-05
-  ID-Daniel:
-    title: IPv6 over Low Power WPAN Security Analysis
-    author:
-    - ins: S. Park
-    - ins: K. Kim
-    - ins: W. Haddad
-    - ins: S. Chakrabarti
-    - ins: J. Laganier
-    date: 2011-03
-    seriesinfo:
-      draft-daniel-6lowpan-security-analysis-05
-  ID-HIP:
-    title: HIP Diet EXchange (DEX)
-    author:
-    - ins: R. Moskowitz
-    date: 2012-05
-    seriesinfo:
-      draft-moskowitz-hip-rg-dex-06
-  ID-Hartke:
-    title: Datagram Transport Layer Security in Constrained Environments
-    author:
-    - ins: K. Hartke
-    - ins: O. Bergmann
-    date: 2012-07
-    seriesinfo:
-      draft-hartke-core-codtls-02
+  ID-dietesp: I-D.mglt-6lo-diet-esp
+  ID-senml: I-D.ietf-core-senml
+  ID-rd: I-D.ietf-core-resource-directory
+  ID-cose: I-D.ietf-cose-msg
+#  ID-6lodect: I-D.ietf-6lo-dect-ule
+  RFC8105: 6lodect
+  ID-6lonfc: I-D.ietf-6lo-nfc
+  ID-6tisch: I-D.ietf-6tisch-architecture
+  ID-aceoauth: I-D.ietf-ace-oauth-authz
+  ID-Daniel: I-D.daniel-6lowpan-security-analysis
+  ID-HIP: I-D.moskowitz-hip-rg-dex
+  ID-Hartke: I-D.hartke-core-codtls
   RFC7401:
-  ID-Nikander:
-    title: A Bound End-to-End Tunnel(BEET) mode for ESP
-    author:
-    - ins: P. Nikander
-    - ins: J. Melen
-    date: 2008-08
-    seriesinfo:
-      draft-nikander-esp-beet-mode-09
-  ID-OFlynn:
-    title: Security Bootstrapping of Resource-Constrained Devices
-    author:
-    - ins: C. O'Flynn
-    - ins: B. Sarikaya
-    - ins: Y. Ohba
-    - ins: Z. Cao
-    - ins: R. Cragie
-    date: 2010-11
-    seriesinfo:
-      draft-oflynn-core-bootstrapping-03
-  ID-Tsao:
-    title: A Security Framework for Routing over Low Power and Lossy Networks
-    author:
-    - ins: T. Tsao
-    - ins: R. Alexander
-    - ins: M. Dohler
-    - ins: V. Daza
-    - ins: A. Lozano
-    date: 2012-01
-    seriesinfo:
-      draft-ietf-roll-security-framework-07
-  ID-Moore:
-    title: Best Current Practices for Securing Internet of Things (IoT) Devices
-    author:
-    - ins: K. Moore
-    - ins: R. Barnes
-    - ins: H. Tschofenig
-    date: 2016-10
-    seriesinfo:
-      draft-moore-iot-security-bcp-00
-  ID-MUD:
-    title: Manufacturer Usage Description Specification
-    author:
-    - ins: E. Lear
-    - ins: R. Droms
-    - ins: D. Domascanu
-    date: 2017-03
-    seriesinfo:
-  ID-Williams:
-    title: Mobile DTLS
-    author:
-    - ins: M. Williams
-    - ins: J. Barrett
-    date: 2009-03
-    seriesinfo:
-      draft-barrett-mobile-dtls-00
-  ID-proHTTPCoAP:
-    title: Best practices for HTTP-CoAP mapping implementation
-    author:
-    - ins: A. Castellani
-    - ins: S. Loreto
-    - ins: A. Rahman
-    - ins: T. Fossati
-    - ins: E. Dijk
-    date: 2013-02
-    seriesinfo:
-      draft-castellani-core-http-mapping-07
-  ID-OSCOAP:
-    title: Object Security of CoAP (OSCOAP)
-    author:
-    - ins: G. Selander
-    - ins: J. Mattsson
-    - ins: F. Palombini
-    - ins: L. Seitz    
-    date: 2016-07    
-    seriesinfo:
-      draft-selander-ace-object-security-05  
+  ID-Nikander: I-D.nikander-esp-beet-mode
+  ID-OFlynn: I-D.oflynn-core-bootstrapping
+  ID-Tsao: I-D.ietf-roll-security-framework
+  ID-Moore: I-D.moore-iot-security-bcp
+  ID-MUD: I-D.ietf-opsawg-mud
+  ID-Williams: I-D.barrett-mobile-dtls
+  ID-proHTTPCoAP: I-D.castellani-core-http-mapping
+  ID-OSCOAP: I-D.selander-ace-object-security
   ENISA_ICS:
     title: "Communication network dependencies for ICS/SCADA Systems"
     date: 2017-02
     seriesinfo: European Union Agency For Network And Information Security
-  ID-bootstrap:
-    title: "Secure IoT Bootstrapping : A Survey"
-    author:
-    - ins: B. Sarikaya
-    - ins: M. Sethi
-    date: 2016-07
-    seriesinfo:
-      draft-sarikaya-t2trg-sbootstrapping-01
+  ID-bootstrap: I-D.sarikaya-t2trg-sbootstrapping
   RFC2119:
   RFC2818: 
   RFC3261: 
@@ -211,7 +45,7 @@ informative:
   RFC4919: 
   RFC4944: 
   RFC5191: 
-  RFC5206: 
+  RFC8046: 
   RFC5246:
   RFC5713: 
   RFC5903: 
@@ -223,7 +57,7 @@ informative:
   RFC6690: 
   RFC6749:
   RFC7049:
-  RFC7158:
+  RFC7159:
   RFC7252:
   RFC7296:
   RFC7390:
@@ -754,10 +588,10 @@ While CoAP defines a standard communication protocol, a format for representing 
 In many IoT deployments, the resource-constrained smart objects are connected to the Internet via a gateway that is directly reachable. For example, an IEEE 802.11 Access Point (AP) typically connects the client devices to the Internet over just one wireless hop. However, some deployments of smart object networks require routing between the smart objects themselves. The IETF has therefore defined the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL) {{RFC6550}}. RPL provides support for multipoint-to-point traffic from resource-constrained smart objects towards a more resourceful central control point, as well as point-to-multipoint traffic in the reverse direction. It also supports point-to-point traffic between the resource-constrained devices. A set of routing metrics and constraints for path calculation in RPL are also specified {{RFC6551}}.
 
 
-In addition to defining a routing protocol, the IETF has also specified how IPv6 packets can be transmitted over various link layer protocols that are commonly employed for resource-constrained smart object networks. There is also ongoing work to specify IPv6 connectivity for a Non-Broadcast Multi-Access (NBMA) mesh network that is formed by IEEE 802.15.4 TimeSlotted Channel Hopping (TSCH} links {{ID-6tisch}}. Other link layer protocols for which IETF has specified or is currently specifying IPv6 support include Bluetooth {{RFC7668}}, Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE) air interface {{ID-6lodect}}, and Near Field Communication (NFC) {{ID-6lonfc}}.
+In addition to defining a routing protocol, the IETF has also specified how IPv6 packets can be transmitted over various link layer protocols that are commonly employed for resource-constrained smart object networks. There is also ongoing work to specify IPv6 connectivity for a Non-Broadcast Multi-Access (NBMA) mesh network that is formed by IEEE 802.15.4 TimeSlotted Channel Hopping (TSCH} links {{ID-6tisch}}. Other link layer protocols for which IETF has specified or is currently specifying IPv6 support include Bluetooth {{RFC7668}}, Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE) air interface {{-6lodect}}, and Near Field Communication (NFC) {{ID-6lonfc}}.
 
 
-JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC7158}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding public keys, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
+JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC7159}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding public keys, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
 
 
 An alternative to JSON, Concise Binary Object Representation (CBOR) {{RFC7049}} is a concise binary data format that is used for serialization of structured data. It is designed for extremely resource-constrained nodes and therefore it aims to provide a fairly small message size with minimal implementation code, and extensibility without the need for version negotiation. There is ongoing work to specify CBOR Object Signing and Encryption (COSE) {{ID-cose}}, which would provide services similar to JWS and JWT.
@@ -997,7 +831,7 @@ IETF working group MSEC in the context of the MIKEY architecture {{WG-MSEC}}{{RF
 It is expected that many things (e.g., wearable sensors, and user devices) will be mobile in the sense that they are attached to different networks
 during the lifetime of a security association. Built-in mobility signaling can greatly reduce the overhead of the cryptographic protocols because unnecessary and costly re- establishments of the session (possibly including handshake and key agreement) can be avoided. IKEv2 supports host mobility with the MOBIKE {{RFC4555}}{{RFC4621}} extension. MOBIKE refrains from applying heavyweight cryptographic extensions for mobility. However, MOBIKE mandates the use of IPsec tunnel mode which requires to transmit an additional IP header in each packet. This additional overhead could be alleviated by using header compression methods or the Bound End- to-End Tunnel (BEET) mode {{ID-Nikander}}, a hybrid of tunnel and transport mode with smaller packet headers.
 
-HIP offers a simple yet effective mobility management by allowing hosts to signal changes to their associations {{RFC5206}}. However, slight adjustments
+HIP offers a simple yet effective mobility management by allowing hosts to signal changes to their associations {{RFC8046}}. However, slight adjustments
 might be necessary to reduce the cryptographic costs, for example, by making the public-key signatures in the mobility messages optional. Diet HIP does
 not define mobility yet but it is sufficiently similar to HIP to employ the same mechanisms. TLS and DTLS do not have standards for mobility support, however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which nodes operate. In many cases, mobility support by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. However, if individual things change their point of network attachment while communicating, mobility support may gain importance.
 
