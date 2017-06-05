@@ -1,6 +1,6 @@
 ---
 abbrev: IoT Security
-title: State of the Art and Challenges for the Internet of Things
+title: State of the Art and Challenges for the Internet of Things Security
 docname: draft-irtf-t2trg-iot-seccons
 cat: info
 stand_alone: true
@@ -16,29 +16,24 @@ informative:
   ID-aceoauth: I-D.ietf-ace-oauth-authz
   ID-Daniel: I-D.daniel-6lowpan-security-analysis
   ID-HIP: I-D.moskowitz-hip-rg-dex
-  ID-Hartke: I-D.hartke-core-codtls
   RFC7401:
   ID-Nikander: I-D.nikander-esp-beet-mode
-  ID-OFlynn: I-D.oflynn-core-bootstrapping
   ID-Tsao: I-D.ietf-roll-security-framework
   ID-Moore: I-D.moore-iot-security-bcp
   ID-MUD: I-D.ietf-opsawg-mud
   ID-Williams: I-D.barrett-mobile-dtls
-  ID-proHTTPCoAP: I-D.castellani-core-http-mapping
   ID-OSCOAP: I-D.selander-ace-object-security
   ENISA_ICS:
     title: "Communication network dependencies for ICS/SCADA Systems"
     date: 2017-02
     seriesinfo: European Union Agency For Network And Information Security
   ID-bootstrap: I-D.sarikaya-t2trg-sbootstrapping
-  RFC2119:
   RFC2818: 
   RFC3261: 
   RFC3748: 
   RFC3756: 
   RFC3833: 
   RFC4016:  
-  RFC4251: 
   RFC4555: 
   RFC4621: 
   RFC4738: 
@@ -49,7 +44,6 @@ informative:
   RFC5246:
   RFC5713: 
   RFC5903: 
-  RFC6345: 
   RFC6347:
   RFC6550:
   RFC6551:
@@ -60,7 +54,6 @@ informative:
   RFC7159:
   RFC7252:
   RFC7296:
-  RFC7390:
   RFC7515:
   RFC7517:
   RFC7519:
@@ -83,59 +76,6 @@ informative:
     date: 2011-02
     seriesinfo:
       Web: http://www.dalibydesign.us/dali.html
-  JOURNAL-Perrig:
-    title: 'SPINS: Security protocols for Sensor Networks'
-    author:
-    - ins: A. Perrig
-    - ins: R. Szewczyk
-    - ins: V. Wen
-    - ins: D. Culler
-    - ins: J. Tygar
-    date: 2002-09
-    seriesinfo:
-      Journal: Wireless Networks
-  NIST:
-    title: NIST Specification Publication 800-38B
-    author:
-    - ins: M. Dworkin
-    date: 2005
-  SPEKE:
-    title: 'IEEE P1363.2: Password-based Cryptography'
-    date: 2008
-  PROC-Chan:
-    title: Random Key Predistribution Schemes for Sensor Networks
-    author:
-    - ins: H. Chan
-    - ins: A. Perrig
-    - ins: D. Song
-    date: 2003
-    seriesinfo:
-      Proceedings: IEEE Symposium on Security and Privacy
-  PROC-Gupta:
-    title: 'Sizzle: A Standards-based End-to-End Security Architecture for the Embedded
-      Internet'
-    author:
-    - ins: V. Gupta
-    - ins: M. Wurm
-    - ins: Y. Zhu
-    - ins: M. Millard
-    - ins: S. Fung
-    - ins: N. Gura
-    - ins: H. Eberle
-    - ins: S. Shantz
-    date: 2005
-    seriesinfo:
-      Proceedings: Pervasive Computing and Communications (PerCom)
-  PROC-Smetters-02:
-    title: 'Talking To Strangers: Authentication in Ad-Hoc Wireless Networks'
-    author:
-    - ins: D. Balfanz
-    - ins: D. Smetters
-    - ins: P. Steward
-    - ins: H. Chi Wong,
-    date: 2002
-    seriesinfo:
-      Paper: NDSS
   Ziegeldorf:
     title: 'Privacy in the Internet of Things: Threats and Challenges'
     author:
@@ -157,37 +97,6 @@ informative:
     date: 2016
     seriesinfo:
       Paper: IEEE Communications Surveys and Tutorials
-  PROC-Smetters-04:
-    title: 'Network-in-a-Box: How to Set Up a Secure Wireless Network in Under a Minute'
-    author:
-    - ins: D. Balfanz
-    - ins: G. Durfee
-    - ins: R. Grinter
-    - ins: D. Smetters
-    - ins: P. Steward
-    date: 2004
-    seriesinfo:
-      Paper: USENIX
-  PROC-Stajano-99:
-    title: Resurrecting Duckling - Security Issues for Adhoc Wireless Networks
-    author:
-    - ins: F. Stajano
-    - ins: R. Anderson
-    date: 1999-11
-    seriesinfo:
-      7th: International Workshop Proceedings
-  THESIS-Langheinrich:
-    title: Personal Privacy in Ubiquitous Computing
-    author:
-    - ins: M. Langheinrich
-    date: 2005
-    seriesinfo:
-      PhD: Thesis ETH Zurich
-  TinyDTLS:
-    title: TinyDTLS
-    date: 2012-02
-    seriesinfo:
-      Web: http://tinydtls.sourceforge.net/
   WG-6LoWPAN:
     title: IETF 6LoWPAN Working Group
     date: 2011-02
@@ -381,13 +290,6 @@ This document is a product of the IRTF Thing-to-Thing Research Group (T2TRG).
 
 
 --- middle
-
-# Conventions and Terminology Used in this Document {#sec1}
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to
-be interpreted as described in "Key words for use in RFCs to Indicate Requirement
-Levels" {{RFC2119}}.
 
 # Introduction {#sec2}
 
@@ -625,7 +527,7 @@ The CoAP base specification {{RFC7252}} provides a description of how DTLS can b
 
 There is also work on Object Security based CoAP protection mechanism being defined in OSCOAP {{ID-OSCOAP}}. 
 
-Migault et al.{ID-dietesp} are working on a compressed version of IPsec so that it can easily be used by resource-constrained IoT devices. They rely on the Internet Key Exchange Protocol version 2 (IKEv2) for negotiating the compression format.
+Migault et al. {{ID-dietesp}} are working on a compressed version of IPsec so that it can easily be used by resource-constrained IoT devices. They rely on the Internet Key Exchange Protocol version 2 (IKEv2) for negotiating the compression format.
 
 
 {{fig3}} depicts the relationships between the discussed protocols in the context of the security terminology introduced in {{sec3}}.
