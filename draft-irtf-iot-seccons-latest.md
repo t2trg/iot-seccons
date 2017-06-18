@@ -9,8 +9,6 @@ informative:
   ID-senml: I-D.ietf-core-senml
   ID-rd: I-D.ietf-core-resource-directory
   ID-cose: I-D.ietf-cose-msg
-  ID-6lodect: I-D.ietf-6lo-dect-ule
-  RFC8105: ID-6lodect
   ID-6lonfc: I-D.ietf-6lo-nfc
   ID-6tisch: I-D.ietf-6tisch-architecture
   ID-aceoauth: I-D.ietf-ace-oauth-authz
@@ -63,6 +61,7 @@ informative:
   RFC7696:
   RFC7815:
   RFC7925: 
+  RFC8105:
   AUTO-ID:
     title: AUTO-ID LABS
     date: 2010-09
@@ -257,7 +256,10 @@ informative:
     title: Federal Communications Comssion Response 12-05-2016 
     date: 12-02-2016 
     seriesinfo: FCC
- 
+  SEAL:
+    title: Simple Encrypted Arithmetic Library - SEAL
+    seriesinfo:
+      Web: https://sealcrypto.codeplex.com/
 author:
 - name: Oscar Garcia-Morchon
   ins: O. Garcia-Morchon
@@ -496,7 +498,7 @@ While CoAP defines a standard communication protocol, a format for representing 
 In many IoT deployments, the resource-constrained smart objects are connected to the Internet via a gateway that is directly reachable. For example, an IEEE 802.11 Access Point (AP) typically connects the client devices to the Internet over just one wireless hop. However, some deployments of smart object networks require routing between the smart objects themselves. The IETF has therefore defined the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL) {{RFC6550}}. RPL provides support for multipoint-to-point traffic from resource-constrained smart objects towards a more resourceful central control point, as well as point-to-multipoint traffic in the reverse direction. It also supports point-to-point traffic between the resource-constrained devices. A set of routing metrics and constraints for path calculation in RPL are also specified {{RFC6551}}.
 
 
-In addition to defining a routing protocol, the IETF has also specified how IPv6 packets can be transmitted over various link layer protocols that are commonly employed for resource-constrained smart object networks. There is also ongoing work to specify IPv6 connectivity for a Non-Broadcast Multi-Access (NBMA) mesh network that is formed by IEEE 802.15.4 TimeSlotted Channel Hopping (TSCH} links {{ID-6tisch}}. Other link layer protocols for which IETF has specified or is currently specifying IPv6 support include Bluetooth {{RFC7668}}, Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE) air interface {{-6lodect}}, and Near Field Communication (NFC) {{ID-6lonfc}}.
+In addition to defining a routing protocol, the IETF has also specified how IPv6 packets can be transmitted over various link layer protocols that are commonly employed for resource-constrained smart object networks. There is also ongoing work to specify IPv6 connectivity for a Non-Broadcast Multi-Access (NBMA) mesh network that is formed by IEEE 802.15.4 TimeSlotted Channel Hopping (TSCH} links {{ID-6tisch}}. Other link layer protocols for which IETF has specified or is currently specifying IPv6 support include Bluetooth {{RFC7668}}, Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE) air interface {{RFC8105}}, and Near Field Communication (NFC) {{ID-6lonfc}}.
 
 
 JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC7159}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding public keys, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
