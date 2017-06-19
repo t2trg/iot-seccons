@@ -471,7 +471,7 @@ BIA, RA, and PIA should generally be realized during the creation of a new IoT s
 
 # State of the Art {#sec4}
 
-This section is organized as follows. {{sec4-1}} summarizes state of the art on IP-based systems, within IETF and in other standardization bodies. {{sec4-2}} summarizes state of the art on IP-based security protocols and their usage. {{sec4-3}} discusses guidelines for securing the IoT as proposed by other bodies. {{sec4-4}} analyzes status of other relevant standards.
+This section is organized as follows. {{sec4-1}} summarizes state of the art on IP-based systems, within IETF and in other standardization bodies. {{sec4-2}} summarizes state of the art on IP-based security protocols and their usage. {{sec4-3}} discusses guidelines and regulations for securing the IoT as proposed by other bodies. 
 
 ## IP-based IoT Protocols and Standards {#sec4-1}
 
@@ -609,12 +609,7 @@ Recent large scale Denial of Service (DoS) attacks on the Internet Infrastructur
 
 11. ENISA {{ENISA_ICS}}: The European Union Agency for Network and Information Security published a document on communication network dependencies for ICS/SCADA systems in which security vulnerabilities, guidelines and general recommendations are summarized.
 
-Other guideline and recommendation documents may exist or may later be published. This list should be considered non-exhaustive. 
-
-
-## Guidelines and IoT Security Regulations {#sec4-4}
-
-Despite the acknowledgment that security in the Internet is needed and the existence of multiple guidelines, the fact is that many IoT devices and systems have very limited security. There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to security. This may be because of lack of expertise or limited budget. However, deployment of such insecure devices poses a severe threat. The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become insecure if a compromised device gains access to the system at some point in time. Even if all other devices in a given environment are secure, it does not prevent external (passive) attacks originating due to insecure devices. 
+Other guideline and recommendation documents may exist or may later be published. This list should be considered non-exhaustive. Despite the acknowledgment that security in the Internet is needed and the existence of multiple guidelines, the fact is that many IoT devices and systems have very limited security. There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to security. This may be because of lack of expertise or limited budget. However, deployment of such insecure devices poses a severe threat. The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become insecure if a compromised device gains access to the system at some point in time. Even if all other devices in a given environment are secure, it does not prevent external (passive) attacks originating due to insecure devices. 
 
 Recently the Federal Communications Commission (FCC) {{FCC}} has stated the need for additional regulation of IoT systems. FCC identifies this as a missing component, especially for Federal Information Systems (FIS). Today, security in the US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST has derived a number of new documents to categorize FIS and determine minimum security requirements for each category. These minimum security requirements are specified in NIST SP 800-53r4 {{NIST-SP80053}}. 
 
