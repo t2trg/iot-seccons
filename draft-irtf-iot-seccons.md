@@ -1,6 +1,6 @@
 ---
 abbrev: IoT Security
-title: State of the Art and Challenges for the Internet of Things Security
+title: State-of-the-Art and Challenges for the Internet of Things Security
 docname: draft-irtf-t2trg-iot-seccons
 cat: info
 stand_alone: true
@@ -469,9 +469,9 @@ Dealing with above threats and finding suitable security mitigations is challeng
 BIA, RA, and PIA should generally be realized during the creation of a new IoT system or when deploying of significant system/feature upgrades. In general, it is recommended to re-assess them on a regular basis taking into account new use cases and/or threats. 
 
 
-# State of the Art {#sec4}
+# State-of-the-Art {#sec4}
 
-This section is organized as follows. {{sec4-1}} summarizes state of the art on IP-based systems, within IETF and in other standardization bodies. {{sec4-2}} summarizes state of the art on IP-based security protocols and their usage. {{sec4-3}} discusses guidelines and regulations for securing the IoT as proposed by other bodies. 
+This section is organized as follows. {{sec4-1}} summarizes state-of-the-art on IP-based systems, within IETF and in other standardization bodies. {{sec4-2}} summarizes state-of-the-art on IP-based security protocols and their usage. {{sec4-3}} discusses guidelines and regulations for securing the IoT as proposed by other bodies. 
 
 ## IP-based IoT Protocols and Standards {#sec4-1}
 
