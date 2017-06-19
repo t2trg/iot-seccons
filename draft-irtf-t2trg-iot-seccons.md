@@ -1,7 +1,7 @@
 ---
 abbrev: IoT Security
 title: State-of-the-Art and Challenges for the Internet of Things Security
-docname: draft-irtf-t2trg-iot-seccons
+docname: draft-irtf-t2trg-iot-seccons-04
 cat: info
 stand_alone: true
 informative:
@@ -26,7 +26,6 @@ informative:
     seriesinfo: European Union Agency For Network And Information Security
   ID-bootstrap: I-D.sarikaya-t2trg-sbootstrapping
   RFC2818: 
-  RFC3261: 
   RFC3748: 
   RFC3756: 
   RFC3833: 
@@ -267,21 +266,21 @@ author:
   ins: O. Garcia-Morchon
   org: Philips IP&S
   street: High Tech Campus 5
-  city: Eindhoven,   5656 AA
+  city: Eindhoven, 5656 AA
   country: The Netherlands
   email: oscar.garcia-morchon@philips.com
 - name: Sandeep S. Kumar
   ins: S. Kumar
   org: Philips Research
   street: High Tech Campus
-  city: Eindhoven,   5656 AA
+  city: Eindhoven, 5656 AA
   country: The Netherlands
   email: sandeep.kumar@philips.com
 - name: Mohit Sethi
   ins: M. Sethi
   org: Ericsson
   street: Hirsalantie 11
-  city: Jorvas
+  city: Jorvas, 02420
   country: Finland
   email: mohit@piuha.net 
 pi:
@@ -305,7 +304,7 @@ This document is a product of the IRTF Thing-to-Thing Research Group (T2TRG).
 
 The Internet of Things (IoT) denotes the interconnection of highly heterogeneous networked entities and networks that follow a number of different communication patterns such as: human-to-human (H2H), human-to-thing (H2T), thing-to-thing (T2T), or thing-to-things (T2Ts). The term IoT was first coined by the Auto-ID center {{AUTO-ID}} in 1999. Since then, the development of the underlying concepts and technologies has increased the pace of its adoption. It is not surprising that IoT has received significant attention from the research community to (re)design, apply, and use of standard Internet technology and protocols for the IoT.
 
-The introduction of IPv6 and web services as fundamental building blocks for IoT applications {{RFC6568}} promises to bring  several advantages including: (i) a homogeneous protocol ecosystem that allows simple integration with Internet hosts; (ii) simplified development for devices that significantly vary in their capabilities; (iii) a unified interface for applications, removing the need for application-level proxies. These building blocks greatly simplify the deployment of the envisioned scenarios which range from building automation to production environments and personal area networks.
+The introduction of IPv6 and web services as fundamental building blocks for IoT applications {{RFC6568}} promises to bring several advantages including: (i) a homogeneous protocol ecosystem that allows simple integration with Internet hosts; (ii) simplified development for devices that significantly vary in their capabilities; (iii) a unified interface for applications, removing the need for application-level proxies. These building blocks greatly simplify the deployment of the envisioned scenarios which range from building automation to production environments and personal area networks.
 
 This Internet Draft presents an overview of important security aspects for the Internet of Things. We begin by discussing the lifecycle of a thing and giving general definitions of the security building blocks in {{sec2}}. In {{sec3}}, we discuss security threats for the IoT and methodologies for managing these threats when designing a secure system. {{sec4}} reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations. {{sec5}} identifies remaining challenges for a secure IoT and discusses potential solutions. {{sec6}} includes final remarks and conclusions.
 
@@ -355,7 +354,7 @@ The term security subsumes a wide range of primitives, protocols, and procedures
 
 2. The security model within a smart object: describes the way security parameters, keys, processes, are managed within a smart object. This includes aspects such as application process separation, secure storage of key materials, etc. For instance, some smart objects might have extremely limited resources and limited capabilities to protect secret keys. In contrast, other devices used in critical applications, such as a pacemaker, may rely on methods to protect cryptographic keys and functionality.
 
-3. Security bootstrapping: denotes the process by which a thing securely joins an IoT system at a given location and point of time. For instance, bootstrapping of a connected camera can include the authentication and authorization of the device as well as the transfer of security parameters necessary for operation in a given network.  
+3. Security bootstrapping: denotes the process by which a thing securely joins an IoT system at a given location and point of time. For instance, bootstrapping of a connected camera can include the authentication and authorization of the device as well as the transfer of security parameters necessary for operation in a given network.
 
 4. Network security: describes the mechanisms applied within a network to ensure secure operation. Specifically, it prevents attackers from endangering or modifying the expected operation of a smart object. It also protects the network itself from malicious things. Network security can include several mechanisms ranging from data link layer security, secure routing, and network layer security.
 
@@ -404,11 +403,11 @@ The term security subsumes a wide range of primitives, protocols, and procedures
 ~~~~
 {: #fig2}
 
-Inspired by the security framework for routing over low power and lossy network {{ID-Tsao}}, we show an example security model of a smart object and illustrate how different security concepts and lifecycle phases map to the Internet communication stack. Assume a centralized architecture in which a configuration entity stores and manages the identities of the things associated with the system along with their cryptographic keys. During the bootstrapping phase, each thing executes the bootstrapping protocol with the configuration entity, thus obtaining the required device identities and the keying material. The security service on a thing in turn stores the received keying material for the network layer and application security mechanisms for secure communication. Things can then securely communicate with each other  during their operational phase by means of the employed network and application security mechanisms.
+Inspired by the security framework for routing over low power and lossy network {{ID-Tsao}}, we show an example security model of a smart object and illustrate how different security concepts and lifecycle phases map to the Internet communication stack. Assume a centralized architecture in which a configuration entity stores and manages the identities of the things associated with the system along with their cryptographic keys. During the bootstrapping phase, each thing executes the bootstrapping protocol with the configuration entity, thus obtaining the required device identities and the keying material. The security service on a thing in turn stores the received keying material for the network layer and application security mechanisms for secure communication. Things can then securely communicate with each other during their operational phase by means of the employed network and application security mechanisms.
 
 # Security Threats and Managing Risk {#sec3}
 
-This section explores security threats and vulnerabilities in the IoT and discusses how to manage risks. Security threats have been analyzed in related IP protocols including HTTPS {{RFC2818}}, COAP{{RFC7252}} 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole. Note that these set of threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. We also note that these threats can be classified according to either (i) the thing's lifecycle phases (when does the threat occur?) or (ii) the security building blocks (which functionality is affected by the threat?). All these threats are summarized in {{fig3}}.
+This section explores security threats and vulnerabilities in the IoT and discusses how to manage risks. Security threats have been analyzed in related IP protocols including HTTPS {{RFC2818}}, COAP {{RFC7252}} 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole. Note that these set of threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. We also note that these threats can be classified according to either (i) the thing's lifecycle phases (when does the threat occur?) or (ii) the security building blocks (which functionality is affected by the threat?). All these threats are summarized in {{fig3}}.
 
 1. Cloning of things: During the manufacturing process of a thing, an untrusted factory can easily clone the physical characteristics, firmware/software, or security configuration of the thing. Deployed things might also be compromised and their software reserve engineered allowing for cloning or software modifications. Such a cloned thing may be sold at a cheaper price in the market, and yet can function normally as a genuine thing. For example, two cloned devices can still be associated and work with each other. In the worst-case scenario, a cloned device can be used to control a genuine device or perform an attack. One should note here, that an untrusted factory may also change functionality of the cloned thing, resulting in degraded functionality with respect to the genuine thing (thereby, inflicting potential damage to the reputation of the original thing manufacturer). Moreover, additional functionality can be implemented within the cloned thing, such as a backdoor.
 
@@ -506,7 +505,7 @@ Additionally, industry alliances and other standardization bodies are creating c
 
 2. Industrial Internet Consortium {{IIoT}}: The consortium defines reference architectures and security frameworks for development, adoption and widespread use of Industrial Internet technologies based on existing IETF standards.
 
-3. Internet Protocol for Smart Objects IPSO {{IPSO}}: The alliance specifies  a common object model that would enable application software on any device to interoperate with other conforming devices.
+3. Internet Protocol for Smart Objects IPSO {{IPSO}}: The alliance specifies a common object model that would enable application software on any device to interoperate with other conforming devices.
 
 4. OneM2M {{OneM2M}}: The standards body defines technical and API specifications for IoT devices. It aims to create a service layer that can run on any IoT device hardware and software.
 
@@ -519,7 +518,7 @@ Additionally, industry alliances and other standardization bodies are creating c
 
 ## Existing IP-based Security Protocols and Solutions {#sec4-2}
 
-In the context of the IP-based IoT solutions, consideration of TCP/IP security protocols is important. There are a wide range of specialized as well as general-purpose key exchange and security solutions  for the Internet domain such as IKEv2/IPsec {{RFC7296}}, TLS {{RFC5246}}, DTLS {{RFC6347}}, HIP {{RFC7401}}, PANA {{RFC5191}}, and EAP {{RFC3748}}. 
+In the context of the IP-based IoT solutions, consideration of TCP/IP security protocols is important. There are a wide range of specialized as well as general-purpose key exchange and security solutions for the Internet domain such as IKEv2/IPsec {{RFC7296}}, TLS {{RFC5246}}, DTLS {{RFC6347}}, HIP {{RFC7401}}, PANA {{RFC5191}}, and EAP {{RFC3748}}. 
 
 There is ongoing work to define an authorization and access-control framework for resource-constrained nodes. The Authentication and Authorization for Constrained Environments (ACE) {{WG-ACE}} working group is defining a solution to allow only authorized access to resources that are hosted on a smart object server and are identified by a URI. The current proposal {{ID-aceoauth}} is based on the OAuth 2.0 framework {{RFC6749}}. 
 
@@ -527,7 +526,7 @@ The CoAP base specification {{RFC7252}} provides a description of how DTLS can b
 
 Migault et al. {{ID-dietesp}} are working on a compressed version of IPsec so that it can easily be used by resource-constrained IoT devices. They rely on the Internet Key Exchange Protocol version 2 (IKEv2) for negotiating the compression format.
 
-OSCOAP {{ID-OSCOAP}} is a proposal that protects CoAP messages by wrapping them in the CBOR Object Signing and Encryption (COSE) {{ID-cose}} format. Thus, OSCOAP falls in the category of object security and it can be applied wherever CoAP can.  
+OSCOAP {{ID-OSCOAP}} is a proposal that protects CoAP messages by wrapping them in the CBOR Object Signing and Encryption (COSE) {{ID-cose}} format. Thus, OSCOAP falls in the category of object security and it can be applied wherever CoAP can.
 
 The Internet Key Exchange (IKEv2)/IPsec and the Host Identity protocol (HIP) reside at or above the network layer in the OSI model. Both protocols are able to perform an authenticated key exchange and set up the IPsec for secure payload delivery. Currently, there are also ongoing efforts to create a HIP variant coined Diet HIP {{ID-HIP}} that takes lossy low-power networks into account at the authentication and key exchange level.
 
@@ -613,7 +612,7 @@ Other guideline and recommendation documents may exist or may later be published
 
 Recently the Federal Communications Commission (FCC) {{FCC}} has stated the need for additional regulation of IoT systems. FCC identifies this as a missing component, especially for Federal Information Systems (FIS). Today, security in the US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST has derived a number of new documents to categorize FIS and determine minimum security requirements for each category. These minimum security requirements are specified in NIST SP 800-53r4 {{NIST-SP80053}}. 
 
-Even with strong regulations in place, the question remains as to how such  regulations can be applied in practice to non-federal deployments, such as industrial, homes, offices, or smart cites. Each of them exhibits unique features, involves very diverse types of users, has different operational requirements, and combines IoT devices from multiple manufacturers. 
+Even with strong regulations in place, the question remains as to how such regulations can be applied in practice to non-federal deployments, such as industrial, homes, offices, or smart cites. Each of them exhibits unique features, involves very diverse types of users, has different operational requirements, and combines IoT devices from multiple manufacturers. 
 Future regulations should therefore consider such diverse deployment scenarios.
 
 
@@ -675,7 +674,7 @@ If access to data or messages by the middleboxes is required or acceptable, then
 
 4. Homomorphic encryption techniques can be used in the middlebox to perform certain operations. However, this is limited to data processing involving arithmetic operations. Furthermore, performance of existing libraries, for example, SEAL {{SEAL}} is still limited to be widely applicable.
 
-5. Message authentication codes that sustain transformation can be realized by considering the order of transformation and protection (for example, by creating a signature before compression so that the gateway can decompress the packet without recalculating the signature).  Such an approach enables IoT specific optimizations but is more complex and may require application-specific transformations before security is applied. Moreover, the usage of encrypted data prevents gateways from transforming packets.
+5. Message authentication codes that sustain transformation can be realized by considering the order of transformation and protection (for example, by creating a signature before compression so that the gateway can decompress the packet without recalculating the signature). Such an approach enables IoT specific optimizations but is more complex and may require application-specific transformations before security is applied. Moreover, the usage of encrypted data prevents gateways from transforming packets.
 
 6. Object security based mechanisms can bridge the protocol worlds, but still require that the two worlds use the same object security formats. Currently the object security format based on CBOR Object Signing and Encryption (COSE) {{ID-cose}} (IoT protocol) is different from JSON Object Signing and Encryption (JOSE) {{RFC7520}} or Cryptographic Message Syntax (CMS) {{RFC5652}}. Legacy devices relying on traditional Internet protocols will need to update to the newer protocols for constrained environments to enable real end-to-end security. Furthermore, middleboxes do not have any access to the data and this approach does not prevent an attacker from modifying relevant fields in CoAP.
 
