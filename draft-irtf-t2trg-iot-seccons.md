@@ -8,14 +8,12 @@ informative:
   ID-dietesp: I-D.mglt-6lo-diet-esp
   ID-senml: I-D.ietf-core-senml
   ID-rd: I-D.ietf-core-resource-directory
-  ID-cose: I-D.ietf-cose-msg
   ID-6lonfc: I-D.ietf-6lo-nfc
   ID-6tisch: I-D.ietf-6tisch-architecture
   ID-aceoauth: I-D.ietf-ace-oauth-authz
   ID-Daniel: I-D.daniel-6lowpan-security-analysis
   ID-HIP: I-D.moskowitz-hip-rg-dex
   ID-Nikander: I-D.nikander-esp-beet-mode
-  ID-Tsao: I-D.ietf-roll-security-framework
   ID-Moore: I-D.moore-iot-security-bcp
   ID-MUD: I-D.ietf-opsawg-mud
   ID-Williams: I-D.barrett-mobile-dtls
@@ -39,7 +37,8 @@ informative:
   RFC5246:
   RFC5652:
   RFC5713: 
-  RFC5903: 
+  RFC5903:
+  RFC6272: 
   RFC6347:
   RFC6550:
   RFC6551:
@@ -53,6 +52,7 @@ informative:
   RFC7252:
   RFC7296:
   RFC7401:
+  RFC7416:
   RFC7515:
   RFC7517:
   RFC7519:
@@ -63,6 +63,7 @@ informative:
   RFC7925:
   RFC8046:  
   RFC8105:
+  RFC8152:
   AUTO-ID:
     title: AUTO-ID LABS
     date: 2010-09
@@ -100,28 +101,27 @@ informative:
     seriesinfo:
       Paper: IEEE Communications Surveys and Tutorials
   WG-6LoWPAN:
-    title: IETF 6Lo Working Group
-    date: 2011-02
+    title: IETF IPv6 over Low power WPAN (6lowpan) Working Group
     seriesinfo:
       Web: http://tools.ietf.org/wg/6lowpan/
   WG-CoRE:
     title: IETF Constrained RESTful Environment (CoRE) Working Group
-    date: 2011-02
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/core/charter/
+  WG-6lo:
+    title: IETF IPv6 over Networks of Resource-constrained Nodes (6lo) Working Group
+    seriesinfo:
+      Web: https://datatracker.ietf.org/wg/6lo/charter/ 
   WG-LWIG:
     title: IETF Light-Weight Implementation Guidance (LWIG) Working Group
-    date: 2011-03
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/lwig/charter/   
   RG-T2TRG:
     title: IRTF Thing-to-Thing (T2TRG) Research Group
-    date: 2015-12
     seriesinfo:
       Web: https://datatracker.ietf.org/rg/t2trg/charter/
   WG-ACE:
     title: IETF Authentication and Authorization for Constrained Environments (ACE) Working Group
-    date: 2014-06
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/ace/charter/
   WG-MSEC:
@@ -326,9 +326,9 @@ The first draft version of this document was submitted in March 2011. Initial dr
 
 The lifecycle of a thing refers to the operational phases of a thing in the context of a given application or use case. {{fig1}} shows the generic phases of the lifecycle of a thing. This generic lifecycle is applicable to very different IoT applications and scenarios.
 
-We consider for example, a Building Automation and Control (BAC) system, to illustrate the lifecycle and the meaning of these different phases. A BAC system consists of a network of interconnected nodes that performs various functions in the domains of HVAC (Heating, Ventilating, and Air Conditioning), lighting, and safety etc. The nodes vary in functionality and a large majority of them represent resource-constrained devices such as sensors and luminaries. Some devices may be battery operated or may rely on energy harvesting. This requires us to also consider devices that that sleep during their operation to save energy. In our example, the life of a thing starts when it is manufactured. Due to the different application areas (i.e., HVAC, lighting, and safety) nodes/things are tailored to a specific task. It is therefore unlikely that one single manufacturer will create all nodes in a building. Hence, interoperability as well as trust bootstrapping between nodes of different vendors is important. 
+We consider for example, a Building Automation and Control (BAC) system, to illustrate the lifecycle and the meaning of these different phases. A BAC system consists of a network of interconnected nodes that performs various functions in the domains of HVAC (Heating, Ventilating, and Air Conditioning), lighting, and safety etc. The nodes vary in functionality and a large majority of them represent resource-constrained devices such as sensors and luminaries. Some devices may be battery operated or may rely on energy harvesting. This requires us to also consider devices that sleep during their operation to save energy. In our example, the life of a thing starts when it is manufactured. Due to the different application areas (i.e., HVAC, lighting, and safety) nodes/things are tailored to a specific task. It is therefore unlikely that one single manufacturer will create all nodes in a building. Hence, interoperability as well as trust bootstrapping between nodes of different vendors is important. 
 
-The thing is later installed and commissioned within a network by an installer during the bootstrapping phase. Specifically, the device identity and the secret keys used during normal operation are provided to the device during this phase. Different subcontractors may install different IoT devices for different purposes. Furthermore, the installation and bootstrapping procedures may not be a discrete event and may stretch over an extended period . After being bootstrapped, the device and the system of things are in operational mode and execute the functions of the BAC system. During this operational phase, the device is under the control of the system owner. For devices with lifetimes spanning several years, occasional maintenance cycles may be required. During each maintenance phase, the software on the device can be upgraded or applications running on the device can be reconfigured. The maintenance tasks can be performed either locally or from a backend system. Depending on the operational changes to the device, it may be required to re-bootstrap at the end of a maintenance cycle. The device continues to loop through the operational phase and the eventual maintenance phase until the device is decommissioned at the end of its lifecycle. However, the end-of-life of a device does not necessarily mean that it is defective and rather denotes a need to replace and upgrade the network to the next-generation devices for additional functionality. Therefore, the device can be removed and re-commissioned to be used in a different system under a different owner thereby starting the lifecycle all over again. 
+The thing is later installed and commissioned within a network by an installer during the bootstrapping phase. Specifically, the device identity and the secret keys used during normal operation may be provided to the device during this phase. Different subcontractors may install different IoT devices for different purposes. Furthermore, the installation and bootstrapping procedures may not be a discrete event and may stretch over an extended period. After being bootstrapped, the device and the system of things are in operational mode and execute the functions of the BAC system. During this operational phase, the device is under the control of the system owner. For devices with lifetimes spanning several years, occasional maintenance cycles may be required. During each maintenance phase, the software on the device can be upgraded or applications running on the device can be reconfigured. The maintenance tasks can be performed either locally or from a backend system. Depending on the operational changes to the device, it may be required to re-bootstrap at the end of a maintenance cycle. The device continues to loop through the operational phase and the eventual maintenance phases until the device is decommissioned at the end of its lifecycle. However, the end-of-life of a device does not necessarily mean that it is defective and rather denotes a need to replace and upgrade the network to the next-generation devices for additional functionality. Therefore, the device can be removed and re-commissioned to be used in a different system under a different owner thereby starting the lifecycle all over again. 
 
 
 
@@ -349,7 +349,7 @@ Bootstrapping  /      Maintenance &   \     Maintenance &
               /      re-bootstrapping  \   re-bootstrapping
         Operational                Operational
 ~~~~
-{: #fig1 title="The lifecycle of a thing in the Internet of Things."}
+{: #fig1 title="The lifecycle of a thing in the Internet of Things"}
 
 ## Security building blocks {#sec2-2}
 
@@ -359,13 +359,13 @@ The term security subsumes a wide range of primitives, protocols, and procedures
 
 1. IoT security architecture: refers to the system-level elements involved in the management of security relationships between things (for example, centralized or distributed). For instance, a smart home could rely on a centralized key distribution center in charge of managing cryptographic keys, devices, users, access control and privacy policies. 
 
-2. The security model within a smart object: describes the way security parameters, keys, processes, are managed within a smart object. This includes aspects such as application process separation, secure storage of key materials, etc. For instance, some smart objects might have extremely limited resources and limited capabilities to protect secret keys. In contrast, other devices used in critical applications, such as a pacemaker, may rely on methods to protect cryptographic keys and functionality.
+2. The security model within a thing: describes the way security parameters, keys, and processes are managed within a smart object. This includes aspects such as application process separation, secure storage of key materials, etc. For instance, some smart objects might have extremely limited resources and limited capabilities to protect secret keys. In contrast, other devices used in critical applications, such as a pacemaker, may rely on methods to protect cryptographic keys and functionality.
 
 3. Security bootstrapping: denotes the process by which a thing securely joins an IoT system at a given location and point of time. For instance, bootstrapping of a connected camera can include the authentication and authorization of the device as well as the transfer of security parameters necessary for operation in a given network.
 
 4. Network security: describes the mechanisms applied within a network to ensure secure operation. Specifically, it prevents attackers from endangering or modifying the expected operation of a smart object. It also protects the network itself from malicious things. Network security can include several mechanisms ranging from data link layer security, secure routing, and network layer security.
 
-5. Application security: describes mechanisms to allow secure transfer of application data. The security may be implemented at different layers of the TCP/IP stack. For instance, assume a smart object such as an environmental sensor that is connected to a backend system. Application security here can refer to the exchange of secure blocks of data such as measurements between the sensor and the backed, or it can also refer to a software update for the smart object. This data is exchanged end-to-end independently of communication pattern, for example through proxies or other store-and-forward mechanisms.
+5. Application security: describes mechanisms to allow secure transfer of application data. The security may be implemented at different layers of the Internet protocol suite. For instance, assume a smart object such as an environmental sensor that is connected to a backend system. Application security here can refer to the exchange of secure blocks of data such as measurements between the sensor and the backed, or it can also refer to a software update for the smart object. This data is exchanged end-to-end independently of communication pattern, for example through proxies or other store-and-forward mechanisms.
 
 
 ~~~~
@@ -405,36 +405,35 @@ The term security subsumes a wide range of primitives, protocols, and procedures
 :       |  +-----------+: : +-----------+ : :+-----------+  |       :
 :       +->|     L2    |: : |     L2    | : :|     L2    |<-+       :
 :          +-----------+: : +-----------+ : :+-----------+          :
-:.......................: :...............: :.......................:
-                   Overview of Security Mechanisms.
+:.......................: :...............: :.......................:                 
 ~~~~
-{: #fig2}
+{: #fig2 title="Overview of Security Mechanisms"}
 
-Inspired by the security framework for routing over low power and lossy network {{ID-Tsao}}, we show an example security model of a smart object and illustrate how different security concepts and lifecycle phases map to the Internet communication stack. Assume a centralized architecture in which a configuration entity stores and manages the identities of the things associated with the system along with their cryptographic keys. During the bootstrapping phase, each thing executes the bootstrapping protocol with the configuration entity, thus obtaining the required device identities and the keying material. The security service on a thing in turn stores the received keying material for the network layer and application security mechanisms for secure communication. Things can then securely communicate with each other during their operational phase by means of the employed network and application security mechanisms.
+Inspired by the security framework for routing over low power and lossy network {{RFC7416}}, we show an example security model of a smart object and illustrate how different security concepts and lifecycle phases map to the Internet communication stack. Assume a centralized architecture in which a configuration entity stores and manages the identities of the things associated with the system along with their cryptographic keys. During the bootstrapping phase, each thing executes the bootstrapping protocol with the configuration entity, thus obtaining the required device identities and the keying material. The security service on a thing in turn stores the received keying material for the network layer and application security mechanisms for secure communication. Things can then securely communicate with each other during their operational phase by means of the employed network and application security mechanisms.
 
 # Security Threats and Managing Risk {#sec3}
 
-This section explores security threats and vulnerabilities in IoT and discusses how to manage risks. Security threats have been analyzed in related IP protocols including HTTPS {{RFC2818}}, COAP {{RFC7252}} 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole. Note that these set of threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. We also note that these threats can be classified according to either (i) the thing's lifecycle phases (when does the threat occur?) or (ii) the security building blocks (which functionality is affected by the threat?). All these threats are summarized in {{fig3}}.
+This section explores security threats and vulnerabilities in IoT and discusses how to manage risks. Security threats have been analyzed in related IP protocols including HTTPS {{RFC2818}}, COAP {{RFC7252}}, 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole. Note that these set of threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. We also note that these threats can be classified according to either (i) the thing's lifecycle phases (when does the threat occur?) or (ii) the security building blocks (which functionality is affected by the threat?). All these threats are summarized in {{fig3}}.
 
 1. Cloning of things: During the manufacturing process of a thing, an untrusted factory can easily clone the physical characteristics, firmware/software, or security configuration of the thing. Deployed things might also be compromised and their software reserve engineered allowing for cloning or software modifications. Such a cloned thing may be sold at a cheaper price in the market, and yet can function normally as a genuine thing. For example, two cloned devices can still be associated and work with each other. In the worst-case scenario, a cloned device can be used to control a genuine device or perform an attack. One should note here, that an untrusted factory may also change functionality of the cloned thing, resulting in degraded functionality with respect to the genuine thing (thereby, inflicting potential damage to the reputation of the original thing manufacturer). Moreover, additional functionality can be implemented within the cloned thing, such as a backdoor.
 
-2. Malicious substitution of things: During the installation of a thing, a genuine thing may be substituted with a similar variant of lower quality without being detected. The main motivation may be cost savings, where the installation of lower-quality things (for example, non-certified products) may significantly reduce the installation and operational costs. The installers can subsequently resell the genuine things to gain further financial benefits. Another motivation may be to inflict damage to the reputation of a competitor's offerings.
+2. Malicious substitution of things: During the installation of a thing, a genuine thing may be substituted with a similar variant (of lower quality) without being detected. The main motivation may be cost savings, where the installation of lower-quality things (for example, non-certified products) may significantly reduce the installation and operational costs. The installers can subsequently resell the genuine things to gain further financial benefits. Another motivation may be to inflict damage to the reputation of a competitor's offerings.
 
 3. Eavesdropping attack: During the commissioning of a thing into a network, it may be susceptible to eavesdropping, especially if operational keying materials, security parameters, or configuration settings, are exchanged in clear using a wireless medium or if used cryptographic algorithms are not suitable for the envisioned lifetime of the device and the system. After obtaining the keying material, the attacker might be able to recover the secret keys established between the communicating entities, thereby compromising the authenticity and confidentiality of the communication channel, as well as the authenticity of commands and other traffic exchanged over this communication channel. When the network is in operation, T2T communication may be eavesdropped upon if the communication channel is not sufficiently protected or in the event of session key compromise due to a long period of usage without key renewal or updates.
 
-4. Man-in-the-middle attack: Both the commissioning phase and operational phases may also be vulnerable to man-in-the-middle attacks, for example, when keying material between communicating entities are exchanged in the clear and the security of the key establishment protocol depends on the tacit assumption that no third party can eavesdrop during the execution of this protocol. Additionally, device authentication or device authorization may be non-trivial, or may need support of a human decision process, since things usually do not have a-priori knowledge about each other and cannot always be able to differentiate friends and foes via completely automated mechanisms. Thus, even if the key establishment protocol provides cryptographic device authentication, this knowledge on device identities may still need complementing with a human-assisted authorization step (thereby, presenting a weak link and offering the potential of man-in-the-middle attacks this way).
+4. Man-in-the-middle attack: Both the commissioning phase and operational phases may also be vulnerable to man-in-the-middle attacks, for example, when keying material between communicating entities is exchanged in the clear and the security of the key establishment protocol depends on the tacit assumption that no third party can eavesdrop during the execution of this protocol. Additionally, device authentication or device authorization may be non-trivial, or may need support of a human decision process, since things usually do not have a-priori knowledge about each other and cannot always differentiate friends and foes via completely automated mechanisms. Thus, even if the key establishment protocol provides cryptographic device authentication, this knowledge on device identities may still need complementing with a human-assisted authorization step (thereby, presenting a weak link and offering the potential of man-in-the-middle attacks this way).
 
-5. Firmware Replacement attack: When a thing is in operation or maintenance phase, its firmware or software may be updated to allow for new functionality or new features. An attacker may be able to exploit such a firmware upgrade by replacing the thing's software with malicious software, thereby influencing the operational behavior of the thing. For example, an attacker could add a piece of malicious code to the firmware that will cause it to periodically report the energy usage of the lamp to a data repository for analysis. Similarly, devices whose software has not been properly maintained and updated might contain vulnerabilities that might be exploited by attackers.
+5. Firmware Replacement attack: When a thing is in operation or maintenance phase, its firmware or software may be updated to allow for new functionality or new features. An attacker may be able to exploit such a firmware upgrade by replacing the thing's software with malicious software, thereby influencing the operational behavior of the thing. For example, an attacker could add a piece of malicious code to the firmware that will cause it to periodically report the energy usage of the lamp to a data repository for analysis. Similarly, devices whose software has not been properly maintained and updated might contain vulnerabilities that might be exploited by attackers to replace the firmware on the device.
 
-6. Extraction of private information: IoT devices (such as sensors, actuators, etc.) are usually physically unprotected in their ambient environment and they could easily be captured by an attacker. An attacker with physical access may then attempt to extract private information such as keys (for example, device's key, private-key, group key), sensed data (for example, healthcare status of a user), configuration parameters (for example, the Wi-Fi key), or proprietary algorithms (for example, algorithm performing some data analytics task). 
+6. Extraction of private information: IoT devices (such as sensors, actuators, etc.) are often physically unprotected in their ambient environment and they could easily be captured by an attacker. An attacker with physical access may then attempt to extract private information such as keys (for example, device's key, private-key, group key), sensed data (for example, healthcare status of a user), configuration parameters (for example, the Wi-Fi key), or proprietary algorithms (for example, algorithm performing some data analytics task). Even when the data originating from a thing is encrypted, attackers can perform traffic analysis to deduce meaningful information which might compromise the privacy of the thing's owner and/or user.
 
 7. Routing attack: As highlighted in {{ID-Daniel}}, routing information in IoT can be spoofed, altered, or replayed, in order to create routing loops, attract/repel network traffic, extend/shorten source routes, etc. Other relevant routing attacks include 1) Sinkhole attack (or blackhole attack), where an attacker declares himself to have a high-quality route/path to the base station, thus allowing him to do manipulate all packets passing through it. 2) Selective forwarding, where an attacker may selectively forward packets or simply drop a packet. 3) Wormhole attack, where an attacker may record packets at one location in the network and tunnel them to another location, thereby influencing perceived network behavior and potentially distorting statistics, thus greatly impacting the functionality of routing. 4) Sybil attack, whereby an attacker presents multiple identities to other things in the network.
 
 8. Privacy threat: The tracking of a thing's location and usage may pose a privacy risk to its users. For instance, an attacker can infer information based on the information gathered about individual things, thus deducing behavioral patterns of the user of interest to him. Such information may subsequently be sold to interested parties for marketing purposes and targeted advertising. In extreme cases, such information might be used to track dissidents in oppressive regimes. 
 
-9. Denial-of-Service (DoS) attack: Often things have very limited memory and computation capabilities. Therefore, they are vulnerable to resource exhaustion attack. Attackers can continuously send requests to specific things so as to deplete their resources. This is especially dangerous in the Internet of Things since an attacker might be located in the backend and target resource-constrained devices that are part of a Low-power and Lossy Network (LLN) {{RFC7228}}. DoS attack can also be launched by physically jamming the communication channel. Network availability can also be disrupted by flooding the network with a large number of packets. On the other hand, things compromised by attackers can be used to disrupt the operation of other networks or systems by means of a Distributed DoS (DDoS) attack.
+9. Denial-of-Service (DoS) attack: Often things have very limited memory and computation capabilities. Therefore, they are vulnerable to resource exhaustion attack. Attackers can continuously send requests to specific things so as to deplete their resources. This is especially dangerous in the Internet of Things since an attacker might be located in the backend and target resource-constrained devices that are part of a constrained node network {{RFC7228}}. DoS attack can also be launched by physically jamming the communication channel. Network availability can also be disrupted by flooding the network with a large number of packets. On the other hand, things compromised by attackers can be used to disrupt the operation of other networks or systems by means of a Distributed DoS (DDoS) attack.
 
-The following table summarizes the above generic security threats and the potential point of vulnerabilities at different layers of the communication stack.
+The following table summarizes the above generic security threats and the potential point of vulnerabilities at different layers of the communication stack. We also include related documents that include a threat model that might apply to the IoT.
 
 
 ~~~~
@@ -443,15 +442,15 @@ The following table summarizes the above generic security threats and the potent
              |                  | Commissioning    |                  |
 +------------+------------------+------------------+------------------+
 |System-level| Device Cloning   |Substitution      |Privacy threat    |
-|            |                  |ACE-OAuth(draft)  |Extraction of     |
+|            |                  |				   |Extraction of     |
 |            |                  |                  |private inform.   |
 +------------+------------------+------------------+------------------+
-|Application |                  |RFC2818, RFC7252  |RFC2818, Firmware |
-|Layer       |                  |OSCOAP(draft)     |replacement       |
+|Application |                  |RFC2818,          |RFC2818, Firmware |
+|Layer       |                  |RFC4016           |replacement       |
 +------------+------------------+------------------+------------------+
 |Transport   |                  | Eavesdropping &  |Eavesdropping     |
 |Layer       |                  | Man-in-the-middle|Man-in-the-middle |
-+------------+------------------| attack, RFC7925  |------------------+
++------------+------------------| attack,          |------------------+
 |Network     |                  | RFC4919, RFC5713 |RFC4919,DoS attack|
 |Layer       |                  | RFC3833, RFC3756 |Routing attack    |
 |            |                  |                  |RFC3833           |
@@ -460,7 +459,7 @@ The following table summarizes the above generic security threats and the potent
 |Layer       |                  |                  |                  |
 +-------------------------------+------------------+------------------+
 ~~~~
-{: #fig3 title="Classification of threats according to the lifecycle phases and security building blocks."}
+{: #fig3 title="Classification of threats according to the lifecycle phases"}
 
 Dealing with above threats and finding suitable security mitigations is challenging. New threats and exploits also appear on a daily basis. Therefore, the existence of proper secure product creation processes that allow managing and minimizing risks during the lifecycle of IoT devices is at least as important as being aware of the threats. A non-exhaustive list of relevant processes include: 
 
@@ -488,19 +487,19 @@ In this setting, a number of IETF working groups are designing new protocols for
 
 The CoRE working group {{WG-CoRE}} among other things has specified the Constrained Application Protocol (CoAP) {{RFC7252}}. CoAP is a RESTful protocol for constrained devices that is modeled after HTTP and typically runs over UDP to enable efficient application-level communication for things. 
 
-In many smart object networks, the smart objects are dispersed and have intermittent reachability either because of network outages or because they sleep during their operational phase to save energy. In such scenarios, direct discovery of resources hosted on the constrained server might not be possible. To overcome this barrier, the CoRE working group is specifying the concept of a Resource Directory (RD) {{ID-rd}}. The Resource Directory hosts descriptions of resources which are located on other nodes. These resource descriptions are specified as CoRE link format {{RFC6690}} URIs.
+In many smart object networks, the smart objects are dispersed and have intermittent reachability either because of network outages or because they sleep during their operational phase to save energy. In such scenarios, direct discovery of resources hosted on the constrained server might not be possible. To overcome this barrier, the CoRE working group is specifying the concept of a Resource Directory (RD) {{ID-rd}}. The Resource Directory hosts descriptions of resources which are located on other nodes. These resource descriptions are specified as CoRE link format {{RFC6690}}.
 
-While CoAP defines a standard communication protocol, a format for representing sensor measurements and parameters over CoAP is required. The Sensor Measurement Lists (SenML) {{ID-senml}} is a specification that is currently being written to define media types for simple sensor measurements and parameters. It has a minimalistic design so that constrained devices with limited computational capabilities can easily encode their measurements and, at the same time, servers can efficiently collect large number of measurements.
+While CoAP defines a standard communication protocol, a format for representing sensor measurements and parameters over CoAP is required. The Sensor Measurement Lists (SenML) {{ID-senml}} is a specification that defines media types for simple sensor measurements and parameters. It has a minimalistic design so that constrained devices with limited computational capabilities can easily encode their measurements and, at the same time, servers can efficiently collect large number of measurements.
 
 In many IoT deployments, the resource-constrained smart objects are connected to the Internet via a gateway that is directly reachable. For example, an IEEE 802.11 Access Point (AP) typically connects the client devices to the Internet over just one wireless hop. However, some deployments of smart object networks require routing between the smart objects themselves. The IETF has therefore defined the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL) {{RFC6550}}. RPL provides support for multipoint-to-point traffic from resource-constrained smart objects towards a more resourceful central control point, as well as point-to-multipoint traffic in the reverse direction. It also supports point-to-point traffic between the resource-constrained devices. A set of routing metrics and constraints for path calculation in RPL are also specified {{RFC6551}}.
 
+The IPv6 over Networks of Resource-constrained Nodes (6lo) {{WG-6lo}} working group of the IETF has specified how IPv6 packets can be transmitted over various link layer protocols that are commonly employed for resource-constrained smart object networks. There is also ongoing work to specify IPv6 connectivity for a Non-Broadcast Multi-Access (NBMA) mesh network that is formed by IEEE 802.15.4 TimeSlotted Channel Hopping (TSCH} links {{ID-6tisch}}. Other link layer protocols for which IETF has specified or is currently specifying IPv6 support include Bluetooth {{RFC7668}}, Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE) air interface {{RFC8105}}, and Near Field Communication (NFC) {{ID-6lonfc}}.
 
-In addition to defining a routing protocol, the IETF has also specified how IPv6 packets can be transmitted over various link layer protocols that are commonly employed for resource-constrained smart object networks. There is also ongoing work to specify IPv6 connectivity for a Non-Broadcast Multi-Access (NBMA) mesh network that is formed by IEEE 802.15.4 TimeSlotted Channel Hopping (TSCH} links {{ID-6tisch}}. Other link layer protocols for which IETF has specified or is currently specifying IPv6 support include Bluetooth {{RFC7668}}, Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE) air interface {{RFC8105}}, and Near Field Communication (NFC) {{ID-6lonfc}}.
-
+{{RFC6272}} identifies IP protocols that can be used in smart grid environments. It gives advice to smart grid network designers on how they can decide on a profile of the Internet protocol suite for smart grid networks. 	
 
 JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC7159}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding public keys, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
 
-An alternative to JSON, Concise Binary Object Representation (CBOR) {{RFC7049}} is a concise binary data format that is used for serialization of structured data. It is designed for extremely resource-constrained nodes and therefore it aims to provide a fairly small message size with minimal implementation code, and extensibility without the need for version negotiation. There is ongoing work to specify CBOR Object Signing and Encryption (COSE) {{ID-cose}} that would provide services similar to JWS and JWT.
+An alternative to JSON, Concise Binary Object Representation (CBOR) {{RFC7049}} is a concise binary data format that is used for serialization of structured data. It is designed for resource-constrained nodes and therefore it aims to provide a fairly small message size with minimal implementation code, and extensibility without the need for version negotiation. CBOR Object Signing and Encryption (COSE) {{RFC8152}} specifies how to encode public keys and signed content with CBOR.
 
 The Light-Weight Implementation Guidance (LWIG) working group {{WG-LWIG}} is collecting experiences from implementers of IP stacks in constrained devices. The working group has already produced documents such as RFC7815 {{RFC7815}} which defines how a minimal Internet Key Exchange Version 2 (IKEv2) initiator can be implemented.
 
@@ -512,7 +511,7 @@ Additionally, industry alliances and other standardization bodies are creating c
 
 2. Industrial Internet Consortium {{IIoT}}: The consortium defines reference architectures and security frameworks for development, adoption and widespread use of Industrial Internet technologies based on existing IETF standards.
 
-3. Internet Protocol for Smart Objects IPSO {{IPSO}}: The alliance specifies a common object model that would enable application software on any device to interoperate with other conforming devices.
+3. Internet Protocol for Smart Objects IPSO {{IPSO}}: The alliance specifies a common object model that enables application software on any device to interoperate with other conforming devices.
 
 4. OneM2M {{OneM2M}}: The standards body defines technical and API specifications for IoT devices. It aims to create a service layer that can run on any IoT device hardware and software.
 
@@ -533,7 +532,7 @@ The CoAP base specification {{RFC7252}} provides a description of how DTLS can b
 
 Migault et al. {{ID-dietesp}} are working on a compressed version of IPsec so that it can easily be used by resource-constrained IoT devices. They rely on the Internet Key Exchange Protocol version 2 (IKEv2) for negotiating the compression format.
 
-OSCOAP {{ID-OSCOAP}} is a proposal that protects CoAP messages by wrapping them in the CBOR Object Signing and Encryption (COSE) {{ID-cose}} format. Thus, OSCOAP falls in the category of object security and it can be applied wherever CoAP can.
+OSCOAP {{ID-OSCOAP}} is a proposal that protects CoAP messages by wrapping them in the CBOR Object Signing and Encryption (COSE) {{RFC8152}} format. Thus, OSCOAP falls in the category of object security and it can be applied wherever CoAP can.
 
 The Internet Key Exchange (IKEv2)/IPsec and the Host Identity protocol (HIP) reside at or above the network layer in the OSI model. Both protocols are able to perform an authenticated key exchange and set up the IPsec for secure payload delivery. Currently, there are also ongoing efforts to create a HIP variant coined Diet HIP {{ID-HIP}} that takes lossy low-power networks into account at the authentication and key exchange level.
 
@@ -683,7 +682,7 @@ If access to data or messages by the middleboxes is required or acceptable, then
 
 5. Message authentication codes that sustain transformation can be realized by considering the order of transformation and protection (for example, by creating a signature before compression so that the gateway can decompress the packet without recalculating the signature). Such an approach enables IoT specific optimizations but is more complex and may require application-specific transformations before security is applied. Moreover, the usage of encrypted data prevents gateways from transforming packets.
 
-6. Object security based mechanisms can bridge the protocol worlds, but still require that the two worlds use the same object security formats. Currently the object security format based on CBOR Object Signing and Encryption (COSE) {{ID-cose}} (IoT protocol) is different from JSON Object Signing and Encryption (JOSE) {{RFC7520}} or Cryptographic Message Syntax (CMS) {{RFC5652}}. Legacy devices relying on traditional Internet protocols will need to update to the newer protocols for constrained environments to enable real end-to-end security. Furthermore, middleboxes do not have any access to the data and this approach does not prevent an attacker from modifying relevant fields in CoAP.
+6. Object security based mechanisms can bridge the protocol worlds, but still require that the two worlds use the same object security formats. Currently the object security format based on CBOR Object Signing and Encryption (COSE) {{RFC8152}} (IoT protocol) is different from JSON Object Signing and Encryption (JOSE) {{RFC7520}} or Cryptographic Message Syntax (CMS) {{RFC5652}}. Legacy devices relying on traditional Internet protocols will need to update to the newer protocols for constrained environments to enable real end-to-end security. Furthermore, middleboxes do not have any access to the data and this approach does not prevent an attacker from modifying relevant fields in CoAP.
 
 To the best of our knowledge, none of the mentioned security approaches that focus on the confidentiality and integrity of the communication exchange between two IP end-points provide the perfect solution in this problem space. 
 
