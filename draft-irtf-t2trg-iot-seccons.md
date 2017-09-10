@@ -544,7 +544,12 @@ Additionally, industry alliances and other standardization bodies are creating c
 
 ## Existing IP-based Security Protocols and Solutions {#sec4-2}
 
-In the context of the IP-based IoT solutions, consideration of existing Internet security protocols is important. There are a wide range of specialized as well as general-purpose key exchange and security solutions for the Internet domain such as IKEv2/IPsec {{RFC7296}}, TLS {{RFC5246}}, DTLS {{RFC6347}}, HIP {{RFC7401}}, PANA {{RFC5191}}, and EAP {{RFC3748}}. 
+There are thee main security objectives for IoT networks:
+1. protecting the IoT network from attackers.
+2. protecting IoT applications and thus, the things.
+3. protecting the rest of the Internet and other things from attacks that use compromised things as an attack platform.
+
+In the context of the IP-based IoT deployments, consideration of existing Internet security protocols is important. There are a wide range of specialized as well as general-purpose key exchange and security solutions for the Internet domain such as IKEv2/IPsec {{RFC7296}}, TLS {{RFC5246}}, DTLS {{RFC6347}}, HIP {{RFC7401}}, PANA {{RFC5191}}, and EAP {{RFC3748}}. 
 
 There is ongoing work to define an authorization and access-control framework for resource-constrained nodes. The Authentication and Authorization for Constrained Environments (ACE) {{WG-ACE}} working group is defining a solution to allow only authorized access to resources that are hosted on a smart object server and are identified by a URI. The current proposal {{ID-aceoauth}} is based on the OAuth 2.0 framework {{RFC6749}} and it comes with profiles intended for different communication scenarios, e.g. DTLS Profile for Authentication and Authorization for Constrained Environments {{ID-acedtls}}. 
 
