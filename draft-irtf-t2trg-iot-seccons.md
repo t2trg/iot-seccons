@@ -108,6 +108,10 @@ informative:
     title: IETF IPv6 over Low power WPAN (6lowpan) Working Group
     seriesinfo:
       Web: http://tools.ietf.org/wg/6lowpan/
+  WG-ACME:
+    title: Automated Certificate Management Environment Working Group
+    seriesinfo:
+      Web: https://datatracker.ietf.org/wg/acme/about/
   WG-CoRE:
     title: IETF Constrained RESTful Environment (CoRE) Working Group
     seriesinfo:
@@ -129,11 +133,11 @@ informative:
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/ace/charter/
   WG-FUD:
-    title: Firmware UpDate (fud)
+    title: IETF Firmware UpDate (fud)
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/fud/about/
   WG-MSEC:
-    title: MSEC Working Group
+    title: IETF MSEC Working Group
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/msec/
   IEEE802ah:
@@ -545,6 +549,8 @@ In the context of the IP-based IoT solutions, consideration of existing Internet
 There is ongoing work to define an authorization and access-control framework for resource-constrained nodes. The Authentication and Authorization for Constrained Environments (ACE) {{WG-ACE}} working group is defining a solution to allow only authorized access to resources that are hosted on a smart object server and are identified by a URI. The current proposal {{ID-aceoauth}} is based on the OAuth 2.0 framework {{RFC6749}} and it comes with profiles intended for different communication scenarios, e.g. DTLS Profile for Authentication and Authorization for Constrained Environments{{ID-acedtls}}. 
 
 The CoAP base specification {{RFC7252}} provides a description of how DTLS can be used for securing CoAP. It proposes three different modes for using DTLS: the PreSharedKey mode, where nodes have pre-provisioned keys for initiating a DTLS session with another node, RawPublicKey mode, where nodes have asymmetric-key pairs but no certificates to verify the ownership, and Certificate mode, where public keys are certified by a certification authority. An IoT implementation profile {{RFC7925}} is defined for TLS version 1.2 and DTLS version 1.2 that offers communications security for resource-constrained nodes. 
+
+The Automated Certificate Management Environment (ACME) {{WG-ACME}} working group is  specifying conventions for automated X.509 certificate management. This includes automatic validation of certificate issuance, certificate renewal, and certificate revocation. While, the initial focus of working group is on domain name certificates (as used by web servers), other uses in some IoT deployments is possible.
 
 Migault et al. {{ID-dietesp}} are working on a compressed version of IPsec so that it can easily be used by resource-constrained IoT devices. They rely on the Internet Key Exchange Protocol version 2 (IKEv2) for negotiating the compression format.
 
