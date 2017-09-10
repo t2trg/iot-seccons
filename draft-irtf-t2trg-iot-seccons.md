@@ -29,7 +29,6 @@ informative:
   RFC3748: 
   RFC3756: 
   RFC3833: 
-  RFC3852:
   RFC4016:
   RFC4108:
   RFC4555: 
@@ -756,7 +755,7 @@ The FTC staff report on Internet of Things - Privacy & Security in a Connected W
 
 While powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world, a more considerate effort is needed for resource-constrained devices that don't have any operating system and are typically not equipped with a memory management unit or similar tools. 
 
-It is important to mention previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC3852}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. Finally, a new working group called Firmware UpDate (fud) {{WG-FUD}} is currently being chartered at the IETF. The working group aims to standardize a new version {{RFC4108}} that reflects the best current practices for firmware update based on experience with IoT deployments. It will specifically work on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package.
+It is important to mention previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC5652}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. Finally, a new working group called Firmware UpDate (fud) {{WG-FUD}} is currently being chartered at the IETF. The working group aims to standardize a new version {{RFC4108}} that reflects the best current practices for firmware update based on experience with IoT deployments. It will specifically work on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package.
 
 
 ## Verifying device behavior {#sec5-5}
