@@ -461,7 +461,7 @@ The following table summarizes the above generic security threats and the potent
              |                  | Commissioning    |                  |
 +------------+------------------+------------------+------------------+
 |System-level| Device Cloning   |Substitution      |Privacy threat    |
-|            |                  |				   |Extraction of     |
+|            |                  |                  |Extraction of     |
 |            |                  |                  |private inform.   |
 +------------+------------------+------------------+------------------+
 |Application |                  |RFC2818,          |RFC2818, Firmware |
