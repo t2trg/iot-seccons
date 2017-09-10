@@ -18,7 +18,7 @@ informative:
   ID-MUD: I-D.ietf-opsawg-mud
   ID-Williams: I-D.barrett-mobile-dtls
   ID-acedtls: I-D.ietf-ace-dtls-authorize
-  ID-OSCOAP: I-D.selander-ace-object-security
+  ID-OSCOAP: I-D.ietf-core-object-security
   ID-c2pq: I-D.hoffman-c2pq
   ENISA_ICS:
     title: "Communication network dependencies for ICS/SCADA Systems"
