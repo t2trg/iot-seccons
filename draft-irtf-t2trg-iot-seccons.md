@@ -19,6 +19,7 @@ informative:
   ID-Williams: I-D.barrett-mobile-dtls
   ID-acedtls: I-D.ietf-ace-dtls-authorize
   ID-OSCOAP: I-D.selander-ace-object-security
+  ID-c2pq: I-D.hoffman-c2pq
   ENISA_ICS:
     title: "Communication network dependencies for ICS/SCADA Systems"
     date: 2017-02
@@ -28,7 +29,9 @@ informative:
   RFC3748: 
   RFC3756: 
   RFC3833: 
+  RFC3852:
   RFC4016:
+  RFC4108:
   RFC4555: 
   RFC4621: 
   RFC4738: 
@@ -125,10 +128,14 @@ informative:
     title: IETF Authentication and Authorization for Constrained Environments (ACE) Working Group
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/ace/charter/
+  WG-FUD:
+    title: Firmware UpDate (fud)
+    seriesinfo:
+      Web: https://datatracker.ietf.org/wg/fud/about/
   WG-MSEC:
     title: MSEC Working Group
     seriesinfo:
-      Web: http://datatracker.ietf.org/wg/msec/
+      Web: https://datatracker.ietf.org/wg/msec/
   IEEE802ah:
     title: 'Status of Project IEEE 802.11ah, IEEE P802.11- Task Group AH-Meeting Update.'
     seriesinfo:
@@ -137,6 +144,14 @@ informative:
     title: 'NarrowBand IoT'
     seriesinfo:
       Web: http://www.3gpp.org/ftp/tsg_ran/TSG_RAN/TSGR_69/Docs/RP-151621.zip 
+  shodan:
+    title: Shodan
+    seriesinfo:
+      Web: https://www.shodan.io/
+  dyn-attack:
+    title: Dyn Analysis Summary Of Friday October 21 Attack
+    seriesinfo:
+      Web: https://dyn.com/blog/dyn-analysis-summary-of-friday-october-21-attack/     
   lora:
     title: 'LoRa - Wide Area Networks for IoT'
     seriesinfo:
@@ -708,7 +723,7 @@ created during the bootstrapping phase in order to exchange information securely
 
 Group key negotiation is an important security service for communication patterns in IoT. All discussed protocols only cover unicast communication and therefore, do not focus on group-key establishment. This applies in particular to (D)TLS and IKEv2. Thus, a solution is required in this area. A potential solution might be to use the Diffie-Hellman keys -- that are used in IKEv2 and HIP to setup a secure unicast link -- for group Diffie-Hellman key-negotiations. However, Diffie-Hellman is a relatively heavy solution, especially if the group is large.
 
-Conceptually, solutions that provide secure group communication at the network layer (IPsec/IKEv2, HIP/Diet HIP) may have an advantage in terms of the cryptographic overhead when compared to application-focused security solutions (TLS/ DTLS). This is due to the fact that application-focused solutions require cryptographic operations per group application, whereas network layer approaches may allow sharing of secure group associations between multiple applications (for example, for neighbor discovery and routing or service discovery). Hence, implementing shared features lower in the communication stack can avoid redundant security measures. In the case of OSCOAP, it provides security for CoAP group communication as defined in RFC7390, i.e., based on multicast IP. If the same security association is reused for each application, then this solution does not seem to have more cryptographic overhead compared to IPSec.
+Conceptually, solutions that provide secure group communication at the network layer (IPsec/IKEv2, HIP/Diet HIP) may have an advantage in terms of the cryptographic overhead when compared to application-focused security solutions (TLS/ DTLS). This is due to the fact that application-focused solutions require cryptographic operations per group application, whereas network layer approaches may allow sharing of secure group associations between multiple applications (for example, for neighbor discovery and routing or service discovery). Hence, implementing shared features lower in the communication stack can avoid redundant security measures. In the case of OSCOAP, it provides security for CoAP group communication as defined in RFC7390, i.e., based on multicast IP. If the same security association is reused for each application, then this solution does not seem to have more cryptographic overhead compared to IPsec.
 
 Several group key solutions have been developed by the MSEC working group {{WG-MSEC}} of the IETF. The MIKEY architecture {{RFC4738}} is one example. While these solutions are specifically tailored for multicast and group broadcast applications in the Internet, they should also be considered as candidate solutions for group key agreement in IoT. The MIKEY architecture for example describes a coordinator entity that disseminates symmetric keys over pair-wise end-to-end secured channels. However, such a centralized approach may not be applicable in a distributed IoT environment, where the choice of one or several coordinators and the management of the group key is not trivial.
 
@@ -728,7 +743,10 @@ Schneier {{SchneierSecurity}} in his essay expresses concerns about the status o
 
 The FTC staff report on Internet of Things - Privacy & Security in a Connected World {{FTCreport}} and the Article 29 Working Party Opinion 8/2014 on the on Recent Developments on the Internet of Things {{Article29}} also document the challenges for secure remote software update of IoT devices. They note that even providing such a software update capability may add new vulnerabilities for constrained devices. For example, a buffer overflow vulnerability in the implementation of a software update protocol (TR69) {{TR69}} and an expired certificate in a hub device {{wink}} demonstrate how the software update process itself can introduce vulnerabilities. 
 
-While powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world, a more considerate effort is needed for resource-constrained devices that don't have any operating system and are typically not equipped with a memory management unit or similar tools. The IAB also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. 
+While powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world, a more considerate effort is needed for resource-constrained devices that don't have any operating system and are typically not equipped with a memory management unit or similar tools. 
+
+It is important to mention previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC3852}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. Finally, a new working group called Firmware UpDate (fud) {{WG-FUD}} is currently being chartered at the IETF. The working group aims to standardize a new version {{RFC4108}} that reflects the best current practices for firmware update based on experience with IoT deployments. It will specifically work on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package.
+
 
 ## Verifying device behavior {#sec5-5}
 
@@ -737,6 +755,9 @@ Users often have a false sense of privacy when using new Internet of Things (IoT
 An IoT device user/owner would like to monitor and verify its operational behavior. For instance, the user might want to know if the device is connecting to the server of the manufacturer for any reason. This feature -- connected to the manufacturer's server -- may be necessary in some scenarios, such as during the initial configuration of the device. However, the user should be kept aware of the data that the device is sending back to the vendor. For example, the user might want to know if his/her TV is sending data when he/she inserts a new USB stick. 
 
 Providing such information to the users in an understandable fashion is challenging. This is because IoT devices are not only resource-constrained in terms of their computational capability, but also in terms of the user interface available. Also, the network infrastructure where these devices are deployed will vary significantly from one user environment to another. Therefore, where and how this monitoring feature is implemented still remains an open question. 
+
+Manufacturer Usage Description (MUD) files {{ID-MUD}} are perhaps a first step towards implementation of such a monitoring service. The idea behind MUD files is relatively simple: IoT devices would disclose the location of their MUD file to the network during installation. The network can then retrieve those files, and learn about the intended behavior of the devices stated by the device manufacturer. A network monitoring service could then warn the user/owner of devices if they don't behave as expected.
+
 
 ## End-of-life {#sec5-6}
 Like all commercial devices, most IoT devices will be end-of-lifed by vendors or even network operators. This may be planned or unplanned (for example when the vendor or manufacturer goes bankrupt or when a network operator moves to a different type of networking technology). A user should still be able to use and perhaps even update the device. This requires for some form of authorization handover.
@@ -748,7 +769,7 @@ Although this may seem far-fetched given the commercial interests and market dyn
 Given that IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform extensive testing on their IoT devices, networks, and systems. Nonetheless, since the devices are resource-constrained and manufactured by multiple vendors, some of them very small, devices might be shipped with very limited testing, so that bugs can remain and can be exploited at a later stage. This leads to two main types of challenges:
 
 1. It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices to give end users the confidence that the purchased devices are robust.
-2. It is also an open question how combination of devices of multiple vendors might actually lead to dangerous network configurations, for example, if combination of specific devices can trigger unexpected behavior.
+2. It is also an open question how the combination of devices from multiple vendors might actually lead to dangerous network configurations, for example, if combination of specific devices can trigger unexpected behavior.
 
 ## Quantum-resistance {#sec5-8}
 
@@ -756,7 +777,7 @@ Many IoT systems that are being deployed today will remain operational for many 
 
 The above scenario becomes more urgent when we consider the so called "harvest and decrypt" attack in which an attacker can start to harvest (store) encrypted data today, before a quantum-computer is available, and decrypt it years later, once a quantum computer is available.
 
-This situation would require us to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. While such future planning is hard, it may be a necessity in certain critical IoT deployments which are expected to last decades or more. Although increasing the key-size of the different algorithms is definitely an option, it would also incur additional computational overhead and network traffic. This would be undesirable in most scenarios. There have been recent advancements in quantum-resistant cryptography.
+This situation would require us to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. {{ID-c2pq}} describes when quantum computers may become widely available and what steps are necessary for transition to cryptographic algorithms that provide security even in presence of quantum computers. While such future planning is hard, it may be a necessity in certain critical IoT deployments which are expected to last decades or more. Although increasing the key-size of the different algorithms is definitely an option, it would also incur additional computational overhead and network traffic. This would be undesirable in most scenarios. There have been recent advancements in quantum-resistant cryptography.
 
 We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography. {{RFC7696}} provides guidelines for cryptographic algorithm agility.
 
@@ -770,8 +791,8 @@ Users will be surrounded by hundreds of connected devices. Even if the communica
 Based on this definition, several privacy threats and challenges have been documented {{Ziegeldorf}} and {{RFC6973}}:
 
 1. Identification - refers to the identification of the users and their objects.
-2. Localization - relates to the capability of locating a user and even tracking him.
-3. Profiling - is about creating a profile of the user and her preferences.
+2. Localization - relates to the capability of locating a user and even tracking them.
+3. Profiling - is about creating a profile of the user and their preferences.
 4. Interaction - occurs when a user has been profiled and a given interaction is preferred, presenting (for example, visually) some information that discloses private information. 
 5. Lifecycle transitions - take place when devices are, for example, sold without properly removing private data.
 6. Inventory attacks - happen if specific information about (smart) objects in possession of a user is disclosed.
@@ -781,7 +802,7 @@ When IoT systems are deployed, the above issues should be considered to ensure t
 
 ## Data leakage {#sec5-10}
 
-IoT devices are resource-constrained and often deployed in unattended environments. Some of these devices can also be purchased off-the-shelf or online without any credential-provisioning process. Therefore, an attacker can have direct access to the device and apply more advance techniques that a traditional black box model does not consider such as side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:
+Many IoT devices are resource-constrained and often deployed in unattended environments. Some of these devices can also be purchased off-the-shelf or online without any credential-provisioning process. Therefore, an attacker can have direct access to the device and apply more advance techniques that a traditional black box model does not consider such as side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:
 
 1. long term keys that might be used perform attacks on devices deployed in other locations. 
 2. source code that might let the user determine bugs or find exploits to perform other types of attacks, or just sell it,
@@ -791,13 +812,13 @@ Protection against such data leakage patterns is not trivial since devices are i
 
 ## Trustworthy IoT Operation {#sec5-11}
 
-Flaws in the design and implementation of a secure IoT device and network can lead to secure vulnerabilities. An example is a flaw is the distribution of an Internet-connected IoT device in which a default password is used in all devices. Many IoT devices can be found in the Internet by means of tools such as Shodan, and if they have any vulnerability, it can then be exploited at scale, for example, to launch DDoS attacks. This is not fiction but reality as Dyn, a mayor DNS was attacked by means of a DDoS attack originated from a large IoT botnet composed of thousands of compromised IP-cameras. Open questions in this area are:
+Flaws in the design and implementation of a secure IoT device and network can lead to secure vulnerabilities. An example is a flaw is the distribution of an Internet-connected IoT device in which a default password is used in all devices. Many IoT devices can be found in the Internet by means of tools such as Shodan {{shodan}}, and if they have any vulnerability, it can then be exploited at scale, for example, to launch DDoS attacks. This is not fiction but reality as Dyn, a mayor DNS was attacked by means of a DDoS attack originated from a large IoT botnet composed of thousands of compromised IP-cameras {{dyn-attack}}. Open questions in this area are:
 
 1. How to prevent large scale vulnerabilities in IoT devices?
 2. How to prevent attackers from exploiting vulnerabilities in IoT devices at large scale?
 3. If the vulnerability has been exploited, how do we stop a large scale attack before any damage is caused?
 
-Some ideas are being explored to address this issue. One of this approaches refers to the specification of Manufacturer Usage Description (MUD) files {{ID-MUD}}. The idea behind MUD files is simple: devices would disclose the location of its MUD file to the network during installation. The network can then (i) retrieve those files, (ii) learn from the manufacturers the intended usage of the devices, for example, which services they require to access, and then (iii) create suitable filters such as firewall rules. 
+Some ideas are being explored to address this issue. One of this approaches refers to the specification of Manufacturer Usage Description (MUD) files {{ID-MUD}}. As explained earlier, this proposal requires IoT devices to disclose the location of their MUD file to the network during installation. The network can then (i) retrieve those files, (ii) learn from the manufacturers the intended usage of the devices, for example, which services they require to access, and then (iii) create suitable filters such as firewall rules. 
 
 # Conclusions and Next Steps {#sec6}
 
