@@ -92,18 +92,6 @@ informative:
     date: 2013
     seriesinfo:
       Security and Communication Networks - Special Issue on Security in a Completely Interconnected World
-  d2dsecurity:
-    title: 'Security and Privacy in Device-to-Device (D2D) Communication: A Review'
-    author:
-    - ins: M. Haus
-    - ins: M. Waqas
-    - ins: A. Ding
-    - ins: Y. Li
-    - ins: S. Tarkoma
-    - ins: J. Ott
-    date: 2016
-    seriesinfo:
-      IEEE Communications Surveys and Tutorials
   WG-6LoWPAN:
     title: IETF IPv6 over Low power WPAN (6lowpan) Working Group
     seriesinfo:
@@ -379,7 +367,7 @@ The term security subsumes a wide range of primitives, protocols, and procedures
 
 1. IoT security architecture: refers to the system-level elements involved in the management of security relationships between things (for example, centralized or distributed). For instance, a smart home could rely on a centralized key distribution center in charge of managing cryptographic keys, devices, users, access control and privacy policies. 
 
-2. The security model within a thing: describes the way security parameters, keys, processes and applications are managed within a smart object. This includes aspects such as application process separation, secure storage of key materials, etc. For instance, some smart objects might have extremely limited resources and limited capabilities to protect secret keys. In contrast, other devices used in critical applications, such as a pacemaker, may rely on methods to protect cryptographic keys and functionality.
+2. The security model within a thing: describes the way security parameters, keys, processes, and applications are managed within a smart object. This includes aspects such as application process separation, secure storage of key materials, etc. For instance, some smart objects might have extremely limited resources and limited capabilities to protect secret keys. In contrast, other devices used in critical applications, such as a pacemaker, may rely on methods to protect cryptographic keys and functionality.
 
 3. Security bootstrapping: denotes the process by which a thing securely joins an IoT system at a given location and point of time. For instance, bootstrapping of a connected camera can include the authentication and authorization of the device as well as the transfer of security parameters necessary for operation in a given network.
 
@@ -832,7 +820,7 @@ Some ideas are being explored to address this issue. One of this approaches refe
 
 # Conclusions and Next Steps {#sec6}
 
-This Internet Draft provides IoT security researchers, system designers and implementers with an overview of both operational and security requirements in the IP-based Internet of Things. We discuss a general threat model, theats, state-of-the-art, and security challenges.
+This Internet Draft provides IoT security researchers, system designers and implementers with an overview of both operational and security requirements in the IP-based Internet of Things. We discuss a general threat model, threats, state-of-the-art, and security challenges.
 
 Although plenty of steps have been realized during the last few years (summarized in {{sec4-1}}) and many organizations are publishing general recommendations ({{sec4-3}}) describing how IoT should be secured, there are many challenges ahead that require further attention. Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring trustworthy IoT operation. All these problems are important; however, different deployment environments have different operational and security demands. Thus, a potential approach is the definition and standardization of security profiles, each with specific mitigation strategies according to the risk assessment associated with the security profile. Such an approach would ensure minimum security capabilities in different environments while ensuring interoperability.
 
