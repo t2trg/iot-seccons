@@ -1,7 +1,7 @@
 ---
 abbrev: IoT Security
 title: State-of-the-Art and Challenges for the Internet of Things Security
-docname: draft-irtf-t2trg-iot-seccons-08
+docname: draft-irtf-t2trg-iot-seccons-09
 cat: info
 stand_alone: true
 informative:
@@ -19,6 +19,7 @@ informative:
   ID-Williams: I-D.barrett-mobile-dtls
   ID-acedtls: I-D.ietf-ace-dtls-authorize
   ID-OSCOAP: I-D.ietf-core-object-security
+  ID-multicast: I-D.tiloca-core-multicast-oscoap
   ID-c2pq: I-D.hoffman-c2pq
   ENISA_ICS:
     title: "Communication network dependencies for ICS/SCADA Systems"
@@ -57,6 +58,7 @@ informative:
   RFC7401:
   RFC7416:
   RFC7515:
+  RFC7516:
   RFC7517:
   RFC7519:
   RFC7520:
@@ -120,10 +122,10 @@ informative:
     title: IETF Authentication and Authorization for Constrained Environments (ACE) Working Group
     seriesinfo:
       Web: https://datatracker.ietf.org/wg/ace/charter/
-  WG-FUD:
-    title: IETF Firmware UpDate (fud)
+  WG-SUIT:
+    title: IETF Software Updates for Internet of Things (suit)
     seriesinfo:
-      Web: https://datatracker.ietf.org/wg/fud/about/
+      Web: https://datatracker.ietf.org/group/suit/about/
   WG-MSEC:
     title: IETF MSEC Working Group
     seriesinfo:
@@ -335,7 +337,7 @@ The lifecycle of a thing refers to the operational phases of a thing in the cont
 
 In this document, we consider a Building Automation and Control (BAC) system to illustrate the lifecycle and the meaning of these different phases. A BAC system consists of a network of interconnected nodes that performs various functions in the domains of HVAC (Heating, Ventilating, and Air Conditioning), lighting, safety, etc. The nodes vary in functionality and a large majority of them represent resource-constrained devices such as sensors and luminaries. Some devices may be battery operated or may rely on energy harvesting. This requires us to also consider devices that sleep during their operation to save energy. In our BAC scenario, the life of a thing starts when it is manufactured. Due to the different application areas (i.e., HVAC, lighting, or safety) nodes/things are tailored to a specific task. It is therefore unlikely that one single manufacturer will create all nodes in a building. Hence, interoperability as well as trust bootstrapping between nodes of different vendors is important. 
 
-The thing is later installed and commissioned within a network by an installer during the bootstrapping phase. Specifically, the device identity and the secret keys used during normal operation may be provided to the device during this phase (key roll over). Different subcontractors may install different IoT devices for different purposes. Furthermore, the installation and bootstrapping procedures may not be a discrete event and may stretch over an extended period. After being bootstrapped, the device and the system of things are in operational mode and execute the functions of the BAC system. During this operational phase, the device is under the control of the system owner and used by multiple system users. For devices with lifetimes spanning several years, occasional maintenance cycles may be required. During each maintenance phase, the software on the device can be upgraded or applications running on the device can be reconfigured. The maintenance tasks can be performed either locally or from a backend system. Depending on the operational changes to the device, it may be required to re-bootstrap at the end of a maintenance cycle. The device continues to loop through the operational phase and the eventual maintenance phases until the device is decommissioned at the end of its lifecycle. However, the end-of-life of a device does not necessarily mean that it is defective and rather denotes a need to replace and upgrade the network to the next-generation devices for additional functionality. Therefore, the device can be removed and re-commissioned to be used in a different system under a different owner thereby starting the lifecycle all over again. 
+The thing is later installed and commissioned within a network by an installer during the bootstrapping phase. Specifically, the device identity and the secret keys used during normal operation may be provided to the device during this phase. Different subcontractors may install different IoT devices for different purposes. Furthermore, the installation and bootstrapping procedures may not be a discrete event and may stretch over an extended period. After being bootstrapped, the device and the system of things are in operational mode and execute the functions of the BAC system. During this operational phase, the device is under the control of the system owner and used by multiple system users. For devices with lifetimes spanning several years, occasional maintenance cycles may be required. During each maintenance phase, the software on the device can be upgraded or applications running on the device can be reconfigured. The maintenance tasks can be performed either locally or from a backend system. Depending on the operational changes to the device, it may be required to re-bootstrap at the end of a maintenance cycle. The device continues to loop through the operational phase and the eventual maintenance phases until the device is decommissioned at the end of its lifecycle. However, the end-of-life of a device does not necessarily mean that it is defective and rather denotes a need to replace and upgrade the network to the next-generation devices for additional functionality. Therefore, the device can be removed and re-commissioned to be used in a different system under a different owner thereby starting the lifecycle all over again. 
 
 
 
@@ -420,7 +422,7 @@ Inspired by the security framework for routing over low power and lossy network 
 
 # Security Threats and Managing Risk {#sec3}
 
-Security threats in related IP protocols have been analyzed in multiple documents including HTTPS {{RFC2818}}, COAP {{RFC7252}}, 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole. Note that these set of threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. We also note that these threats can be classified according to either (i) the thing's lifecycle phases (when does the threat occur?) or (ii) the security building blocks (which functionality is affected by the threat?). All these threats are summarized in {{fig3}}.
+Security threats in related IP protocols have been analyzed in multiple documents including HTTPS {{RFC2818}}, COAP {{RFC7252}}, 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole. Note that these set of threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. We also note that these threats can be classified according to either (i) the thing's lifecycle phases (when does the threat occur?) or (ii) the security building blocks (which functionality is affected by the threat?):
 
 1. Cloning of things: During the manufacturing process of a thing, an untrusted factory can easily clone the physical characteristics, firmware/software, or security configuration of the thing. Deployed things might also be compromised and their software reverse engineered allowing for cloning or software modifications. Such a cloned thing may be sold at a cheaper price in the market, and yet can function normally as a genuine thing. For example, two cloned devices can still be associated and work with each other. In the worst-case scenario, a cloned device can be used to control a genuine device or perform an attack. One should note here, that an untrusted factory may also change functionality of the cloned thing, resulting in degraded functionality with respect to the genuine thing (thereby, inflicting potential damage to the reputation of the original thing manufacturer). Moreover, additional functionality can be introduced in the cloned thing, an example of such functionality is a backdoor.
 
@@ -436,46 +438,13 @@ Security threats in related IP protocols have been analyzed in multiple document
 
 7. Routing attack: As highlighted in {{ID-Daniel}}, routing information in IoT can be spoofed, altered, or replayed, in order to create routing loops, attract/repel network traffic, extend/shorten source routes, etc. Other relevant routing attacks include 1) Sinkhole attack (or blackhole attack), where an attacker declares himself to have a high-quality route/path to the base station, thus allowing him to do manipulate all packets passing through it. 2) Selective forwarding, where an attacker may selectively forward packets or simply drop a packet. 3) Wormhole attack, where an attacker may record packets at one location in the network and tunnel them to another location, thereby influencing perceived network behavior and potentially distorting statistics, thus greatly impacting the functionality of routing. 4) Sybil attack, whereby an attacker presents multiple identities to other things in the network.
 
-8. Elevation of privilege: An attacker with low privileges can misuse addtional flaws in the implemented authentication and authorization mechanisms of a thing to gain more priviledged access to the thing and its data. 
+8. Elevation of privilege: An attacker with low privileges can misuse additional flaws in the implemented authentication and authorization mechanisms of a thing to gain more privileged access to the thing and its data. 
 
 9. Privacy threat: The tracking of a thing's location and usage may pose a privacy risk to its users. For instance, an attacker can infer information based on the information gathered about individual things, thus deducing behavioral patterns of the user of interest to him. Such information may subsequently be sold to interested parties for marketing purposes and targeted advertising. In extreme cases, such information might be used to track dissidents in oppressive regimes. Unlawful surveillance and interception of traffic to/from a thing by intelligence agencies is also a privacy threat. 
 
 10. Denial-of-Service (DoS) attack: Often things have very limited memory and computation capabilities. Therefore, they are vulnerable to resource exhaustion attack. Attackers can continuously send requests to specific things so as to deplete their resources. This is especially dangerous in the Internet of Things since an attacker might be located in the backend and target resource-constrained devices that are part of a constrained node network {{RFC7228}}. DoS attack can also be launched by physically jamming the communication channel. Network availability can also be disrupted by flooding the network with a large number of packets. On the other hand, things compromised by attackers can be used to disrupt the operation of other networks or systems by means of a Distributed DoS (DDoS) attack.
 
-The following table summarizes the above generic security threats and the potential point of vulnerabilities at different layers of the communication stack. We also include related documents that include a threat model that might apply to the IoT.
-
-
-~~~~
-             +------------------+------------------+------------------+
-             | Manufacturing    | Installation/    | Operation        |
-             |                  | Commissioning    |                  |
-+------------+------------------+------------------+------------------+
-|System-level| Device Cloning   |Substitution      |Privacy threat    |
-|            |                  |                  |Extraction of     |
-|            |                  |                  |private inform.   |
-+------------+------------------+------------------+------------------+
-|Application |                  |RFC2818,          |RFC2818, Firmware |
-|Layer       |                  |RFC4016           |replacement       |
-+------------+------------------+------------------+------------------+
-|Transport   |                  | Eavesdropping &  |Eavesdropping     |
-|Layer       |                  | Man-in-the-middle|Man-in-the-middle |
-+------------+------------------| attack,          |------------------+
-|Network     |                  | RFC4919, RFC5713 |RFC4919,DoS attack|
-|Layer       |                  | RFC3833, RFC3756 |Routing attack    |
-|            |                  |                  |RFC3833           |
-+------------+------------------+------------------+------------------+
-|Physical    |                  |                  |DoS attack        |
-|Layer       |                  |                  |                  |
-+-------------------------------+------------------+------------------+
-~~~~
-{: #fig3 title="Classification of threats according to the lifecycle phases"}
-
-To deal with above threats it is required to find and apply suitable security mitigations. 
-However, new threats and exploits appear on a daily basis and products are deployed in different environments prone to different types of threats. 
-Thus, ensuring a proper level of security in an IoT system at any point of time is challenging.
-
-To address this challenge, a process for secure product creation is required to ensure that an IoT system is secure and no security risks are present. 
-A non-exhaustive list of required methodologies include: 
+To deal with above threats it is required to find and apply suitable security mitigations. However, new threats and exploits appear on a daily basis and products are deployed in different environments prone to different types of threats. Thus, ensuring a proper level of security in an IoT system at any point of time is challenging. To address this challenge, a process for secure product creation is required to ensure that an IoT system is secure and no security risks are present. A non-exhaustive list of required methodologies include: 
 
 1. A Business Impact Analysis (BIA) assesses the consequences of the loss of basic security attributes: confidentiality, integrity and availability in an IoT system. These consequences might include the impact from lost data, reduced sales, increased expenses, regulatory fines, customer dissatisfaction, etc. Performing a business impact analysis allows a business to determine the relevance of having a proper security design.
 
@@ -510,9 +479,9 @@ The IPv6 over Networks of Resource-constrained Nodes (6lo) {{WG-6lo}} working gr
 
 Baker and Meyer {{RFC6272}} identify which IP protocols can be used in smart grid environments. They give advice to smart grid network designers on how they can decide on a profile of the Internet protocol suite for smart grid networks. 	
 
-JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC7159}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding public keys, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
+JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC7159}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding cryptographic keys, encrypted content, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Encryption (JWE) {{RFC7516}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
 
-An alternative to JSON, Concise Binary Object Representation (CBOR) {{RFC7049}} is a concise binary data format that is used for serialization of structured data. It is designed for resource-constrained nodes and therefore it aims to provide a fairly small message size with minimal implementation code, and extensibility without the need for version negotiation. CBOR Object Signing and Encryption (COSE) {{RFC8152}} specifies how to encode public keys and signed content with CBOR.
+An alternative to JSON, Concise Binary Object Representation (CBOR) {{RFC7049}} is a concise binary data format that is used for serialization of structured data. It is designed for resource-constrained nodes and therefore it aims to provide a fairly small message size with minimal implementation code, and extensibility without the need for version negotiation. CBOR Object Signing and Encryption (COSE) {{RFC8152}} specifies how to encode cryptographic keys, message authentication codes, encrypted content, and signatures with CBOR.
 
 The Light-Weight Implementation Guidance (LWIG) working group {{WG-LWIG}} is collecting experiences from implementers of IP stacks in constrained devices. The working group has already produced documents such as RFC7815 {{RFC7815}} which defines how a minimal Internet Key Exchange Version 2 (IKEv2) initiator can be implemented.
 
@@ -550,7 +519,7 @@ The CoAP base specification {{RFC7252}} provides a description of how DTLS can b
 
 Transport Layer Security (TLS) and its datagram-oriented variant DTLS secure transport-layer connections. TLS provides security for TCP and requires a reliable transport, while DTLS secures and uses datagram-oriented protocols such as UDP. Both protocols are intentionally kept similar and share the same ideology and cipher suites.
 
-OSCOAP {{ID-OSCOAP}} is a proposal that protects CoAP messages by wrapping them in the CBOR Object Signing and Encryption (COSE) {{RFC8152}} format. Thus, OSCOAP falls in the category of object security and it can be applied wherever CoAP can. The advantage of OSCOAP compared with DTLS resides in some more flexibility when dealing with e2e security as it will be discussed in Section {{sec5-1-3}}.
+OSCOAP {{ID-OSCOAP}} is a proposal that protects CoAP messages by wrapping them in the CBOR Object Signing and Encryption (COSE) {{RFC8152}} format. Thus, OSCOAP falls in the category of object security and it can be applied wherever CoAP can be used. The advantage of OSCOAP over DTLS is that it provides some more flexibility when dealing with end-to-end security. {{sec5-1-3}} discusses this further.
 
 The Automated Certificate Management Environment (ACME) {{WG-ACME}} working group is  specifying conventions for automated X.509 certificate management. This includes automatic validation of certificate issuance, certificate renewal, and certificate revocation. While the initial focus of working group is on domain name certificates (as used by web servers), other uses in some IoT deployments is possible.
 
@@ -660,9 +629,9 @@ IoT deployments are often characterized by lossy and low-bandwidth communication
 
 The size and number of messages should be minimized to reduce memory requirements and optimize bandwidth usage. In this context, layered approaches involving a number of protocols might lead to worse performance in resource-constrained devices since they combine the headers of the different protocols. In some settings, protocol negotiation can increase the number of exchanged messages. To improve performance during basic procedures such as, for example, bootstrapping, it might be a good strategy to perform those procedures at a lower layer.
 
-Small CPUs and scarce memory limit the usage of resource-expensive crypto primitives such as public-key cryptography as used in most Internet security standards. This is especially true if the basic crypto blocks need to be frequently used or the underlying application demands a low delay.
+Small CPUs and scarce memory limit the usage of resource-expensive cryptographic primitives such as public-key cryptography as used in most Internet security standards. This is especially true if the basic cryptographic blocks need to be frequently used or the underlying application demands low delay.
 
-Independently from the development in the IoT domain, all discussed security protocols show efforts to reduce the cryptographic cost of the required public-key-based key exchanges and signatures with Elliptic Curve Cryptography (ECC) {{RFC5246}}, {{RFC5903}}, {{RFC7401}}, and {{ID-HIP-DEX}}. Moreover, all protocols have been revised in the last years to enable crypto agility, making cryptographic primitives interchangeable. However, these improvements are only a first step in reducing the computation and communication overhead of Internet protocols. The question remains if other approaches can be applied to leverage key agreement in these heavily resource-constrained environments.
+Independently from the development in the IoT domain, all discussed security protocols show efforts to reduce the cryptographic cost of the required public-key-based key exchanges and signatures with Elliptic Curve Cryptography (ECC) {{RFC5246}}, {{RFC5903}}, {{RFC7401}}, and {{ID-HIP-DEX}}. Moreover, all protocols have been revised in the last years to enable cryptographic agility, making cryptographic primitives interchangeable. However, these improvements are only a first step in reducing the computation and communication overhead of Internet protocols. The question remains if other approaches can be applied to leverage key agreement in these heavily resource-constrained environments.
 
 A further fundamental need refers to the limited energy budget available
 to IoT nodes. Careful protocol (re)design and usage is required to reduce
@@ -728,9 +697,9 @@ created during the bootstrapping phase in order to exchange information securely
 
 Group key negotiation is an important security service for IoT communication patterns in which a thing sends some data to multiple things or data flows from multiple things towards a thing. All discussed protocols only cover unicast communication and therefore, do not focus on group-key establishment. This applies in particular to (D)TLS and IKEv2. Thus, a solution is required in this area. A potential solution might be to use the Diffie-Hellman keys -- that are used in IKEv2 and HIP to setup a secure unicast link -- for group Diffie-Hellman key-negotiations. However, Diffie-Hellman is a relatively heavy solution, especially if the group is large.
 
-Symmetric and asymmetric keys can be used in group communication. Asymmetric keys have the advantage that they can provide source authentication. However, doing broadcast encryption with a single public/private key pair is also not feasible. Although a single symmetric key can be used to encrypt the communication or compute a message authentication code, it has inherent risks since the capture of a single node can compromise the key shared throughout the network. The usage of symmetric-keys also does not provide source authentication. Another factor to consider is that asymmetric cryptography is  more resource-intensive than symmetric key solutions. Thus, the security risks and performance trade-offs of applying either symmetric or asymmetric keys to a given IoT use case need to be well-analyzed according to risk and usability assessments. At the point of writing this document, the current document on group communication is looking at a combination of symmetric - for encryption - and asymmetric - for authentication - in the same packet.  
+Symmetric and asymmetric keys can be used in group communication. Asymmetric keys have the advantage that they can provide source authentication. However, doing broadcast encryption with a single public/private key pair is also not feasible. Although a single symmetric key can be used to encrypt the communication or compute a message authentication code, it has inherent risks since the capture of a single node can compromise the key shared throughout the network. The usage of symmetric-keys also does not provide source authentication. Another factor to consider is that asymmetric cryptography is  more resource-intensive than symmetric key solutions. Thus, the security risks and performance trade-offs of applying either symmetric or asymmetric keys to a given IoT use case need to be well-analyzed according to risk and usability assessments. {{ID-multicast}} is looking at a combination of symmetric (for encryption) and asymmetric (for authentication) in the same packet.  
 
-Conceptually, solutions that provide secure group communication at the network layer (IPsec/IKEv2, HIP/Diet HIP) may have an advantage in terms of the cryptographic overhead when compared to application-focused security solutions (TLS/ DTLS). This is due to the fact that application-focused solutions require cryptographic operations per group application, whereas network layer approaches may allow sharing secure group associations between multiple applications (for example, for neighbor discovery and routing or service discovery). Hence, implementing shared features lower in the communication stack can avoid redundant security measures. However, it is important to note that sharing security contexts among different applications involves potential security threats, e.g., if one of the applications is malitious and monitors exchanged messages or injects fake messages. In the case of OSCOAP, it provides security for CoAP group communication as defined in RFC7390, i.e., based on multicast IP. If the same security association is reused for each application, then this solution does not seem to have more cryptographic overhead compared to IPsec. 
+Conceptually, solutions that provide secure group communication at the network layer (IPsec/IKEv2, HIP/Diet HIP) may have an advantage in terms of the cryptographic overhead when compared to application-focused security solutions (TLS/ DTLS). This is due to the fact that application-focused solutions require cryptographic operations per group application, whereas network layer approaches may allow sharing secure group associations between multiple applications (for example, for neighbor discovery and routing or service discovery). Hence, implementing shared features lower in the communication stack can avoid redundant security measures. However, it is important to note that sharing security contexts among different applications involves potential security threats, e.g., if one of the applications is malicious and monitors exchanged messages or injects fake messages. In the case of OSCOAP, it provides security for CoAP group communication as defined in RFC7390, i.e., based on multicast IP. If the same security association is reused for each application, then this solution does not seem to have more cryptographic overhead compared to IPsec. 
 
 
 Several group key solutions have been developed by the MSEC working group {{WG-MSEC}} of the IETF. The MIKEY architecture {{RFC4738}} is one example. While these solutions are specifically tailored for multicast and group broadcast applications in the Internet, they should also be considered as candidate solutions for group key agreement in IoT. The MIKEY architecture for example describes a coordinator entity that disseminates symmetric keys over pair-wise end-to-end secured channels. However, such a centralized approach may not be applicable in a distributed IoT environment, where the choice of one or several coordinators and the management of the group key is not trivial.
@@ -739,21 +708,27 @@ Several group key solutions have been developed by the MSEC working group {{WG-M
 
 It is expected that many things (for example, wearable sensors, and user devices) will be mobile in the sense that they are attached to different networks during the lifetime of a security association. Built-in mobility signaling can greatly reduce the overhead of the cryptographic protocols because unnecessary and costly re-establishments of the session (possibly including handshake and key agreement) can be avoided. IKEv2 supports host mobility with the MOBIKE {{RFC4555}} and {{RFC4621}} extension. MOBIKE refrains from applying heavyweight cryptographic extensions for mobility. However, MOBIKE mandates the use of IPsec tunnel mode which requires to transmit an additional IP header in each packet. This additional overhead could be alleviated by using header compression methods or the Bound End- to-End Tunnel (BEET) mode {{ID-Nikander}}, a hybrid of tunnel and transport mode with smaller packet headers.
 
-HIP offers a simple yet effective mobility management by allowing hosts to signal changes to their associations {{RFC8046}}. However, slight adjustments might be necessary to reduce the cryptographic costs, for example, by making the public-key signatures in the mobility messages optional. Diet HIP does not define mobility yet but it is sufficiently similar to HIP and can use the same mechanisms. TLS and DTLS do not have native mobility support, however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which the nodes operate. In many cases, mobility supported by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. 
+HIP offers a simple yet effective mobility management by allowing hosts to signal changes to their associations {{RFC8046}}. However, slight adjustments might be necessary to reduce the cryptographic costs, for example, by making the public-key signatures in the mobility messages optional. Diet HIP does not define mobility yet but it is sufficiently similar to HIP and can use the same mechanisms. TLS and DTLS do not have native mobility support, however, work on DTLS mobility exists in the form of an Internet draft {{ID-Williams}}. The specific need for IP-layer mobility mainly depends on the scenario in which the nodes operate. In many cases, mobility supported by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. Using message based application-layer security solutions such as OSCoAP {{ID-OSCOAP}} can also alleviate the problem of re-establishing lower-layer sessions for mobile nodes. 
 
-## Secure software update {#sec5-4}
+## Secure software update and cryptographic agility {#sec5-4}
 
-Software updates are required not only to add new functionality to IoT devices but also to eliminate security vulnerabilities due to software bugs, design flaws, or deprecated algorithms. Software bugs might remain even after careful code review. Implementations of security protocols might contain (design) flaws. Lastly, cryptographic algorithms can become insecure due to advances in cryptanalysis.
-
-Due to all these reasons, IoT devices have a reputation for being insecure, and yet, they are expected to stay functional for years and even decades. Additionally, these devices typically operate unattended with direct Internet connectivity. Therefore, a remote software update mechanism to fix vulnerabilities, to update configuration settings, and for adding new functionality is needed. 
+IoT devices are often expected to stay functional for several years and decades even though they might operate unattended with direct Internet connectivity. Software updates for IoT devices are therefore not only required for new functionality, but also to eliminate security vulnerabilities due to software bugs, design flaws, or deprecated algorithms. Software bugs might remain even after careful code review. Implementations of security protocols might contain (design) flaws. Cryptographic algorithms can also become insecure due to advances in cryptanalysis.
 
 Schneier {{SchneierSecurity}} in his essay highlights several challenges that hinder mechanisms for secure software update of IoT devices. First, there is a lack of incentives for manufactures, vendors and others on the supply chain to issue updates for their devices. Second, parts of the software running on IoT devices is simply a binary blob without any source code available. Since the complete source code is not available, no patches can be written for that piece of code. Lastly Schneier points out that even when updates are available, users generally have to manually download and install them. However, users are never alerted about security updates and at many times do not have the necessary expertise to manually administer the required updates.
 
 The FTC staff report on Internet of Things - Privacy & Security in a Connected World {{FTCreport}} and the Article 29 Working Party Opinion 8/2014 on the Recent Developments on the Internet of Things {{Article29}} also document the challenges for secure remote software update of IoT devices. They note that even providing such a software update capability may add new vulnerabilities for constrained devices. For example, a buffer overflow vulnerability in the implementation of a software update protocol (TR69) {{TR69}} and an expired certificate in a hub device {{wink}} demonstrate how the software update process itself can introduce vulnerabilities. 
 
-Powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world. However, resource-constrained devices typically do not have any operating system and are often not equipped with a memory management unit or similar tools. Therefore, they might require more specialized solutions. An important requirement for secure software and firmware updates is source authentication. Source authentication requires the resource-constrained things to implement public-key signature verification algorithms. As stated in {{sec5-1-1}}, resource-constrained things have limited amount of computational capabilities and energy supply available which can hinder the amount and frequency of cryptographic processing that they can perform. In addition to source authentication, software updates might require confidential delivery over a secure (encrypted) channel. The complexity of broadcast encryption can force the usage of point-to-point secure links - however, this increases the duration of a software update in a large system. Alternatively, it may force the usage of solutions in which the software update is delivered to a gateway, and then distributed to the rest of the system with a network key. Sending large amounts of data that later needs to be assembled and verified over a secure channel can consume a lot of energy and computational resources. Correct scheduling of the software updates is also a crucial design challenge. For example, a user of connected light bulbs would not want them to update and restart at night. More importantly, the user would not want all the lights to update at the same time. 
+Powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world. However, resource-constrained devices typically do not have any operating system and are often not equipped with a memory management unit or similar tools. Therefore, they might require more specialized solutions. 
 
-Finally, it is also important to mention previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC5652}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. Finally, a new working group called Firmware UpDate (fud) {{WG-FUD}} is currently being chartered at the IETF. The working group aims to standardize a new version {{RFC4108}} that reflects the best current practices for firmware update based on experience with IoT deployments. It will specifically work on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package.
+An important requirement for secure software and firmware updates is source authentication. Source authentication requires the resource-constrained things to implement public-key signature verification algorithms. As stated in {{sec5-1-1}}, resource-constrained things have limited amount of computational capabilities and energy supply available which can hinder the amount and frequency of cryptographic processing that they can perform. In addition to source authentication, software updates might require confidential delivery over a secure (encrypted) channel. The complexity of broadcast encryption can force the usage of point-to-point secure links - however, this increases the duration of a software update in a large system. Alternatively, it may force the usage of solutions in which the software update is delivered to a gateway, and then distributed to the rest of the system with a network key. Sending large amounts of data that later needs to be assembled and verified over a secure channel can consume a lot of energy and computational resources. Correct scheduling of the software updates is also a crucial design challenge. For example, a user of connected light bulbs would not want them to update and restart at night. More importantly, the user would not want all the lights to update at the same time. 
+
+Software updates in IoT systems are also needed to update old and insecure cryptographic primitives. However, many IoT systems, some of which are already deployed, are not designed with provisions for cryptographic agility. For example, many devices come with a wireless radio that has an AES128 hardware co-processor. These devices solely rely on the co-processor for encrypting and authenticating messages. A software update adding support for new cryptographic algorithms implemented solely in software might not fit on these devices due to limited memory, or might drastically hinder its operational performance. This can lead to the use of old and insecure devices. Therefore, it is important to account for the fact that cryptographic algorithms would need to be updated and consider the following when planning for cryptographic agility:
+
+1. Would it be safe to use the existing cryptographic algorithms available on the device for updating with new cryptographic algorithms that are more secure?
+2. Will the new software-based implementation fit on the device given the limited resources?
+3. Would the normal operation of existing IoT applications on the device be severely hindered by the update?
+
+Finally, we would like to highlight the previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC5652}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. Finally, a new working group called Software Updates for Internet of Things (suit) {{WG-SUIT}} is currently being chartered at the IETF. The working group aims to standardize a new version {{RFC4108}} that reflects the best current practices for firmware update based on experience with IoT deployments. It will specifically work on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package.
 
 
 ## End-of-Life {#sec5-5}
@@ -792,26 +767,7 @@ This situation would require us to move to quantum-resistant alternatives, in pa
 
 We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography. {{RFC7696}} provides guidelines for cryptographic algorithm agility.
 
-## Cryptographic agility {#sec5-9}
-
-IoT applications can involve the deployment of IoT devices remaining operational for several decades.
-However, cryptographic algorithms such as block ciphers, hash functions, or asymmetric primitives might not remain secure fror such a long period of time.
-For instance, NIST has recently standarized a new hash function, SHA-3, that might replace at some of time SHA-2.
-Similarly, NIST has started a process {{nist_pq}} to standarize new quantum-resistant public-key primitives that will replace existing ones.
-
-IoT systems should be engineered in such a way that old cryptographic primitives can be replaced by new ones.
-However, many IoT systems -- already deployed -- have not been designed with this mind.
-For example, many devices come with a wireless radio outfitted with an AES128 hardware coprocessor in charge of encrypting and authenticating the exchanged messages.
-However, once a quantum-computer is available AES128 will offer a security level of roughly 64 bits due to Grover's algorithm.
-In this situation, many IoT systems will have to deal with several challenges:
-
-1. Which protocols should be used to  update the device with a new block cipher, e.g., AES256, offering a proper security level?
-2. Will the new software-based implementation of the new block cipher fit in the device. Recall that many devices have limited storage and the device's memory is frequently almost full.
-3. Block ciphers with a longer block size are often slower or require more energy. Will the operation of existing IoT applications be affected by the update?
-
-Similar concerns arise if other cryptographic primitives -- such as a hash function, a public-key encryption algorithm, or a digital signature scheme -- need to be replaced, in particular, if performance features differ, e.g., regarding CPU or bandwidth requirements.
-
-## Privacy protection {#sec5-10}
+## Privacy protection {#sec5-9}
 
 Users will be surrounded by hundreds of connected IoT devices. Even if the communication links are encrypted and protected, information about the users might be collected for different purposes affecting their privacy. In {{Ziegeldorf}}, privacy in IoT is defined as the threefold guarantee to the user for:
 1. awareness of privacy risks imposed by smart things and services surrounding the data subject,
@@ -828,22 +784,20 @@ Based on this definition, several privacy threats and challenges have been docum
 6. Inventory attacks - happen if specific information about (smart) objects in possession of a user is disclosed.
 7. Linkage - is about when information of two of more IoT systems is combined so that a broader view on the personal data is created.
 
-When IoT systems are deployed, the above issues should be considered to ensure that private data remains private. 
-These issues are particularly challenging in enviroments in which multiple users with different privacy preferences interact with the same IoT devices, e.g., an IoT device controlled by user A (low privacy settings) might leak private information about another user B (high privacy settings).
-How to deal with these threats in practice is an area of ongoing research.
+When IoT systems are deployed, the above issues should be considered to ensure that private data remains private. These issues are particularly challenging in environments in which multiple users with different privacy preferences interact with the same IoT devices. For example, an IoT device controlled by user A (low privacy settings) might leak private information about another user B (high privacy settings). How to deal with these threats in practice is an area of ongoing research.
 
 
-## Data leakage {#sec5-11}
+## Data leakage {#sec5-10}
 
 Many IoT devices are resource-constrained and often deployed in unattended environments. Some of these devices can also be purchased off-the-shelf or online without any credential-provisioning process. Therefore, an attacker can have direct access to the device and apply advanced techniques to retrieve information that a traditional black box model does not consider. Example of those techniques are side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:
 
 1. long term keys. These long term keys can be extracted by means of a side-channel attack or reverse engineering. If these keys are exposed, then they might be used to perform attacks on devices deployed in other locations. 
 2. source code that might allow the attacker to determine bugs or find exploits to perform other types of attacks. The attacker might also just sell the source code.
-3. proprietary algorithms. The attacker can analyze these algorithms gaining valuable know-how. The attacker can alsocreate copies of the product (based on those propietary algorithms) or modify the algorithms to perform more advanced attacks.
+3. proprietary algorithms. The attacker can analyze these algorithms gaining valuable know-how. The attacker can also create copies of the product (based on those proprietary algorithms) or modify the algorithms to perform more advanced attacks.
 
 Protection against such data leakage patterns is not trivial since devices are inherently resource-constrained. An open question is whether there are any viable techniques to protect IoT devices and the data in the devices in such an adversarial model.
 
-## Trustworthy IoT Operation {#sec5-12}
+## Trustworthy IoT Operation {#sec5-11}
 
 Flaws in the design and implementation of a secure IoT device and network can lead to security vulnerabilities. For instance, a flaw is the distribution of an Internet-connected IoT device in which a default password is used in all devices. Many IoT devices can be found in the Internet by means of tools such as Shodan {{shodan}}, and if they have any vulnerability, it can then be exploited at scale, for example, to launch DDoS attacks. For instance, Dyn, a major DNS, was attacked by means of a DDoS attack originated from a large IoT botnet composed of thousands of compromised IP-cameras {{dyn-attack}}. Open questions in this area are:
 
