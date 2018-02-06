@@ -21,6 +21,7 @@ informative:
   ID-OSCOAP: I-D.ietf-core-object-security
   ID-multicast: I-D.tiloca-core-multicast-oscoap
   ID-c2pq: I-D.hoffman-c2pq
+  ID-lpwan: I-D.ietf-lpwan-overview
   ENISA_ICS:
     title: "Communication network dependencies for ICS/SCADA Systems"
     date: 2017-02
@@ -70,6 +71,7 @@ informative:
   RFC8046:  
   RFC8105:
   RFC8152:
+  RFC8240:
   AUTO-ID:
     title: AUTO-ID LABS
     date: 2010-09
@@ -94,6 +96,10 @@ informative:
     date: 2013
     seriesinfo:
       Security and Communication Networks - Special Issue on Security in a Completely Interconnected World
+  WG-LPWAN:
+    title: IETF Low Power Wide-Area Networks Working Group
+    seriesinfo:
+      Web: https://datatracker.ietf.org/wg/lpwan/
   WG-6LoWPAN:
     title: IETF IPv6 over Low power WPAN (6lowpan) Working Group
     seriesinfo:
@@ -274,7 +280,20 @@ informative:
   SEAL:
     title: Simple Encrypted Arithmetic Library - SEAL
     seriesinfo:
-      Web: https://sealcrypto.codeplex.com/
+      Web: https://www.microsoft.com/en-us/research/publication/simple-encrypted-arithmetic-library-seal-v2-0/
+  ChaCha:
+    title: ChaCha, a variant of Salsa20
+    author:
+    - ins: D. J. Bernstein
+    seriesinfo:
+      Web: http://cr.yp.to/chacha/chacha-20080128.pdf
+  ecc25519:
+    title: "Curve25519: new Diffie-Hellman speed records"
+    author:
+    - ins: D. J. Bernstein
+    seriesinfo:
+      Web: https://cr.yp.to/ecdh/curve25519-20060209.pdf
+
 author:
 - name: Oscar Garcia-Morchon
   ins: O. Garcia-Morchon
