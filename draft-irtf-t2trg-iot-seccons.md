@@ -729,7 +729,7 @@ Some ideas are being explored to address this issue. One of this approaches refe
 
 # Conclusions and Next Steps {#sec6}
 
-This Internet Draft provides IoT security researchers, system designers and implementers with an overview of both operational and security requirements in the IP-based Internet of Things. We discuss a general threat model, threats, state-of-the-art, and security challenges.
+This Internet Draft provides IoT security researchers, system designers and implementers with an overview of security requirements in the IP-based Internet of Things. We discuss the security threats, state-of-the-art, and challenges.
 
 Although plenty of steps have been realized during the last few years (summarized in {{sec4-1}}) and many organizations are publishing general recommendations ({{sec4-3}}) describing how IoT should be secured, there are many challenges ahead that require further attention. Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring trustworthy IoT operation.
 
