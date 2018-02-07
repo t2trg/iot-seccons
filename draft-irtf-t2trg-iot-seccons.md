@@ -261,10 +261,6 @@ informative:
     title: Wink’s Outage Shows Us How Frustrating Smart Homes Could Be
     seriesinfo:
       Web: http://www.wired.com/2015/04/smart-home-headaches/  
-  iotsu:
-    title: "Patching the Internet of Things: IoT Software Update Workshop 2016"
-    seriesinfo:
-      Web: https://www.ietf.org/blog/2016/07/patching-the-internet-of-things-iot-software-update-workshop-2016/
   cctv:
     title: "Backdoor In MVPower DVR Firmware Sends CCTV Stills To an Email Address In China"
     seriesinfo:
@@ -632,7 +628,7 @@ Other guideline and recommendation documents may exist or may later be published
 
 Recently the Federal Communications Commission (FCC) {{FCC}} has stated the need for additional regulation of IoT systems. FCC identifies this as a missing component, especially for Federal Information Systems (FIS). Today, security in the US FIS is regulated according to Federal Information Security Management Act (FISMA). From this law, NIST has derived a number of new documents to categorize FIS and determine minimum security requirements for each category. These minimum security requirements are specified in NIST SP 800-53r4 {{NIST-SP80053}}. 
 
-Even with strong regulations in place, the question remains as to how such regulations can be applied in practice to non-federal deployments, such as industrial, homes, offices, or smart cities. Each of them exhibits unique features, involves very diverse types of users, has different operational requirements, and combines IoT devices from multiple manufacturers. Future regulations should therefore consider such diverse deployment scenarios.
+
 
 
 # Challenges for a Secure IoT {#sec5}
@@ -754,7 +750,7 @@ Software updates in IoT systems are also needed to update old and insecure crypt
 2. Will the new software-based implementation fit on the device given the limited resources?
 3. Would the normal operation of existing IoT applications on the device be severely hindered by the update?
 
-Finally, we would like to highlight the previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC5652}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the workshop and the proposed next steps have been documented {{iotsu}}. Finally, a new working group called Software Updates for Internet of Things (suit) {{WG-SUIT}} is currently being chartered at the IETF. The working group aims to standardize a new version {{RFC4108}} that reflects the best current practices for firmware update based on experience with IoT deployments. It will specifically work on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package.
+Finally, we would like to highlight the previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC5652}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the recommendations to the standards community derived from the discussions during that workshop have been documented {{RFC8240}}. Finally, a new working group called Software Updates for Internet of Things (suit) {{WG-SUIT}} is currently being chartered at the IETF. The working group aims to standardize a new version {{RFC4108}} that reflects the best current practices for firmware update based on experience with IoT deployments. It will specifically work on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package.
 
 
 ## End-of-Life {#sec5-5}
@@ -795,7 +791,9 @@ We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-re
 
 ## Privacy protection {#sec5-9}
 
-Users will be surrounded by hundreds of connected IoT devices. Even if the communication links are encrypted and protected, information about the users might be collected for different purposes affecting their privacy. In {{Ziegeldorf}}, privacy in IoT is defined as the threefold guarantee to the user for:
+People will eventually be surrounded by hundreds of connected IoT devices. Even if the communication links are encrypted and protected, information about the people might still be collected for different purposes. Such kind of pervasive monitoring can negatively impact their privacy. For instance, imagine the scenario where a static presence sensor emits a packet due to the presence/absence of people in its vicinity. In such a scenario, anyone who can observe the packet, can gather critical privacy-sensitive information. 
+
+Ziegeldorf {{Ziegeldorf}} defines privacy in IoT as a threefold guarantee:
 1. awareness of privacy risks imposed by smart things and services surrounding the data subject,
 2. individual control over the collection and processing of personal information by the surrounding smart things,
 3. awareness and control of subsequent use and dissemination of personal information by those entities to any entity outside the subject's personal control sphere.
@@ -821,7 +819,8 @@ Many IoT devices are resource-constrained and often deployed in unattended envir
 2. source code that might allow the attacker to determine bugs or find exploits to perform other types of attacks. The attacker might also just sell the source code.
 3. proprietary algorithms. The attacker can analyze these algorithms gaining valuable know-how. The attacker can also create copies of the product (based on those proprietary algorithms) or modify the algorithms to perform more advanced attacks.
 
-Protection against such data leakage patterns is not trivial since devices are inherently resource-constrained. An open question is whether there are any viable techniques to protect IoT devices and the data in the devices in such an adversarial model.
+
+One existing solution to prevent such data leaks is the use of a secure element, a tamper-resistant device that is capable of securely hosting applications and their confidential data. Another potential solution is the usage of of Physical Unclonable Function (PUFs) that serves as unique digital fingerprint of a hardware device. PUFs can also enable other functionalities such as secure key storage. Protection against such data leakage patterns is non-trivial since devices are inherently resource-constrained. An open question is whether there are any viable techniques to protect IoT devices and the data in the devices in such an adversarial model.
 
 ## Trustworthy IoT Operation {#sec5-11}
 
@@ -837,8 +836,7 @@ Some ideas are being explored to address this issue. One of this approaches refe
 
 This Internet Draft provides IoT security researchers, system designers and implementers with an overview of both operational and security requirements in the IP-based Internet of Things. We discuss a general threat model, threats, state-of-the-art, and security challenges.
 
-Although plenty of steps have been realized during the last few years (summarized in {{sec4-1}}) and many organizations are publishing general recommendations ({{sec4-3}}) describing how IoT should be secured, there are many challenges ahead that require further attention. Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring trustworthy IoT operation. All these problems are important; however, different deployment environments have different operational and security demands. Thus, a potential approach is the definition and standardization of security profiles, each with specific mitigation strategies according to the risk assessment associated with the security profile. Such an approach would ensure minimum security capabilities in different environments while ensuring interoperability.
-
+Although plenty of steps have been realized during the last few years (summarized in {{sec4-1}}) and many organizations are publishing general recommendations ({{sec4-3}}) describing how IoT should be secured, there are many challenges ahead that require further attention. Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention -- where data could be cryptographic keys, personal data, or even algorithms -- and ensuring trustworthy IoT operation.
 
 # Security Considerations {#sec7}
 
