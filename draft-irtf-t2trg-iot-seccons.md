@@ -322,7 +322,7 @@ pi:
 
 --- abstract
 
-The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs for IoT systems are well-recognized and many standardization steps to provide security have been taken, for example, the specification of Constrained Application Protocol (CoAP) secured over Datagram Transport Layer Security (DTLS). However, security challenges still exist, not only because there are some use cases that lack a suitable solution, but also because many IoT devices and systems have been designed and deployed with very limited security capabilities. In this document, we first discuss the various stages in the lifecycle of a thing. Next, we document the security threats to a thing and the challenges that one might face to protect against these threats. Lastly, we discuss the next steps needed to facilitate the deployment of secure IoT systems. This document can be used by IoT standards specifications as a reference for details about security considerations applying to the specified protocol.
+The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs for IoT systems are well-recognized and many standardization steps to provide security have been taken, for example, the specification of Constrained Application Protocol (CoAP) secured with Datagram Transport Layer Security (DTLS). However, security challenges still exist, not only because there are some use cases that lack a suitable solution, but also because many IoT devices and systems have been designed and deployed with very limited security capabilities. In this document, we first discuss the various stages in the lifecycle of a thing. Next, we document the security threats to a thing and the challenges that one might face to protect against these threats. Lastly, we discuss the next steps needed to facilitate the deployment of secure IoT systems. This document can be used by IoT standards specifications as a reference for details about security considerations applying to the specified protocol.
 
 This document is a product of the IRTF Thing-to-Thing Research Group (T2TRG).
 
@@ -336,17 +336,12 @@ The Internet of Things (IoT) denotes the interconnection of highly heterogeneous
 
 The things that are part of the Internet of Things are computing devices that understand and react to the environment they reside in. These things are also often referred to as smart objects or smart devices. The introduction of IPv6 {{RFC6568}} and CoAP {{RFC7252}} as fundamental building blocks for IoT applications allows connecting IoT hosts to the Internet. This brings several advantages including: (i) a homogeneous protocol ecosystem that allows simple integration with other Internet hosts; (ii) simplified development for devices that significantly vary in their capabilities; (iii) a unified interface for applications, removing the need for application-level proxies. These building blocks greatly simplify the deployment of the envisioned scenarios which range from building automation to production environments and personal area networks.
 
-This document presents an overview of important security aspects for the Internet of Things. We begin by discussing the lifecycle of a thing and giving general definitions of the security building blocks in {{sec2}}. In {{sec3}}, we discuss security threats for the IoT and methodologies for managing these threats when designing a secure system. {{sec4}} reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations. {{sec5}} identifies remaining challenges for a secure IoT and discusses potential solutions. {{sec6}} includes final remarks and conclusions. This document can be used by IoT standards specifications as a reference for details about security considerations applying to the specified system or protocol.
+This document presents an overview of important security aspects for the Internet of Things. We begin by discussing the lifecycle of a thing in {{sec2}}. In {{sec3}}, we discuss security threats for the IoT and methodologies for managing these threats when designing a secure system. {{sec4}} reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations. {{sec5}} identifies remaining challenges for a secure IoT and discusses potential solutions. {{sec6}} includes final remarks and conclusions. This document can be used by IoT standards specifications as a reference for details about security considerations applying to the specified system or protocol.
 
 The first draft version of this document was submitted in March 2011. Initial draft versions of this document were presented and discussed during the CORE meetings at IETF 80 and later. Discussions on security lifecycle at IETF 92 (March 2015) evolved into more general security considerations. Thus, the draft was selected to address the T2TRG work item on the security considerations and challenges for the Internet of Things. Further updates of the draft were presented and discussed during the T2TRG meetings at IETF 96 (July 2016) and IETF 97 (November 2016) and at the joint interim in Amsterdam (March 2017). This document has been reviewed by, commented on, and discussed extensively for a period of nearly six years by a vast majority of T2TRG and related group members; the number of which certainly exceeds 100 individuals. It is the consensus of T2TRG that the security considerations described in this document should be published in the IRTF Stream of the RFC series. This document does not constitute a standard.
 
 
-# Motivation and background {#sec2}
-
-
-This section begins by describing the lifecycle of a thing. It then details the five different security building blocks that can be used for analyzing and classifying the security aspects of the IoT. 
-
-## The Thing Lifecycle {#sec2-1}
+# The Thing Lifecycle {#sec2}
 
 The lifecycle of a thing refers to the operational phases of a thing in the context of a given application or use case. {{fig1}} shows the generic phases of the lifecycle of a thing. This generic lifecycle is applicable to very different IoT applications and scenarios. For instance, {{RFC7744}} provides an overview of relevant IoT use cases.
 
@@ -376,69 +371,15 @@ Bootstrapping  /      Maintenance &   \     Maintenance &
 ~~~~
 {: #fig1 title="The lifecycle of a thing in the Internet of Things"}
 
-## Security building blocks {#sec2-2}
 
 Security is a key requirement in any communication system. However, security is an even more critical requirement in real-world IoT deployments for several reasons. First, compromised IoT systems can not only endanger the privacy and security of a user, but can also cause physical harm. This is because IoT systems often comprise sensors, actuators and other connected devices in the physical environment of the user which could adversely affect the user if they are compromised. Second, a vulnerable IoT system means that an attacker can alter the functionality of a device from a given manufacturer. This not only affects the manufacturer's brand image, but can also leak information that is very valuable for the manufacturer (such as proprietary algorithms). Third, the impact of attacking an IoT system goes beyond a specific device or an isolated system since compromised IoT systems can be misused at scale. For example, they may be used to perform a Distributed Denial of Service (DDoS) attack that limits the availability of other networks and services. The fact that many IoT systems rely on standard IP protocols allows for easier system integration, but this also makes standard attacks applicable to a wide number of devices deployed in multiple systems. This results in new requirements regarding the implementation of security.
 
-The term security subsumes a wide range of primitives, protocols, and procedures. Firstly, it includes the basic provision of security services that include confidentiality, authentication, integrity, authorization, source authentication, and availability along with some augmented services, such as duplicate detection and detection of stale packets (timeliness). These security services can be implemented by means of a combination of cryptographic mechanisms, such as block ciphers, hash functions, or signature algorithms, and non-cryptographic mechanisms, which implement authorization and other security policy enforcement aspects. For ensuring security in IoT networks, we should not only focus on the required security services, but also pay special attention to how these services are realized in the overall system and how the security functionalities are executed in practice. To this end, we consider five major "building blocks" to analyze and classify security aspects for IoT:
+The term security subsumes a wide range of primitives, protocols, and procedures. Firstly, it includes the basic provision of security services that include confidentiality, authentication, integrity, authorization, source authentication, and availability along with some augmented services, such as duplicate detection and detection of stale packets (timeliness). These security services can be implemented by means of a combination of cryptographic mechanisms, such as block ciphers, hash functions, or signature algorithms, and non-cryptographic mechanisms, which implement authorization and other security policy enforcement aspects. For ensuring security in IoT networks, we should not only focus on the required security services, but also pay special attention to how these services are realized in the overall system and how the security functionalities are executed in practice. 
 
-1. IoT security architecture: refers to the system-level elements involved in the management of security relationships between things (for example, centralized or distributed). For instance, a smart home could rely on a centralized key distribution center in charge of managing cryptographic keys, devices, users, access control and privacy policies. 
-
-2. The security model within a thing: describes the way security parameters, keys, processes, and applications are managed within a smart object. This includes aspects such as application process separation, secure storage of key materials, etc. For instance, some smart objects might have extremely limited resources and limited capabilities to protect secret keys. In contrast, other devices used in critical applications, such as a pacemaker, may rely on methods to protect cryptographic keys and functionality.
-
-3. Secure bootstrapping: denotes the process by which a thing securely joins an IoT system at a given location and point of time. For instance, bootstrapping of a connected camera can include the authentication and authorization of the device as well as the transfer of security parameters necessary for operation in a given network.
-
-4. Network security: describes the mechanisms applied within a network to ensure secure operation. Specifically, it prevents attackers from endangering or modifying the expected operation of a smart object. It also protects the network itself from malicious things. Network security can include several mechanisms ranging from data link layer security, secure routing, and network layer security.
-
-5. Application security: describes mechanisms to allow secure transfer of application data. The security may be implemented at different layers of the Internet protocol suite. For instance, assume a smart object such as an environmental sensor that is connected to a backend system. Application security here can refer to the exchange of secure blocks of data such as measurements between the sensor and the backed, or it can also refer to a software update for the smart object. This data is exchanged end-to-end independently of the underlying network infrastructure, for example through proxies or other store-and-forward mechanisms.
-
-
-~~~~
-            ..........................
-            :           +-----------+:
-            :       *+*>|Application|*****
-            :       *|  +-----------+:   *
-            :       *|  +-----------+:   *
-            :       *|->| Transport |:   *
-            :    * _*|  +-----------+:   *
-            :    *|  |  +-----------+:   *
-            :    *|  |->|  Network  |:   *
-            :    *|  |  +-----------+:   *
-            :    *|  |  +-----------+:   *    *** Bootstrapping
-            :    *|  +->|     L2    |:   *    ~~~ Transport Security
-            :    *|     +-----------+:   *    ''' Object Security
-            :+--------+              :   *
-            :|Security| Configuration:   *
-            :|Service |   Entity     :   *
-            :+--------+              :   *
-            :........................:   *
-                                         *
-.........................                *  .........................
-:+--------+             :                *  :             +--------+:
-:|Security|   Node B    :                *  :   Node A    |Security|:
-:|Service |             :                *  :             |Service |:
-:+--------+             :                *  :             +--------+:
-:    |     +-----------+:                *  :+-----------+     |*   :
-:    |  +->|Application|:                ****|Application|<*+* |*   :
-:    |  |  +-----------+:''''''''''''''''''''+-----------+  |* |*   :
-:    |  |  +-----------+:                   :+-----------+  |* |*   :
-:    |  |->| Transport |~~~~~~~~~~~~~~~~~~~~~| Transport |<-|* |*   :
-:    |__|  +-----------+: ................. :+-----------+  |*_|*   :
-:       |  +-----------+: : +-----------+ : :+-----------+  | *     :
-:       |->|  Network  |: : |  Network  | : :|  Network  |<-|       :
-:       |  +-----------+: : +-----------+ : :+-----------+  |       :
-:       |  +-----------+: : +-----------+ : :+-----------+  |       :
-:       +->|     L2    |: : |     L2    | : :|     L2    |<-+       :
-:          +-----------+: : +-----------+ : :+-----------+          :
-:.......................: :...............: :.......................:                 
-~~~~
-{: #fig2 title="Overview of Security Mechanisms"}
-
-Inspired by the security framework for routing over low power and lossy network {{RFC7416}}, we show an example security model of a smart object and illustrate how different security concepts and lifecycle phases map to the Internet communication stack. Assume a centralized architecture in which a configuration entity stores and manages the identities of the things associated with the system along with their cryptographic keys. During the bootstrapping phase, each thing executes the bootstrapping protocol with the configuration entity, thus obtaining the required device identities and the keying material. The security service on a thing in turn stores the received keying material for the network layer and application security mechanisms for secure communication. Things can then securely communicate with each other during their operational phase by means of the employed network and application security mechanisms.
 
 # Security Threats and Managing Risk {#sec3}
 
-Security threats in related IP protocols have been analyzed in multiple documents including HTTPS {{RFC2818}}, COAP {{RFC7252}}, 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole.  Note that these set of threats might go beyond   the scope of Internet protocols but we gather them here for the sake of completeness.  We also note that these threats can be classified according to either (i) the thing's lifecycle phases (when does the threat occur?) or (ii) the security building blocks (which functionality is affected by the threat?):
+Security threats in related IP protocols have been analyzed in multiple documents including HTTPS {{RFC2818}}, COAP {{RFC7252}}, 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole.  Note that these set of threats might go beyond   the scope of Internet protocols but we gather them here for the sake of completeness:
 
 1. Cloning of things: During the manufacturing process of a thing, an untrusted factory can easily clone the physical characteristics, firmware/software, or security configuration of the thing. Deployed things might also be compromised and their software reverse engineered allowing for cloning or software modifications. Such a cloned thing may be sold at a cheaper price in the market, and yet can function normally as a genuine thing. For example, two cloned devices can still be associated and work with each other. In the worst-case scenario, a cloned device can be used to control a genuine device or perform an attack. One should note here, that an untrusted factory may also change functionality of the cloned thing, resulting in degraded functionality with respect to the genuine thing (thereby, inflicting potential damage to the reputation of the original thing manufacturer). Moreover, additional functionality can be introduced in the cloned thing, an example of such functionality is a backdoor.
 
@@ -548,52 +489,6 @@ The Internet Key Exchange (IKEv2)/IPsec -- as well as the less used Host Identit
 Migault et al. {{ID-dietesp}} are working on a compressed version of IPsec so that it can easily be used by resource-constrained IoT devices. They rely on the Internet Key Exchange Protocol version 2 (IKEv2) for negotiating the compression format.
 
 The Extensible Authentication Protocol (EAP) {{RFC3748}} is an authentication framework supporting multiple authentication methods. EAP runs directly over the data link layer and, thus, does not require the deployment of IP. It supports duplicate detection and retransmission, but does not allow for packet fragmentation. The Protocol for Carrying Authentication for Network Access (PANA) is a network-layer transport for EAP that enables network access authentication between clients and the network infrastructure. In EAP terms, PANA is a UDP-based EAP lower layer that runs between the EAP peer and the EAP authenticator.
-
-
-{{fig4}} depicts the relationships between the discussed protocols in the context of the security terminology introduced in {{sec2}}.
-
-
-~~~~
-            ..........................
-            :           +-----------+:
-            :       *+*>|Application|*****     *** Bootstrapping
-            :       *|  +-----------+:   *     ### Transport Security 
-            :       *|  +-----------+:   *     === Network security
-            :       *|->| Transport |:   *     ''' Object security
-            :    * _*|  +-----------+:   *
-            :    *|  |  +-----------+:   *
-            :    *|  |->|  Network  |:   *--> -PANA/EAP
-            :    *|  |  +-----------+:   *    -HIP
-            :    *|  |  +-----------+:   *
-            :    *|  +->|     L2    |:   *     ## DTLS
-            :    *|     +-----------+:   *     '' OSCOAP
-            :+--------+              :   *
-            :|Security| Configuration:   *     [] HIP,IKEv2
-            :|Service |   Entity     :   *     [] ESP/AH
-            :+--------+              :   *
-            :........................:   *
-                                         *
-.........................                *    .........................
-:+--------+             :                *    :             +--------+:
-:|Security|   Node B    :    Secure      *    :   Node A    |Security|:
-:|Service |             :    routing     *    :             |Service |:
-:+--------+             :   framework    *    :             +--------+:
-:    |     +-----------+:        |       **** :+-----------+     |*   :
-:    |  +->|Application|:''''''''|'''''''''''':|Application|<*+* |*   :
-:    |  |  +----##-----+:        |            :+----##-----+  |* |*   :
-:    |  |  +----##-----+:        |            :+----##-----+  |* |*   :
-:    |  |->| Transport |#########|#############| Transport |<-|* |*   :
-:    |__|  +----[]-----+:  ......|..........  :+----[]-----+  |*_|*   :
-:       |  +====[]=====+=====+===========+=====+====[]=====+  | *     :
-:       |->|| Network  |:  : |  Network  | :  :|  Network ||<-|       :
-:       |  +|----------+:  : +-----------+ :  :+----------|+  |       :
-:       |  +|----------+:  : +-----------+ :  :+----------|+  |       :
-:       +->||    L2    |:  : |     L2    | :  :|     L2   ||<-+       :
-:          +===========+=====+===========+=====+===========+          :
-:.......................:  :...............:  :.......................:
-           
-~~~~
-{: #fig4  title="Relationships between IP-based security protocols"}
 
 
 ## IoT Security Guidelines {#sec4-3}
