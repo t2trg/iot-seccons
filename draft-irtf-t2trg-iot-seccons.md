@@ -13,7 +13,6 @@ informative:
   ID-aceoauth: I-D.ietf-ace-oauth-authz
   ID-Daniel: I-D.daniel-6lowpan-security-analysis
   ID-HIP-DEX: I-D.moskowitz-hip-rg-dex
-  ID-Nikander: I-D.nikander-esp-beet-mode
   ID-Moore: I-D.moore-iot-security-bcp
   ID-MUD: I-D.ietf-opsawg-mud
   ID-Williams: I-D.barrett-mobile-dtls
@@ -52,12 +51,10 @@ informative:
   RFC6749:
   RFC6973:
   RFC7049:
-  RFC7159:
   RFC7228:
   RFC7252:
   RFC7296:
   RFC7401:
-  RFC7416:
   RFC7515:
   RFC7516:
   RFC7517:
@@ -72,6 +69,7 @@ informative:
   RFC8105:
   RFC8152:
   RFC8240:
+  RFC8259:
   AUTO-ID:
     title: AUTO-ID LABS
     date: 2010-09
@@ -440,7 +438,7 @@ Baker and Meyer {{RFC6272}} identify which IP protocols can be used in smart gri
 
 The Low Power Wide-Area Network (LPWAN) working {{WG-LPWAN}} group is analyzing features, requirements, and solutions to adapt IP-based protocols to networks such as LORA {{lora}}, SigFox {{sigfox}}, NB-IoT {{nbiot}}, etc. These networking technologies enable a smart thing to run for years on a single coin-cell by relying on a star network topology and using optimized radio modulation with frame sizes in the order of tens of bytes. Such networks bring new security challenges since most existing security mechanism do not work well with such resource constraints.
 
-JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC7159}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding cryptographic keys, encrypted content, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Encryption (JWE) {{RFC7516}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
+JavaScript Object Notation (JSON) is a lightweight text representation format for structured data {{RFC8259}}. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding cryptographic keys, encrypted content, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) {{RFC7517}}, JSON Web Encryption (JWE) {{RFC7516}}, JSON Web Signatures (JWS) {{RFC7515}} and JSON Web Token (JWT) {{RFC7519}}.
 
 An alternative to JSON, Concise Binary Object Representation (CBOR) {{RFC7049}} is a concise binary data format that is used for serialization of structured data. It is designed for resource-constrained nodes and therefore it aims to provide a fairly small message size with minimal implementation code, and extensibility without the need for version negotiation. CBOR Object Signing and Encryption (COSE) {{RFC8152}} specifies how to encode cryptographic keys, message authentication codes, encrypted content, and signatures with CBOR.
 
