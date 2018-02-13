@@ -1,7 +1,7 @@
 ---
 abbrev: IoT Security
 title: State-of-the-Art and Challenges for the Internet of Things Security
-docname: draft-irtf-t2trg-iot-seccons-10
+docname: draft-irtf-t2trg-iot-seccons-11
 cat: info
 stand_alone: true
 informative:
