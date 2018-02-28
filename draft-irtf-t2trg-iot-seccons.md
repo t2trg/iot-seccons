@@ -154,10 +154,6 @@ informative:
     title: 'LoRa - Wide Area Networks for IoT'
     seriesinfo:
       Web: https://www.lora-alliance.org/     
-  nist_pq:
-    title: 'NIST Post-Quantum-Cryptography Project'	
-    seriesinfo:
-      Web: https://csrc.nist.gov/Projects/Post-Quantum-Cryptography 
   nist_lightweight_project:
     title: 'NIST lightweight Project'
     seriesinfo:
