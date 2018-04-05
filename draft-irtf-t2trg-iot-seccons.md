@@ -147,7 +147,7 @@ informative:
     seriesinfo:
       Web: https://www.ecs-org.eu/
   GDPR:
-    title: General Data Protection Regulation
+    title: The EU General Data Protection Regulation
     seriesinfo:
       Web: https://www.eugdpr.org/
   shodan:
@@ -377,7 +377,7 @@ The term security subsumes a wide range of primitives, protocols, and procedures
 
 # Security Threats and Managing Risk {#sec3}
 
-Security threats in related IP protocols have been analyzed in multiple documents including HTTPS {{RFC2818}}, COAP {{RFC7252}}, 6LoWPAN {{RFC4919}}, ANCP {{RFC5713}}, DNS security threats {{RFC3833}}, IPv6 ND {{RFC3756}}, and PANA {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole.  Note that these set of threats might go beyond   the scope of Internet protocols but we gather them here for the sake of completeness:
+Security threats in related IP protocols have been analyzed in multiple documents including Hypertext Transfer Protocol (HTTP) over Transport Layer Security (TLS) (HTTPS) {{RFC2818}}, Constrained Application Protocol (COAP) {{RFC7252}}, IPv6 over Low-Power Wireless Personal Area Networks (6LoWPAN) {{RFC4919}}, Access Node Control Protocol (ANCP) {{RFC5713}}, Domain Name System (DNS) {{RFC3833}}, IPv6 Neighbor Discovery (ND) {{RFC3756}}, and  Protocol for Carrying Authentication and Network Access (PANA) {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole.  Note that these set of threats might go beyond   the scope of Internet protocols but we gather them here for the sake of completeness:
 
 1. Vulnerable Software/Code: Things in the Internet of Things rely on software that might contain severe bugs and/or bad design choices. This makes the things vulnerable to many different types of attacks, depending on the criticality of the bugs, e.g., buffer overflows or lack of authentication. This can be considered as one of the most important security threat. The large-scale distributed denial-of-service (DDoS) attack, popularly known as the Mirai botnet, was caused by things that had well-known or easy-to-guess passwords for configuration.
 
@@ -680,50 +680,49 @@ We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-re
 
 ## Privacy protection {#sec5-9}
 
-People will eventually be surrounded by hundreds of connected IoT devices. Even if the communication links are encrypted and protected, information about people might still be collected or processed for different purposes.
-The fact that IoT devices might enable any type of pervasive monitoring can negatively impact the privacy of users. For instance, imagine the scenario where a static presence sensor emits a packet due to the presence/absence of people in its vicinity. In such a scenario, anyone who can observe the packet, can gather critical privacy-sensitive information.
+People will eventually be surrounded by hundreds of connected IoT devices. Even if the communication links are encrypted and protected, information about people might still be collected or processed for different purposes. The fact that IoT devices in the vicinity of people might enable more pervasive monitoring can negatively impact their privacy. For instance, imagine the scenario where a static presence sensor emits a packet due to the presence or absence of people in its vicinity. In such a scenario, anyone who can observe the packet, can gather critical privacy-sensitive information.
 
-Such information about people is referred to as personal data in EU or Personally identifiable information (PII) in US,
-In particular, the General Data Protection Regulation (GDPR) {{GDPR}} defines personal data as: 'any information relating to an identified or identifiable natural person (‘data subject’); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person'.
+Such information about people is referred to as personal data in the European Union (EU) or Personally identifiable information (PII) in the United States (US), In particular, the General Data Protection Regulation (GDPR) {{GDPR}} defines personal data as: 'any information relating to an identified or identifiable natural person (‘data subject’); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person'.
 
 Ziegeldorf {{Ziegeldorf}} defines privacy in IoT as a threefold guarantee:
-1. Awareness of privacy risks imposed by smart things and services surrounding the data subject. Awareness is achieved by means of transparent practices, e.g., by the data controller.
-2. Individual control over the collection and processing of personal information by the surrounding smart things.
-3. Awareness and control of subsequent use and dissemination of personal information by those entities to any entity outside the subject's personal control sphere. This point implies that the data controler must be accountable for its actions on the personal information.
+
+1. Awareness of the privacy risks imposed by IoT devices and services. This awareness is achieved by means of transparent practices by the data controller, i.e., the entity that is providing IoT devices and/or services. 
+2. Individual control over the collection and processing of personal information by IoT devices and services.
+3. Awareness and control of the subsequent use and dissemination of personal information by data controllers to any entity outside the subject's personal control sphere. This point implies that the data controler must be accountable for its actions on the personal information.
 
 Based on this definition, several threats to the privacy of users  have been documented {{Ziegeldorf}} and {{RFC6973}}, in particular considering the IoT environment and its lifecycle:
 
-1. Identification - refers to the identification of the users, their IoT objects, and generated data.
+1. Identification - refers to the identification of the users, their IoT devices, and generated data.
 2. Localization - relates to the capability of locating a user and even tracking them, e.g., by tracking MAC addresses in wifi or Bluetooth.
 3. Profiling - is about creating a profile of the user and their preferences.
 4. Interaction - occurs when a user has been profiled and a given interaction is preferred, presenting (for example, visually) some information that discloses private information.
-5. Lifecycle transitions - take place when devices are, for example, sold without properly removing private data.
-6. Inventory attacks - happen if specific information about (smart) objects in possession of a user is disclosed.
-7. Linkage - is about when information of two of more IoT systems (or other data sets) is combined so that a broader view on the personal data is created.
+5. Lifecycle transitions - take place when devices are, for example, is sold without properly removing private data.
+6. Inventory attacks - happen if specific information about IoT devices in possession of a user is disclosed.
+7. Linkage - is about when information of two of more IoT systems (or other data sets) is combined so that a broader view of the personal data captured can be created.
 
 When IoT systems are deployed, the above issues should be considered to ensure that private data remains private. These issues are particularly challenging in environments in which multiple users with different privacy preferences interact with the same IoT devices. For example, an IoT device controlled by user A (low privacy settings) might leak private information about another user B (high privacy settings). How to deal with these threats in practice is an area of ongoing research.
 
 
-## Reverse-engineering considerations {#sec5-10}
+## Reverse engineering considerations {#sec5-10}
 
 Many IoT devices are resource-constrained and often deployed in unattended environments. Some of these devices can also be purchased off-the-shelf or online without any credential-provisioning process. Therefore, an attacker can have direct access to the device and apply advanced techniques to retrieve information that a traditional black box model does not consider. Example of those techniques are side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:
 
 1. long term keys. These long term keys can be extracted by means of a side-channel attack or reverse engineering. If these keys are exposed, then they might be used to perform attacks on devices deployed in other locations.
-2. source code that might allow the attacker to determine bugs or find exploits to perform other types of attacks. The attacker might also just sell the source code.
+2. source code. Extraction of source code might allow the attacker to determine bugs or find exploits to perform other types of attacks. The attacker might also just sell the source code.
 3. proprietary algorithms. The attacker can analyze these algorithms gaining valuable know-how. The attacker can also create copies of the product (based on those proprietary algorithms) or modify the algorithms to perform more advanced attacks.
-4. configuration or personal data. The attacker can retrieve information such as a machine learning model used to perform a classification task. The attacker might also be able to read personal data, e.g., heatlhcare data, that has been stored on a device.
+4. configuration or personal data. The attacker might be able to read personal data, e.g., heatlhcare data, that has been stored on a device.
 
 One existing solution to prevent such data leaks is the use of a secure element, a tamper-resistant device that is capable of securely hosting applications and their confidential data. Another potential solution is the usage of of Physical Unclonable Function (PUFs) that serves as unique digital fingerprint of a hardware device. PUFs can also enable other functionalities such as secure key storage. Protection against such data leakage patterns is non-trivial since devices are inherently resource-constrained. An open question is whether there are any viable techniques to protect IoT devices and the data in the devices in such an adversarial model.
 
 ## Trustworthy IoT Operation {#sec5-11}
 
-Flaws in the design and implementation of a secure IoT device and network can lead to security vulnerabilities. For instance, a flaw is the distribution of an Internet-connected IoT device in which a default password is used in all devices. Many IoT devices can be found in the Internet by means of tools such as Shodan {{shodan}}, and if they have any vulnerability, it can then be exploited at scale, for example, to launch DDoS attacks. For instance, Dyn, a major DNS, was attacked by means of a DDoS attack originated from a large IoT botnet composed of thousands of compromised IP-cameras {{dyn-attack}}. Open questions in this area are:
+Flaws in the design and implementation of IoT devices and networks can lead to security vulnerabilities. A common flaw is the use of well-known or easy-to-guess passwords for configuration of IoT devices. Many such compromised IoT devices can be found on the Internet by means of tools such as Shodan {{shodan}}. Once discovered, these compromised devices can be exploited at scale, for example, to launch DDoS attacks. Dyn, a major DNS , was attacked by means of a DDoS attack originating from a large IoT botnet composed of thousands of compromised IP-cameras {{dyn-attack}}. There are several open research questions in this area:
 
-1. First of all, how to prevent large scale vulnerabilities in IoT devices are present at all?
-2. If vulnerabilities are present, the second question is how to prevent attackers from exploiting them at large scale?
-3. Finally, if a vulnerability in a class of devices has been exploited, how to stop a large scale attack before any damage is caused?
+1. How to avoid vulnerabilities in IoT devices that can lead to large-scale attacks?
+2. How to detect sophisticated attacks against IoT devices?
+3. How to prevent attackers from exploiting known vulnerabilities at a large scale?
 
-Some ideas are being explored to address this issue. One of this approaches refers to the specification of Manufacturer Usage Description (MUD) files {{ID-MUD}}. As explained earlier, this proposal requires IoT devices to disclose the location of their MUD file to the network during installation. The network can then (i) retrieve those files, (ii) learn from the manufacturers the intended usage of the devices, for example, which services they require to access, and then (iii) create suitable filters such as firewall rules.
+Some ideas are being explored to address this issue. One of the approaches relies on the use of Manufacturer Usage Description (MUD) files {{ID-MUD}}. As explained earlier, this proposal requires IoT devices to disclose the location of their MUD file to the network during installation. The network can then (i) retrieve those files, (ii) learn from the manufacturers the intended usage of the devices, for example, which services they need to access, and then (iii) create suitable filters and firewall rules.
 
 # Conclusions and Next Steps {#sec6}
 
