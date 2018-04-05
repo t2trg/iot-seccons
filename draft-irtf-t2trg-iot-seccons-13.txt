@@ -5,14 +5,14 @@
 Network Working Group                                  O. Garcia-Morchon
 Internet-Draft                                              Philips IP&S
 Intended status: Informational                                  S. Kumar
-Expires: August 31, 2018                                Philips Research
+Expires: October 7, 2018                                Philips Research
                                                                 M. Sethi
                                                                 Ericsson
-                                                       February 27, 2018
+                                                          April 05, 2018
 
 
   State-of-the-Art and Challenges for the Internet of Things Security
-                    draft-irtf-t2trg-iot-seccons-12
+                    draft-irtf-t2trg-iot-seccons-13
 
 Abstract
 
@@ -53,15 +53,15 @@ Status of This Memo
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 1]
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 1]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 31, 2018.
+   This Internet-Draft will expire on October 7, 2018.
 
 Copyright Notice
 
@@ -104,21 +104,21 @@ Table of Contents
      5.7.  Testing: bug hunting and vulnerabilities  . . . . . . . .  29
      5.8.  Quantum-resistance  . . . . . . . . . . . . . . . . . . .  29
      5.9.  Privacy protection  . . . . . . . . . . . . . . . . . . .  30
-     5.10. Data leakage  . . . . . . . . . . . . . . . . . . . . . .  31
-     5.11. Trustworthy IoT Operation . . . . . . . . . . . . . . . .  32
+     5.10. Reverse engineering considerations  . . . . . . . . . . .  32
+     5.11. Trustworthy IoT Operation . . . . . . . . . . . . . . . .  33
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 2]
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 2]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    6.  Conclusions and Next Steps  . . . . . . . . . . . . . . . . .  33
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  33
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  33
-   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  33
-   10. Informative References  . . . . . . . . . . . . . . . . . . .  33
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  34
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  34
+   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  34
+   10. Informative References  . . . . . . . . . . . . . . . . . . .  34
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  45
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 3]
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 3]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    specifications as a reference for details about security
@@ -221,9 +221,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 4]
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 4]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    identity and the secret keys used during normal operation may be
@@ -277,9 +277,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 5]
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 5]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
     _Manufactured           _SW update          _Decommissioned
@@ -333,9 +333,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 6]
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 6]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    non-cryptographic mechanisms, which implement authorization and other
@@ -348,13 +348,17 @@ Internet-Draft                IoT Security                 February 2018
 3.  Security Threats and Managing Risk
 
    Security threats in related IP protocols have been analyzed in
-   multiple documents including HTTPS [RFC2818], COAP [RFC7252], 6LoWPAN
-   [RFC4919], ANCP [RFC5713], DNS security threats [RFC3833], IPv6 ND
-   [RFC3756], and PANA [RFC4016].  In this section, we specifically
-   discuss the threats that could compromise an individual thing, or the
-   network as a whole.  Note that these set of threats might go beyond
-   the scope of Internet protocols but we gather them here for the sake
-   of completeness:
+   multiple documents including Hypertext Transfer Protocol (HTTP) over
+   Transport Layer Security (TLS) (HTTPS) [RFC2818], Constrained
+   Application Protocol (COAP) [RFC7252], IPv6 over Low-Power Wireless
+   Personal Area Networks (6LoWPAN) [RFC4919], Access Node Control
+   Protocol (ANCP) [RFC5713], Domain Name System (DNS) [RFC3833], IPv6
+   Neighbor Discovery (ND) [RFC3756], and Protocol for Carrying
+   Authentication and Network Access (PANA) [RFC4016].  In this section,
+   we specifically discuss the threats that could compromise an
+   individual thing, or the network as a whole.  Note that these set of
+   threats might go beyond the scope of Internet protocols but we gather
+   them here for the sake of completeness:
 
    1.   Vulnerable Software/Code: Things in the Internet of Things rely
         on software that might contain severe bugs and/or bad design
@@ -366,12 +370,30 @@ Internet-Draft                IoT Security                 February 2018
         popularly known as the Mirai botnet, was caused by things that
         had well-known or easy-to-guess passwords for configuration.
 
-   2.   Cloning of things: During the manufacturing process of a thing,
+   2.   Privacy threat: The tracking of a thing's location and usage may
+        pose a privacy risk to people around it.  For instance, an
+        attacker can infer privacy sensitive information from the data
+        gathered and communicated by individual things.  Such
+        information may subsequently be sold to interested parties for
+        marketing purposes and targeted advertising.  In extreme cases,
+        such information might be used to track dissidents in oppressive
+        regimes.  Unlawful surveillance and interception of traffic to/
+        from a thing by intelligence agencies is also a privacy threat.
+
+   3.   Cloning of things: During the manufacturing process of a thing,
         an untrusted factory can easily clone the physical
         characteristics, firmware/software, or security configuration of
         the thing.  Deployed things might also be compromised and their
         software reverse engineered allowing for cloning or software
         modifications.  Such a cloned thing may be sold at a cheaper
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 7]
+
+Internet-Draft                IoT Security                    April 2018
+
+
         price in the market, and yet can function normally as a genuine
         thing.  For example, two cloned devices can still be associated
         and work with each other.  In the worst-case scenario, a cloned
@@ -384,16 +406,8 @@ Internet-Draft                IoT Security                 February 2018
         functionality can be introduced in the cloned thing, an example
         of such functionality is a backdoor.
 
-   3.   Malicious substitution of things: During the installation of a
+   4.   Malicious substitution of things: During the installation of a
         thing, a genuine thing may be substituted with a similar variant
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 7]
-
-Internet-Draft                IoT Security                 February 2018
-
-
         (of lower quality) without being detected.  The main motivation
         may be cost savings, where the installation of lower-quality
         things (for example, non-certified products) may significantly
@@ -402,7 +416,7 @@ Internet-Draft                IoT Security                 February 2018
         financial benefits.  Another motivation may be to inflict damage
         to the reputation of a competitor's offerings.
 
-   4.   Eavesdropping attack: During the commissioning of a thing into a
+   5.   Eavesdropping attack: During the commissioning of a thing into a
         network, it may be susceptible to eavesdropping, especially if
         operational keying materials, security parameters, or
         configuration settings, are exchanged in clear using a wireless
@@ -420,36 +434,32 @@ Internet-Draft                IoT Security                 February 2018
         usage without key renewal or updates.  Messages can also be
         recorded and processed offline at a later time.
 
-   5.   Man-in-the-middle attack: Both the commissioning phase and
+   6.   Man-in-the-middle attack: Both the commissioning phase and
         operational phases may also be vulnerable to man-in-the-middle
-        attacks, for example, when keying material between communicating
-        entities is exchanged in the clear and the security of the key
-        establishment protocol depends on the tacit assumption that no
-        third party can eavesdrop during the execution of this protocol.
-        Additionally, device authentication or device authorization may
-        be non-trivial, or may need support of a human decision process,
-        since things usually do not have a-priori knowledge about each
-        other and cannot always differentiate friends and foes via
-        completely automated mechanisms.  Thus, even if the key
-        establishment protocol provides cryptographic device
-        authentication, this knowledge on device identities may still
-        need complementing with a human-assisted authorization step
-        (thereby, presenting a weak link and offering the potential of
-        man-in-the-middle attacks this way).
+        attacks.  For example, when keying material between
+        communicating entities is exchanged in the clear and the
+        security of the key establishment protocol depends on the tacit
+        assumption that no third party can eavesdrop during the
+        execution of this protocol.  Additionally, device authentication
+        or device authorization may be non-trivial, or may need support
 
-   6.   Firmware attacks: When a thing is in operation or maintenance
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 8]
+
+Internet-Draft                IoT Security                    April 2018
+
+
+        of a human decision process, since things usually do not have
+        a-priori knowledge about each other and cannot always
+        differentiate friends and foes via completely automated
+        mechanisms.
+
+   7.   Firmware attacks: When a thing is in operation or maintenance
         phase, its firmware or software may be updated to allow for new
         functionality or new features.  An attacker may be able to
         exploit such a firmware upgrade by replacing the thing's
         software with malicious software, thereby influencing the
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 8]
-
-Internet-Draft                IoT Security                 February 2018
-
-
         operational behavior of the thing.  For example, an attacker
         could add a piece of malicious code to the firmware that will
         cause it to periodically report the energy usage of the lamp to
@@ -458,7 +468,7 @@ Internet-Draft                IoT Security                 February 2018
         contain vulnerabilities that might be exploited by attackers to
         replace the firmware on the device.
 
-   7.   Extraction of private information: IoT devices (such as sensors,
+   8.   Extraction of private information: IoT devices (such as sensors,
         actuators, etc.) are often physically unprotected in their
         ambient environment and they could easily be captured by an
         attacker.  An attacker with physical access may then attempt to
@@ -471,7 +481,7 @@ Internet-Draft                IoT Security                 February 2018
         perform traffic analysis to deduce meaningful information which
         might compromise the privacy of the thing's owner and/or user.
 
-   8.   Routing attack: As highlighted in [ID-Daniel], routing
+   9.   Routing attack: As highlighted in [ID-Daniel], routing
         information in IoT networks can be spoofed, altered, or
         replayed, in order to create routing loops, attract/repel
         network traffic, extend/shorten source routes, etc.  Other
@@ -488,29 +498,18 @@ Internet-Draft                IoT Security                 February 2018
         attacker presents multiple identities to other things in the
         network.
 
-   9.   Elevation of privilege: An attacker with low privileges can
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018                [Page 9]
+
+Internet-Draft                IoT Security                    April 2018
+
+
+   10.  Elevation of privilege: An attacker with low privileges can
         misuse additional flaws in the implemented authentication and
         authorization mechanisms of a thing to gain more privileged
         access to the thing and its data.
-
-   10.  Privacy threat: The tracking of a thing's location and usage may
-        pose a privacy risk to its users.  For instance, an attacker can
-        infer information based on the information gathered about
-        individual things, thus deducing behavioral patterns of the user
-        of interest to him.  Such information may subsequently be sold
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018                [Page 9]
-
-Internet-Draft                IoT Security                 February 2018
-
-
-        to interested parties for marketing purposes and targeted
-        advertising.  In extreme cases, such information might be used
-        to track dissidents in oppressive regimes.  Unlawful
-        surveillance and interception of traffic to/from a thing by
-        intelligence agencies is also a privacy threat.
 
    11.  Denial-of-Service (DoS) attack: Often things have very limited
         memory and computation capabilities.  Therefore, they are
@@ -557,9 +556,10 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 10]
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 10]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    4.  Procedures for incident reporting and mitigation refer to the
@@ -613,9 +613,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 11]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 11]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    While CoAP defines a standard communication protocol, a format for
@@ -669,9 +669,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 12]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 12]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    since most existing security mechanism do not work well with such
@@ -725,9 +725,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 13]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 13]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    3.  Internet Protocol for Smart Objects IPSO [IPSO]: The alliance
@@ -781,9 +781,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 14]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 14]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    1.2 and DTLS version 1.2 that offers communication security for
@@ -837,9 +837,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 15]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 15]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    Migault et al.  [ID-dietesp] are working on a compressed version of
@@ -893,9 +893,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 16]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 16]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    3.   CSA New Security Guidance for Early Adopters of the IoT [CSA]:
@@ -949,9 +949,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 17]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 17]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    10.  Best Current Practices (BCP) for IoT devices [ID-Moore]: This
@@ -1005,9 +1005,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 18]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 18]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
 5.1.  Constraints and Heterogeneous Communication
@@ -1061,9 +1061,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 19]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 19]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    efficient.  Additionally, all security protocols have been revised in
@@ -1117,9 +1117,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 20]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 20]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
 5.1.3.  End-to-end security, protocol translation, and the role of
@@ -1173,9 +1173,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 21]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 21]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
        and integrity protecting most of the message fields except those
@@ -1229,9 +1229,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 22]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 22]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    lower energy consumption to support Internet of Things (IoT) devices.
@@ -1285,9 +1285,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 23]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 23]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    Diffie-Hellman key-negotiations.  However, Diffie-Hellman is a
@@ -1341,9 +1341,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 24]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 24]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    choice of one or several coordinators and the management of the group
@@ -1369,9 +1369,10 @@ Internet-Draft                IoT Security                 February 2018
    costs, for example, by making the public-key signatures in the
    mobility messages optional.  Diet HIP does not define mobility yet
    but it is sufficiently similar to HIP and can use the same
-   mechanisms.  TLS and DTLS do not have native mobility support,
-   however, work on DTLS mobility exists in the form of an Internet
-   draft [ID-Williams].  The specific need for IP-layer mobility mainly
+   mechanisms.  DTLS provides some mobility support by relying on a
+   connection ID (CID).  The use of connection IDs can provide all the
+   mobility functionality described in [ID-Williams], except, sending
+   the updated location.  The specific need for IP-layer mobility mainly
    depends on the scenario in which the nodes operate.  In many cases,
    mobility supported by means of a mobile gateway may suffice to enable
    mobile IoT networks, such as body sensor networks.  Using message
@@ -1390,16 +1391,15 @@ Internet-Draft                IoT Security                 February 2018
    after careful code review.  Implementations of security protocols
    might contain (design) flaws.  Cryptographic algorithms can also
    become insecure due to advances in cryptanalysis.  Therefore, it is
-   necessary that devices which are incapable of verifying a reasonable
-   signature are not exposed to the Internet (even indirectly).
+   necessary that devices which are incapable of verifying a
+   cryptographic signature are not exposed to the Internet (even
+   indirectly).
 
 
 
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 25]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 25]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    Schneier [SchneierSecurity] in his essay highlights several
@@ -1453,9 +1453,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 26]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 26]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    challenge.  For example, a user of connected light bulbs would not
@@ -1509,9 +1509,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 27]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 27]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
 5.5.  End-of-Life
@@ -1565,9 +1565,9 @@ Internet-Draft                IoT Security                 February 2018
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 28]
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 28]
 
-Internet-Draft                IoT Security                 February 2018
+Internet-Draft                IoT Security                    April 2018
 
 
    and how this monitoring feature is implemented still remains an open
@@ -1582,6 +1582,12 @@ Internet-Draft                IoT Security                 February 2018
    manufacturer.  A network monitoring service could then warn the user/
    owner of devices if they don't behave as expected.
 
+   Many devices and software services that automatically learn and
+   monitor the behavior of different IoT devices in a given network are
+   commercially available.  Such monitoring devices/services can be
+   configured by the user to limit network traffic and trigger alarms
+   when unexpected operation of IoT devices is detected.
+
 5.7.  Testing: bug hunting and vulnerabilities
 
    Given that IoT devices often have inadvertent vulnerabilities, both
@@ -1595,12 +1601,16 @@ Internet-Draft                IoT Security                 February 2018
    1.  It remains to be seen how the software testing and quality
        assurance mechanisms used from the desktop and mobile world will
        be applied to IoT devices to give end users the confidence that
-       the purchased devices are robust.
+       the purchased devices are robust.  Bodies such as the European
+       Cyber Security Organization (ECSO) [ECSO] are working on
+       processes for security certification of IoT devices.
 
    2.  It is also an open question how the combination of devices from
        multiple vendors might actually lead to dangerous network
-       configurations, for example, if combination of specific devices
-       can trigger unexpected behavior.
+       configurations.  For example, if combination of specific devices
+       can trigger unexpected behavior.  It is needless to say that the
+       security of the whole system might is limited by its weakest
+       point.
 
 5.8.  Quantum-resistance
 
@@ -1608,6 +1618,14 @@ Internet-Draft                IoT Security                 February 2018
    operational for many years.  With the advancements made in the field
    of quantum computers, it is possible that large-scale quantum
    computers are available in the future for performing cryptanalysis on
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 29]
+
+Internet-Draft                IoT Security                    April 2018
+
+
    existing cryptographic algorithms and cipher suites.  If this
    happens, it will have two consequences.  First, functionalities
    enabled by means of RSA/ECC - namely key exchange, public-key
@@ -1617,20 +1635,14 @@ Internet-Draft                IoT Security                 February 2018
    of b bits will only offer b/2 bits of security due to Grover's
    algorithm.
 
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 29]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    The above scenario becomes more urgent when we consider the so called
    "harvest and decrypt" attack in which an attacker can start to
    harvest (store) encrypted data today, before a quantum-computer is
    available, and decrypt it years later, once a quantum computer is
-   available.
+   available.  Similarly, many IoT devices that are being deployed today
+   will remain operational for a decade or even longer.  During this
+   time, digital signatures used to sign software updates might become
+   obsolete making the secure update of IoT devices challenging.
 
    This situation would require us to move to quantum-resistant
    alternatives, in particular, for those functionalities involving key
@@ -1653,37 +1665,62 @@ Internet-Draft                IoT Security                 February 2018
 
    People will eventually be surrounded by hundreds of connected IoT
    devices.  Even if the communication links are encrypted and
-   protected, information about the people might still be collected for
-   different purposes.  Such kind of pervasive monitoring can negatively
-   impact their privacy.  For instance, imagine the scenario where a
-   static presence sensor emits a packet due to the presence/absence of
-   people in its vicinity.  In such a scenario, anyone who can observe
-   the packet, can gather critical privacy-sensitive information.
+   protected, information about people might still be collected or
+   processed for different purposes.  The fact that IoT devices in the
+   vicinity of people might enable more pervasive monitoring can
+   negatively impact their privacy.  For instance, imagine the scenario
+   where a static presence sensor emits a packet due to the presence or
+   absence of people in its vicinity.  In such a scenario, anyone who
+   can observe the packet, can gather critical privacy-sensitive
+   information.
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 30]
+
+Internet-Draft                IoT Security                    April 2018
+
+
+   Such information about people is referred to as personal data in the
+   European Union (EU) or Personally identifiable information (PII) in
+   the United States (US), In particular, the General Data Protection
+   Regulation (GDPR) [GDPR] defines personal data as: 'any information
+   relating to an identified or identifiable natural person ('data
+   subject'); an identifiable natural person is one who can be
+   identified, directly or indirectly, in particular by reference to an
+   identifier such as a name, an identification number, location data,
+   an online identifier or to one or more factors specific to the
+   physical, physiological, genetic, mental, economic, cultural or
+   social identity of that natural person'.
 
    Ziegeldorf [Ziegeldorf] defines privacy in IoT as a threefold
-   guarantee: 1. awareness of privacy risks imposed by smart things and
-   services surrounding the data subject, 2. individual control over the
-   collection and processing of personal information by the surrounding
-   smart things, 3. awareness and control of subsequent use and
-   dissemination of personal information by those entities to any entity
-   outside the subject's personal control sphere.
+   guarantee:
 
-   Based on this definition, several privacy threats and challenges have
-   been documented [Ziegeldorf] and [RFC6973]:
+   1.  Awareness of the privacy risks imposed by IoT devices and
+       services.  This awareness is achieved by means of transparent
+       practices by the data controller, i.e., the entity that is
+       providing IoT devices and/or services.
 
-   1.  Identification - refers to the identification of the users and
-       their objects.
+   2.  Individual control over the collection and processing of personal
+       information by IoT devices and services.
 
+   3.  Awareness and control of the subsequent use and dissemination of
+       personal information by data controllers to any entity outside
+       the subject's personal control sphere.  This point implies that
+       the data controller must be accountable for its actions on the
+       personal information.
 
+   Based on this definition, several threats to the privacy of users
+   have been documented [Ziegeldorf] and [RFC6973], in particular
+   considering the IoT environment and its lifecycle:
 
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 30]
-
-Internet-Draft                IoT Security                 February 2018
-
+   1.  Identification - refers to the identification of the users, their
+       IoT devices, and generated data.
 
    2.  Localization - relates to the capability of locating a user and
-       even tracking them.
+       even tracking them, e.g., by tracking MAC addresses in Wi-Fi or
+       Bluetooth.
 
    3.  Profiling - is about creating a profile of the user and their
        preferences.
@@ -1692,14 +1729,24 @@ Internet-Draft                IoT Security                 February 2018
        interaction is preferred, presenting (for example, visually) some
        information that discloses private information.
 
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 31]
+
+Internet-Draft                IoT Security                    April 2018
+
+
    5.  Lifecycle transitions - take place when devices are, for example,
-       sold without properly removing private data.
+       is sold without properly removing private data.
 
-   6.  Inventory attacks - happen if specific information about (smart)
-       objects in possession of a user is disclosed.
+   6.  Inventory attacks - happen if specific information about IoT
+       devices in possession of a user is disclosed.
 
-   7.  Linkage - is about when information of two of more IoT systems is
-       combined so that a broader view on the personal data is created.
+   7.  Linkage - is about when information of two of more IoT systems
+       (or other data sets) is combined so that a broader view of the
+       personal data captured can be created.
 
    When IoT systems are deployed, the above issues should be considered
    to ensure that private data remains private.  These issues are
@@ -1710,7 +1757,7 @@ Internet-Draft                IoT Security                 February 2018
    privacy settings).  How to deal with these threats in practice is an
    area of ongoing research.
 
-5.10.  Data leakage
+5.10.  Reverse engineering considerations
 
    Many IoT devices are resource-constrained and often deployed in
    unattended environments.  Some of these devices can also be purchased
@@ -1726,23 +1773,26 @@ Internet-Draft                IoT Security                 February 2018
        are exposed, then they might be used to perform attacks on
        devices deployed in other locations.
 
-   2.  source code that might allow the attacker to determine bugs or
-       find exploits to perform other types of attacks.  The attacker
-       might also just sell the source code.
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 31]
-
-Internet-Draft                IoT Security                 February 2018
-
+   2.  source code.  Extraction of source code might allow the attacker
+       to determine bugs or find exploits to perform other types of
+       attacks.  The attacker might also just sell the source code.
 
    3.  proprietary algorithms.  The attacker can analyze these
        algorithms gaining valuable know-how.  The attacker can also
        create copies of the product (based on those proprietary
        algorithms) or modify the algorithms to perform more advanced
        attacks.
+
+   4.  configuration or personal data.  The attacker might be able to
+       read personal data, e.g., heatlhcare data, that has been stored
+       on a device.
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 32]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    One existing solution to prevent such data leaks is the use of a
    secure element, a tamper-resistant device that is capable of securely
@@ -1757,42 +1807,33 @@ Internet-Draft                IoT Security                 February 2018
 
 5.11.  Trustworthy IoT Operation
 
-   Flaws in the design and implementation of a secure IoT device and
-   network can lead to security vulnerabilities.  For instance, a flaw
-   is the distribution of an Internet-connected IoT device in which a
-   default password is used in all devices.  Many IoT devices can be
-   found in the Internet by means of tools such as Shodan [shodan], and
-   if they have any vulnerability, it can then be exploited at scale,
-   for example, to launch DDoS attacks.  For instance, Dyn, a major DNS,
-   was attacked by means of a DDoS attack originated from a large IoT
-   botnet composed of thousands of compromised IP-cameras [dyn-attack].
-   Open questions in this area are:
+   Flaws in the design and implementation of IoT devices and networks
+   can lead to security vulnerabilities.  A common flaw is the use of
+   well-known or easy-to-guess passwords for configuration of IoT
+   devices.  Many such compromised IoT devices can be found on the
+   Internet by means of tools such as Shodan [shodan].  Once discovered,
+   these compromised devices can be exploited at scale, for example, to
+   launch DDoS attacks.  Dyn, a major DNS , was attacked by means of a
+   DDoS attack originating from a large IoT botnet composed of thousands
+   of compromised IP-cameras [dyn-attack].  There are several open
+   research questions in this area:
 
-   1.  How to prevent large scale vulnerabilities in IoT devices?
+   1.  How to avoid vulnerabilities in IoT devices that can lead to
+       large-scale attacks?
 
-   2.  How to prevent attackers from exploiting vulnerabilities in IoT
-       devices at large scale?
+   2.  How to detect sophisticated attacks against IoT devices?
 
-   3.  If the vulnerability has been exploited, how do we stop a large
-       scale attack before any damage is caused?
+   3.  How to prevent attackers from exploiting known vulnerabilities at
+       a large scale?
 
-   Some ideas are being explored to address this issue.  One of this
-   approaches refers to the specification of Manufacturer Usage
-   Description (MUD) files [ID-MUD].  As explained earlier, this
-   proposal requires IoT devices to disclose the location of their MUD
-   file to the network during installation.  The network can then (i)
-   retrieve those files, (ii) learn from the manufacturers the intended
-   usage of the devices, for example, which services they require to
-   access, and then (iii) create suitable filters such as firewall
-   rules.
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 32]
-
-Internet-Draft                IoT Security                 February 2018
-
+   Some ideas are being explored to address this issue.  One of the
+   approaches relies on the use of Manufacturer Usage Description (MUD)
+   files [ID-MUD].  As explained earlier, this proposal requires IoT
+   devices to disclose the location of their MUD file to the network
+   during installation.  The network can then (i) retrieve those files,
+   (ii) learn from the manufacturers the intended usage of the devices,
+   for example, which services they need to access, and then (iii)
+   create suitable filters and firewall rules.
 
 6.  Conclusions and Next Steps
 
@@ -1800,6 +1841,14 @@ Internet-Draft                IoT Security                 February 2018
    designers and implementers with an overview of security requirements
    in the IP-based Internet of Things.  We discuss the security threats,
    state-of-the-art, and challenges.
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 33]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    Although plenty of steps have been realized during the last few years
    (summarized in Section 4.1) and many organizations are publishing
@@ -1833,22 +1882,11 @@ Internet-Draft                IoT Security                 February 2018
    We gratefully acknowledge feedback and fruitful discussion with
    Tobias Heer, Robert Moskowitz, Thorsten Dahm, Hannes Tschofenig,
    Carsten Bormann, Barry Raveendran, Ari Keranen, Goran Selander, Fred
-   Baker and Eliot Lear.  We acknowledge the additional authors of the
-   previous version of this document Sye Loong Keoh, Rene Hummen and
-   Rene Struik.
+   Baker, Vicent Roca, Thomas Fossati and Eliot Lear.  We acknowledge
+   the additional authors of the previous version of this document Sye
+   Loong Keoh, Rene Hummen and Rene Struik.
 
 10.  Informative References
-
-
-
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 33]
-
-Internet-Draft                IoT Security                 February 2018
-
 
    [Article29]
               "Opinion 8/2014 on the on Recent Developments on the
@@ -1860,6 +1898,13 @@ Internet-Draft                IoT Security                 February 2018
               2010.
 
    [BACNET]   "BACnet", Web http://www.bacnet.org/, February 2011.
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 34]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [BITAG]    "Internet of Things (IoT) Security and Privacy
               Recommendations", Web http://www.bitag.org/report-
@@ -1895,26 +1940,27 @@ Internet-Draft                IoT Security                 February 2018
               https://dyn.com/blog/dyn-analysis-summary-of-friday-
               october-21-attack/, n.d..
 
-
-
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 34]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [ecc25519]
               Bernstein, D., "Curve25519: new Diffie-Hellman speed
               records",
               Web https://cr.yp.to/ecdh/curve25519-20060209.pdf, n.d..
 
+   [ECSO]     "European Cyber Security Organization", Web
+              https://www.ecs-org.eu/, n.d..
+
    [ENISA_ICS]
               "Communication network dependencies for ICS/SCADA
               Systems", European Union Agency For Network And
               Information Security , February 2017.
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 35]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [ETSI_GR_QSC_001]
               "Quantum-Safe Cryptography (QSC);Quantum-safe algorithmic
@@ -1935,6 +1981,9 @@ Internet-Draft                IoT Security                 February 2018
               releases/2015/01/ftc-report-internet-things-urges-
               companies-adopt-best-practices, n.d..
 
+   [GDPR]     "The EU General Data Protection Regulation",
+              Web https://www.eugdpr.org/, n.d..
+
    [GSMAsecurity]
               "GSMA IoT Security Guidelines", Web
               http://www.gsma.com/connectedliving/future-iot-
@@ -1951,29 +2000,30 @@ Internet-Draft                IoT Security                 February 2018
               of IEEE 802.15.4", draft-ietf-6tisch-architecture-13 (work
               in progress), November 2017.
 
-
-
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 35]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [ID-acedtls]
               Gerdes, S., Bergmann, O., Bormann, C., Selander, G., and
               L. Seitz, "Datagram Transport Layer Security (DTLS)
-              Profiles for Authentication and Authorization for
+              Profile for Authentication and Authorization for
               Constrained Environments (ACE)", draft-ietf-ace-dtls-
-              authorize-02 (work in progress), October 2017.
+              authorize-03 (work in progress), March 2018.
+
+
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 36]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [ID-aceoauth]
               Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
               H. Tschofenig, "Authentication and Authorization for
-              Constrained Environments (ACE)", draft-ietf-ace-oauth-
-              authz-10 (work in progress), February 2018.
+              Constrained Environments (ACE) using the OAuth 2.0
+              Framework (ACE-OAuth)", draft-ietf-ace-oauth-authz-11
+              (work in progress), March 2018.
 
    [ID-bootstrap]
               Sarikaya, B., Sethi, M., and A. Sangi, "Secure IoT
@@ -2009,39 +2059,41 @@ Internet-Draft                IoT Security                 February 2018
               draft-moore-iot-security-bcp-01 (work in progress), July
               2017.
 
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 36]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [ID-MUD]   Lear, E., Droms, R., and D. Romascanu, "Manufacturer Usage
-              Description Specification", draft-ietf-opsawg-mud-17 (work
-              in progress), February 2018.
+              Description Specification", draft-ietf-opsawg-mud-19 (work
+              in progress), April 2018.
+
+
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 37]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [ID-multicast]
               Tiloca, M., Selander, G., Palombini, F., and J. Park,
               "Secure group communication for CoAP", draft-ietf-core-
-              oscore-groupcomm-00 (work in progress), February 2018.
+              oscore-groupcomm-01 (work in progress), March 2018.
 
    [ID-OSCORE]
               Selander, G., Mattsson, J., Palombini, F., and L. Seitz,
               "Object Security for Constrained RESTful Environments
-              (OSCORE)", draft-ietf-core-object-security-08 (work in
-              progress), January 2018.
+              (OSCORE)", draft-ietf-core-object-security-12 (work in
+              progress), March 2018.
 
    [ID-rd]    Shelby, Z., Koster, M., Bormann, C., Stok, P., and C.
               Amsuess, "CoRE Resource Directory", draft-ietf-core-
-              resource-directory-12 (work in progress), October 2017.
+              resource-directory-13 (work in progress), March 2018.
 
    [ID-senml]
               Jennings, C., Shelby, Z., Arkko, J., Keranen, A., and C.
               Bormann, "Media Types for Sensor Measurement Lists
-              (SenML)", draft-ietf-core-senml-12 (work in progress),
-              December 2017.
+              (SenML)", draft-ietf-core-senml-14 (work in progress),
+              April 2018.
 
    [ID-Williams]
               Williams, M. and J. Barrett, "Mobile DTLS", draft-barrett-
@@ -2066,17 +2118,17 @@ Internet-Draft                IoT Security                 February 2018
    [lora]     "LoRa - Wide Area Networks for IoT", Web https://www.lora-
               alliance.org/, n.d..
 
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 37]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [LWM2M]    "OMA LWM2M", Web
               http://openmobilealliance.org/iot/lightweight-m2m-lwm2m,
               n.d..
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 38]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [nbiot]    "NarrowBand IoT", Web
               http://www.3gpp.org/ftp/tsg_ran/TSG_RAN/TSGR_69/Docs/RP-
@@ -2098,10 +2150,6 @@ Internet-Draft                IoT Security                 February 2018
               www.nist.gov/sites/default/files/documents/2016/10/17/
               sonmez-turan-presentation-lwc2016.pdf, n.d..
 
-   [nist_pq]  "NIST Post-Quantum-Cryptography Project", Web
-              https://csrc.nist.gov/Projects/Post-Quantum-Cryptography,
-              n.d..
-
    [OCF]      "Open Connectivity Foundation",
               Web https://openconnectivity.org/, n.d..
 
@@ -2120,16 +2168,6 @@ Internet-Draft                IoT Security                 February 2018
               (EAP)", RFC 3748, DOI 10.17487/RFC3748, June 2004,
               <https://www.rfc-editor.org/info/rfc3748>.
 
-
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 38]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [RFC3756]  Nikander, P., Ed., Kempf, J., and E. Nordmark, "IPv6
               Neighbor Discovery (ND) Trust Models and Threats",
               RFC 3756, DOI 10.17487/RFC3756, May 2004,
@@ -2138,6 +2176,15 @@ Internet-Draft                IoT Security                 February 2018
    [RFC3833]  Atkins, D. and R. Austein, "Threat Analysis of the Domain
               Name System (DNS)", RFC 3833, DOI 10.17487/RFC3833, August
               2004, <https://www.rfc-editor.org/info/rfc3833>.
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 39]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [RFC4016]  Parthasarathy, M., "Protocol for Carrying Authentication
               and Network Access (PANA) Threat Analysis and Security
@@ -2175,17 +2222,6 @@ Internet-Draft                IoT Security                 February 2018
               Networks", RFC 4944, DOI 10.17487/RFC4944, September 2007,
               <https://www.rfc-editor.org/info/rfc4944>.
 
-
-
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 39]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [RFC5191]  Forsberg, D., Ohba, Y., Ed., Patil, B., Tschofenig, H.,
               and A. Yegin, "Protocol for Carrying Authentication for
               Network Access (PANA)", RFC 5191, DOI 10.17487/RFC5191,
@@ -2195,6 +2231,16 @@ Internet-Draft                IoT Security                 February 2018
               (TLS) Protocol Version 1.2", RFC 5246,
               DOI 10.17487/RFC5246, August 2008,
               <https://www.rfc-editor.org/info/rfc5246>.
+
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 40]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
@@ -2231,17 +2277,6 @@ Internet-Draft                IoT Security                 February 2018
               DOI 10.17487/RFC6551, March 2012,
               <https://www.rfc-editor.org/info/rfc6551>.
 
-
-
-
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 40]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [RFC6568]  Kim, E., Kaspar, D., and JP. Vasseur, "Design and
               Application Spaces for IPv6 over Low-Power Wireless
               Personal Area Networks (6LoWPANs)", RFC 6568,
@@ -2255,6 +2290,13 @@ Internet-Draft                IoT Security                 February 2018
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/info/rfc6749>.
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 41]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [RFC6973]  Cooper, A., Tschofenig, H., Aboba, B., Peterson, J.,
               Morris, J., Hansen, M., and R. Smith, "Privacy
@@ -2290,14 +2332,6 @@ Internet-Draft                IoT Security                 February 2018
               Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, May
               2015, <https://www.rfc-editor.org/info/rfc7515>.
 
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 41]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [RFC7516]  Jones, M. and J. Hildebrand, "JSON Web Encryption (JWE)",
               RFC 7516, DOI 10.17487/RFC7516, May 2015,
               <https://www.rfc-editor.org/info/rfc7516>.
@@ -2309,6 +2343,16 @@ Internet-Draft                IoT Security                 February 2018
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
+
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 42]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [RFC7520]  Miller, M., "Examples of Protecting Content Using JSON
               Object Signing and Encryption (JOSE)", RFC 7520,
@@ -2347,13 +2391,6 @@ Internet-Draft                IoT Security                 February 2018
               DOI 10.17487/RFC8046, February 2017,
               <https://www.rfc-editor.org/info/rfc8046>.
 
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 42]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [RFC8105]  Mariager, P., Petersen, J., Ed., Shelby, Z., Van de Logt,
               M., and D. Barthel, "Transmission of IPv6 Packets over
               Digital Enhanced Cordless Telecommunications (DECT) Ultra
@@ -2363,6 +2400,15 @@ Internet-Draft                IoT Security                 February 2018
    [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
               RFC 8152, DOI 10.17487/RFC8152, July 2017,
               <https://www.rfc-editor.org/info/rfc8152>.
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 43]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [RFC8240]  Tschofenig, H. and S. Farrell, "Report from the Internet
               of Things Software Update (IoTSU) Workshop 2016",
@@ -2403,13 +2449,6 @@ Internet-Draft                IoT Security                 February 2018
               _exploiting_the_internet-of-tr-069-things_-
               _lior_oppenheim_-_shahar_tal, n.d..
 
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 43]
-
-Internet-Draft                IoT Security                 February 2018
-
-
    [WG-6lo]   "IETF IPv6 over Networks of Resource-constrained Nodes
               (6lo) Working Group",
               Web https://datatracker.ietf.org/wg/6lo/charter/, n.d..
@@ -2417,6 +2456,15 @@ Internet-Draft                IoT Security                 February 2018
    [WG-6LoWPAN]
               "IETF IPv6 over Low power WPAN (6lowpan) Working Group",
               Web http://tools.ietf.org/wg/6lowpan/, n.d..
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 44]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    [WG-ACE]   "IETF Authentication and Authorization for Constrained
               Environments (ACE) Working Group",
@@ -2458,15 +2506,21 @@ Internet-Draft                IoT Security                 February 2018
               Issue on Security in a Completely Interconnected World ,
               2013.
 
-
-
-
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 44]
-
-Internet-Draft                IoT Security                 February 2018
-
-
 Authors' Addresses
+
+
+
+
+
+
+
+
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 45]
+
+Internet-Draft                IoT Security                    April 2018
+
 
    Oscar Garcia-Morchon
    Philips IP&S
@@ -2517,4 +2571,6 @@ Authors' Addresses
 
 
 
-Garcia-Morchon, et al.   Expires August 31, 2018               [Page 45]
+
+
+Garcia-Morchon, et al.   Expires October 7, 2018               [Page 46]
