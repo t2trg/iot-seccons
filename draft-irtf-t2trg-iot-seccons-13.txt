@@ -5,10 +5,10 @@
 Network Working Group                                  O. Garcia-Morchon
 Internet-Draft                                              Philips IP&S
 Intended status: Informational                                  S. Kumar
-Expires: October 7, 2018                                Philips Research
+Expires: October 8, 2018                                Philips Research
                                                                 M. Sethi
                                                                 Ericsson
-                                                          April 05, 2018
+                                                          April 06, 2018
 
 
   State-of-the-Art and Challenges for the Internet of Things Security
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 1]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 1]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -61,7 +61,7 @@ Internet-Draft                IoT Security                    April 2018
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 7, 2018.
+   This Internet-Draft will expire on October 8, 2018.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 2]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 2]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -165,7 +165,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 3]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 3]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -221,7 +221,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 4]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 4]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -277,7 +277,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 5]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 5]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -333,7 +333,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 6]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 6]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -389,7 +389,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 7]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 7]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -445,7 +445,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 8]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 8]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -501,7 +501,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018                [Page 9]
+Garcia-Morchon, et al.   Expires October 8, 2018                [Page 9]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -557,7 +557,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 10]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 10]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -613,7 +613,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 11]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 11]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -669,7 +669,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 12]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 12]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -725,7 +725,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 13]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 13]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -781,7 +781,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 14]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 14]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -837,7 +837,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 15]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 15]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -893,7 +893,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 16]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 16]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -949,7 +949,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 17]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 17]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1005,7 +1005,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 18]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 18]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1061,7 +1061,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 19]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 19]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1117,7 +1117,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 20]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 20]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1173,7 +1173,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 21]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 21]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1229,7 +1229,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 22]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 22]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1285,7 +1285,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 23]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 23]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1341,7 +1341,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 24]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 24]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1397,7 +1397,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 25]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 25]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1453,7 +1453,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 26]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 26]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1509,7 +1509,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 27]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 27]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1565,7 +1565,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 28]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 28]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1609,8 +1609,7 @@ Internet-Draft                IoT Security                    April 2018
        multiple vendors might actually lead to dangerous network
        configurations.  For example, if combination of specific devices
        can trigger unexpected behavior.  It is needless to say that the
-       security of the whole system might is limited by its weakest
-       point.
+       security of the whole system is limited by its weakest point.
 
 5.8.  Quantum-resistance
 
@@ -1618,15 +1617,15 @@ Internet-Draft                IoT Security                    April 2018
    operational for many years.  With the advancements made in the field
    of quantum computers, it is possible that large-scale quantum
    computers are available in the future for performing cryptanalysis on
+   existing cryptographic algorithms and cipher suites.  If this
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 29]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 29]
 
 Internet-Draft                IoT Security                    April 2018
 
 
-   existing cryptographic algorithms and cipher suites.  If this
    happens, it will have two consequences.  First, functionalities
    enabled by means of RSA/ECC - namely key exchange, public-key
    encryption and signature - would not be secure anymore due to Shor's
@@ -1677,7 +1676,8 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 30]
+
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 30]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1733,7 +1733,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 31]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 31]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1789,7 +1789,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 32]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 32]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1845,7 +1845,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 33]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 33]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1901,7 +1901,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 34]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 34]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -1957,7 +1957,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 35]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 35]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2013,7 +2013,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 36]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 36]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2069,7 +2069,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 37]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 37]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2125,7 +2125,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 38]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 38]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2181,7 +2181,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 39]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 39]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2237,7 +2237,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 40]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 40]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2293,7 +2293,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 41]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 41]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2349,7 +2349,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 42]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 42]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2405,7 +2405,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 43]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 43]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2461,7 +2461,7 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 44]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 44]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2517,7 +2517,7 @@ Authors' Addresses
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 45]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 45]
 
 Internet-Draft                IoT Security                    April 2018
 
@@ -2573,4 +2573,4 @@ Internet-Draft                IoT Security                    April 2018
 
 
 
-Garcia-Morchon, et al.   Expires October 7, 2018               [Page 46]
+Garcia-Morchon, et al.   Expires October 8, 2018               [Page 46]
