@@ -1,7 +1,7 @@
 ---
 abbrev: IoT Security
 title: State-of-the-Art and Challenges for the Internet of Things Security
-docname: draft-irtf-t2trg-iot-seccons-13
+docname: draft-irtf-t2trg-iot-seccons-14
 cat: info
 stand_alone: true
 informative:
@@ -377,7 +377,7 @@ The term security subsumes a wide range of primitives, protocols, and procedures
 
 # Security Threats and Managing Risk {#sec3}
 
-Security threats in related IP protocols have been analyzed in multiple documents including Hypertext Transfer Protocol (HTTP) over Transport Layer Security (TLS) (HTTPS) {{RFC2818}}, Constrained Application Protocol (COAP) {{RFC7252}}, IPv6 over Low-Power Wireless Personal Area Networks (6LoWPAN) {{RFC4919}}, Access Node Control Protocol (ANCP) {{RFC5713}}, Domain Name System (DNS) {{RFC3833}}, IPv6 Neighbor Discovery (ND) {{RFC3756}}, and Protocol for Carrying Authentication and Network Access (PANA) {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing, or the network as a whole. Note that these set of threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness:
+Security threats in related IP protocols have been analyzed in multiple documents including Hypertext Transfer Protocol (HTTP) over Transport Layer Security (TLS) (HTTPS) {{RFC2818}}, Constrained Application Protocol (COAP) {{RFC7252}}, IPv6 over Low-Power Wireless Personal Area Networks (6LoWPAN) {{RFC4919}}, Access Node Control Protocol (ANCP) {{RFC5713}}, Domain Name System (DNS) {{RFC3833}}, IPv6 Neighbor Discovery (ND) {{RFC3756}}, and Protocol for Carrying Authentication and Network Access (PANA) {{RFC4016}}. In this section, we specifically discuss the threats that could compromise an individual thing or the network as a whole. Some of these threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. The threats in the following list are not in any particular order and some threats may be more critical than others depending on the deployment scenario:
 
 1. Vulnerable Software/Code: Things in the Internet of Things rely on software that might contain severe bugs and/or bad design choices. This makes the things vulnerable to many different types of attacks, depending on the criticality of the bugs, e.g., buffer overflows or lack of authentication. This can be considered as one of the most important security threat. The large-scale distributed denial-of-service (DDoS) attack, popularly known as the Mirai botnet, was caused by things that had well-known or easy-to-guess passwords for configuration.
 
