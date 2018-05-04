@@ -1,7 +1,7 @@
 ---
 abbrev: IoT Security
 title: State-of-the-Art and Challenges for the Internet of Things Security
-docname: draft-irtf-t2trg-iot-seccons-14
+docname: draft-irtf-t2trg-iot-seccons-15
 cat: info
 stand_alone: true
 informative:
@@ -696,7 +696,7 @@ Based on this definition, several threats to the privacy of users have been docu
 2. Localization - relates to the capability of locating a user and even tracking them, e.g., by tracking MAC addresses in Wi-Fi or Bluetooth.
 3. Profiling - is about creating a profile of the user and their preferences.
 4. Interaction - occurs when a user has been profiled and a given interaction is preferred, presenting (for example, visually) some information that discloses private information.
-5. Lifecycle transitions - take place when devices are, for example, is sold without properly removing private data.
+5. Lifecycle transitions - take place when devices are, for example, sold without properly removing private data.
 6. Inventory attacks - happen if specific information about IoT devices in possession of a user is disclosed.
 7. Linkage - is about when information of two of more IoT systems (or other data sets) is combined so that a broader view of the personal data captured can be created.
 
