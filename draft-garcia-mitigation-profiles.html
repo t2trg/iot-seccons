@@ -1,0 +1,1212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>IoT Security - Threats, Security mitigations and Profiles</title>
+
+  
+<style type="text/css">/*<![CDATA[*/
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+
+@media screen and (min-width: 1024px) {
+  ul.toc, #rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #rfc\.toc {
+    top: 16px;
+  }
+  ul.toc {
+    top: 80px;
+    overflow: auto;
+  }
+
+  body {
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+}
+
+body {
+  font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #333;
+  font-size-adjust: 0.5;
+  line-height: 130%;
+  margin: 2.5em auto;
+  max-width: 724px;
+}
+
+.title, .filename, h1, h2, h3, h4 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size-adjust: 0.5;
+  font-weight: 500;
+  color: #333;
+  line-height: 100%;
+  margin: 0.8em 0 0.3em;
+}
+.title { font-size: 36px; }
+h1 { font-size: 30px; }
+h2 { font-size: 24px; }
+h3, h4 { font-size: 18px; }
+h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
+  color: #333;
+}
+
+ul.toc li {
+  list-style: none;
+  text-indent: -2.5em;
+  padding-left: 2.5em;
+  padding-bottom: 5px;
+  margin: 0;
+}
+ul.toc ul {
+  margin: 0;
+}
+/* xml2rfc nests ul directly inside ul which messes with the style badly */
+ul.toc, ul.toc>ul, ul.toc ul>ul {
+  margin: 0 0 0 1.5em;
+}
+
+table {
+  margin-left: 0em;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(2n+1) > td,
+tr:nth-child(2n+1) > th {
+  background-color: #f9f9f9;
+}
+td.reference {
+  max-width: 200px;
+  border-top: none;
+  padding-right: 1em;
+}
+.right {
+  text-align: right;
+}
+
+
+table.header {
+  width: 100%;
+}
+table.header td {
+  border: none;
+  background-color: transparent;
+  color: black;
+}
+.filename {
+  color: rgb(119, 119, 119);
+  font-size: 23px;
+  font-weight: normal;
+  height: auto;
+  line-height: 100%;
+}
+#rfc\.abstract+p {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 130%;
+}
+
+samp, tt, code, pre {
+  font: 11pt consolas, monospace;
+  font-size-adjust: none;
+}
+pre {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 5px;
+}
+.figure {
+  font-style: italic;
+  margin: 0 1.5em;
+}
+
+address {
+  margin: 10px 0 0;
+}
+.vcard {
+  font-style: normal;
+}
+.vcardline {
+  display: block;
+}
+.vcardline .fn {
+  font-weight: bold;
+}
+.vcardline .hidden {
+  display: none;
+}
+
+dl {
+  margin-left: 1em;
+}
+dl.dl-horizontal: {
+  margin-left: 0;
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.nohang > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .5em;
+}
+dl.compact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+ul.empty {
+  list-style-type: none;
+}
+ul.empty li {
+  margin-top: .5em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #2a6496;
+}
+a[href]:hover {
+  background-color: #eee;
+}
+
+ol, ul, li, p {
+  padding: 0;
+  margin: 0.5em 0 0.5em 2em;
+}
+li, p {
+  margin-left: 0;
+}
+address {
+  font-style: normal;
+}
+
+.github-fork-ribbon-wrapper {
+  display: none;
+}
+@media screen and (min-width: 800px) {
+  /* "Fork me on GitHub" CSS ribbon based on
+   * https://github.com/simonwhitaker/github-fork-ribbon-css
+   */
+  .github-fork-ribbon {
+    position: absolute;
+    padding: 2px 0;
+    background-color: #a00;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    pointer-events: auto;
+
+    top: 38px;
+    right: -45px;
+
+    transform: rotate(45deg);
+  }
+
+  .github-fork-ribbon a[href],
+  .github-fork-ribbon a[href]:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    width: 190px;
+    line-height: 18px;
+
+    display: inline-block;
+    padding: 2px 0;
+
+    border: 1.5px dotted #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .github-fork-ribbon-wrapper {
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    overflow: hidden;
+    top: 0; right: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .github-fork-ribbon-wrapper {
+    position: fixed;
+  }
+  /*]]>*/</style>
+
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Conventions and Terminology Used in this Document">
+<link href="#rfc.section.2" rel="Chapter" title="2 Introduction">
+<link href="#rfc.section.3" rel="Chapter" title="3 The design space of secure IoT systems">
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 The Thing Lifecycle">
+<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Classes of IoT device">
+<link href="#rfc.section.3.3" rel="Chapter" title="3.3 Classes of IoT systems">
+<link href="#rfc.section.4" rel="Chapter" title="4 Security Threats">
+<link href="#rfc.section.5" rel="Chapter" title="5 Security Mitigations">
+<link href="#rfc.section.6" rel="Chapter" title="6 Designing and operating secure IoT systems">
+<link href="#rfc.section.7" rel="Chapter" title="7 Security Profiles">
+<link href="#rfc.section.7.1" rel="Chapter" title="7.1 Classes of IoT Systems">
+<link href="#rfc.section.7.2" rel="Chapter" title="7.2 Security Profile 1: Home usage">
+<link href="#rfc.section.7.3" rel="Chapter" title="7.3 Security Profile 2: Managed Home usage">
+<link href="#rfc.section.7.4" rel="Chapter" title="7.4 Security Profile 3: Industrial usage">
+<link href="#rfc.section.7.5" rel="Chapter" title="7.5 Security Profile 4: Managed Industrial usage">
+<link href="#rfc.section.8" rel="Chapter" title="8 Conclusions">
+<link href="#rfc.section.9" rel="Chapter" title="9 Security Considerations">
+<link href="#rfc.section.10" rel="Chapter" title="10 IANA Considerations">
+<link href="#rfc.section.11" rel="Chapter" title="11 Acknowledgments">
+<link href="#rfc.references" rel="Chapter" title="12 Informative References">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 2.10.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Garcia-Morchon, O., Kumar, S., and M. Sethi" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-garcia-security-mitigations-and-profiles" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-12-12" />
+  <meta name="dct.abstract" content="The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication.  The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS).  However, the design space of IoT applications and systems is complex and exposed to multiple types of threats." />
+  <meta name="description" content="The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication.  The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS).  However, the design space of IoT applications and systems is complex and exposed to multiple types of threats." />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left">Network Working Group</td>
+<td class="right">O. Garcia-Morchon</td>
+</tr>
+<tr>
+<td class="left">Internet-Draft</td>
+<td class="right">Philips IP&amp;S</td>
+</tr>
+<tr>
+<td class="left">Intended status: Informational</td>
+<td class="right">S. Kumar</td>
+</tr>
+<tr>
+<td class="left">Expires: June 15, 2019</td>
+<td class="right">Philips Research</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">M. Sethi</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">Ericsson</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">December 12, 2018</td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">IoT Security - Threats, Security mitigations and Profiles<br />
+  <span class="filename">draft-garcia-security-mitigations-and-profiles</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication.  The security needs are well-recognized and and many standardization steps for providing security have been taken, for example, the specification of Constrained Application Protocol (CoAP) over Datagram Transport Layer Security (DTLS).  However, the design space of IoT applications and systems is complex and exposed to multiple types of threats.</p>
+<p>This document summarizes key security threats and suitable mitigation strategies to protect against these threats.  We introduce the concept of security profiles, sets of security mitigations applicable to IoT applications and systems exposed to similar security threats.</p>
+<h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on June 15, 2019.</p>
+<h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
+<p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Conventions and Terminology Used in this Document</a>
+</li>
+<li>2.   <a href="#rfc.section.2">Introduction</a>
+</li>
+<li>3.   <a href="#rfc.section.3">The design space of secure IoT systems</a>
+</li>
+<ul><li>3.1.   <a href="#rfc.section.3.1">The Thing Lifecycle</a>
+</li>
+<li>3.2.   <a href="#rfc.section.3.2">Classes of IoT device</a>
+</li>
+<li>3.3.   <a href="#rfc.section.3.3">Classes of IoT systems</a>
+</li>
+</ul><li>4.   <a href="#rfc.section.4">Security Threats</a>
+</li>
+<li>5.   <a href="#rfc.section.5">Security Mitigations</a>
+</li>
+<li>6.   <a href="#rfc.section.6">Designing and operating secure IoT systems</a>
+</li>
+<li>7.   <a href="#rfc.section.7">Security Profiles</a>
+</li>
+<ul><li>7.1.   <a href="#rfc.section.7.1">Classes of IoT Systems</a>
+</li>
+<li>7.2.   <a href="#rfc.section.7.2">Security Profile 1: Home usage</a>
+</li>
+<li>7.3.   <a href="#rfc.section.7.3">Security Profile 2: Managed Home usage</a>
+</li>
+<li>7.4.   <a href="#rfc.section.7.4">Security Profile 3: Industrial usage</a>
+</li>
+<li>7.5.   <a href="#rfc.section.7.5">Security Profile 4: Managed Industrial usage</a>
+</li>
+</ul><li>8.   <a href="#rfc.section.8">Conclusions</a>
+</li>
+<li>9.   <a href="#rfc.section.9">Security Considerations</a>
+</li>
+<li>10.   <a href="#rfc.section.10">IANA Considerations</a>
+</li>
+<li>11.   <a href="#rfc.section.11">Acknowledgments</a>
+</li>
+<li>12.   <a href="#rfc.references">Informative References</a>
+</li>
+<li><a href="#rfc.authors">Authors' Addresses</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#sec1" id="sec1">Conventions and Terminology Used in this Document</a>
+</h1>
+<p id="rfc.section.1.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in &#8220;Key words for use in RFCs to Indicate Requirement Levels&#8221; <a href="#RFC2119" class="xref">[RFC2119]</a>.</p>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#sec2" id="sec2">Introduction</a>
+</h1>
+<p id="rfc.section.2.p.1">The Internet of Things (IoT) denotes the interconnection of highly heterogeneous networked entities and networks following a number of communication patterns such as: human-to-human (H2H), human-to-thing (H2T), thing-to-thing (T2T), or thing-to-things (T2Ts). The term IoT was first coined by the Auto-ID center <a href="#AUTO-ID" class="xref">[AUTO-ID]</a> in 1999. Since then, the development of the underlying concepts has ever increased its pace. Nowadays, the IoT presents a strong focus of research with various initiatives working on the (re)design, application, and usage of standard Internet technology in the IoT.</p>
+<p id="rfc.section.2.p.2">The IoT is exposed to a high number of attack vectors, that if sucessfully exploited by an attacker can have severe consequences.  This document summarizes threats and existing mitigation strategies to overcome those threats.  Which mitigation strategies are most suitable to and required in an IoT system depends on several factors, including, the operational features of the IoT system or the threats that are applicable to that system.  Thus, this document further discusses processes that can facilitate the proper design and operation of secure IoT systems.  Finally, this document proposes diffent security profiles, i.e., sets of mitigation strategies, that address typical threats in different IoT environments.</p>
+<p id="rfc.section.2.p.3">The rest of the Internet-Draft is organized as follows.  Section <a href="#sec3" class="xref">Section 3</a> summarizes the design space of secure IoT systems, including lifecycle, device capabilities, and operational features.  This section further gives general definitions for the main security building blocks within the IoT domain.  Section <a href="#sec4" class="xref">Section 4</a> discusses threats that should be considered when designing and operating an IoT system.  In <a href="#sec5" class="xref">Section 5</a>, mitigation strategies to the identified threats are listed.  Choosing which mitigation strategies apply to which use cases is not trivial since it is required to find a proper balance between security, cost and usuability.  Thus, the following section details methodologies for managing risks when designing a secure IoT system and dealing with vulnerabilities when operating the system.  Finally, <a href="#sec7" class="xref">Section 7</a> proposes a number of illustrative security profiles applicable to different illustrative clases of IoT systems.  Each security profile comprises a set of mitigation strategies and security processes that can provide a suitable security level while matching the cost and usuability goals of the corresponding class of IoT systems.  <a href="#sec8" class="xref">Section 8</a> includes final remarks and conclusions.</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#sec3" id="sec3">The design space of secure IoT systems</a>
+</h1>
+<p id="rfc.section.3.p.1">ToDo: write intro for this section whose goal is to describe &#8216;general&#8217; aspects to consider when designing/operating/maintaining an IoT system.</p>
+<h1 id="rfc.section.3.1">
+<a href="#rfc.section.3.1">3.1.</a> <a href="#sec3-1" id="sec3-1">The Thing Lifecycle</a>
+</h1>
+<p id="rfc.section.3.1.p.1">ToDo: describe IoT lifecycle and how that impacts security design.</p>
+<p id="rfc.section.3.1.p.2">The text below is old and belongs to the old draft. Part of the text could be reused.</p>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<p id="rfc.section.3.1.p.4">The lifecycle of a thing refers to the operational phases of a thing in the context of a given application or use case. <a href="#fig1" class="xref">Figure 1</a> shows the generic phases of the lifecycle of a thing. This generic lifecycle is applicable to very different IoT applications and scenarios.</p>
+<p id="rfc.section.3.1.p.5">We consider an example, a Building Automation and Control (BAC) system, to illustrate the lifecycle and the meaning of these different phases.  A BAC system consists of a network of interconnected nodes that performs various functions in the domains of HVAC (Heating, Ventilating, and Air Conditioning), lighting, safety etc. The nodes vary in functionality and a majority of them represent resource constrained devices such as sensors and luminaries. Some devices may also be battery operated or battery-less nodes, demanding for a focus on low energy consumption and on sleeping devices.  In our example, the life of a thing starts when it is manufactured. Due to the different application areas (i.e., HVAC, lighting, safety) nodes are tailored to a specific task. It is therefore unlikely that one single manufacturer will create all nodes in a building. Hence, interoperability as well as trust bootstrapping between nodes of different vendors is important. The thing is later installed and commissioned within a network by an installer during the bootstrapping phase. Specifically, the device identity and the secret keys used during normal operation are provided to the device during this phase. Different subcontractors may install different IoT devices for different purposes. Furthermore, the installation and bootstrapping procedures may not be a defined event but may stretch over an extended period of time. After being bootstrapped, the device and the system of things are in operational mode and execute the functions of the BAC system. During this operational phase, the device is under the control of the system owner. For devices with lifetimes spanning several years, occasional maintenance cycles may be required. During each maintenance phase, the software on the device can be upgraded or applications running on the device can be reconfigured. The maintenance tasks can thereby be performed either locally or from a backend system by means of an end-to-end connection. Depending on the operational changes of the device, it may be required to re-bootstrap at the end of a maintenance cycle. The device continues to loop through the operational phase and the eventual maintenance phase until the device is decommissioned at the end of its lifecycle. However, the end-of-life of a device does not necessarily mean that it is defective but rather denotes a need to replace and upgrade the network to next-generation devices in order to provide additional  functionality. Therefore the device can be removed and re-commissioned to be used in a different system under a different owner by starting the lifecycle all over again.</p>
+<div id="rfc.figure.1"></div>
+<div id="fig1"></div>
+<pre>
+ _Manufactured           _SW update          _Decommissioned
+/                       /                   /
+|   _Installed          |   _ Application   |   _Removed &amp;
+|  /                    |  / reconfigured   |  /  replaced
+|  |   _Commissioned    |  |                |  |
+|  |  /                 |  |                |  |   _Reownership &amp;
+|  |  |    _Application |  |   _Application |  |  / recommissioned
+|  |  |   /   running   |  |  / running     |  |  |
+|  |  |   |             |  |  |             |  |  |             \\
++##+##+###+#############+##+##+#############+##+##+##############&gt;&gt;&gt;
+    \/  \______________/ \/  \_____________/ \___/         time //
+    /           /         \          \          \
+Bootstrapping  /      Maintenance &amp;   \     Maintenance &amp;
+              /      re-bootstrapping  \   re-bootstrapping
+        Operational                Operational
+</pre>
+<p class="figure">Figure 1: The lifecycle of a thing in the Internet of Things.</p>
+<h1 id="rfc.section.3.2">
+<a href="#rfc.section.3.2">3.2.</a> <a href="#sec3-2" id="sec3-2">Classes of IoT device</a>
+</h1>
+<p id="rfc.section.3.2.p.1">ToDo: describe classes of IoT devices and how that impacts security design.</p>
+<h1 id="rfc.section.3.3">
+<a href="#rfc.section.3.3">3.3.</a> <a href="#sec3-3" id="sec3-3">Classes of IoT systems</a>
+</h1>
+<p id="rfc.section.3.3.p.1">ToDo: describe classes of IoT systems and how that impacts security design.</p>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#sec4" id="sec4">Security Threats</a>
+</h1>
+<p id="rfc.section.4.p.1">ToDo: This section should summarize threats. The list below is from the old draft and it is not complete or very detailed. This shold be improved.</p>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<p id="rfc.section.4.p.3">This section explores security threats and vulnerabilities in the IoT and discusses how to manage risks.</p>
+<p id="rfc.section.4.p.4">Security threats have been analyzed in related IP protocols including HTTPS <a href="#RFC2818" class="xref">[RFC2818]</a>, COAP<a href="#RFC7252" class="xref">[RFC7252]</a> 6LoWPAN <a href="#RFC4919" class="xref">[RFC4919]</a>, ANCP <a href="#RFC5713" class="xref">[RFC5713]</a>, DNS security threats <a href="#RFC3833" class="xref">[RFC3833]</a>, SIP <a href="#RFC3261" class="xref">[RFC3261]</a>, IPv6 ND <a href="#RFC3756" class="xref">[RFC3756]</a>, and PANA <a href="#RFC4016" class="xref">[RFC4016]</a>. Nonetheless, the challenge is about their impacts on scenarios of the IoTs. In this section, we specifically discuss the threats that could compromise an individual thing, or network as a whole. Note that these set of threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. We also note that these threats can be classified according to either (i) the thing&#8217;s lifecycle phases (when does the threat occur?) or (ii) the security building blocks (which functionality is affected by the threat?). All these threats are summarized in Table 2.</p>
+<p></p>
+
+<ol>
+<li>Cloning of things: During the manufacturing process of a thing, an untrusted factory can easily clone the physical characteristics, firmware/software, or security configuration of the thing. Deployed things might also be compromised and their software reserve engineered allowing for cloning or software modifications. Such a cloned thing may be sold at a cheaper price in the market, and yet be able to function normally, as a genuine thing. For example, two cloned devices can still be associated and work with each other. In the worst case scenario, a cloned device can be used to control a genuine device or perform an attack. One should note here, that an untrusted factory may also change functionality of the cloned thing, resulting in degraded functionality with respect to the genuine thing (thereby, inflicting potential damage to the reputation of the original thing manufacturer). Moreover, additional functionality can be implemented within the cloned thing, such as a backdoor.</li>
+<li>Malicious substitution of things: During the installation of a thing, a genuine thing may be substituted with a similar variant of lower quality without being detected. The main motivation may be cost savings, where the installation of lower-quality things (e.g., non-certified products) may significantly reduce the installation and operational costs. The installers can subsequently resell the genuine things in order to gain further financial benefits. Another motivation may be to inflict damage to the reputation of a competitor&#8217;s offerings.</li>
+<li>Eavesdropping attack: During the commissioning of a thing into a network, it may be susceptible to eavesdropping, especially if operational keying materials, security parameters, or configuration settings, are exchanged in clear using a wireless medium or if used cryptographic algorithms are not suitable for the envisioned lifetime of the device and the system. After obtaining the keying material, the attacker might be able to recover the secret keys established between the communicating entities (e.g., H2T, T2Ts, or Thing to the backend management system), thereby compromising the authenticity and confidentiality of the communication channel, as well as the authenticity of commands and other traffic exchanged over this communication channel. When the network is in operation, T2T communication may be eavesdropped upon if the communication channel is not sufficiently protected or in the event of session key compromise due to a long period of usage without key renewal or updates.</li>
+<li>Man-in-the-middle attack: Both the commissioning phase and operational phases may also be vulnerable to man-in-the-middle attacks, e.g., when keying material between communicating entities are exchanged in the clear and the security of the key establishment protocol depends on the tacit assumption that no third party is able to eavesdrop during the execution of this protocol. Additionally, device authentication or device authorization may be non-trivial, or may need support of a human decision process, since things usually do not have a-priori knowledge about each other and cannot always be able to differentiate friends and foes via completely automated mechanisms. Thus, even if the key establishment protocol provides cryptographic device authentication, this knowledge on device identities may still need complementing with a human-assisted authorization step (thereby, presenting a weak link and offering the potential of man-in-the-middle attacks this way).</li>
+<li>Firmware Replacement attack: When a thing is in operation or maintenance phase, its firmware or software may be updated to allow for new functionality or new features. An attacker may be able to exploit such a firmware upgrade by replacing the thing&#8217;s software with malicious software, thereby influencing the operational behavior of the thing. For example, an attacker could add a piece of malicious code to the firmware that will cause it to periodically report the energy usage of the lamp to a data repository for analysis. Similarly, devices whose software has not been properly maintained and updated might contain vulnerabilities that might be exploited by attackers.</li>
+<li>Extraction of private information: in the ambient environment the things (such as sensors, actuators, etc.) are usually physically unprotected and could easily be captured by an attacker. Such an attacker may then attempt to extract private information such as keys (e.g., device&#8217;s key, private-key, group key), sensed data (e.g., healthcare status of a user), configuration parameters (e.g., the WiFi key), or proprietary algorithms (e.g., algorithm performing some data analytic task) from this thing. Compromise of a thing&#8217;s unique key compromises communication channels of this particular thing and also compromise all data communicated over this channel.</li>
+<li>Routing attack: As highlighted in <a href="#ID-Daniel" class="xref">[ID-Daniel]</a>, routing information in IoT can be spoofed, altered, or replayed, in order to create routing loops, attract/repel network traffic, extend/shorten source routes, etc. Other relevant routing attacks include 1) Sinkhole attack (or blackhole attack), where an attacker declares himself to have a high-quality route/path to the base station, thus allowing him to do manipulate all packets passing through it. 2) Selective forwarding, where an attacker may selectively forward packets or simply drop a packet. 3) Wormhole attack, where an attacker may record packets at one location in the network and tunnel them to another location, thereby influencing perceived network behavior and potentially distorting statistics, thus greatly impacting the functionality of routing. 4) Sybil attack, whereby an attacker presents multiple identities to other things in the network.</li>
+<li>Privacy threat: The tracking of a thing&#8217;s location and usage may pose a privacy risk to its users. An attacker can infer information based on the information gathered about individual things, thus deducing behavioral patterns of the user of interest to him. Such information can subsequently be sold to interested parties for marketing purposes and targeted advertising.</li>
+<li>Denial-of-Service attack: Typically, things have tight memory and limited computation, they are thus vulnerable to resource exhaustion attack. Attackers can continuously send requests to be processed by specific things so as to deplete their resources. This is especially dangerous in the IoTs since an attacker might be located in the backend and target resource-constrained devices in an Low-Latency Network (LLN). Additionally, DoS attack can be launched by physically jamming the communication channel, thus breaking down the T2T communication channel. Network availability can also be disrupted by flooding the network with a large number of packets. On the other hand, things compromised by attackers can be used to disrupt the operation of other networks or systems by means of a Distributed DoS attack.</li>
+</ol>
+<p id="rfc.section.4.p.6">The following table summarizes the above generic security threats and the potential point of vulnerabilities at different layers of the communication stack. We also include related RFCs and ongoing standardization efforts that include a threat model that might apply to the IoTs.</p>
+<div id="rfc.figure.2"></div>
+<div id="fig3"></div>
+<pre>
+             +------------------+------------------+------------------+
+             | Manufacturing    | Installation/    | Operation        |
+             |                  | Commissioning    |                  |
++------------+------------------+------------------+------------------+
+|Thing's     | Device Cloning   |Substitution      |Privacy threat    |
+|Model       |                  |ACE-OAuth(draft)  |Extraction of     |
+|            |                  |                  |private inform.   |
++------------+------------------+------------------+------------------+
+|Application |                  |RFC2818, RFC7252  |RFC2818, Firmware |
+|Layer       |                  |OSCOAP(draft)     |replacement       |
++------------+------------------+------------------+------------------+
+|Transport   |                  | Eavesdropping &amp;  |Eavesdropping     |
+|Layer       |                  | Man-in-the-middle|Man-in-the-middle |
++------------+------------------| attack, RFC7925  |------------------+
+|Network     |                  | RFC4919, RFC5713 |RFC4919,DoS attack|
+|Layer       |                  | RFC3833, RFC3756 |Routing attack    |
+|            |                  |                  |RFC3833           |
++------------+------------------+------------------+------------------+
+|Physical    |                  |                  |DoS attack        |
+|Layer       |                  |                  |                  |
++-------------------------------+------------------+------------------+
+</pre>
+<p class="figure">Figure 2: Classification of threats according to the lifecycle phases and security building blocks.</p>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#sec5" id="sec5">Security Mitigations</a>
+</h1>
+<p id="rfc.section.5.p.1">ToDo: this section should contain mitigation strategies to deal with threats.</p>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<h1 id="rfc.section.6">
+<a href="#rfc.section.6">6.</a> <a href="#sec6" id="sec6">Designing and operating secure IoT systems</a>
+</h1>
+<p id="rfc.section.6.p.1">[ToDo: This section should describe how an IoT system should be designed/operated. The text below is from the old draft and it should be further improved.]</p>
+<p id="rfc.section.6.p.2">Dealing with above threats and finding suitable security mitigations is challenging: there are very sophisticated threats that a very powerful attacker could use; also, new threats and exploits appear in a daily basis. Therefore, the existence of proper secure product creation processes that allow managing and minimizing risks during the lifecycle of the IoT devices is at least as important as being aware of the threats. A non-exhaustive list of relevant processes include:</p>
+<p></p>
+
+<ol>
+<li>A Business Impact Analysis (BIA) assesses the consequences of loss of basic security attributes, namely, confidentiality, integrity and availability in an IoT system. These consequences might include impact on data lost, sales lost, increased expenses, regulatory fines, customer dissatisfaction, etc. Performing a business impact analysis allow determining the business relevance of having a proper security design placing security in the focus.</li>
+<li>A Risk Assessment (RA) analyzes security threats to the IoT system, considering their likelihood and impact, and deriving for each of them a risk level. Risks classified as moderate or high must be mitigated, i.e., security architecture should be able to deal with that threat bringing the risk to a low level. Note that threats are usually classified according to their goal: confidentiality, integrity, and availability. For instance, a specific threat to recover a symmetric-key used in the system relates to confidentiality.</li>
+<li>A privacy impact assessment (PIA) aims at assessing Personal Identifiable Information (PII) that is collected, processed, or used in the IoT system. By doing so, the goals is to fulfill applicable legal requirements, determine risks and effects of the manipulation of PII, and evaluate proposed protections.</li>
+<li>Procedures for incident reporting and mitigation refer to the methodologies that allow becoming aware of any security issues that affect an IoT system. Furthermore, this includes steps towards the actual deployment of patches that mitigate the identified vulnerabilities.</li>
+</ol>
+<p id="rfc.section.6.p.4">BIA, RA, and PIA are usually to be realized during the creation of a new IoT system, introduction of new technologies in the IoT system, or deployment of significant system upgrades. In general, it is recommended to re-assess them on a regular basis taking into account new use cases or threats.</p>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#sec7" id="sec7">Security Profiles</a>
+</h1>
+<p id="rfc.section.7.p.1">ToDo: this section should contain the security profiles. My thinking is to (i) define some classes of IoT systems that are illustrative of real-world scenarios describing the features of those (lifecycle, device capabilities, IoT system). Then, (ii) describe the types of threats that would be typically applicable to them. And finally, (iii) describe mitigation strategies that should be used to deal with those threats while taking into account the features of the IoT system.</p>
+<p id="rfc.section.7.p.2">NOTE THAT THE 4 PROFILES ARE MERE PLACEHOLDERS.</p>
+<p id="rfc.section.7.p.3">The text below is old and belongs to the old draft. Part of the text could be reused.</p>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<p id="rfc.section.7.p.5">There is a wide range of IoT applications including building automation systems, healthcare, smart cities, logistics, etc. For each of these applications, properties such as device capability, network infrastructure, or available security services can be completely different. Furthermore, each of those applications is featured by a different number of actors deployed in very different environments and with very different purposes.</p>
+<p id="rfc.section.7.p.6">Consequently, when a Business Impact Analysis or Risk Assessment is performed, not only the types of threats will be different, but also their likelihood and potential impact.  This determines that different applications tend to require different or complementary types of security mechanisms mitigating the identified risks.</p>
+<p id="rfc.section.7.p.7">For example, IoT applications may have different needs regarding authentication and confidentiality. While some application might not require any confidentiality at all, others might require strong end-to-end confidentiality. In terms of secure bootstrapping of keys, some applications might assume the existence and online availability of a central key-distribution-center (KDC) within the network to distribute and manage keys; while other applications cannot rely on such a central party or on their availability.</p>
+<p id="rfc.section.7.p.8">This section describes some exemplary security profiles fitting the security needs of applications with the same characteristics and requirements.  This approach is similar to that in the security profiles in <a href="#nist_lightweight_project" class="xref">[nist_lightweight_project]</a>.  Such security profiles can help to (i) guide the design process of different application types by identifying open gaps; (ii) allow for later interoperability; and (iii) prevent possible security misconfiguration.  Each security profile is identified by:</p>
+<p></p>
+
+<ol>
+<li>a short description,</li>
+<li>an exemplary application that might use/require such a security profile,</li>
+<li>the security requirements for each of the above security aspects according to our classification.</li>
+</ol>
+<p id="rfc.section.7.p.10">These security profiles can serve to guide the standardization process, since these explicitly describe the basic functionalities and protocols required to get different use cases up and running. They can allow for later interoperability since different manufacturers can describe the implemented security profile in their products. Finally, the security profiles can avoid possible security misconfiguration, since each security profile can be bound to a different application domain so that security protocols are clearly defined and under which circumstances they are applied.</p>
+<p id="rfc.section.7.p.11">We compare the security capabilities in each of the security profiles according to security building blocks, namely:</p>
+<p></p>
+
+<ol>
+<li>Security architecture,</li>
+<li>Security model,</li>
+<li>Security bootstrapping,</li>
+<li>Network security, and</li>
+<li>Application security.</li>
+</ol>
+<p id="rfc.section.7.p.13">IMPORTANT: Note that each of these exemplary profiles aims at summarizing the required security requirements for different exemplary application areas and at providing a set of initial security features. In other words, these profiles reflect the need for different security configurations, depending on the threat and trust models of the underlying applications. In this sense, this section does not provide an overview of existing protocols as done in previous sections, but it rather explicitly describes what should be in place to ensure secure system operation. Observe also that this list of security profiles is not exhaustive and that it should be considered just as an example not related to existing legal regulations for any existing application.</p>
+<p id="rfc.section.7.p.14">The remainder of this section is organized as follows. The following section first describes four generic security profiles and discuss how different applications of IP networks, e.g., 6LoWPAN/CoAP networks, involve different security needs. The following five subsections summarize the expected security features or capabilities for each the security profile with regards to &#8220;Security Architecture&#8221;, &#8220;Security Model&#8221;, &#8220;Security Bootstrapping&#8221;, &#8220;Network Security&#8221;, and &#8220;Application Security&#8221;.</p>
+<h1 id="rfc.section.7.1">
+<a href="#rfc.section.7.1">7.1.</a> <a href="#sec7-1" id="sec7-1">Classes of IoT Systems</a>
+</h1>
+<p id="rfc.section.7.1.p.1">ToDo: This section should describe some exemplary classes of IoT systems. As already said above, my thinking would be to describe the features of those systems and also the typical threat model for each of those classes of IoT systems. With this, we can also &#8216;assign&#8217; mitigation strategies to each of the classes of IoT systems and that set of mitigation strategies would be the security profile.</p>
+<p id="rfc.section.7.1.p.2">The text below is from the old draft.</p>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<p id="rfc.section.7.1.p.4">We consider four generic security profiles as summarized in the table below:</p>
+<div id="rfc.figure.3"></div>
+<div id="fig6"></div>
+<pre>
+           +---------------------------------------------------------+
+           | Exemplary       |                                       |
+           | IoT Application |          Description                  |
++----------+---------------------------------------------------------+
+|SecProf_1 |Home usage       |Enables operation between home things  |
+|          |                 |without interaction with central device|
++----------+-----------------+---------------------------------------+
+|SecProf_2 |Managed Home     |Enables operation between home things. |
+|          | usage           |Interaction with a central and local   |
+|          |                 |device is possible                     |
++----------+-----------------+---------------------------------------+
+|SecProf_3 |Industrial usage |Enables operation between things.      |
+|          |                 |Relies on central (local or backend)   |
+|          |                 |device for security                    |
++----------+-----------------+---------------------------------------+
+|SecProf_4 |Advanced         |Enables ad-hoc operation between things|
+|          |Industrial usage |and relies on central device or        |
+|          |                 |on a collection of control devices     |
++----------+-----------------+---------------------------------------+
+</pre>
+<p class="figure">Figure 3: Security profiles and application areas.</p>
+<p id="rfc.section.7.1.p.5">The classification in the table considers different potential applications in which security mechanism are chosen according to the operational features (network size, existence of a central device, connectivity to the Internet, importance of the exchanged information, etc.) and threat model (what are the assets that an attacker looks for). As already pointed out, this set of scenarios is just exemplary and they should be further discussed based on a broader consensus.</p>
+<p id="rfc.section.7.1.p.6">The security suite (SecProf_1) is catered for environments in which IP protocols (e.g., 6LoWPAN/CoAP) can be used to enable communication between things in an ad-hoc manner and the security requirements are minimal. An example, is a home application in which two devices should exchange information and no further connection with other devices (local or with a backend) is required. In this scenario, value of the exchanged information is low and usually happens in a confined room, thus, it is possible to have a short period of time during which initial secrets can be exchanged in the clear. Due to this fact, there is no requirement to enable devices from different manufacturers to inter operate in a secure way (keys are just exchanged).  The expected network size of applications using this profile is expected to be small such that the provision of network security, e.g., secure routing, is of low importance.</p>
+<p id="rfc.section.7.1.p.7">The next security suite (SecProf_2) represents an evolution of SecProf_1 in which, e.g., home devices, can be managed. A first possibility for the securing domain management refers to the creation of a centrally managed security domain without any connectivity to the Internet. The central device used for management can serve as, e.g., a key distribution center including policies for key update, storage, etc. The presence of a central device can help in the management of larger networks. Network security becomes more relevant in this scenario since the IP network (e.g., 6LoWPAN/CoAP network) can be prone to Denial of Service attacks (e.g., flooding if L2 is not protected) or routing attacks. Similarly, the network of devices could also be the source of a DDoS attack and a central device connecting to the Internet can block traffic of ongoing attacks.</p>
+<p id="rfc.section.7.1.p.8">SecProf_3 considers that a central device is always required for managing the system. Example applications of this profile include building control and automation, sensor networks for industrial use, environmental monitoring, etc. As before, the manager can be located in the same network (e.g., 6LoWPAN/CoAP network) and handle key management. In this case, the first association of devices to the network is required to be done in a secure way, i.e., requiring authentication and authorization. This step can involve the secure transmission of keying materials used for network security at different layers. The information exchanged in the network is considered to be valuable and it should be protected in the sense of pairwise links. Commands should be secured and broadcast should be secured with entity authentication <a href="#RFC7390" class="xref">[RFC7390]</a>. Network should be protected from routing attacks. A further extension to this use case is to allow for remote management. A &#8220;backend manager&#8221; is in charge of securely managing SW or information exchanged or collected within the network, e.g., a 6LoWPAN/CoAP network. This requires connection of devices to the Internet over a 6LBR involving a number of new threats that were not present before. A list of potential attacks include: resource-exhaustion attacks from the Internet; amplification attacks; trust issues related a HTTP-CoAP proxy <a href="#ID-proHTTPCoAP" class="xref">[ID-proHTTPCoAP]</a>, etc. This use case requires protecting the communication from a device in the backend to a device in the IP network, e.g., a 6LoWPAN/CoAP network, end-to-end. This use case also requires measures to provide the 6LBR with the capability of dropping fake requests coming from the Internet. This becomes especially challenging when the 6LBR is not trusted and access to the exchanged information is limited; and even more in the case of a HTTP-CoAP proxy since protocol translation is required. This use case should take care of protecting information accessed from the backend due to privacy issues (e.g., information such as type of devices, location, usage, type and amount of exchanged information, or mobility patterns can be gathered at the backend threatening the privacy sphere of users) so that only required information is disclosed.</p>
+<p id="rfc.section.7.1.p.9">The last security suite (SecProf_4) essentially represents interoperability of all the security profiles defined previously. It considers applications with some additional requirements regarding operation such as: (i) ad-hoc establishment of security relationships between things (potentially from different manufacturers) in non-secure environments or (ii) dynamic roaming of things between different IP network security domains. Such operational requirements pose additional security requirements, e.g., in addition to secure bootstrapping of a device within an IP, e.g., 6LowPan/CoAP, security domain and the secure transfer of network operational key, there is a need to enable inter-domains secure communication to facilitate data sharing.  In this scenario, there is also a higher pressure to ensure that an attacker cannot compromise deployed devices and extract or modify any type of private data such as cryptographic keys, data, or proprietary algorithms.</p>
+<h1 id="rfc.section.7.2">
+<a href="#rfc.section.7.2">7.2.</a> <a href="#sec7-2" id="sec7-2">Security Profile 1: Home usage</a>
+</h1>
+<p id="rfc.section.7.2.p.1">ToDo: include typical threats and mitigation strategies for this scenario. Describe why that set of mitigation strategies would lead to a good trade-off between security/cost/usuability.</p>
+<h1 id="rfc.section.7.3">
+<a href="#rfc.section.7.3">7.3.</a> <a href="#sec7-3" id="sec7-3">Security Profile 2: Managed Home usage</a>
+</h1>
+<p id="rfc.section.7.3.p.1">ToDo: include typical threats and mitigation strategies for this scenario. Describe why that set of mitigation strategies would lead to a good trade-off between security/cost/usuability.</p>
+<h1 id="rfc.section.7.4">
+<a href="#rfc.section.7.4">7.4.</a> <a href="#sec7-4" id="sec7-4">Security Profile 3: Industrial usage</a>
+</h1>
+<p id="rfc.section.7.4.p.1">ToDo: include typical threats and mitigation strategies for this scenario. Describe why that set of mitigation strategies would lead to a good trade-off between security/cost/usuability.</p>
+<h1 id="rfc.section.7.5">
+<a href="#rfc.section.7.5">7.5.</a> <a href="#sec7-5" id="sec7-5">Security Profile 4: Managed Industrial usage</a>
+</h1>
+<p id="rfc.section.7.5.p.1">ToDo: include typical threats and mitigation strategies for this scenario. Describe why that set of mitigation strategies would lead to a good trade-off between security/cost/usuability.</p>
+<h1 id="rfc.section.8">
+<a href="#rfc.section.8">8.</a> <a href="#sec8" id="sec8">Conclusions</a>
+</h1>
+<p id="rfc.section.8.p.1">ToDo</p>
+<h1 id="rfc.section.9">
+<a href="#rfc.section.9">9.</a> <a href="#sec9" id="sec9">Security Considerations</a>
+</h1>
+<p id="rfc.section.9.p.1">This document reflects upon the requirements and challenges of the security architectural framework for the Internet of Things.</p>
+<h1 id="rfc.section.10">
+<a href="#rfc.section.10">10.</a> <a href="#sec10" id="sec10">IANA Considerations</a>
+</h1>
+<p id="rfc.section.10.p.1">This document contains no request to IANA.</p>
+<h1 id="rfc.section.11">
+<a href="#rfc.section.11">11.</a> <a href="#sec11" id="sec11">Acknowledgments</a>
+</h1>
+<p id="rfc.section.11.p.1">We gratefully acknowledge feedback and fruitful discussion with Tobias Heer, Robert Moskowitz, and Thorsten Dahm. We acknowledge the additional authors of the previous version of this document Sye Loong Keoh, Rene Hummen and Rene Struik.</p>
+<h1 id="rfc.references">
+<a href="#rfc.references">12.</a> Informative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="Article29">[Article29]</b></td>
+<td class="top">"<a>Opinion 8/2014 on the on Recent Developments on the Internet of Things</a>", Web http://ec.europa.eu/justice/data-protection/article-29/documentation/opinion-recommendation/files/2014/wp223_en.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="AUTO-ID">[AUTO-ID]</b></td>
+<td class="top">"<a>AUTO-ID LABS</a>", Web http://www.autoidlabs.org/, September 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="BACNET">[BACNET]</b></td>
+<td class="top">"<a>BACnet</a>", Web http://www.bacnet.org/, February 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="BITAG">[BITAG]</b></td>
+<td class="top">"<a>Internet of Things (IoT) Security and Privacy Recommendations</a>", Web http://www.bitag.org/report-internet-of-things-security-privacy-recommendations.php, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="cctv">[cctv]</b></td>
+<td class="top">"<a>Backdoor In MVPower DVR Firmware Sends CCTV Stills To an Email Address In China</a>", Web https://hardware.slashdot.org/story/16/02/17/0422259/backdoor-in-mvpower-dvr-firmware-sends-cctv-stills-to-an-email-address-in-china, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="CSA">[CSA]</b></td>
+<td class="top">"<a>Security Guidance for Early Adopters of the Internet of Things (IoT)</a>", Web https://downloads.cloudsecurityalliance.org/whitepapers/Security_Guidance_for_Early_Adopters_of_the_Internet_of_Things.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="d2dsecurity">[d2dsecurity]</b></td>
+<td class="top">
+<a>Haus, M.</a>, <a>Waqas, M.</a>, <a>Ding, A.</a>, <a>Li, Y.</a>, <a>Tarkoma, S.</a> and <a>J. Ott</a>, "<a>Security and Privacy in Device-to-Device (D2D) Communication: A Review</a>", Paper IEEE Communications Surveys and Tutorials, 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="DALI">[DALI]</b></td>
+<td class="top">"<a>DALI</a>", Web http://www.dalibydesign.us/dali.html, February 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="DHS">[DHS]</b></td>
+<td class="top">"<a>Strategic Principles For Securing the Internet of Things (IoT)</a>", Web https://www.dhs.gov/sites/default/files/publications/Strategic_Principles_for_Securing_the_Internet_of_Things-2016-1115-FINAL....pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ENISA_ICS">[ENISA_ICS]</b></td>
+<td class="top">"<a>Communication network dependencies for ICS/SCADA Systems</a>", European Union Agency For Network And Information Security , February 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ETSI_GR_QSC_001">[ETSI_GR_QSC_001]</b></td>
+<td class="top">"<a>Quantum-Safe Cryptography (QSC);Quantum-safe algorithmic framework</a>", European Telecommunications Standards Institute (ETSI) , June 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="Fairhair">[Fairhair]</b></td>
+<td class="top">"<a>Fairhair Alliance</a>", Web https://www.fairhair-alliance.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="FCC">[FCC]</b></td>
+<td class="top">"<a>Federal Communications Comssion Response 12-05-2016</a>", FCC , February 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="FTCreport">[FTCreport]</b></td>
+<td class="top">"<a>FTC Report on Internet of Things Urges Companies to Adopt Best Practices to Address Consumer Privacy and Security Risks</a>", Web https://www.ftc.gov/news-events/press-releases/2015/01/ftc-report-internet-things-urges-companies-adopt-best-practices, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="GSMAsecurity">[GSMAsecurity]</b></td>
+<td class="top">"<a>GSMA IoT Security Guidelines</a>", Web http://www.gsma.com/connectedliving/future-iot-networks/iot-security-guidelines/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-6lodect">[ID-6lodect]</b></td>
+<td class="top">
+<a>Mariager, P.</a>, <a>Petersen, J.</a>, <a>Shelby, Z.</a>, <a>Logt, M.</a> and <a>D. Barthel</a>, "<a>Transmission of IPv6 Packets over DECT Ultra Low Energy</a>", draft-ietf-6lo-dect-ule-09 , December 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-6lonfc">[ID-6lonfc]</b></td>
+<td class="top">
+<a>Choi, Y.</a>, <a>Hong, Y.</a>, <a>Youn, J.</a>, <a>Kim, D.</a> and <a>J. Choi</a>, "<a>Transmission of IPv6 Packets over Near Field Communication</a>", draft-ietf-6lo-nfc-05 , October 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-6tisch">[ID-6tisch]</b></td>
+<td class="top">
+<a>Thubert, P.</a>, "<a>An Architecture for IPv6 over the TSCH mode of IEEE 802.15.4</a>", draft-ietf-6tisch-architecture-11 , January 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-aceoauth">[ID-aceoauth]</b></td>
+<td class="top">
+<a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a>Authentication and Authorization for Constrained Environments (ACE)</a>", draft-ietf-ace-oauth-authz-05 , March 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-bootstrap">[ID-bootstrap]</b></td>
+<td class="top">
+<a>Sarikaya, B.</a> and <a>M. Sethi</a>, "<a>Secure IoT Bootstrapping : A Survey</a>", draft-sarikaya-t2trg-sbootstrapping-01 , July 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-cose">[ID-cose]</b></td>
+<td class="top">
+<a>Schaad, J.</a>, "<a>CBOR Object Signing and Encryption (COSE)</a>", draft-ietf-cose-msg-24 , November 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Daniel">[ID-Daniel]</b></td>
+<td class="top">
+<a>Park, S.</a>, <a>Kim, K.</a>, <a>Haddad, W.</a>, <a>Chakrabarti, S.</a> and <a>J. Laganier</a>, "<a>IPv6 over Low Power WPAN Security Analysis</a>", draft-daniel-6lowpan-security-analysis-05 , March 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-dietesp">[ID-dietesp]</b></td>
+<td class="top">
+<a>Migault, D.</a>, <a>Guggemos, T.</a> and <a>C. Bormann</a>, "<a>Diet-ESP: a flexible and compressed format for IPsec/ESP</a>", draft-mglt-6lo-diet-esp-02 , August 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Hartke">[ID-Hartke]</b></td>
+<td class="top">
+<a>Hartke, K.</a> and <a>O. Bergmann</a>, "<a>Datagram Transport Layer Security in Constrained Environments</a>", draft-hartke-core-codtls-02 , July 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-HIP">[ID-HIP]</b></td>
+<td class="top">
+<a>Moskowitz, R.</a>, "<a>HIP Diet EXchange (DEX)</a>", draft-moskowitz-hip-rg-dex-06 , May 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Moore">[ID-Moore]</b></td>
+<td class="top">
+<a>Moore, K.</a>, <a>Barnes, R.</a> and <a>H. Tschofenig</a>, "<a>Best Current Practices for Securing Internet of Things (IoT) Devices</a>", draft-moore-iot-security-bcp-00 , October 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-MUD">[ID-MUD]</b></td>
+<td class="top">
+<a>Lear, E.</a>, <a>Droms, R.</a> and <a>D. Domascanu</a>, "<a>Manufacturer Usage Description Specification</a>", March 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Nikander">[ID-Nikander]</b></td>
+<td class="top">
+<a>Nikander, P.</a> and <a>J. Melen</a>, "<a>A Bound End-to-End Tunnel(BEET) mode for ESP</a>", draft-nikander-esp-beet-mode-09 , August 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-OFlynn">[ID-OFlynn]</b></td>
+<td class="top">
+<a>O'Flynn, C.</a>, <a>Sarikaya, B.</a>, <a>Ohba, Y.</a>, <a>Cao, Z.</a> and <a>R. Cragie</a>, "<a>Security Bootstrapping of Resource-Constrained Devices</a>", draft-oflynn-core-bootstrapping-03 , November 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-OSCOAP">[ID-OSCOAP]</b></td>
+<td class="top">
+<a>Selander, G.</a>, <a>Mattsson, J.</a>, <a>Palombini, F.</a> and <a>L. Seitz</a>, "<a>Object Security of CoAP (OSCOAP)</a>", draft-selander-ace-object-security-05 , July 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-proHTTPCoAP">[ID-proHTTPCoAP]</b></td>
+<td class="top">
+<a>Castellani, A.</a>, <a>Loreto, S.</a>, <a>Rahman, A.</a>, <a>Fossati, T.</a> and <a>E. Dijk</a>, "<a>Best practices for HTTP-CoAP mapping implementation</a>", draft-castellani-core-http-mapping-07 , February 2013.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-rd">[ID-rd]</b></td>
+<td class="top">
+<a>Shelby, Z.</a>, <a>Koster, M.</a>, <a>Bormann, C.</a> and <a>P. Stok</a>, "<a>CoRE Resource Directory</a>", draft-ietf-core-resource-directory-09 , October 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-senml">[ID-senml]</b></td>
+<td class="top">
+<a>Jennings, C.</a>, <a>Shelby, Z.</a>, <a>Arkko, J.</a>, <a>Keranen, A.</a> and <a>C. Bormann</a>, "<a>Media Types for Sensor Measurement Lists (SenML)</a>", draft-ietf-core-resource-directory-09 , October 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Tsao">[ID-Tsao]</b></td>
+<td class="top">
+<a>Tsao, T.</a>, <a>Alexander, R.</a>, <a>Dohler, M.</a>, <a>Daza, V.</a> and <a>A. Lozano</a>, "<a>A Security Framework for Routing over Low Power and Lossy Networks</a>", draft-ietf-roll-security-framework-07 , January 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Williams">[ID-Williams]</b></td>
+<td class="top">
+<a>Williams, M.</a> and <a>J. Barrett</a>, "<a>Mobile DTLS</a>", draft-barrett-mobile-dtls-00 , March 2009.</td>
+</tr>
+<tr>
+<td class="reference"><b id="IEEE802ah">[IEEE802ah]</b></td>
+<td class="top">"<a>Status of Project IEEE 802.11ah, IEEE P802.11- Task Group AH-Meeting Update.</a>", Web http://www.ieee802.org/11/Reports/tgah_update.htm, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="IIoT">[IIoT]</b></td>
+<td class="top">"<a>Industrial Internet Consortium</a>", Web http://www.iiconsortium.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="IoTSecFoundation">[IoTSecFoundation]</b></td>
+<td class="top">"<a>Establishing Principles for Internet of Things Security</a>", Web https://iotsecurityfoundation.org/establishing-principles-for-internet-of-things-security/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="iotsu">[iotsu]</b></td>
+<td class="top">"<a>Patching the Internet of Things: IoT Software Update Workshop 2016</a>", Web https://www.ietf.org/blog/2016/07/patching-the-internet-of-things-iot-software-update-workshop-2016/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="IPSO">[IPSO]</b></td>
+<td class="top">"<a>IPSO Alliance</a>", Web http://www.ipso-alliance.org, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="JOURNAL-Perrig">[JOURNAL-Perrig]</b></td>
+<td class="top">
+<a>Perrig, A.</a>, <a>Szewczyk, R.</a>, <a>Wen, V.</a>, <a>Culler, D.</a> and <a>J. Tygar</a>, "<a>SPINS: Security protocols for Sensor Networks</a>", Journal Wireless Networks, September 2002.</td>
+</tr>
+<tr>
+<td class="reference"><b id="lora">[lora]</b></td>
+<td class="top">"<a>LoRa - Wide Area Networks for IoT</a>", Web https://www.lora-alliance.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="nbiot">[nbiot]</b></td>
+<td class="top">"<a>NarrowBand IoT</a>", Web http://www.3gpp.org/ftp/tsg_ran/TSG_RAN/TSGR_69/Docs/RP-151621.zip, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="NHTSA">[NHTSA]</b></td>
+<td class="top">"<a>Cybersecurity Best Practices for Modern Vehicles</a>", Web https://www.nhtsa.gov/staticfiles/nvs/pdf/812333_CybersecurityForModernVehicles.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="NIST">[NIST]</b></td>
+<td class="top">
+<a>Dworkin, M.</a>, "<a>NIST Specification Publication 800-38B</a>", 2005.</td>
+</tr>
+<tr>
+<td class="reference"><b id="NIST-Guide">[NIST-Guide]</b></td>
+<td class="top">
+<a>Ross, R.</a>, <a>McEVILLEY, M.</a> and <a>J. Oren</a>, "<a>Systems Security Engineering</a>", Web http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-160.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="nist_lightweight_project">[nist_lightweight_project]</b></td>
+<td class="top">"<a>NIST lightweight Project</a>", Web www.nist.gov/programs-projects/lightweight-cryptography, www.nist.gov/sites/default/files/documents/2016/10/17/sonmez-turan-presentation-lwc2016.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="OCF">[OCF]</b></td>
+<td class="top">"<a>Open Connectivity Foundation</a>", Web https://openconnectivity.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="OneM2M">[OneM2M]</b></td>
+<td class="top">"<a>OneM2M</a>", Web http://www.onem2m.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="OWASP">[OWASP]</b></td>
+<td class="top">"<a>IoT Security Guidance</a>", Web https://www.owasp.org/index.php/IoT_Security_Guidance, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="PROC-Chan">[PROC-Chan]</b></td>
+<td class="top">
+<a>Chan, H.</a>, <a>Perrig, A.</a> and <a>D. Song</a>, "<a>Random Key Predistribution Schemes for Sensor Networks</a>", Proceedings IEEE Symposium on Security and Privacy, 2003.</td>
+</tr>
+<tr>
+<td class="reference"><b id="PROC-Gupta">[PROC-Gupta]</b></td>
+<td class="top">
+<a>Gupta, V.</a>, <a>Wurm, M.</a>, <a>Zhu, Y.</a>, <a>Millard, M.</a>, <a>Fung, S.</a>, <a>Gura, N.</a>, <a>Eberle, H.</a> and <a>S. Shantz</a>, "<a>Sizzle: A Standards-based End-to-End Security Architecture for the Embedded Internet</a>", Proceedings Pervasive Computing and Communications (PerCom), 2005.</td>
+</tr>
+<tr>
+<td class="reference"><b id="PROC-Smetters-02">[PROC-Smetters-02]</b></td>
+<td class="top">
+<a>Balfanz, D.</a>, <a>Smetters, D.</a>, <a>Steward, P.</a> and <a>H. Chi Wong,</a>, "<a>Talking To Strangers: Authentication in Ad-Hoc Wireless Networks</a>", Paper NDSS, 2002.</td>
+</tr>
+<tr>
+<td class="reference"><b id="PROC-Smetters-04">[PROC-Smetters-04]</b></td>
+<td class="top">
+<a>Balfanz, D.</a>, <a>Durfee, G.</a>, <a>Grinter, R.</a>, <a>Smetters, D.</a> and <a>P. Steward</a>, "<a>Network-in-a-Box: How to Set Up a Secure Wireless Network in Under a Minute</a>", Paper USENIX, 2004.</td>
+</tr>
+<tr>
+<td class="reference"><b id="PROC-Stajano-99">[PROC-Stajano-99]</b></td>
+<td class="top">
+<a>Stajano, F.</a> and <a>R. Anderson</a>, "<a>Resurrecting Duckling - Security Issues for Adhoc Wireless Networks</a>", 7th International Workshop Proceedings, November 1999.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC2119">[RFC2119]</b></td>
+<td class="top">
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC2818">[RFC2818]</b></td>
+<td class="top">
+<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/rfc2818">HTTP Over TLS</a>", RFC 2818, DOI 10.17487/RFC2818, May 2000.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3261">[RFC3261]</b></td>
+<td class="top">
+<a>Rosenberg, J.</a>, <a>Schulzrinne, H.</a>, <a>Camarillo, G.</a>, <a>Johnston, A.</a>, <a>Peterson, J.</a>, <a>Sparks, R.</a>, <a>Handley, M.</a> and <a>E. Schooler</a>, "<a href="https://tools.ietf.org/html/rfc3261">SIP: Session Initiation Protocol</a>", RFC 3261, DOI 10.17487/RFC3261, June 2002.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3748">[RFC3748]</b></td>
+<td class="top">
+<a>Aboba, B.</a>, <a>Blunk, L.</a>, <a>Vollbrecht, J.</a>, <a>Carlson, J.</a> and <a>H. Levkowetz</a>, "<a href="https://tools.ietf.org/html/rfc3748">Extensible Authentication Protocol (EAP)</a>", RFC 3748, DOI 10.17487/RFC3748, June 2004.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3756">[RFC3756]</b></td>
+<td class="top">
+<a>Nikander, P.</a>, <a>Kempf, J.</a> and <a>E. Nordmark</a>, "<a href="https://tools.ietf.org/html/rfc3756">IPv6 Neighbor Discovery (ND) Trust Models and Threats</a>", RFC 3756, DOI 10.17487/RFC3756, May 2004.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3833">[RFC3833]</b></td>
+<td class="top">
+<a>Atkins, D.</a> and <a>R. Austein</a>, "<a href="https://tools.ietf.org/html/rfc3833">Threat Analysis of the Domain Name System (DNS)</a>", RFC 3833, DOI 10.17487/RFC3833, August 2004.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4016">[RFC4016]</b></td>
+<td class="top">
+<a>Parthasarathy, M.</a>, "<a href="https://tools.ietf.org/html/rfc4016">Protocol for Carrying Authentication and Network Access (PANA) Threat Analysis and Security Requirements</a>", RFC 4016, DOI 10.17487/RFC4016, March 2005.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4251">[RFC4251]</b></td>
+<td class="top">
+<a>Ylonen, T.</a> and <a>C. Lonvick</a>, "<a href="https://tools.ietf.org/html/rfc4251">The Secure Shell (SSH) Protocol Architecture</a>", RFC 4251, DOI 10.17487/RFC4251, January 2006.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4555">[RFC4555]</b></td>
+<td class="top">
+<a>Eronen, P.</a>, "<a href="https://tools.ietf.org/html/rfc4555">IKEv2 Mobility and Multihoming Protocol (MOBIKE)</a>", RFC 4555, DOI 10.17487/RFC4555, June 2006.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4621">[RFC4621]</b></td>
+<td class="top">
+<a>Kivinen, T.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/rfc4621">Design of the IKEv2 Mobility and Multihoming (MOBIKE) Protocol</a>", RFC 4621, DOI 10.17487/RFC4621, August 2006.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4738">[RFC4738]</b></td>
+<td class="top">
+<a>Ignjatic, D.</a>, <a>Dondeti, L.</a>, <a>Audet, F.</a> and <a>P. Lin</a>, "<a href="https://tools.ietf.org/html/rfc4738">MIKEY-RSA-R: An Additional Mode of Key Distribution in Multimedia Internet KEYing (MIKEY)</a>", RFC 4738, DOI 10.17487/RFC4738, November 2006.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4919">[RFC4919]</b></td>
+<td class="top">
+<a>Kushalnagar, N.</a>, <a>Montenegro, G.</a> and <a>C. Schumacher</a>, "<a href="https://tools.ietf.org/html/rfc4919">IPv6 over Low-Power Wireless Personal Area Networks (6LoWPANs): Overview, Assumptions, Problem Statement, and Goals</a>", RFC 4919, DOI 10.17487/RFC4919, August 2007.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4944">[RFC4944]</b></td>
+<td class="top">
+<a>Montenegro, G.</a>, <a>Kushalnagar, N.</a>, <a>Hui, J.</a> and <a>D. Culler</a>, "<a href="https://tools.ietf.org/html/rfc4944">Transmission of IPv6 Packets over IEEE 802.15.4 Networks</a>", RFC 4944, DOI 10.17487/RFC4944, September 2007.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5191">[RFC5191]</b></td>
+<td class="top">
+<a>Forsberg, D.</a>, <a>Ohba, Y.</a>, <a>Patil, B.</a>, <a>Tschofenig, H.</a> and <a>A. Yegin</a>, "<a href="https://tools.ietf.org/html/rfc5191">Protocol for Carrying Authentication for Network Access (PANA)</a>", RFC 5191, DOI 10.17487/RFC5191, May 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5206">[RFC5206]</b></td>
+<td class="top">
+<a>Nikander, P.</a>, <a>Henderson, T.</a>, <a>Vogt, C.</a> and <a>J. Arkko</a>, "<a href="https://tools.ietf.org/html/rfc5206">End-Host Mobility and Multihoming with the Host Identity Protocol</a>", RFC 5206, DOI 10.17487/RFC5206, April 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5246">[RFC5246]</b></td>
+<td class="top">
+<a>Dierks, T.</a> and <a>E. Rescorla</a>, "<a href="https://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>", RFC 5246, DOI 10.17487/RFC5246, August 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5713">[RFC5713]</b></td>
+<td class="top">
+<a>Moustafa, H.</a>, <a>Tschofenig, H.</a> and <a>S. De Cnodder</a>, "<a href="https://tools.ietf.org/html/rfc5713">Security Threats and Security Requirements for the Access Node Control Protocol (ANCP)</a>", RFC 5713, DOI 10.17487/RFC5713, January 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5903">[RFC5903]</b></td>
+<td class="top">
+<a>Fu, D.</a> and <a>J. Solinas</a>, "<a href="https://tools.ietf.org/html/rfc5903">Elliptic Curve Groups modulo a Prime (ECP Groups) for IKE and IKEv2</a>", RFC 5903, DOI 10.17487/RFC5903, June 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6345">[RFC6345]</b></td>
+<td class="top">
+<a>Duffy, P.</a>, <a>Chakrabarti, S.</a>, <a>Cragie, R.</a>, <a>Ohba, Y.</a> and <a>A. Yegin</a>, "<a href="https://tools.ietf.org/html/rfc6345">Protocol for Carrying Authentication for Network Access (PANA) Relay Element</a>", RFC 6345, DOI 10.17487/RFC6345, August 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6347">[RFC6347]</b></td>
+<td class="top">
+<a>Rescorla, E.</a> and <a>N. Modadugu</a>, "<a href="https://tools.ietf.org/html/rfc6347">Datagram Transport Layer Security Version 1.2</a>", RFC 6347, DOI 10.17487/RFC6347, January 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6550">[RFC6550]</b></td>
+<td class="top">
+<a>Winter, T.</a>, <a>Thubert, P.</a>, <a>Brandt, A.</a>, <a>Hui, J.</a>, <a>Kelsey, R.</a>, <a>Levis, P.</a>, <a>Pister, K.</a>, <a>Struik, R.</a>, <a>Vasseur, JP.</a> and <a>R. Alexander</a>, "<a href="https://tools.ietf.org/html/rfc6550">RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks</a>", RFC 6550, DOI 10.17487/RFC6550, March 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6551">[RFC6551]</b></td>
+<td class="top">
+<a>Vasseur, JP.</a>, <a>Kim, M.</a>, <a>Pister, K.</a>, <a>Dejean, N.</a> and <a>D. Barthel</a>, "<a href="https://tools.ietf.org/html/rfc6551">Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks</a>", RFC 6551, DOI 10.17487/RFC6551, March 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6568">[RFC6568]</b></td>
+<td class="top">
+<a>Kim, E.</a>, <a>Kaspar, D.</a> and <a>JP. Vasseur</a>, "<a href="https://tools.ietf.org/html/rfc6568">Design and Application Spaces for IPv6 over Low-Power Wireless Personal Area Networks (6LoWPANs)</a>", RFC 6568, DOI 10.17487/RFC6568, April 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6690">[RFC6690]</b></td>
+<td class="top">
+<a>Shelby, Z.</a>, "<a href="https://tools.ietf.org/html/rfc6690">Constrained RESTful Environments (CoRE) Link Format</a>", RFC 6690, DOI 10.17487/RFC6690, August 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6749">[RFC6749]</b></td>
+<td class="top">
+<a>Hardt, D.</a>, "<a href="https://tools.ietf.org/html/rfc6749">The OAuth 2.0 Authorization Framework</a>", RFC 6749, DOI 10.17487/RFC6749, October 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7049">[RFC7049]</b></td>
+<td class="top">
+<a>Bormann, C.</a> and <a>P. Hoffman</a>, "<a href="https://tools.ietf.org/html/rfc7049">Concise Binary Object Representation (CBOR)</a>", RFC 7049, DOI 10.17487/RFC7049, October 2013.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7158">[RFC7158]</b></td>
+<td class="top">
+<a>Bray, T.</a>, "<a href="https://tools.ietf.org/html/rfc7158">The JavaScript Object Notation (JSON) Data Interchange Format</a>", RFC 7158, DOI 10.17487/RFC7158, March 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7252">[RFC7252]</b></td>
+<td class="top">
+<a>Shelby, Z.</a>, <a>Hartke, K.</a> and <a>C. Bormann</a>, "<a href="https://tools.ietf.org/html/rfc7252">The Constrained Application Protocol (CoAP)</a>", RFC 7252, DOI 10.17487/RFC7252, June 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7296">[RFC7296]</b></td>
+<td class="top">
+<a>Kaufman, C.</a>, <a>Hoffman, P.</a>, <a>Nir, Y.</a>, <a>Eronen, P.</a> and <a>T. Kivinen</a>, "<a href="https://tools.ietf.org/html/rfc7296">Internet Key Exchange Protocol Version 2 (IKEv2)</a>", STD 79, RFC 7296, DOI 10.17487/RFC7296, October 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7390">[RFC7390]</b></td>
+<td class="top">
+<a>Rahman, A.</a> and <a>E. Dijk</a>, "<a href="https://tools.ietf.org/html/rfc7390">Group Communication for the Constrained Application Protocol (CoAP)</a>", RFC 7390, DOI 10.17487/RFC7390, October 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7401">[RFC7401]</b></td>
+<td class="top">
+<a>Moskowitz, R.</a>, <a>Heer, T.</a>, <a>Jokela, P.</a> and <a>T. Henderson</a>, "<a href="https://tools.ietf.org/html/rfc7401">Host Identity Protocol Version 2 (HIPv2)</a>", RFC 7401, DOI 10.17487/RFC7401, April 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7515">[RFC7515]</b></td>
+<td class="top">
+<a>Jones, M.</a>, <a>Bradley, J.</a> and <a>N. Sakimura</a>, "<a href="https://tools.ietf.org/html/rfc7515">JSON Web Signature (JWS)</a>", RFC 7515, DOI 10.17487/RFC7515, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7517">[RFC7517]</b></td>
+<td class="top">
+<a>Jones, M.</a>, "<a href="https://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>", RFC 7517, DOI 10.17487/RFC7517, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7519">[RFC7519]</b></td>
+<td class="top">
+<a>Jones, M.</a>, <a>Bradley, J.</a> and <a>N. Sakimura</a>, "<a href="https://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>", RFC 7519, DOI 10.17487/RFC7519, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7668">[RFC7668]</b></td>
+<td class="top">
+<a>Nieminen, J.</a>, <a>Savolainen, T.</a>, <a>Isomaki, M.</a>, <a>Patil, B.</a>, <a>Shelby, Z.</a> and <a>C. Gomez</a>, "<a href="https://tools.ietf.org/html/rfc7668">IPv6 over BLUETOOTH(R) Low Energy</a>", RFC 7668, DOI 10.17487/RFC7668, October 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7696">[RFC7696]</b></td>
+<td class="top">
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc7696">Guidelines for Cryptographic Algorithm Agility and Selecting Mandatory-to-Implement Algorithms</a>", BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7815">[RFC7815]</b></td>
+<td class="top">
+<a>Kivinen, T.</a>, "<a href="https://tools.ietf.org/html/rfc7815">Minimal Internet Key Exchange Version 2 (IKEv2) Initiator Implementation</a>", RFC 7815, DOI 10.17487/RFC7815, March 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7925">[RFC7925]</b></td>
+<td class="top">
+<a>Tschofenig, H.</a> and <a>T. Fossati</a>, "<a href="https://tools.ietf.org/html/rfc7925">Transport Layer Security (TLS) / Datagram Transport Layer Security (DTLS) Profiles for the Internet of Things</a>", RFC 7925, DOI 10.17487/RFC7925, July 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RG-T2TRG">[RG-T2TRG]</b></td>
+<td class="top">"<a>IRTF Thing-to-Thing (T2TRG) Research Group</a>", Web https://datatracker.ietf.org/rg/t2trg/charter/, December 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="SchneierSecurity">[SchneierSecurity]</b></td>
+<td class="top">"<a>The Internet of Things Is Wildly Insecure&#8212;And Often Unpatchable</a>", Web https://www.schneier.com/essays/archives/2014/01/the_internet_of_thin.html, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="sigfox">[sigfox]</b></td>
+<td class="top">"<a>Sigfox - The Global Communications Service Provider for the Internet of Things (IoT)</a>", Web https://www.sigfox.com/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="SPEKE">[SPEKE]</b></td>
+<td class="top">"<a>IEEE P1363.2: Password-based Cryptography</a>", 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="THESIS-Langheinrich">[THESIS-Langheinrich]</b></td>
+<td class="top">
+<a>Langheinrich, M.</a>, "<a>Personal Privacy in Ubiquitous Computing</a>", PhD Thesis ETH Zurich, 2005.</td>
+</tr>
+<tr>
+<td class="reference"><b id="Thread">[Thread]</b></td>
+<td class="top">"<a>Thread Group</a>", Web http://threadgroup.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="TinyDTLS">[TinyDTLS]</b></td>
+<td class="top">"<a>TinyDTLS</a>", Web http://tinydtls.sourceforge.net/, February 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="TR69">[TR69]</b></td>
+<td class="top">"<a>Too Many Cooks - Exploiting the Internet-of-TR-069-Things</a>", Web https://media.ccc.de/v/31c3_-_6166_-_en_-_saal_6_-_201412282145_-_too_many_cooks_-_exploiting_the_internet-of-tr-069-things_-_lior_oppenheim_-_shahar_tal, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-6LoWPAN">[WG-6LoWPAN]</b></td>
+<td class="top">"<a>IETF 6LoWPAN Working Group</a>", Web http://tools.ietf.org/wg/6lowpan/, February 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-ACE">[WG-ACE]</b></td>
+<td class="top">"<a>IETF Authentication and Authorization for Constrained Environments (ACE) Working Group</a>", Web https://datatracker.ietf.org/wg/ace/charter/, June 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-CoRE">[WG-CoRE]</b></td>
+<td class="top">"<a>IETF Constrained RESTful Environment (CoRE) Working Group</a>", Web https://datatracker.ietf.org/wg/core/charter/, February 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-LWIG">[WG-LWIG]</b></td>
+<td class="top">"<a>IETF Light-Weight Implementation Guidance (LWIG) Working Group</a>", Web https://datatracker.ietf.org/wg/lwig/charter/, March 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-MSEC">[WG-MSEC]</b></td>
+<td class="top">"<a>MSEC Working Group</a>", Web http://datatracker.ietf.org/wg/msec/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="wink">[wink]</b></td>
+<td class="top">"<a>Wink&#8217;s Outage Shows Us How Frustrating Smart Homes Could Be</a>", Web http://www.wired.com/2015/04/smart-home-headaches/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ZB">[ZB]</b></td>
+<td class="top">"<a>ZigBee Alliance</a>", Web http://www.zigbee.org/, February 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="Ziegeldorf">[Ziegeldorf]</b></td>
+<td class="top">
+<a>Ziegeldorf, J.</a>, <a>Garcia-Morchon, O.</a> and <a>K. Wehrle,</a>, "<a>Privacy in the Internet of Things: Threats and Challenges</a>", Paper Security and Communication Networks - Special Issue on Security in a Completely Interconnected World, 2013.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Oscar Garcia-Morchon</span> 
+	  <span class="n hidden">
+		<span class="family-name">Garcia-Morchon</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Philips IP&S</span>
+	<span class="adr">
+	  <span class="vcardline">High Tech Campus 5</span>
+
+	  <span class="vcardline">
+		<span class="locality">Eindhoven,   5656 AA</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">The Netherlands</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:oscar.garcia-morchon@philips.com">oscar.garcia-morchon@philips.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Sandeep S. Kumar</span> 
+	  <span class="n hidden">
+		<span class="family-name">Kumar</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Philips Research</span>
+	<span class="adr">
+	  <span class="vcardline">High Tech Campus</span>
+
+	  <span class="vcardline">
+		<span class="locality">Eindhoven,   5656 AA</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">The Netherlands</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:sandeep.kumar@philips.com">sandeep.kumar@philips.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Mohit Sethi</span> 
+	  <span class="n hidden">
+		<span class="family-name">Sethi</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Ericsson</span>
+	<span class="adr">
+	  <span class="vcardline">Hirsalantie 11</span>
+
+	  <span class="vcardline">
+		<span class="locality">Jorvas</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">Finland</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:mohit@piuha.net">mohit@piuha.net</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>

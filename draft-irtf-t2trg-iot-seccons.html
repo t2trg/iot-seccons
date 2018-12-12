@@ -1,0 +1,1393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>State-of-the-Art and Challenges for the Internet of Things Security</title>
+
+  
+<style type="text/css">/*<![CDATA[*/
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+
+@media screen and (min-width: 1024px) {
+  ul.toc, #rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #rfc\.toc {
+    top: 16px;
+  }
+  ul.toc {
+    top: 80px;
+    overflow: auto;
+  }
+
+  body {
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+}
+
+body {
+  font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #333;
+  font-size-adjust: 0.5;
+  line-height: 130%;
+  margin: 2.5em auto;
+  max-width: 724px;
+}
+
+.title, .filename, h1, h2, h3, h4 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size-adjust: 0.5;
+  font-weight: 500;
+  color: #333;
+  line-height: 100%;
+  margin: 0.8em 0 0.3em;
+}
+.title { font-size: 36px; }
+h1 { font-size: 30px; }
+h2 { font-size: 24px; }
+h3, h4 { font-size: 18px; }
+h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
+  color: #333;
+}
+
+ul.toc li {
+  list-style: none;
+  text-indent: -2.5em;
+  padding-left: 2.5em;
+  padding-bottom: 5px;
+  margin: 0;
+}
+ul.toc ul {
+  margin: 0;
+}
+/* xml2rfc nests ul directly inside ul which messes with the style badly */
+ul.toc, ul.toc>ul, ul.toc ul>ul {
+  margin: 0 0 0 1.5em;
+}
+
+table {
+  margin-left: 0em;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(2n+1) > td,
+tr:nth-child(2n+1) > th {
+  background-color: #f9f9f9;
+}
+td.reference {
+  max-width: 200px;
+  border-top: none;
+  padding-right: 1em;
+}
+.right {
+  text-align: right;
+}
+
+
+table.header {
+  width: 100%;
+}
+table.header td {
+  border: none;
+  background-color: transparent;
+  color: black;
+}
+.filename {
+  color: rgb(119, 119, 119);
+  font-size: 23px;
+  font-weight: normal;
+  height: auto;
+  line-height: 100%;
+}
+#rfc\.abstract+p {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 130%;
+}
+
+samp, tt, code, pre {
+  font: 11pt consolas, monospace;
+  font-size-adjust: none;
+}
+pre {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 5px;
+}
+.figure {
+  font-style: italic;
+  margin: 0 1.5em;
+}
+
+address {
+  margin: 10px 0 0;
+}
+.vcard {
+  font-style: normal;
+}
+.vcardline {
+  display: block;
+}
+.vcardline .fn {
+  font-weight: bold;
+}
+.vcardline .hidden {
+  display: none;
+}
+
+dl {
+  margin-left: 1em;
+}
+dl.dl-horizontal: {
+  margin-left: 0;
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.nohang > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .5em;
+}
+dl.compact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+ul.empty {
+  list-style-type: none;
+}
+ul.empty li {
+  margin-top: .5em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #2a6496;
+}
+a[href]:hover {
+  background-color: #eee;
+}
+
+ol, ul, li, p {
+  padding: 0;
+  margin: 0.5em 0 0.5em 2em;
+}
+li, p {
+  margin-left: 0;
+}
+address {
+  font-style: normal;
+}
+
+.github-fork-ribbon-wrapper {
+  display: none;
+}
+@media screen and (min-width: 800px) {
+  /* "Fork me on GitHub" CSS ribbon based on
+   * https://github.com/simonwhitaker/github-fork-ribbon-css
+   */
+  .github-fork-ribbon {
+    position: absolute;
+    padding: 2px 0;
+    background-color: #a00;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    pointer-events: auto;
+
+    top: 38px;
+    right: -45px;
+
+    transform: rotate(45deg);
+  }
+
+  .github-fork-ribbon a[href],
+  .github-fork-ribbon a[href]:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    width: 190px;
+    line-height: 18px;
+
+    display: inline-block;
+    padding: 2px 0;
+
+    border: 1.5px dotted #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .github-fork-ribbon-wrapper {
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    overflow: hidden;
+    top: 0; right: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .github-fork-ribbon-wrapper {
+    position: fixed;
+  }
+  /*]]>*/</style>
+
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
+<link href="#rfc.section.2" rel="Chapter" title="2 The Thing Lifecycle">
+<link href="#rfc.section.3" rel="Chapter" title="3 Security Threats and Managing Risk">
+<link href="#rfc.section.4" rel="Chapter" title="4 State-of-the-Art">
+<link href="#rfc.section.4.1" rel="Chapter" title="4.1 IP-based IoT Protocols and Standards">
+<link href="#rfc.section.4.2" rel="Chapter" title="4.2 Existing IP-based Security Protocols and Solutions">
+<link href="#rfc.section.4.3" rel="Chapter" title="4.3 IoT Security Guidelines">
+<link href="#rfc.section.5" rel="Chapter" title="5 Challenges for a Secure IoT">
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Constraints and Heterogeneous Communication">
+<link href="#rfc.section.5.1.1" rel="Chapter" title="5.1.1 Resource Constraints">
+<link href="#rfc.section.5.1.2" rel="Chapter" title="5.1.2 Denial-of-Service Resistance">
+<link href="#rfc.section.5.1.3" rel="Chapter" title="5.1.3 End-to-end security, protocol translation, and the role of middleboxes">
+<link href="#rfc.section.5.1.4" rel="Chapter" title="5.1.4 New network architectures and paradigm">
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Bootstrapping of a Security Domain">
+<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Operational Challenges">
+<link href="#rfc.section.5.3.1" rel="Chapter" title="5.3.1 Group Membership and Security">
+<link href="#rfc.section.5.3.2" rel="Chapter" title="5.3.2 Mobility and IP Network Dynamics">
+<link href="#rfc.section.5.4" rel="Chapter" title="5.4 Secure software update and cryptographic agility">
+<link href="#rfc.section.5.5" rel="Chapter" title="5.5 End-of-Life">
+<link href="#rfc.section.5.6" rel="Chapter" title="5.6 Verifying device behavior">
+<link href="#rfc.section.5.7" rel="Chapter" title="5.7 Testing: bug hunting and vulnerabilities">
+<link href="#rfc.section.5.8" rel="Chapter" title="5.8 Quantum-resistance">
+<link href="#rfc.section.5.9" rel="Chapter" title="5.9 Privacy protection">
+<link href="#rfc.section.5.10" rel="Chapter" title="5.10 Reverse engineering considerations">
+<link href="#rfc.section.5.11" rel="Chapter" title="5.11 Trustworthy IoT Operation">
+<link href="#rfc.section.6" rel="Chapter" title="6 Conclusions and Next Steps">
+<link href="#rfc.section.7" rel="Chapter" title="7 Security Considerations">
+<link href="#rfc.section.8" rel="Chapter" title="8 IANA Considerations">
+<link href="#rfc.section.9" rel="Chapter" title="9 Acknowledgments">
+<link href="#rfc.references" rel="Chapter" title="10 Informative References">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 2.10.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Garcia-Morchon, O., Kumar, S., and M. Sethi" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-irtf-t2trg-iot-seccons-16" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-12-12" />
+  <meta name="dct.abstract" content="The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs for IoT systems are well-recognized and many standardization steps to provide security have been taken, for example, the specification of Constrained Application Protocol (CoAP) secured with Datagram Transport Layer Security (DTLS). However, security challenges still exist, not only because there are some use cases that lack a suitable solution, but also because many IoT devices and systems have been designed and deployed with very limited security capabilities. In this document, we first discuss the various stages in the lifecycle of a thing. Next, we document the security threats to a thing and the challenges that one might face to protect against these threats. Lastly, we discuss the next steps needed to facilitate the deployment of secure IoT systems. This document can be used by implementors and authors of IoT specifications as a reference for details about security considerations while documenting their specific security challenges, threat models, and mitigations." />
+  <meta name="description" content="The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs for IoT systems are well-recognized and many standardization steps to provide security have been taken, for example, the specification of Constrained Application Protocol (CoAP) secured with Datagram Transport Layer Security (DTLS). However, security challenges still exist, not only because there are some use cases that lack a suitable solution, but also because many IoT devices and systems have been designed and deployed with very limited security capabilities. In this document, we first discuss the various stages in the lifecycle of a thing. Next, we document the security threats to a thing and the challenges that one might face to protect against these threats. Lastly, we discuss the next steps needed to facilitate the deployment of secure IoT systems. This document can be used by implementors and authors of IoT specifications as a reference for details about security considerations while documenting their specific security challenges, threat models, and mitigations." />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left">Network Working Group</td>
+<td class="right">O. Garcia-Morchon</td>
+</tr>
+<tr>
+<td class="left">Internet-Draft</td>
+<td class="right">Philips IP&amp;S</td>
+</tr>
+<tr>
+<td class="left">Intended status: Informational</td>
+<td class="right">S. Kumar</td>
+</tr>
+<tr>
+<td class="left">Expires: June 15, 2019</td>
+<td class="right">Philips Research</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">M. Sethi</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">Ericsson</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">December 12, 2018</td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">State-of-the-Art and Challenges for the Internet of Things Security<br />
+  <span class="filename">draft-irtf-t2trg-iot-seccons-16</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>The Internet of Things (IoT) concept refers to the usage of standard Internet protocols to allow for human-to-thing and thing-to-thing communication. The security needs for IoT systems are well-recognized and many standardization steps to provide security have been taken, for example, the specification of Constrained Application Protocol (CoAP) secured with Datagram Transport Layer Security (DTLS). However, security challenges still exist, not only because there are some use cases that lack a suitable solution, but also because many IoT devices and systems have been designed and deployed with very limited security capabilities. In this document, we first discuss the various stages in the lifecycle of a thing. Next, we document the security threats to a thing and the challenges that one might face to protect against these threats. Lastly, we discuss the next steps needed to facilitate the deployment of secure IoT systems. This document can be used by implementors and authors of IoT specifications as a reference for details about security considerations while documenting their specific security challenges, threat models, and mitigations.</p>
+<p>This document is a product of the IRTF Thing-to-Thing Research Group (T2TRG).</p>
+<h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on June 15, 2019.</p>
+<h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
+<p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<li>2.   <a href="#rfc.section.2">The Thing Lifecycle</a>
+</li>
+<li>3.   <a href="#rfc.section.3">Security Threats and Managing Risk</a>
+</li>
+<li>4.   <a href="#rfc.section.4">State-of-the-Art</a>
+</li>
+<ul><li>4.1.   <a href="#rfc.section.4.1">IP-based IoT Protocols and Standards</a>
+</li>
+<li>4.2.   <a href="#rfc.section.4.2">Existing IP-based Security Protocols and Solutions</a>
+</li>
+<li>4.3.   <a href="#rfc.section.4.3">IoT Security Guidelines</a>
+</li>
+</ul><li>5.   <a href="#rfc.section.5">Challenges for a Secure IoT</a>
+</li>
+<ul><li>5.1.   <a href="#rfc.section.5.1">Constraints and Heterogeneous Communication</a>
+</li>
+<ul><li>5.1.1.   <a href="#rfc.section.5.1.1">Resource Constraints</a>
+</li>
+<li>5.1.2.   <a href="#rfc.section.5.1.2">Denial-of-Service Resistance</a>
+</li>
+<li>5.1.3.   <a href="#rfc.section.5.1.3">End-to-end security, protocol translation, and the role of middleboxes</a>
+</li>
+<li>5.1.4.   <a href="#rfc.section.5.1.4">New network architectures and paradigm</a>
+</li>
+</ul><li>5.2.   <a href="#rfc.section.5.2">Bootstrapping of a Security Domain</a>
+</li>
+<li>5.3.   <a href="#rfc.section.5.3">Operational Challenges</a>
+</li>
+<ul><li>5.3.1.   <a href="#rfc.section.5.3.1">Group Membership and Security</a>
+</li>
+<li>5.3.2.   <a href="#rfc.section.5.3.2">Mobility and IP Network Dynamics</a>
+</li>
+</ul><li>5.4.   <a href="#rfc.section.5.4">Secure software update and cryptographic agility</a>
+</li>
+<li>5.5.   <a href="#rfc.section.5.5">End-of-Life</a>
+</li>
+<li>5.6.   <a href="#rfc.section.5.6">Verifying device behavior</a>
+</li>
+<li>5.7.   <a href="#rfc.section.5.7">Testing: bug hunting and vulnerabilities</a>
+</li>
+<li>5.8.   <a href="#rfc.section.5.8">Quantum-resistance</a>
+</li>
+<li>5.9.   <a href="#rfc.section.5.9">Privacy protection</a>
+</li>
+<li>5.10.   <a href="#rfc.section.5.10">Reverse engineering considerations</a>
+</li>
+<li>5.11.   <a href="#rfc.section.5.11">Trustworthy IoT Operation</a>
+</li>
+</ul><li>6.   <a href="#rfc.section.6">Conclusions and Next Steps</a>
+</li>
+<li>7.   <a href="#rfc.section.7">Security Considerations</a>
+</li>
+<li>8.   <a href="#rfc.section.8">IANA Considerations</a>
+</li>
+<li>9.   <a href="#rfc.section.9">Acknowledgments</a>
+</li>
+<li>10.   <a href="#rfc.references">Informative References</a>
+</li>
+<li><a href="#rfc.authors">Authors' Addresses</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#sec1" id="sec1">Introduction</a>
+</h1>
+<p id="rfc.section.1.p.1">The Internet of Things (IoT) denotes the interconnection of highly heterogeneous networked entities and networks that follow a number of different communication patterns such as: human-to-human (H2H), human-to-thing (H2T), thing-to-thing (T2T), or thing-to-things (T2Ts). The term IoT was first coined by the Auto-ID center <a href="#AUTO-ID" class="xref">[AUTO-ID]</a> in 1999 which had envisioned a world where every physical object is tagged with a radio-frequency identification (RFID) tag having a globally unique identifier. This would not only allow tracking of objects in real-time but also allow querying of data about them over the Internet. However, since then, the meaning of the Internet of Things has expanded and now encompasses a wide variety of technologies, objects and protocols. It is not surprising that the IoT has received significant attention from the research community to (re)design, apply, and use standard Internet technology and protocols for the IoT.</p>
+<p id="rfc.section.1.p.2">The things that are part of the Internet of Things are computing devices that understand and react to the environment they reside in. These things are also often referred to as smart objects or smart devices. The introduction of IPv6 <a href="#RFC6568" class="xref">[RFC6568]</a> and CoAP <a href="#RFC7252" class="xref">[RFC7252]</a> as fundamental building blocks for IoT applications allows connecting IoT hosts to the Internet. This brings several advantages including: (i) a homogeneous protocol ecosystem that allows simple integration with other Internet hosts; (ii) simplified development for devices that significantly vary in their capabilities; (iii) a unified interface for applications, removing the need for application-level proxies. These building blocks greatly simplify the deployment of the envisioned scenarios which range from building automation to production environments and personal area networks.</p>
+<p id="rfc.section.1.p.3">This document presents an overview of important security aspects for the Internet of Things. We begin by discussing the lifecycle of a thing in <a href="#sec2" class="xref">Section 2</a>. In <a href="#sec3" class="xref">Section 3</a>, we discuss security threats for the IoT and methodologies for managing these threats when designing a secure system. <a href="#sec4" class="xref">Section 4</a> reviews existing IP-based (security) protocols for the IoT and briefly summarizes existing guidelines and regulations. <a href="#sec5" class="xref">Section 5</a> identifies remaining challenges for a secure IoT and discusses potential solutions. <a href="#sec6" class="xref">Section 6</a> includes final remarks and conclusions. This document can be used by IoT standards specifications as a reference for details about security considerations applying to the specified system or protocol.</p>
+<p id="rfc.section.1.p.4">The first draft version of this document was submitted in March 2011. Initial draft versions of this document were presented and discussed during the CORE meetings at IETF 80 and later. Discussions on security lifecycle at IETF 92 (March 2015) evolved into more general security considerations. Thus, the draft was selected to address the T2TRG work item on the security considerations and challenges for the Internet of Things. Further updates of the draft were presented and discussed during the T2TRG meetings at IETF 96 (July 2016) and IETF 97 (November 2016) and at the joint interim in Amsterdam (March 2017). This document has been reviewed by, commented on, and discussed extensively for a period of nearly six years by a vast majority of T2TRG and related group members; the number of which certainly exceeds 100 individuals. It is the consensus of T2TRG that the security considerations described in this document should be published in the IRTF Stream of the RFC series. This document does not constitute a standard.</p>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#sec2" id="sec2">The Thing Lifecycle</a>
+</h1>
+<p id="rfc.section.2.p.1">The lifecycle of a thing refers to the operational phases of a thing in the context of a given application or use case. <a href="#fig1" class="xref">Figure 1</a> shows the generic phases of the lifecycle of a thing. This generic lifecycle is applicable to very different IoT applications and scenarios. For instance, <a href="#RFC7744" class="xref">[RFC7744]</a> provides an overview of relevant IoT use cases.</p>
+<p id="rfc.section.2.p.2">In this document, we consider a Building Automation and Control (BAC) system to illustrate the lifecycle and the meaning of these different phases. A BAC system consists of a network of interconnected nodes that performs various functions in the domains of HVAC (Heating, Ventilating, and Air Conditioning), lighting, safety, etc. The nodes vary in functionality and a large majority of them represent resource-constrained devices such as sensors and luminaries. Some devices may be battery operated or may rely on energy harvesting. This requires us to also consider devices that sleep during their operation to save energy. In our BAC scenario, the life of a thing starts when it is manufactured. Due to the different application areas (i.e., HVAC, lighting, or safety) nodes/things are tailored to a specific task. It is therefore unlikely that one single manufacturer will create all nodes in a building. Hence, interoperability as well as trust bootstrapping between nodes of different vendors is important.</p>
+<p id="rfc.section.2.p.3">The thing is later installed and commissioned within a network by an installer during the bootstrapping phase. Specifically, the device identity and the secret keys used during normal operation may be provided to the device during this phase. Different subcontractors may install different IoT devices for different purposes. Furthermore, the installation and bootstrapping procedures may not be a discrete event and may stretch over an extended period. After being bootstrapped, the device and the system of things are in operational mode and execute the functions of the BAC system. During this operational phase, the device is under the control of the system owner and used by multiple system users. For devices with lifetimes spanning several years, occasional maintenance cycles may be required. During each maintenance phase, the software on the device can be upgraded or applications running on the device can be reconfigured. The maintenance tasks can be performed either locally or from a backend system. Depending on the operational changes to the device, it may be required to re-bootstrap at the end of a maintenance cycle. The device continues to loop through the operational phase and the eventual maintenance phases until the device is decommissioned at the end of its lifecycle. However, the end-of-life of a device does not necessarily mean that it is defective and rather denotes a need to replace and upgrade the network to the next-generation devices for additional functionality. Therefore, the device can be removed and re-commissioned to be used in a different system under a different owner thereby starting the lifecycle all over again.</p>
+<p id="rfc.section.2.p.4">We note that the presented lifecycle represents to some extent a simplified model. For instance, it is possible to argue that the lifecycle does not start when a tangible device is manufactured but rather when the oldest bit of code that ends up in the device &#8211; maybe from an open source project or from the used operating system &#8211; was written. Similarly, the lifecycle could also include an on-the-shelf phase where the device is in the supply-chain before an owner/user purchases and installs it. Another phase could involve the device being re-badged by some vendor who is not the original manufacturer. Such phases can significantly complicate other phases such as maintenance and bootstrapping. Finally, other potential end-states can be, e.g., a vendor that no longer supports a device type because it is at end-of-life or a situation in which a device is simply forgotten but remains functional.</p>
+<div id="rfc.figure.1"></div>
+<div id="fig1"></div>
+<pre>
+ _Manufactured           _SW update          _Decommissioned
+/                       /                   /
+|   _Installed          |   _ Application   |   _Removed &amp;
+|  /                    |  / reconfigured   |  /  replaced
+|  |   _Commissioned    |  |                |  |
+|  |  /                 |  |                |  |   _Reownership &amp;
+|  |  |    _Application |  |   _Application |  |  / recommissioned
+|  |  |   /   running   |  |  / running     |  |  |
+|  |  |   |             |  |  |             |  |  |             \\
++##+##+###+#############+##+##+#############+##+##+##############&gt;&gt;&gt;
+    \/  \______________/ \/  \_____________/ \___/         time //
+    /           /         \          \          \
+Bootstrapping  /      Maintenance &amp;   \     Maintenance &amp;
+              /      re-bootstrapping  \   re-bootstrapping
+        Operational                Operational
+</pre>
+<p class="figure">Figure 1: The lifecycle of a thing in the Internet of Things</p>
+<p id="rfc.section.2.p.5">Security is a key requirement in any communication system. However, security is an even more critical requirement in real-world IoT deployments for several reasons. First, compromised IoT systems can not only endanger the privacy and security of a user, but can also cause physical harm. This is because IoT systems often comprise sensors, actuators and other connected devices in the physical environment of the user which could adversely affect the user if they are compromised. Second, a vulnerable IoT system means that an attacker can alter the functionality of a device from a given manufacturer. This not only affects the manufacturer&#8217;s brand image, but can also leak information that is very valuable for the manufacturer (such as proprietary algorithms). Third, the impact of attacking an IoT system goes beyond a specific device or an isolated system since compromised IoT systems can be misused at scale. For example, they may be used to perform a Distributed Denial of Service (DDoS) attack that limits the availability of other networks and services. The fact that many IoT systems rely on standard IP protocols allows for easier system integration, but this also makes attacks on standard IP protocols widely applicable in other environments. This results in new requirements regarding the implementation of security.</p>
+<p id="rfc.section.2.p.6">The term security subsumes a wide range of primitives, protocols, and procedures. For instance, the term security includes services such as confidentiality, authentication, integrity, authorization, source authentication, and availability. The term security often also includes augmented services such as duplicate detection and detection of stale packets (timeliness). These security services can be implemented through a combination of cryptographic mechanisms such as block ciphers, hash functions, and signature algorithms; as well as non-cryptographic mechanisms that implement authorization and other security policy enforcement aspects. For ensuring security in IoT networks, one should not only focus on the required security services, but also pay special attention to how the services are realized in the overall system.</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#sec3" id="sec3">Security Threats and Managing Risk</a>
+</h1>
+<p id="rfc.section.3.p.1">Security threats in related IP protocols have been analyzed in multiple documents including Hypertext Transfer Protocol (HTTP) over Transport Layer Security (TLS) (HTTPS) <a href="#RFC2818" class="xref">[RFC2818]</a>, Constrained Application Protocol (COAP) <a href="#RFC7252" class="xref">[RFC7252]</a>, IPv6 over Low-Power Wireless Personal Area Networks (6LoWPAN) <a href="#RFC4919" class="xref">[RFC4919]</a>, Access Node Control Protocol (ANCP) <a href="#RFC5713" class="xref">[RFC5713]</a>, Domain Name System (DNS) <a href="#RFC3833" class="xref">[RFC3833]</a>, IPv6 Neighbor Discovery (ND) <a href="#RFC3756" class="xref">[RFC3756]</a>, and Protocol for Carrying Authentication and Network Access (PANA) <a href="#RFC4016" class="xref">[RFC4016]</a>. In this section, we specifically discuss the threats that could compromise an individual thing or the network as a whole. Some of these threats might go beyond the scope of Internet protocols but we gather them here for the sake of completeness. The threats in the following list are not in any particular order and some threats might be more critical than others depending on the deployment scenario under consideration:</p>
+<p></p>
+
+<ol>
+<li>Vulnerable Software/Code: Things in the Internet of Things rely on software that might contain severe bugs and/or bad design choices.  This makes the things vulnerable to many different types of attacks, depending on the criticality of the bugs, e.g., buffer overflows or lack of authentication.  This can be considered as one of the most important security threat.  The large-scale distributed denial-of-service (DDoS) attack, popularly known as the Mirai botnet <a href="#mirai" class="xref">[mirai]</a>, was caused by things that had well-known or easy-to-guess passwords for configuration.</li>
+<li>Privacy threat: The tracking of a thing&#8217;s location and usage may pose a privacy risk to people around it. For instance, an attacker can infer privacy sensitive information from the data gathered and communicated by individual things. Such information may subsequently be sold to interested parties for marketing purposes and targeted advertising. In extreme cases, such information might be used to track dissidents in oppressive regimes. Unlawful surveillance and interception of traffic to/from a thing by intelligence agencies is also a privacy threat.</li>
+<li>Cloning of things: During the manufacturing process of a thing, an untrusted factory can easily clone the physical characteristics, firmware/software, or security configuration of the thing. Deployed things might also be compromised and their software reverse engineered allowing for cloning or software modifications. Such a cloned thing may be sold at a cheaper price in the market, and yet can function normally as a genuine thing. For example, two cloned devices can still be associated and work with each other. In the worst-case scenario, a cloned device can be used to control a genuine device or perform an attack. One should note here, that an untrusted factory may also change functionality of the cloned thing, resulting in degraded functionality with respect to the genuine thing (thereby, inflicting potential damage to the reputation of the original thing manufacturer). Moreover, additional functionality can be introduced in the cloned thing. An example of such functionality is a backdoor.</li>
+<li>Malicious substitution of things: During the installation of a thing, a genuine thing may be substituted with a similar variant (of lower quality) without being detected. The main motivation may be cost savings, where the installation of lower-quality things (for example, non-certified products) may significantly reduce the installation and operational costs. The installers can subsequently resell the genuine things to gain further financial benefits. Another motivation may be to inflict damage to the reputation of a competitor&#8217;s offerings.</li>
+<li>Eavesdropping attack: During the commissioning of a thing into a network, it may be susceptible to eavesdropping, especially if operational keying materials, security parameters, or configuration settings, are exchanged in clear using a wireless medium or if used cryptographic algorithms are not suitable for the envisioned lifetime of the device and the system. After obtaining the keying material, the attacker might be able to recover the secret keys established between the communicating entities, thereby compromising the authenticity and confidentiality of the communication channel, as well as the authenticity of commands and other traffic exchanged over this communication channel. When the network is in operation, T2T communication can be eavesdropped if the communication channel is not sufficiently protected or if a session key is compromised due to protocol weaknesses. An adversary may also be able to eavesdrop if keys are not renewed or updated appropriately. Lastly, messages can also be recorded and decrypted offline at a later point of time. The Venona project <a href="#venona-project" class="xref">[venona-project]</a> is one such example where messages were recorded for offline decryption.</li>
+<li>Man-in-the-middle attack: Both the commissioning phase and operational phases may also be vulnerable to man-in-the-middle attacks. For example, when keying material between communicating entities is exchanged in the clear and the security of the key establishment protocol depends on the tacit assumption that no third party can eavesdrop during the execution of this protocol. Additionally, device authentication or device authorization may be non-trivial, or may need support of a human decision process, since things usually do not have a-priori knowledge about each other and cannot always differentiate friends and foes via completely automated mechanisms.</li>
+<li>Firmware attacks: When a thing is in operation or maintenance phase, its firmware or software may be updated to allow for new functionality or new features. An attacker may be able to exploit such a firmware upgrade by maliciously replacing the thing&#8217;s firware, thereby influencing its operational behavior. For example, an attacker could add a piece of malicious code to the firmware that will cause it to periodically report the energy usage of the thing to a data repository for analysis. The attacker can then use this information to determine when a home or enterprise (where the thing is installed) is unoccupied and break in. Similarly, devices whose software has not been properly maintained and updated might contain vulnerabilities that might be exploited by attackers to replace the firmware on the device.</li>
+<li>Extraction of private information: IoT devices (such as sensors, actuators, etc.) are often physically unprotected in their ambient environment and they could easily be captured by an attacker. An attacker with physical access may then attempt to extract private information such as keys (for example, device&#8217;s key, private-key, group key), sensed data (for example, healthcare status of a user), configuration parameters (for example, the Wi-Fi key), or proprietary algorithms (for example, algorithm performing some data analytics task). Even when the data originating from a thing is encrypted, attackers can perform traffic analysis to deduce meaningful information which might compromise the privacy of the thing&#8217;s owner and/or user.</li>
+<li>Routing attack: As highlighted in <a href="#ID-Daniel" class="xref">[ID-Daniel]</a>, routing information in IoT networks can be spoofed, altered, or replayed, in order to create routing loops, attract/repel network traffic, extend/shorten source routes, etc. A non-exhaustive list of routing attacks includes 1) Sinkhole attack (or blackhole attack), where an attacker declares himself to have a high-quality route/path to the base station, thus allowing him to do manipulate all packets passing through it. 2) Selective forwarding, where an attacker may selectively forward packets or simply drop a packet. 3) Wormhole attack, where an attacker may record packets at one location in the network and tunnel them to another location, thereby influencing perceived network behavior and potentially distorting statistics, thus greatly impacting the functionality of routing. 4) Sybil attack, whereby an attacker presents multiple identities to other things in the network. We refer to <a href="#ID-Daniel" class="xref">[ID-Daniel]</a> for further router attacks and a more detailed description.</li>
+<li>Elevation of privilege: An attacker with low privileges can misuse additional flaws in the implemented authentication and authorization mechanisms of a thing to gain more privileged access to the thing and its data.</li>
+<li>Denial-of-Service (DoS) attack: Often things have very limited memory and computation capabilities. Therefore, they are vulnerable to resource exhaustion attack. Attackers can continuously send requests to specific things so as to deplete their resources. This is especially dangerous in the Internet of Things since an attacker might be located in the backend and target resource-constrained devices that are part of a constrained node network <a href="#RFC7228" class="xref">[RFC7228]</a>. DoS attack can also be launched by physically jamming the communication channel. Network availability can also be disrupted by flooding the network with a large number of packets. On the other hand, things compromised by attackers can be used to disrupt the operation of other networks or systems by means of a Distributed DoS (DDoS) attack.</li>
+</ol>
+<p id="rfc.section.3.p.3">To deal with above threats it is required to find and apply suitable security mitigations. However, new threats and exploits appear on a daily basis and products are deployed in different environments prone to different types of threats. Thus, ensuring a proper level of security in an IoT system at any point of time is challenging. To address this challenge, some of the following methodologies can be used:</p>
+<p></p>
+
+<ol>
+<li>A Business Impact Analysis (BIA) assesses the consequences of the loss of basic security attributes: confidentiality, integrity and availability in an IoT system. These consequences might include the impact from lost data, reduced sales, increased expenses, regulatory fines, customer dissatisfaction, etc. Performing a business impact analysis allows a business to determine the relevance of having a proper security design.</li>
+<li>A Risk Assessment (RA) analyzes security threats to an IoT system while considering their likelihood and impact. It also includes categorizing each of them with a risk level. Risks classified as moderate or high must be mitigated, i.e., the security architecture should be able to deal with those threat.</li>
+<li>A privacy impact assessment (PIA) aims at assessing the Personally Identifiable Information (PII) that is collected, processed, or used in an IoT system. By doing so, the goal is to fulfill applicable legal requirements, determine risks and effects of manipulation and loss of PII.</li>
+<li>Procedures for incident reporting and mitigation refer to the methodologies that allow becoming aware of any security issues that affect an IoT system. Furthermore, this includes steps towards the actual deployment of patches that mitigate the identified vulnerabilities.</li>
+</ol>
+<p id="rfc.section.3.p.5">BIA, RA, and PIA should generally be realized during the creation of a new IoT system or when deploying significant system/feature upgrades. In general, it is recommended to re-assess them on a regular basis taking into account new use cases and/or threats. The way a BIA, RA, PIA are performed depends on the environment and the industry. More information can be found in NIST documents such as <a href="#NISTSP800-34r1" class="xref">[NISTSP800-34r1]</a>, <a href="#NISTSP800-30r1" class="xref">[NISTSP800-30r1]</a>, and <a href="#NISTSP800-122" class="xref">[NISTSP800-122]</a>.</p>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#sec4" id="sec4">State-of-the-Art</a>
+</h1>
+<p id="rfc.section.4.p.1">This section is organized as follows. <a href="#sec4-1" class="xref">Section 4.1</a> summarizes state-of-the-art on IP-based IoT systems, within IETF and in other standardization bodies. <a href="#sec4-2" class="xref">Section 4.2</a> summarizes state-of-the-art on IP-based security protocols and their usage. <a href="#sec4-3" class="xref">Section 4.3</a> discusses guidelines and regulations for securing IoT as proposed by other bodies.  Note that the references included in this section are a representative of the state-of-the-art at the point of writing and they are by no means exhaustive. The references are also at varying levels of maturity, and thus, it is advisable to review their specific status.</p>
+<h1 id="rfc.section.4.1">
+<a href="#rfc.section.4.1">4.1.</a> <a href="#sec4-1" id="sec4-1">IP-based IoT Protocols and Standards</a>
+</h1>
+<p id="rfc.section.4.1.p.1">Nowadays, there exists a multitude of control protocols for IoT. For BAC systems, the ZigBee standard <a href="#ZB" class="xref">[ZB]</a>, BACNet <a href="#BACNET" class="xref">[BACNET]</a>, and DALI <a href="#DALI" class="xref">[DALI]</a> play key roles. Recent trends, however, focus on an all-IP approach for system control.</p>
+<p id="rfc.section.4.1.p.2">In this setting, a number of IETF working groups are designing new protocols for resource-constrained networks of smart things. The 6LoWPAN working group <a href="#WG-6LoWPAN" class="xref">[WG-6LoWPAN]</a> for example has defined methods and protocols for the efficient transmission and adaptation of IPv6 packets over IEEE 802.15.4 networks <a href="#RFC4944" class="xref">[RFC4944]</a>.</p>
+<p id="rfc.section.4.1.p.3">The CoRE working group <a href="#WG-CoRE" class="xref">[WG-CoRE]</a> has specified the Constrained Application Protocol (CoAP) <a href="#RFC7252" class="xref">[RFC7252]</a>. CoAP is a RESTful protocol for constrained devices that is modeled after HTTP and typically runs over UDP to enable efficient application-level communication for things.</p>
+<p id="rfc.section.4.1.p.4">In many smart object networks, the smart objects are dispersed and have intermittent reachability either because of network outages or because they sleep during their operational phase to save energy. In such scenarios, direct discovery of resources hosted on the constrained server might not be possible. To overcome this barrier, the CoRE working group is specifying the concept of a Resource Directory (RD) <a href="#ID-rd" class="xref">[ID-rd]</a>. The Resource Directory hosts descriptions of resources which are located on other nodes. These resource descriptions are specified as CoRE link format <a href="#RFC6690" class="xref">[RFC6690]</a>.</p>
+<p id="rfc.section.4.1.p.5">While CoAP defines a standard communication protocol, a format for representing sensor measurements and parameters over CoAP is required. The Sensor Measurement Lists (SenML) <a href="#ID-senml" class="xref">[ID-senml]</a> is a specification that defines media types for simple sensor measurements and parameters. It has a minimalistic design so that constrained devices with limited computational capabilities can easily encode their measurements and, at the same time, servers can efficiently collect large number of measurements.</p>
+<p id="rfc.section.4.1.p.6">In many IoT deployments, the resource-constrained smart objects are connected to the Internet via a gateway that is directly reachable. For example, an IEEE 802.11 Access Point (AP) typically connects the client devices to the Internet over just one wireless hop. However, some deployments of smart object networks require routing between the smart objects themselves. The IETF has therefore defined the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL) <a href="#RFC6550" class="xref">[RFC6550]</a>. RPL provides support for multipoint-to-point traffic from resource-constrained smart objects towards a more resourceful central control point, as well as point-to-multipoint traffic in the reverse direction. It also supports point-to-point traffic between the resource-constrained devices. A set of routing metrics and constraints for path calculation in RPL are also specified <a href="#RFC6551" class="xref">[RFC6551]</a>.</p>
+<p id="rfc.section.4.1.p.7">The IPv6 over Networks of Resource-constrained Nodes (6lo) <a href="#WG-6lo" class="xref">[WG-6lo]</a> working group of the IETF has specified how IPv6 packets can be transmitted over various link layer protocols that are commonly employed for resource-constrained smart object networks. There is also ongoing work to specify IPv6 connectivity for a Non-Broadcast Multi-Access (NBMA) mesh network that is formed by IEEE 802.15.4 TimeSlotted Channel Hopping (TSCH} links <a href="#ID-6tisch" class="xref">[ID-6tisch]</a>. Other link layer protocols for which IETF has specified or is currently specifying IPv6 support include Bluetooth <a href="#RFC7668" class="xref">[RFC7668]</a>, Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE) air interface <a href="#RFC8105" class="xref">[RFC8105]</a>, and Near Field Communication (NFC) <a href="#ID-6lonfc" class="xref">[ID-6lonfc]</a>.</p>
+<p id="rfc.section.4.1.p.8">Baker and Meyer <a href="#RFC6272" class="xref">[RFC6272]</a> identify which IP protocols can be used in smart grid environments. They give advice to smart grid network designers on how they can decide on a profile of the Internet protocol suite for smart grid networks.</p>
+<p id="rfc.section.4.1.p.9">The Low Power Wide-Area Network (LPWAN) working <a href="#WG-LPWAN" class="xref">[WG-LPWAN]</a> group is analyzing features, requirements, and solutions to adapt IP-based protocols to networks such as LORA <a href="#lora" class="xref">[lora]</a>, SigFox <a href="#sigfox" class="xref">[sigfox]</a>, NB-IoT <a href="#nbiot" class="xref">[nbiot]</a>, etc. These networking technologies enable a smart thing to run for years on a single coin-cell by relying on a star network topology and using optimized radio modulation with frame sizes in the order of tens of bytes. Such networks bring new security challenges since most existing security mechanism do not work well with such resource constraints.</p>
+<p id="rfc.section.4.1.p.10">JavaScript Object Notation (JSON) is a lightweight text representation format for structured data <a href="#RFC8259" class="xref">[RFC8259]</a>. It is often used for transmitting serialized structured data over the network. IETF has defined specifications for encoding cryptographic keys, encrypted content, signed content, and claims to be transferred between two parties as JSON objects. They are referred to as JSON Web Keys (JWK) <a href="#RFC7517" class="xref">[RFC7517]</a>, JSON Web Encryption (JWE) <a href="#RFC7516" class="xref">[RFC7516]</a>, JSON Web Signatures (JWS) <a href="#RFC7515" class="xref">[RFC7515]</a> and JSON Web Token (JWT) <a href="#RFC7519" class="xref">[RFC7519]</a>.</p>
+<p id="rfc.section.4.1.p.11">An alternative to JSON, Concise Binary Object Representation (CBOR) <a href="#RFC7049" class="xref">[RFC7049]</a> is a concise binary data format that is used for serialization of structured data. It is designed for resource-constrained nodes and therefore it aims to provide a fairly small message size with minimal implementation code, and extensibility without the need for version negotiation. CBOR Object Signing and Encryption (COSE) <a href="#RFC8152" class="xref">[RFC8152]</a> specifies how to encode cryptographic keys, message authentication codes, encrypted content, and signatures with CBOR.</p>
+<p id="rfc.section.4.1.p.12">The Light-Weight Implementation Guidance (LWIG) working group <a href="#WG-LWIG" class="xref">[WG-LWIG]</a> is collecting experiences from implementers of IP stacks in constrained devices. The working group has already produced documents such as RFC7815 <a href="#RFC7815" class="xref">[RFC7815]</a> which defines how a minimal Internet Key Exchange Version 2 (IKEv2) initiator can be implemented.</p>
+<p id="rfc.section.4.1.p.13">The Thing-2-Thing Research Group (T2TRG) <a href="#RG-T2TRG" class="xref">[RG-T2TRG]</a> is investigating the remaining research issues that need to be addressed to quickly turn the vision of IoT into a reality where resource-constrained nodes can communicate with each other and with other more capable nodes on the Internet.</p>
+<p id="rfc.section.4.1.p.14">Additionally, industry alliances and other standardization bodies are creating constrained IP protocol stacks based on the IETF work. Some important examples of this include:</p>
+<p></p>
+
+<ol>
+<li>Thread <a href="#Thread" class="xref">[Thread]</a>: Specifies the Thread protocol that is intended for a variety of IoT devices. It is an IPv6-based network protocol that runs over IEEE 802.15.4.</li>
+<li>Industrial Internet Consortium <a href="#IIoT" class="xref">[IIoT]</a>: The consortium defines reference architectures and security frameworks for development, adoption and widespread use of Industrial Internet technologies based on existing IETF standards.</li>
+<li>Internet Protocol for Smart Objects IPSO <a href="#IPSO" class="xref">[IPSO]</a>: The alliance specifies a common object model that enables application software on any device to interoperate with other conforming devices.</li>
+<li>OneM2M <a href="#OneM2M" class="xref">[OneM2M]</a>: The standards body defines technical and API specifications for IoT devices. It aims to create a service layer that can run on any IoT device hardware and software.</li>
+<li>Open Connectivity Foundation (OCF) <a href="#OCF" class="xref">[OCF]</a>: The foundation develops standards and certifications primarily for IoT devices that use Constrained Application Protocol (CoAP) as the application layer protocol.</li>
+<li>Fairhair Alliance <a href="#Fairhair" class="xref">[Fairhair]</a>: Specifies an IoT middleware to enable a common IP network infrastructure between different application standards used in building automation and lighting systems such as BACnet, KNX and ZigBee.</li>
+<li>OMA LWM2M <a href="#LWM2M" class="xref">[LWM2M]</a>: OMA Lightweight M2M is a standard from the Open Mobile Alliance for M2M and IoT device management. LWM2M relies on CoAP as the application layer protocol and uses a RESTful architecture for remote management of IoT devices.</li>
+</ol>
+<h1 id="rfc.section.4.2">
+<a href="#rfc.section.4.2">4.2.</a> <a href="#sec4-2" id="sec4-2">Existing IP-based Security Protocols and Solutions</a>
+</h1>
+<p id="rfc.section.4.2.p.1">There are three main security objectives for IoT networks: 1. protecting the IoT network from attackers.  2. protecting IoT applications and thus, the things and users.  3. protecting the rest of the Internet and other things from attacks that use compromised things as an attack platform.</p>
+<p id="rfc.section.4.2.p.2">In the context of the IP-based IoT deployments, consideration of existing Internet security protocols is important. There are a wide range of specialized as well as general-purpose security solutions for the Internet domain such as IKEv2/IPsec <a href="#RFC7296" class="xref">[RFC7296]</a>, Transport Layer Security (TLS) <a href="#RFC8446" class="xref">[RFC8446]</a>, Datagram Transport Layer Security (DTLS) <a href="#RFC6347" class="xref">[RFC6347]</a>, Host Identity Protocol (HIP) <a href="#RFC7401" class="xref">[RFC7401]</a>, PANA <a href="#RFC5191" class="xref">[RFC5191]</a>, Kerberos (<a href="#RFC4120" class="xref">[RFC4120]</a>), Simple Authentication and Security Layer (SASL) <a href="#RFC4422" class="xref">[RFC4422]</a>, and Extensible Authentication Protocol (EAP) <a href="#RFC3748" class="xref">[RFC3748]</a>.</p>
+<p id="rfc.section.4.2.p.3">TLS provides security for TCP and requires a reliable transport. DTLS secures and uses datagram-oriented protocols such as UDP. Both protocols are intentionally kept similar and share the same ideology and cipher suites. The CoAP base specification <a href="#RFC7252" class="xref">[RFC7252]</a> provides a description of how DTLS can be used for securing CoAP. It proposes three different modes for using DTLS: the PreSharedKey mode, where nodes have pre-provisioned keys for initiating a DTLS session with another node, RawPublicKey mode, where nodes have asymmetric-key pairs but no certificates to verify the ownership, and Certificate mode, where public keys are certified by a certification authority. An IoT implementation profile <a href="#RFC7925" class="xref">[RFC7925]</a> is defined for TLS version 1.2 and DTLS version 1.2 that offers communication security for resource-constrained nodes.</p>
+<p id="rfc.section.4.2.p.4">There is ongoing work to define an authorization and access-control framework for resource-constrained nodes. The Authentication and Authorization for Constrained Environments (ACE) <a href="#WG-ACE" class="xref">[WG-ACE]</a> working group is defining a solution to allow only authorized access to resources that are hosted on a smart object server and are identified by a URI. The current proposal <a href="#ID-aceoauth" class="xref">[ID-aceoauth]</a> is based on the OAuth 2.0 framework <a href="#RFC6749" class="xref">[RFC6749]</a> and it comes with profiles intended for different communication scenarios, e.g. DTLS Profile for Authentication and Authorization for Constrained Environments <a href="#ID-acedtls" class="xref">[ID-acedtls]</a>.</p>
+<p id="rfc.section.4.2.p.5">OSCORE <a href="#ID-OSCORE" class="xref">[ID-OSCORE]</a> is a proposal that protects CoAP messages by wrapping them in the CBOR Object Signing and Encryption (COSE) <a href="#RFC8152" class="xref">[RFC8152]</a> format. Thus, OSCORE falls in the category of object security and it can be applied wherever CoAP can be used. The advantage of OSCORE over DTLS is that it provides some more flexibility when dealing with end-to-end security. <a href="#sec5-1-3" class="xref">Section 5.1.3</a> discusses this further.</p>
+<p id="rfc.section.4.2.p.6">The Automated Certificate Management Environment (ACME) <a href="#WG-ACME" class="xref">[WG-ACME]</a> working group is specifying conventions for automated X.509 certificate management. This includes automatic validation of certificate issuance, certificate renewal, and certificate revocation. While the initial focus of working group is on domain name certificates (as used by web servers), other uses in some IoT deployments is possible.</p>
+<p id="rfc.section.4.2.p.7">The Internet Key Exchange (IKEv2)/IPsec &#8211; as well as the less used Host Identity protocol (HIP) &#8211; reside at or above the network layer in the OSI model. Both protocols are able to perform an authenticated key exchange and set up the IPsec for secure payload delivery. Currently, there are also ongoing efforts to create a HIP variant coined Diet HIP <a href="#ID-HIP-DEX" class="xref">[ID-HIP-DEX]</a> that takes constrained networks and nodes into account at the authentication and key exchange level.</p>
+<p id="rfc.section.4.2.p.8">Migault et al. <a href="#ID-dietesp" class="xref">[ID-dietesp]</a> are working on a compressed version of IPsec so that it can easily be used by resource-constrained IoT devices. They rely on the Internet Key Exchange Protocol version 2 (IKEv2) for negotiating the compression format.</p>
+<p id="rfc.section.4.2.p.9">The Extensible Authentication Protocol (EAP) <a href="#RFC3748" class="xref">[RFC3748]</a> is an authentication framework supporting multiple authentication methods. EAP runs directly over the data link layer and, thus, does not require the deployment of IP. It supports duplicate detection and retransmission, but does not allow for packet fragmentation. The Protocol for Carrying Authentication for Network Access (PANA) is a network-layer transport for EAP that enables network access authentication between clients and the network infrastructure. In EAP terms, PANA is a UDP-based EAP lower layer that runs between the EAP peer and the EAP authenticator.</p>
+<h1 id="rfc.section.4.3">
+<a href="#rfc.section.4.3">4.3.</a> <a href="#sec4-3" id="sec4-3">IoT Security Guidelines</a>
+</h1>
+<p id="rfc.section.4.3.p.1">Attacks on and from IoT devices have become common in the last years, for instance, large scale Denial of Service (DoS) attacks on the Internet Infrastructure from compromised IoT devices. This fact has prompted many different standards bodies and consortia to provide guidelines for developers and the Internet community at large to build secure IoT devices and services. A subset of the different guidelines and ongoing projects are as follows:</p>
+<p></p>
+
+<ol>
+<li>Global System for Mobile Communications (GSM) Association (GSMA) IoT security guidelines <a href="#GSMAsecurity" class="xref">[GSMAsecurity]</a>: GSMA has published a set of security guidelines for the benefit of new IoT product and service providers. The guidelines are aimed at device manufacturers, service providers, developers and network operators. An enterprise can complete an IoT Security Self-Assessment to demonstrate that its products and services are aligned with the security guidelines of the GSMA.</li>
+<li>Broadband Internet Technical Advisory Group (BITAG) IoT Security and Privacy Recommendations <a href="#BITAG" class="xref">[BITAG]</a>: BITAG has published recommendations for ensuring security and privacy of IoT device users. BITAG observes that many IoT devices are shipped from the factory with software that is already outdated and vulnerable. The report also states that many devices with vulnerabilities will not be fixed either because the manufacturer does not provide updates or because the user does not apply them. The recommendations include that IoT devices should function without cloud and Internet connectivity, and that all IoT devices should have methods for automatic secure software updates.</li>
+<li>United Kingdom Department for Digital, Culture, Media and Sport (DCMS) <a href="#DCMS" class="xref">[DCMS]</a>: UK DCMS has released a report that includes a list of 13 steps for improving IoT security. These steps, for example, highlight the need for implementing a vulnerability disclosure policy and keeping software updated. The report is aimed at device manufacturers, IoT service providers, mobile application developers and retailers.</li>
+<li>Cloud Security Alliance (CSA) New Security Guidance for Early Adopters of the IoT <a href="#CSA" class="xref">[CSA]</a>: CSA recommendations for early adopters of IoT encourages enterprises to implement security at different layers of the protocol stack. It also recommends implementation of an authentication/authorization framework for IoT deployments. A complete list of recommendations is available in the report <a href="#CSA" class="xref">[CSA]</a>.</li>
+<li>United States Department of Homeland Security <a href="#DHS" class="xref">[DHS]</a>: DHS has put forth six strategic principles that would enable IoT developers, manufacturers, service providers and consumers to maintain security as they develop, manufacture, implement or use network-connected IoT devices.</li>
+<li>National Institute of Standards and Technology (NIST) <a href="#NIST-Guide" class="xref">[NIST-Guide]</a>: The NIST special publication urges enterprise and US federal agencies to address security throughout the systems engineering process. The publication builds upon the International Organization for Standardization (ISO)/International Electrotechnical Commission (IEC) 15288 standard and augments each process in the system lifecycle with security enhancements.</li>
+<li>National Institute of Standards and Technology (NIST) <a href="#nist-lightweight-project" class="xref">[nist-lightweight-project]</a>: NIST is running a project on lightweight cryptography with the purpose of: (i) identifying application areas for which standard cryptographic algorithms are too heavy, classifying them according to some application profiles to be determined; (ii) determining limitations in those existing cryptographic standards; and (iii) standardizing lightweight algorithms that can be used in specific application profiles.</li>
+<li>Open Web Application Security Project (OWASP) <a href="#OWASP" class="xref">[OWASP]</a>: OWASP provides security guidance for IoT manufactures, developers and consumers. OWASP also includes guidelines for those who intend to test and analyze IoT devices and applications.</li>
+<li>IoT Security foundation <a href="#IoTSecFoundation" class="xref">[IoTSecFoundation]</a>: IoT security foundation has published a document that enlists various considerations that need to be taken into account when developing IoT applications. For example, the document states that IoT devices could use hardware-root of trust to ensure that only authorized software runs on the devices.</li>
+<li>National Highway Traffic Safety Administration (NHTSA) <a href="#NHTSA" class="xref">[NHTSA]</a>: The US NHTSA provides guidance to the automotive industry for improving the cyber security of vehicles. While some of the guidelines are general, the document provides specific recommendations for the automotive industry such as how various automotive manufacturer can share cyber security vulnerabilities discovered.</li>
+<li>Best Current Practices (BCP) for IoT devices <a href="#ID-Moore" class="xref">[ID-Moore]</a>: This document provides a list of minimum requirements that vendors of Internet of Things (IoT) devices should to take into account while developing applications, services and firmware updates in order to reduce the frequency and severity of security incidents that arise from compromised IoT devices.</li>
+<li>European Union Agency for Network and Information Security (ENISA) <a href="#ENISA-ICS" class="xref">[ENISA-ICS]</a>: ENISA published a document on communication network dependencies for Industrial Control Systems (ICS)/Supervisory Control And Data Acquisition (SCADA) systems in which security vulnerabilities, guidelines and general recommendations are summarized.</li>
+<li>Internet Society Online Trust Alliance <a href="#ISOC-OTA" class="xref">[ISOC-OTA]</a>: The Internet Society&#8217;s IoT Trust Framework identifies the core requirements manufacturers, service providers, distributors, purchasers and policymakers need to understand, assess and embrace for effective security and privacy as part of the Internet of Things.</li>
+</ol>
+<p id="rfc.section.4.3.p.3">Other guideline and recommendation documents may exist or may later be published. This list should be considered non-exhaustive. Despite the acknowledgment that security in the Internet is needed and the existence of multiple guidelines, the fact is that many IoT devices and systems have very limited security. There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to security. This may be because of lack of expertise or limited budget. However, the deployment of such insecure devices poses a severe threat on the privacy and safety of users. The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become insecure if a compromised device gains access to the system at some point in time. Even if all other devices in a given environment are secure, this does not prevent external attacks caused by insecure devices. Recently the Federal Communications Commission (FCC) <a href="#FCC" class="xref">[FCC]</a> has stated the need for additional regulation of IoT systems. It is possible that we may see other such regional regulations in the future.</p>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#sec5" id="sec5">Challenges for a Secure IoT</a>
+</h1>
+<p id="rfc.section.5.p.1">In this section, we take a closer look at the various security challenges in the operational and technical features of IoT and then discuss how existing Internet security protocols cope with these technical and conceptual challenges through the lifecycle of a thing. This discussion should neither be understood as a comprehensive evaluation of all protocols, nor can it cover all possible aspects of IoT security. Yet, it aims at showing concrete limitations and challenges in some IoT design areas rather than giving an abstract discussion. In this regard, the discussion handles issues that are most important from the authors&#8217; perspectives.</p>
+<h1 id="rfc.section.5.1">
+<a href="#rfc.section.5.1">5.1.</a> <a href="#sec5-1" id="sec5-1">Constraints and Heterogeneous Communication</a>
+</h1>
+<p id="rfc.section.5.1.p.1">Coupling resource-constrained networks and the powerful Internet is a challenge because the resulting heterogeneity of both networks complicates protocol design and system operation. In the following we briefly discuss the resource constraints of IoT devices and the consequences for the use of Internet Protocols in the IoT domain.</p>
+<h1 id="rfc.section.5.1.1">
+<a href="#rfc.section.5.1.1">5.1.1.</a> <a href="#sec5-1-1" id="sec5-1-1">Resource Constraints</a>
+</h1>
+<p id="rfc.section.5.1.1.p.1">IoT deployments are often characterized by lossy and low-bandwidth communication channels. IoT devices are also often constrained in terms of CPU, memory, and energy budget available <a href="#RFC7228" class="xref">[RFC7228]</a>. These characteristics directly impact the design of protocols for the IoT domain. For instance, small packet size limits at the physical layer (127 Bytes in IEEE 802.15.4) can lead to (i) hop-by-hop fragmentation and reassembly or (ii) small IP-layer maximum transmission unit (MTU). In the first case, excessive fragmentation of large packets that are often required by security protocols may open new attack vectors for state exhaustion attacks. The second case might lead to more fragmentation at the IP layer which commonly downgrades the overall system performance due to packet loss and the need for retransmission.</p>
+<p id="rfc.section.5.1.1.p.2">The size and number of messages should be minimized to reduce memory requirements and optimize bandwidth usage. In this context, layered approaches involving a number of protocols might lead to worse performance in resource-constrained devices since they combine the headers of the different protocols. In some settings, protocol negotiation can increase the number of exchanged messages. To improve performance during basic procedures such as, for example, bootstrapping, it might be a good strategy to perform those procedures at a lower layer.</p>
+<p id="rfc.section.5.1.1.p.3">Small CPUs and scarce memory limit the usage of resource-expensive cryptographic primitives such as public-key cryptography as used in most Internet security standards. This is especially true if the basic cryptographic blocks need to be frequently used or the underlying application demands low delay.</p>
+<p id="rfc.section.5.1.1.p.4">There are ongoing efforts to reduce the resource consumption of security protocols by using more efficient underlying cryptographic primitives such as Elliptic Curve Cryptography <a href="#RFC5246" class="xref">[RFC5246]</a>. The specification of elliptic curve X25519 <a href="#ecc25519" class="xref">[ecc25519]</a>, stream ciphers such as ChaCha <a href="#ChaCha" class="xref">[ChaCha]</a>, Diet HIP <a href="#ID-HIP-DEX" class="xref">[ID-HIP-DEX]</a>, and ECC goups for IKEv2 <a href="#RFC5903" class="xref">[RFC5903]</a> are all examples of efforts to make security protocols more resource efficient. Additionally, most modern security protocols have been revised in the last few years to enable cryptographic agility, making cryptographic primitives interchangeable. However, these improvements are only a first step in reducing the computation and communication overhead of Internet protocols. The question remains if other approaches can be applied to leverage key agreement in these heavily resource-constrained environments.</p>
+<p id="rfc.section.5.1.1.p.5">A further fundamental need refers to the limited energy budget available to IoT nodes. Careful protocol (re)design and usage is required to reduce not only the energy consumption during normal operation, but also under DoS attacks. Since the energy consumption of IoT devices differs from other device classes, judgments on the energy consumption of a particular protocol cannot be made without tailor-made IoT implementations.</p>
+<h1 id="rfc.section.5.1.2">
+<a href="#rfc.section.5.1.2">5.1.2.</a> <a href="#sec5-1-2" id="sec5-1-2">Denial-of-Service Resistance</a>
+</h1>
+<p id="rfc.section.5.1.2.p.1">The tight memory and processing constraints of things naturally alleviate resource exhaustion attacks. Especially in unattended T2T communication, such attacks are difficult to notice before the service becomes unavailable (for example, because of battery or memory exhaustion). As a DoS countermeasure, DTLS, IKEv2, HIP, and Diet HIP implement return routability checks based on a cookie mechanism to delay the establishment of state at the responding host until the address of the initiating host is verified. The effectiveness of these defenses strongly depend on the routing topology of the network. Return routability checks are particularly effective if hosts cannot receive packets addressed to other hosts and if IP addresses present meaningful information as is the case in today&#8217;s Internet. However, they are less effective in broadcast media or when attackers can influence the routing and addressing of hosts (for example, if hosts contribute to the routing infrastructure in ad-hoc networks and meshes).</p>
+<p id="rfc.section.5.1.2.p.2">In addition, HIP implements a puzzle mechanism that can force the initiator of a connection (and potential attacker) to solve cryptographic puzzles with variable difficulties. Puzzle-based defense mechanisms are less dependent on the network topology but perform poorly if CPU resources in the network are heterogeneous (for example, if a powerful Internet host attacks a thing). Increasing the puzzle difficulty under attack conditions can easily lead to situations where a powerful attacker can still solve the puzzle while weak IoT clients cannot and are excluded from communicating with the victim. Still, puzzle-based approaches are a viable option for sheltering IoT devices against unintended overload caused by misconfiguration or malfunctioning things.</p>
+<h1 id="rfc.section.5.1.3">
+<a href="#rfc.section.5.1.3">5.1.3.</a> <a href="#sec5-1-3" id="sec5-1-3">End-to-end security, protocol translation, and the role of middleboxes</a>
+</h1>
+<p id="rfc.section.5.1.3.p.1">The term end-to-end security often has multiple interpretations. Here, we consider end-to-end security in the context end-to-end IP connectivity, from a sender to a receiver. Services such as confidentiality and integrity protection on packet data, message authentication codes or encryption are typically used to provide end-to-end security. These protection methods render the protected parts of the packets immutable as rewriting is either not possible because a) the relevant information is encrypted and inaccessible to the gateway or b) rewriting integrity-protected parts of the packet would invalidate the end-to-end integrity protection.</p>
+<p id="rfc.section.5.1.3.p.2">Protocols for constrained IoT networks are not exactly identical to their larger Internet counterparts for efficiency and performance reasons. Hence, more or less subtle differences between protocols for constrained IoT networks and Internet protocols will remain. While these differences can be bridged with protocol translators at middleboxes, they may become major obstacles if end-to-end security measures between IoT devices and Internet hosts are needed.</p>
+<p id="rfc.section.5.1.3.p.3">If access to data or messages by the middleboxes is required or acceptable, then a diverse set of approaches for handling such a scenario are available. Note that some of these approaches affect the meaning of end-to-end security in terms of integrity and confidentiality since the middleboxes will be able to either decrypt or modify partially the exchanged messages:</p>
+<p></p>
+
+<ol>
+<li>Sharing credentials with middleboxes enables them to transform (for example, decompress, convert, etc.) packets and re-apply the security measures after transformation. This method abandons end-to-end security and is only applicable to simple scenarios with a rudimentary security model.</li>
+<li>Reusing the Internet wire format for IoT makes conversion between IoT and Internet protocols unnecessary. However, it can lead to poor performance in some use cases because IoT specific optimizations (for example, stateful or stateless compression) are not possible.</li>
+<li>Selectively protecting vital and immutable packet parts with a message authentication code or with encryption requires a careful balance between performance and security. Otherwise this approach might either result in poor performance or poor security depending on which parts are selected for protection, where they are located in the original packet, and how they are processed. <a href="#ID-OSCORE" class="xref">[ID-OSCORE]</a> proposes a solution in this direction by encrypting and integrity protecting most of the message fields except those parts that a middlebox needs to read or change.</li>
+<li>Homomorphic encryption techniques can be used in the middlebox to perform certain operations. However, this is limited to data processing involving arithmetic operations. Furthermore, performance of existing libraries, for example, SEAL <a href="#SEAL" class="xref">[SEAL]</a> is still too limited and homomorphic encryption techniques are not widely applicable yet.</li>
+<li>Message authentication codes that sustain transformation can be realized by considering the order of transformation and protection (for example, by creating a signature before compression so that the gateway can decompress the packet without recalculating the signature). Such an approach enables IoT specific optimizations but is more complex and may require application-specific transformations before security is applied. Moreover, the usage of encrypted or integrity-protected data prevents middleboxes from transforming packets.</li>
+<li>Mechanisms based on object security can bridge the protocol worlds, but still require that the two worlds use the same object security formats. Currently the object security format based on CBOR Object Signing and Encryption (COSE) <a href="#RFC8152" class="xref">[RFC8152]</a> is different from JSON Object Signing and Encryption (JOSE) <a href="#RFC7520" class="xref">[RFC7520]</a> or Cryptographic Message Syntax (CMS) <a href="#RFC5652" class="xref">[RFC5652]</a>. Legacy devices relying on traditional Internet protocols will need to update to the newer protocols for constrained environments to enable real end-to-end security. Furthermore, middleboxes do not have any access to the data and this approach does not prevent an attacker who is capable of modifying relevant message header fields that are not protected.</li>
+</ol>
+<p id="rfc.section.5.1.3.p.5">To the best of our knowledge, none of the mentioned security approaches that focus on the confidentiality and integrity of the communication exchange between two IP end-points provide the perfect solution in this problem space.</p>
+<h1 id="rfc.section.5.1.4">
+<a href="#rfc.section.5.1.4">5.1.4.</a> <a href="#sec5-1-4" id="sec5-1-4">New network architectures and paradigm</a>
+</h1>
+<p id="rfc.section.5.1.4.p.1">There is a multitude of new link layer protocols that aim to address the resource-constrained nature of IoT devices. For example, the IEEE 802.11 ah <a href="#IEEE802ah" class="xref">[IEEE802ah]</a> has been specified for extended range and lower energy consumption to support Internet of Things (IoT) devices. Similarly, Low-Power Wide-Area Network (LPWAN) protocols such as LoRa <a href="#lora" class="xref">[lora]</a>, Sigfox <a href="#sigfox" class="xref">[sigfox]</a>, NarrowBand IoT (NB-IoT) <a href="#nbiot" class="xref">[nbiot]</a> are all designed for resource-constrained devices that require long range and low bit rates. <a href="#ID-lpwan" class="xref">[ID-lpwan]</a> provides an informational overview of the set of LPWAN technologies being considered by the IETF. It also identifies the potential gaps that exist between the needs of those technologies and the goal of running IP in such networks. While these protocols allow IoT devices to conserve energy and operate efficiently, they also add additional security challenges. For example, the relatively small MTU can make security handshakes with large X509 certificates a significant overhead. At the same time, new communication paradigms also allow IoT devices to communicate directly amongst themselves with or without support from the network. This communication paradigm is also referred to as Device-to-Device (D2D) or Machine-to-Machine (M2M) or Thing-to-Thing (T2T) communication and it is motivated by a number of features such as improved network performance, lower latency and lower energy requirements.</p>
+<h1 id="rfc.section.5.2">
+<a href="#rfc.section.5.2">5.2.</a> <a href="#sec5-2" id="sec5-2">Bootstrapping of a Security Domain</a>
+</h1>
+<p id="rfc.section.5.2.p.1">Creating a security domain from a set of previously unassociated IoT devices is a key operation in the lifecycle of a thing in an IoT network. This aspect is further elaborated and discussed in the T2TRG draft on bootstrapping <a href="#ID-bootstrap" class="xref">[ID-bootstrap]</a>.</p>
+<h1 id="rfc.section.5.3">
+<a href="#rfc.section.5.3">5.3.</a> <a href="#sec5-3" id="sec5-3">Operational Challenges</a>
+</h1>
+<p id="rfc.section.5.3.p.1">After the bootstrapping phase, the system enters the operational phase.  During the operational phase, things can use the state information created during the bootstrapping phase in order to exchange information securely. In this section, we discuss the security challenges during the operational phase. Note that many of the challenges discussed in <a href="#sec5-1" class="xref">Section 5.1</a> apply during the operational phase.</p>
+<h1 id="rfc.section.5.3.1">
+<a href="#rfc.section.5.3.1">5.3.1.</a> <a href="#sec5-3-1" id="sec5-3-1">Group Membership and Security</a>
+</h1>
+<p id="rfc.section.5.3.1.p.1">Group key negotiation is an important security service for IoT communication patterns in which a thing sends some data to multiple things or data flows from multiple things towards a thing. All discussed protocols only cover unicast communication and therefore, do not focus on group-key establishment. This applies in particular to (D)TLS and IKEv2. Thus, a solution is required in this area. A potential solution might be to use the Diffie-Hellman keys &#8211; that are used in IKEv2 and HIP to setup a secure unicast link &#8211; for group Diffie-Hellman key-negotiations. However, Diffie-Hellman is a relatively heavy solution, especially if the group is large.</p>
+<p id="rfc.section.5.3.1.p.2">Symmetric and asymmetric keys can be used in group communication. Asymmetric keys have the advantage that they can provide source authentication. However, doing broadcast encryption with a single public/private key pair is also not feasible. Although a single symmetric key can be used to encrypt the communication or compute a message authentication code, it has inherent risks since the capture of a single node can compromise the key shared throughout the network. The usage of symmetric-keys also does not provide source authentication. Another factor to consider is that asymmetric cryptography is more resource-intensive than symmetric key solutions. Thus, the security risks and performance trade-offs of applying either symmetric or asymmetric keys to a given IoT use case need to be well-analyzed according to risk and usability assessments. <a href="#ID-multicast" class="xref">[ID-multicast]</a> is looking at a combination of symmetric (for encryption) and asymmetric (for authentication) in the same packet.</p>
+<p id="rfc.section.5.3.1.p.3">Conceptually, solutions that provide secure group communication at the network layer (IPsec/IKEv2, HIP/Diet HIP) may have an advantage in terms of the cryptographic overhead when compared to application-focused security solutions (TLS/ DTLS). This is due to the fact that application-focused solutions require cryptographic operations per group application, whereas network layer approaches may allow sharing secure group associations between multiple applications (for example, for neighbor discovery and routing or service discovery). Hence, implementing shared features lower in the communication stack can avoid redundant security measures. However, it is important to note that sharing security contexts among different applications involves potential security threats, e.g., if one of the applications is malicious and monitors exchanged messages or injects fake messages. In the case of OSCORE, it provides security for CoAP group communication as defined in RFC7390, i.e., based on multicast IP. If the same security association is reused for each application, then this solution does not seem to have more cryptographic overhead compared to IPsec.</p>
+<p id="rfc.section.5.3.1.p.4">Several group key solutions have been developed by the MSEC working group <a href="#WG-MSEC" class="xref">[WG-MSEC]</a> of the IETF. The MIKEY architecture <a href="#RFC4738" class="xref">[RFC4738]</a> is one example. While these solutions are specifically tailored for multicast and group broadcast applications in the Internet, they should also be considered as candidate solutions for group key agreement in IoT. The MIKEY architecture for example describes a coordinator entity that disseminates symmetric keys over pair-wise end-to-end secured channels. However, such a centralized approach may not be applicable in a distributed IoT environment, where the choice of one or several coordinators and the management of the group key is not trivial.</p>
+<h1 id="rfc.section.5.3.2">
+<a href="#rfc.section.5.3.2">5.3.2.</a> <a href="#sec5-3-2" id="sec5-3-2">Mobility and IP Network Dynamics</a>
+</h1>
+<p id="rfc.section.5.3.2.p.1">It is expected that many things (for example, wearable sensors, and user devices) will be mobile in the sense that they are attached to different networks during the lifetime of a security association. Built-in mobility signaling can greatly reduce the overhead of the cryptographic protocols because unnecessary and costly re-establishments of the session (possibly including handshake and key agreement) can be avoided. IKEv2 supports host mobility with the MOBIKE <a href="#RFC4555" class="xref">[RFC4555]</a> and <a href="#RFC4621" class="xref">[RFC4621]</a> extension. MOBIKE refrains from applying heavyweight cryptographic extensions for mobility. However, MOBIKE mandates the use of IPsec tunnel mode which requires the transmission of an additional IP header in each packet.</p>
+<p id="rfc.section.5.3.2.p.2">HIP offers a simple yet effective mobility management by allowing hosts to signal changes to their associations <a href="#RFC8046" class="xref">[RFC8046]</a>. However, slight adjustments might be necessary to reduce the cryptographic costs, for example, by making the public-key signatures in the mobility messages optional. Diet HIP does not define mobility yet but it is sufficiently similar to HIP and can use the same mechanisms. DTLS provides some mobility support by relying on a connection ID (CID). The use of connection IDs can provide all the mobility functionality described in <a href="#ID-Williams" class="xref">[ID-Williams]</a>, except, sending the updated location. The specific need for IP-layer mobility mainly depends on the scenario in which the nodes operate. In many cases, mobility supported by means of a mobile gateway may suffice to enable mobile IoT networks, such as body sensor networks. Using message based application-layer security solutions such as OSCORE <a href="#ID-OSCORE" class="xref">[ID-OSCORE]</a> can also alleviate the problem of re-establishing lower-layer sessions for mobile nodes.</p>
+<h1 id="rfc.section.5.4">
+<a href="#rfc.section.5.4">5.4.</a> <a href="#sec5-4" id="sec5-4">Secure software update and cryptographic agility</a>
+</h1>
+<p id="rfc.section.5.4.p.1">IoT devices are often expected to stay functional for several years and decades even though they might operate unattended with direct Internet connectivity. Software updates for IoT devices are therefore not only required for new functionality, but also to eliminate security vulnerabilities due to software bugs, design flaws, or deprecated algorithms. Software bugs might remain even after careful code review. Implementations of security protocols might contain (design) flaws. Cryptographic algorithms can also become insecure due to advances in cryptanalysis. Therefore, it is necessary that devices which are incapable of verifying a cryptographic signature are not exposed to the Internet (even indirectly).</p>
+<p id="rfc.section.5.4.p.2">Schneier <a href="#SchneierSecurity" class="xref">[SchneierSecurity]</a> in his essay highlights several challenges that hinder mechanisms for secure software update of IoT devices. First, there is a lack of incentives for manufactures, vendors and others on the supply chain to issue updates for their devices. Second, parts of the software running on IoT devices is simply a binary blob without any source code available. Since the complete source code is not available, no patches can be written for that piece of code. Lastly Schneier points out that even when updates are available, users generally have to manually download and install them. However, users are never alerted about security updates and at many times do not have the necessary expertise to manually administer the required updates.</p>
+<p id="rfc.section.5.4.p.3">The FTC staff report on Internet of Things - Privacy &amp; Security in a Connected World <a href="#FTCreport" class="xref">[FTCreport]</a> and the Article 29 Working Party Opinion 8/2014 on the Recent Developments on the Internet of Things <a href="#Article29" class="xref">[Article29]</a> also document the challenges for secure remote software update of IoT devices. They note that even providing such a software update capability may add new vulnerabilities for constrained devices. For example, a buffer overflow vulnerability in the implementation of a software update protocol (TR69) <a href="#TR69" class="xref">[TR69]</a> and an expired certificate in a hub device <a href="#wink" class="xref">[wink]</a> demonstrate how the software update process itself can introduce vulnerabilities.</p>
+<p id="rfc.section.5.4.p.4">Powerful IoT devices that run general purpose operating systems can make use of sophisticated software update mechanisms known from the desktop world. However, resource-constrained devices typically do not have any operating system and are often not equipped with a memory management unit or similar tools. Therefore, they might require more specialized solutions.</p>
+<p id="rfc.section.5.4.p.5">An important requirement for secure software and firmware updates is source authentication. Source authentication requires the resource-constrained things to implement public-key signature verification algorithms. As stated in <a href="#sec5-1-1" class="xref">Section 5.1.1</a>, resource-constrained things have limited amount of computational capabilities and energy supply available which can hinder the amount and frequency of cryptographic processing that they can perform. In addition to source authentication, software updates might require confidential delivery over a secure (encrypted) channel. The complexity of broadcast encryption can force the usage of point-to-point secure links - however, this increases the duration of a software update in a large system. Alternatively, it may force the usage of solutions in which the software update is delivered to a gateway, and then distributed to the rest of the system with a network key. Sending large amounts of data that later needs to be assembled and verified over a secure channel can consume a lot of energy and computational resources. Correct scheduling of the software updates is also a crucial design challenge. For example, a user of connected light bulbs would not want them to update and restart at night. More importantly, the user would not want all the lights to update at the same time.</p>
+<p id="rfc.section.5.4.p.6">Software updates in IoT systems are also needed to update old and insecure cryptographic primitives. However, many IoT systems, some of which are already deployed, are not designed with provisions for cryptographic agility. For example, many devices come with a wireless radio that has an AES128 hardware co-processor. These devices solely rely on the co-processor for encrypting and authenticating messages. A software update adding support for new cryptographic algorithms implemented solely in software might not fit on these devices due to limited memory, or might drastically hinder its operational performance. This can lead to the use of old and insecure software. Therefore, it is important to account for the fact that cryptographic algorithms would need to be updated and consider the following when planning for cryptographic agility:</p>
+<p></p>
+
+<ol>
+<li>Would it be secure to use the existing cryptographic algorithms available on the device for updating with new cryptographic algorithms that are more secure?</li>
+<li>Will the new software-based implementation fit on the device given the limited resources?</li>
+<li>Would the normal operation of existing IoT applications on the device be severely hindered by the update?</li>
+</ol>
+<p id="rfc.section.5.4.p.8">Finally, we would like to highlight the previous and ongoing work in the area of secure software and firmware updates at the IETF. <a href="#RFC4108" class="xref">[RFC4108]</a> describes how Cryptographic Message Syntax (CMS) <a href="#RFC5652" class="xref">[RFC5652]</a> can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the recommendations to the standards community derived from the discussions during that workshop have been documented <a href="#RFC8240" class="xref">[RFC8240]</a>. A working group called Software Updates for Internet of Things (suit) <a href="#WG-SUIT" class="xref">[WG-SUIT]</a> is currently working on a new version <a href="#RFC4108" class="xref">[RFC4108]</a> to reflect the best current practices for firmware update based on experience from IoT deployments. It is specifically working on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package. Finally, the Trusted Execution Environment Provisioning working group <a href="#WG-TEEP" class="xref">[WG-TEEP]</a> aims at developing a protocol for lifecycle management of trusted applications running on the secure area of a processor (Trusted Execution Enviornment (TEE)).</p>
+<h1 id="rfc.section.5.5">
+<a href="#rfc.section.5.5">5.5.</a> <a href="#sec5-5" id="sec5-5">End-of-Life</a>
+</h1>
+<p id="rfc.section.5.5.p.1">Like all commercial devices, IoT devices have a given useful lifetime. The term end-of-life (EOL) is used by vendors or network operators to indicate the point of time in which they limit or end support for the IoT device. This may be planned or unplanned (for example when the manufacturer goes bankrupt, when the vendor just decides to abandon a product, or when a network operator moves to a different type of networking technology). A user should still be able to use and perhaps even update the device. This requires for some form of authorization handover.</p>
+<p id="rfc.section.5.5.p.2">Although this may seem far-fetched given the commercial interests and market dynamics, we have examples from the mobile world where the devices have been functional and up-to-date long after the original vendor stopped supporting the device. CyanogenMod for Android devices, and OpenWrt for home routers are two such instances where users have been able to use and update their devices even after the official EOL. Admittedly it is not easy for an average user to install and configure their devices on their own. With the deployment of millions of IoT devices, simpler mechanisms are needed to allow users to add new root-of-trusts and install software and firmware from other sources once the device is EOL.</p>
+<h1 id="rfc.section.5.6">
+<a href="#rfc.section.5.6">5.6.</a> <a href="#sec5-6" id="sec5-6">Verifying device behavior</a>
+</h1>
+<p id="rfc.section.5.6.p.1">Users using new IoT appliances such as Internet-connected smart televisions, speakers and cameras are often unaware that these devices can undermine their privacy. Recent revelations have shown that many IoT device vendors have been collecting sensitive private data through these connected appliances with or without appropriate user warnings <a href="#cctv" class="xref">[cctv]</a>.</p>
+<p id="rfc.section.5.6.p.2">An IoT device user/owner would like to monitor and verify its operational behavior. For instance, the user might want to know if the device is connecting to the server of the manufacturer for any reason. This feature &#8211; connecting to the manufacturer&#8217;s server &#8211; may be necessary in some scenarios, such as during the initial configuration of the device. However, the user should be kept aware of the data that the device is sending back to the vendor. For example, the user might want to know if his/her TV is sending data when he/she inserts a new USB stick.</p>
+<p id="rfc.section.5.6.p.3">Providing such information to the users in an understandable fashion is challenging. This is because IoT devices are not only resource-constrained in terms of their computational capability, but also in terms of the user interface available. Also, the network infrastructure where these devices are deployed will vary significantly from one user environment to another. Therefore, where and how this monitoring feature is implemented still remains an open question.</p>
+<p id="rfc.section.5.6.p.4">Manufacturer Usage Description (MUD) files <a href="#ID-MUD" class="xref">[ID-MUD]</a> are perhaps a first step towards implementation of such a monitoring service. The idea behind MUD files is relatively simple: IoT devices would disclose the location of their MUD file to the network during installation. The network can then retrieve those files, and learn about the intended behavior of the devices stated by the device manufacturer. A network monitoring service could then warn the user/owner of devices if they don&#8217;t behave as expected.</p>
+<p id="rfc.section.5.6.p.5">Many devices and software services that automatically learn and monitor the behavior of different IoT devices in a given network are commercially available. Such monitoring devices/services can be configured by the user to limit network traffic and trigger alarms when unexpected operation of IoT devices is detected.</p>
+<h1 id="rfc.section.5.7">
+<a href="#rfc.section.5.7">5.7.</a> <a href="#sec5-7" id="sec5-7">Testing: bug hunting and vulnerabilities</a>
+</h1>
+<p id="rfc.section.5.7.p.1">Given that IoT devices often have inadvertent vulnerabilities, both users and developers would want to perform extensive testing on their IoT devices, networks, and systems. Nonetheless, since the devices are resource-constrained and manufactured by multiple vendors, some of them very small, devices might be shipped with very limited testing, so that bugs can remain and can be exploited at a later stage. This leads to two main types of challenges:</p>
+<p></p>
+
+<ol>
+<li>It remains to be seen how the software testing and quality assurance mechanisms used from the desktop and mobile world will be applied to IoT devices to give end users the confidence that the purchased devices are robust. Bodies such as the European Cyber Security Organization (ECSO) <a href="#ECSO" class="xref">[ECSO]</a> are working on processes for security certification of IoT devices.</li>
+<li>It is also an open question how the combination of devices from multiple vendors might actually lead to dangerous network configurations. For example, if combination of specific devices can trigger unexpected behavior. It is needless to say that the security of the whole system is limited by its weakest point.</li>
+</ol>
+<h1 id="rfc.section.5.8">
+<a href="#rfc.section.5.8">5.8.</a> <a href="#sec5-8" id="sec5-8">Quantum-resistance</a>
+</h1>
+<p id="rfc.section.5.8.p.1">Many IoT systems that are being deployed today will remain operational for many years. With the advancements made in the field of quantum computers, it is possible that large-scale quantum computers are available in the future for performing cryptanalysis on existing cryptographic algorithms and cipher suites. If this happens, it will have two consequences. First, functionalities enabled by means of primitives such as RSA or ECC - namely key exchange, public-key encryption and signature - would not be secure anymore due to Shor&#8217;s algorithm. Second, the security level of symmetric algorithms will decrease, for example, the security of a block cipher with a key size of b bits will only offer b/2 bits of security due to Grover&#8217;s algorithm.</p>
+<p id="rfc.section.5.8.p.2">The above scenario becomes more urgent when we consider the so called &#8220;harvest and decrypt&#8221; attack in which an attacker can start to harvest (store) encrypted data today, before a quantum-computer is available, and decrypt it years later, once a quantum computer is available. Such &#8220;harvest and decrypt&#8221; attacks are not new and were used in the Venona project <a href="#venona-project" class="xref">[venona-project]</a>. Many IoT devices that are being deployed today will remain operational for a decade or even longer. During this time, digital signatures used to sign software updates might become obsolete making the secure update of IoT devices challenging.</p>
+<p id="rfc.section.5.8.p.3">This situation would require us to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. <a href="#ID-c2pq" class="xref">[ID-c2pq]</a> describes when quantum computers may become widely available and what steps are necessary for transition to cryptographic algorithms that provide security even in presence of quantum computers. While future planning is hard, it may be a necessity in certain critical IoT deployments which are expected to last decades or more. Although increasing the key-size of the different algorithms is definitely an option, it would also incur additional computational overhead and network traffic. This would be undesirable in most scenarios. There have been recent advancements in quantum-resistant cryptography. We refer to <a href="#ETSI-GR-QSC-001" class="xref">[ETSI-GR-QSC-001]</a> for an extensive overview of existing quantum-resistant cryptography and <a href="#RFC7696" class="xref">[RFC7696]</a> provides guidelines for cryptographic algorithm agility.</p>
+<h1 id="rfc.section.5.9">
+<a href="#rfc.section.5.9">5.9.</a> <a href="#sec5-9" id="sec5-9">Privacy protection</a>
+</h1>
+<p id="rfc.section.5.9.p.1">People will eventually be surrounded by hundreds of connected IoT devices. Even if the communication links are encrypted and protected, information about people might still be collected or processed for different purposes. The fact that IoT devices in the vicinity of people might enable more pervasive monitoring can negatively impact their privacy. For instance, imagine the scenario where a static presence sensor emits a packet due to the presence or absence of people in its vicinity. In such a scenario, anyone who can observe the packet, can gather critical privacy-sensitive information.</p>
+<p id="rfc.section.5.9.p.2">Such information about people is referred to as personal data in the European Union (EU) or Personally identifiable information (PII) in the United States (US), In particular, the General Data Protection Regulation (GDPR) <a href="#GDPR" class="xref">[GDPR]</a> defines personal data as: &#8216;any information relating to an identified or identifiable natural person (&#8216;data subject&#8217;); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person&#8217;.</p>
+<p id="rfc.section.5.9.p.3">Ziegeldorf <a href="#Ziegeldorf" class="xref">[Ziegeldorf]</a> defines privacy in IoT as a threefold guarantee:</p>
+<p></p>
+
+<ol>
+<li>Awareness of the privacy risks imposed by IoT devices and services. This awareness is achieved by means of transparent practices by the data controller, i.e., the entity that is providing IoT devices and/or services.</li>
+<li>Individual control over the collection and processing of personal information by IoT devices and services.</li>
+<li>Awareness and control of the subsequent use and dissemination of personal information by data controllers to any entity outside the subject&#8217;s personal control sphere. This point implies that the data controller must be accountable for its actions on the personal information.</li>
+</ol>
+<p id="rfc.section.5.9.p.5">Based on this definition, several threats to the privacy of users have been documented <a href="#Ziegeldorf" class="xref">[Ziegeldorf]</a> and <a href="#RFC6973" class="xref">[RFC6973]</a>, in particular considering the IoT environment and its lifecycle:</p>
+<p></p>
+
+<ol>
+<li>Identification - refers to the identification of the users, their IoT devices, and generated data.</li>
+<li>Localization - relates to the capability of locating a user and even tracking them, e.g., by tracking MAC addresses in Wi-Fi or Bluetooth.</li>
+<li>Profiling - is about creating a profile of the user and their preferences.</li>
+<li>Interaction - occurs when a user has been profiled and a given interaction is preferred, presenting (for example, visually) some information that discloses private information.</li>
+<li>Lifecycle transitions - take place when devices are, for example, sold without properly removing private data.</li>
+<li>Inventory attacks - happen if specific information about IoT devices in possession of a user is disclosed.</li>
+<li>Linkage - is about when information of two of more IoT systems (or other data sets) is combined so that a broader view of the personal data captured can be created.</li>
+</ol>
+<p id="rfc.section.5.9.p.7">When IoT systems are deployed, the above issues should be considered to ensure that private data remains private. These issues are particularly challenging in environments in which multiple users with different privacy preferences interact with the same IoT devices. For example, an IoT device controlled by user A (low privacy settings) might leak private information about another user B (high privacy settings). How to deal with these threats in practice is an area of ongoing research.</p>
+<h1 id="rfc.section.5.10">
+<a href="#rfc.section.5.10">5.10.</a> <a href="#sec5-10" id="sec5-10">Reverse engineering considerations</a>
+</h1>
+<p id="rfc.section.5.10.p.1">Many IoT devices are resource-constrained and often deployed in unattended environments. Some of these devices can also be purchased off-the-shelf or online without any credential-provisioning process. Therefore, an attacker can have direct access to the device and apply advanced techniques to retrieve information that a traditional black box model does not consider. Example of those techniques are side-channel attacks or code disassembly. By doing this, the attacker can try to retrieve data such as:</p>
+<p></p>
+
+<ol>
+<li>long term keys. These long term keys can be extracted by means of a side-channel attack or reverse engineering. If these keys are exposed, then they might be used to perform attacks on devices deployed in other locations.</li>
+<li>source code. Extraction of source code might allow the attacker to determine bugs or find exploits to perform other types of attacks. The attacker might also just sell the source code.</li>
+<li>proprietary algorithms. The attacker can analyze these algorithms gaining valuable know-how. The attacker can also create copies of the product (based on those proprietary algorithms) or modify the algorithms to perform more advanced attacks.</li>
+<li>configuration or personal data. The attacker might be able to read personal data, e.g., healthcare data, that has been stored on a device.</li>
+</ol>
+<p id="rfc.section.5.10.p.3">One existing solution to prevent such data leaks is the use of a secure element, a tamper-resistant device that is capable of securely hosting applications and their confidential data. Another potential solution is the usage of of Physical Unclonable Function (PUFs) that serves as unique digital fingerprint of a hardware device. PUFs can also enable other functionalities such as secure key storage. Protection against such data leakage patterns is non-trivial since devices are inherently resource-constrained. An open question is whether there are any viable techniques to protect IoT devices and the data in the devices in such an adversarial model.</p>
+<h1 id="rfc.section.5.11">
+<a href="#rfc.section.5.11">5.11.</a> <a href="#sec5-11" id="sec5-11">Trustworthy IoT Operation</a>
+</h1>
+<p id="rfc.section.5.11.p.1">Flaws in the design and implementation of IoT devices and networks can lead to security vulnerabilities. A common flaw is the use of well-known or easy-to-guess passwords for configuration of IoT devices. Many such compromised IoT devices can be found on the Internet by means of tools such as Shodan <a href="#shodan" class="xref">[shodan]</a>. Once discovered, these compromised devices can be exploited at scale, for example, to launch DDoS attacks. Dyn, a major DNS , was attacked by means of a DDoS attack originating from a large IoT botnet composed of thousands of compromised IP-cameras <a href="#dyn-attack" class="xref">[dyn-attack]</a>. There are several open research questions in this area:</p>
+<p></p>
+
+<ol>
+<li>How to avoid vulnerabilities in IoT devices that can lead to large-scale attacks?</li>
+<li>How to detect sophisticated attacks against IoT devices?</li>
+<li>How to prevent attackers from exploiting known vulnerabilities at a large scale?</li>
+</ol>
+<p id="rfc.section.5.11.p.3">Some ideas are being explored to address this issue. One of the approaches relies on the use of Manufacturer Usage Description (MUD) files <a href="#ID-MUD" class="xref">[ID-MUD]</a>. As explained earlier, this proposal requires IoT devices to disclose the location of their MUD file to the network during installation. The network can then (i) retrieve those files, (ii) learn from the manufacturers the intended usage of the devices, for example, which services they need to access, and then (iii) create suitable filters and firewall rules.</p>
+<h1 id="rfc.section.6">
+<a href="#rfc.section.6">6.</a> <a href="#sec6" id="sec6">Conclusions and Next Steps</a>
+</h1>
+<p id="rfc.section.6.p.1">This Internet Draft provides IoT security researchers, system designers and implementers with an overview of security requirements in the IP-based Internet of Things. We discuss the security threats, state-of-the-art, and challenges.</p>
+<p id="rfc.section.6.p.2">Although plenty of steps have been realized during the last few years (summarized in <a href="#sec4-1" class="xref">Section 4.1</a>) and many organizations are publishing general recommendations (<a href="#sec4-3" class="xref">Section 4.3</a>) describing how IoT should be secured, there are many challenges ahead that require further attention. Challenges of particular importance are bootstrapping of security, group security, secure software updates, long-term security and quantum-resistance, privacy protection, data leakage prevention &#8211; where data could be cryptographic keys, personal data, or even algorithms &#8211; and ensuring trustworthy IoT operation.</p>
+<p id="rfc.section.6.p.3">Authors of new IoT specifications and implementors need to consider how all the security challenges discussed in this draft (and those that emerge later) affect their work. The authors of IoT specifications not only need to put in a real effort towards addressing the security challenges, but also clearly documenting how the security challenges are addressed. This would reduce the chances of security vulnerabilities in the code written by implementors of those specifications.</p>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#sec7" id="sec7">Security Considerations</a>
+</h1>
+<p id="rfc.section.7.p.1">This entire memo deals with security issues.</p>
+<h1 id="rfc.section.8">
+<a href="#rfc.section.8">8.</a> <a href="#sec8" id="sec8">IANA Considerations</a>
+</h1>
+<p id="rfc.section.8.p.1">This document contains no request to IANA.</p>
+<h1 id="rfc.section.9">
+<a href="#rfc.section.9">9.</a> <a href="#sec9" id="sec9">Acknowledgments</a>
+</h1>
+<p id="rfc.section.9.p.1">We gratefully acknowledge feedback and fruitful discussion with Tobias Heer, Robert Moskowitz, Thorsten Dahm, Hannes Tschofenig, Carsten Bormann, Barry Raveendran, Ari Keranen, Goran Selander, Fred Baker, Vicent Roca, Thomas Fossati and Eliot Lear. We acknowledge the additional authors of the previous version of this document Sye Loong Keoh, Rene Hummen and Rene Struik.</p>
+<h1 id="rfc.references">
+<a href="#rfc.references">10.</a> Informative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="Article29">[Article29]</b></td>
+<td class="top">"<a>Opinion 8/2014 on the on Recent Developments on the Internet of Things</a>", Web http://ec.europa.eu/justice/data-protection/article-29/documentation/opinion-recommendation/files/2014/wp223_en.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="AUTO-ID">[AUTO-ID]</b></td>
+<td class="top">"<a>AUTO-ID LABS</a>", Web http://www.autoidlabs.org/, September 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="BACNET">[BACNET]</b></td>
+<td class="top">"<a>BACnet</a>", Web http://www.bacnet.org/, February 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="BITAG">[BITAG]</b></td>
+<td class="top">"<a>Internet of Things (IoT) Security and Privacy Recommendations</a>", Web http://www.bitag.org/report-internet-of-things-security-privacy-recommendations.php, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="cctv">[cctv]</b></td>
+<td class="top">"<a>Backdoor In MVPower DVR Firmware Sends CCTV Stills To an Email Address In China</a>", Web https://hardware.slashdot.org/story/16/02/17/0422259/backdoor-in-mvpower-dvr-firmware-sends-cctv-stills-to-an-email-address-in-china, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ChaCha">[ChaCha]</b></td>
+<td class="top">
+<a>Bernstein, D.</a>, "<a>ChaCha, a variant of Salsa20</a>", Web http://cr.yp.to/chacha/chacha-20080128.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="CSA">[CSA]</b></td>
+<td class="top">"<a>Security Guidance for Early Adopters of the Internet of Things (IoT)</a>", Web https://downloads.cloudsecurityalliance.org/whitepapers/Security_Guidance_for_Early_Adopters_of_the_Internet_of_Things.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="DALI">[DALI]</b></td>
+<td class="top">"<a>DALI</a>", Web http://www.dalibydesign.us/dali.html, February 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="DCMS">[DCMS]</b></td>
+<td class="top">"<a>Secure by Design: Improving the cyber security of consumer Internet of Things Report</a>", Web https://www.gov.uk/government/publications/secure-by-design, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="DHS">[DHS]</b></td>
+<td class="top">"<a>Strategic Principles For Securing the Internet of Things (IoT)</a>", Web https://www.dhs.gov/sites/default/files/publications/Strategic_Principles_for_Securing_the_Internet_of_Things-2016-1115-FINAL....pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="dyn-attack">[dyn-attack]</b></td>
+<td class="top">"<a>Dyn Analysis Summary Of Friday October 21 Attack</a>", Web https://dyn.com/blog/dyn-analysis-summary-of-friday-october-21-attack/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ecc25519">[ecc25519]</b></td>
+<td class="top">
+<a>Bernstein, D.</a>, "<a>Curve25519: new Diffie-Hellman speed records</a>", Web https://cr.yp.to/ecdh/curve25519-20060209.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ECSO">[ECSO]</b></td>
+<td class="top">"<a>European Cyber Security Organization</a>", Web https://www.ecs-org.eu/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ENISA-ICS">[ENISA-ICS]</b></td>
+<td class="top">"<a>Communication network dependencies for ICS/SCADA Systems</a>", European Union Agency For Network And Information Security , February 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ETSI-GR-QSC-001">[ETSI-GR-QSC-001]</b></td>
+<td class="top">"<a>Quantum-Safe Cryptography (QSC);Quantum-safe algorithmic framework</a>", European Telecommunications Standards Institute (ETSI) , June 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="Fairhair">[Fairhair]</b></td>
+<td class="top">"<a>Fairhair Alliance</a>", Web https://www.fairhair-alliance.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="FCC">[FCC]</b></td>
+<td class="top">"<a>Federal Communications Comssion Response 12-05-2016</a>", FCC , February 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="FTCreport">[FTCreport]</b></td>
+<td class="top">"<a>FTC Report on Internet of Things Urges Companies to Adopt Best Practices to Address Consumer Privacy and Security Risks</a>", Web https://www.ftc.gov/news-events/press-releases/2015/01/ftc-report-internet-things-urges-companies-adopt-best-practices, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="GDPR">[GDPR]</b></td>
+<td class="top">"<a>The EU General Data Protection Regulation</a>", Web https://www.eugdpr.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="GSMAsecurity">[GSMAsecurity]</b></td>
+<td class="top">"<a>GSMA IoT Security Guidelines</a>", Web http://www.gsma.com/connectedliving/future-iot-networks/iot-security-guidelines/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-6lonfc">[ID-6lonfc]</b></td>
+<td class="top">
+<a>Choi, Y.</a>, <a>Hong, Y.</a>, <a>Youn, J.</a>, <a>Kim, D.</a> and <a>J. Choi</a>, "<a href="https://tools.ietf.org/html/draft-ietf-6lo-nfc-12">Transmission of IPv6 Packets over Near Field Communication</a>", Internet-Draft draft-ietf-6lo-nfc-12, November 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-6tisch">[ID-6tisch]</b></td>
+<td class="top">
+<a>Thubert, P.</a>, "<a href="https://tools.ietf.org/html/draft-ietf-6tisch-architecture-18">An Architecture for IPv6 over the TSCH mode of IEEE 802.15.4</a>", Internet-Draft draft-ietf-6tisch-architecture-18, December 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-acedtls">[ID-acedtls]</b></td>
+<td class="top">
+<a>Gerdes, S.</a>, <a>Bergmann, O.</a>, <a>Bormann, C.</a>, <a>Selander, G.</a> and <a>L. Seitz</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-dtls-authorize-05">Datagram Transport Layer Security (DTLS) Profile for Authentication and Authorization for Constrained Environments (ACE)</a>", Internet-Draft draft-ietf-ace-dtls-authorize-05, October 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-aceoauth">[ID-aceoauth]</b></td>
+<td class="top">
+<a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-ietf-ace-oauth-authz-17">Authentication and Authorization for Constrained Environments (ACE) using the OAuth 2.0 Framework (ACE-OAuth)</a>", Internet-Draft draft-ietf-ace-oauth-authz-17, November 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-bootstrap">[ID-bootstrap]</b></td>
+<td class="top">
+<a>Sarikaya, B.</a>, <a>Sethi, M.</a> and <a>D. Garcia-Carillo</a>, "<a href="https://tools.ietf.org/html/draft-sarikaya-t2trg-sbootstrapping-05">Secure IoT Bootstrapping: A Survey</a>", Internet-Draft draft-sarikaya-t2trg-sbootstrapping-05, September 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-c2pq">[ID-c2pq]</b></td>
+<td class="top">
+<a>Hoffman, P.</a>, "<a href="https://tools.ietf.org/html/draft-hoffman-c2pq-04">The Transition from Classical to Post-Quantum Cryptography</a>", Internet-Draft draft-hoffman-c2pq-04, August 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Daniel">[ID-Daniel]</b></td>
+<td class="top">
+<a>Park, S.</a>, <a>Kim, K.</a>, <a>Haddad, W.</a>, <a>Chakrabarti, S.</a> and <a>J. Laganier</a>, "<a href="https://tools.ietf.org/html/draft-daniel-6lowpan-security-analysis-05">IPv6 over Low Power WPAN Security Analysis</a>", Internet-Draft draft-daniel-6lowpan-security-analysis-05, March 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-dietesp">[ID-dietesp]</b></td>
+<td class="top">
+<a>Migault, D.</a>, <a>Guggemos, T.</a> and <a>C. Bormann</a>, "<a href="https://tools.ietf.org/html/draft-mglt-6lo-diet-esp-02">Diet-ESP: a flexible and compressed format for IPsec/ESP</a>", Internet-Draft draft-mglt-6lo-diet-esp-02, July 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-HIP-DEX">[ID-HIP-DEX]</b></td>
+<td class="top">
+<a>Moskowitz, R.</a>, "<a href="https://tools.ietf.org/html/draft-moskowitz-hip-rg-dex-06">HIP Diet EXchange (DEX)</a>", Internet-Draft draft-moskowitz-hip-rg-dex-06, May 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-lpwan">[ID-lpwan]</b></td>
+<td class="top">
+<a>Farrell, S.</a>, "<a href="https://tools.ietf.org/html/draft-ietf-lpwan-overview-10">LPWAN Overview</a>", Internet-Draft draft-ietf-lpwan-overview-10, February 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Moore">[ID-Moore]</b></td>
+<td class="top">
+<a>Moore, K.</a>, <a>Barnes, R.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/draft-moore-iot-security-bcp-01">Best Current Practices for Securing Internet of Things (IoT) Devices</a>", Internet-Draft draft-moore-iot-security-bcp-01, July 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-MUD">[ID-MUD]</b></td>
+<td class="top">
+<a>Lear, E.</a>, <a>Droms, R.</a> and <a>D. Romascanu</a>, "<a href="https://tools.ietf.org/html/draft-ietf-opsawg-mud-25">Manufacturer Usage Description Specification</a>", Internet-Draft draft-ietf-opsawg-mud-25, June 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-multicast">[ID-multicast]</b></td>
+<td class="top">
+<a>Tiloca, M.</a>, <a>Selander, G.</a>, <a>Palombini, F.</a> and <a>J. Park</a>, "<a href="https://tools.ietf.org/html/draft-ietf-core-oscore-groupcomm-03">Group OSCORE - Secure Group Communication for CoAP</a>", Internet-Draft draft-ietf-core-oscore-groupcomm-03, October 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-OSCORE">[ID-OSCORE]</b></td>
+<td class="top">
+<a>Selander, G.</a>, <a>Mattsson, J.</a>, <a>Palombini, F.</a> and <a>L. Seitz</a>, "<a href="https://tools.ietf.org/html/draft-ietf-core-object-security-15">Object Security for Constrained RESTful Environments (OSCORE)</a>", Internet-Draft draft-ietf-core-object-security-15, August 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-rd">[ID-rd]</b></td>
+<td class="top">
+<a>Shelby, Z.</a>, <a>Koster, M.</a>, <a>Bormann, C.</a>, <a>Stok, P.</a> and <a>C. Amsuess</a>, "<a href="https://tools.ietf.org/html/draft-ietf-core-resource-directory-17">CoRE Resource Directory</a>", Internet-Draft draft-ietf-core-resource-directory-17, October 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-senml">[ID-senml]</b></td>
+<td class="top">
+<a>Jennings, C.</a>, <a>Shelby, Z.</a>, <a>Arkko, J.</a>, <a>Keranen, A.</a> and <a>C. Bormann</a>, "<a href="https://tools.ietf.org/html/draft-ietf-core-senml-16">Sensor Measurement Lists (SenML)</a>", Internet-Draft draft-ietf-core-senml-16, May 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="ID-Williams">[ID-Williams]</b></td>
+<td class="top">
+<a>Williams, M.</a> and <a>J. Barrett</a>, "<a href="https://tools.ietf.org/html/draft-barrett-mobile-dtls-00">Mobile DTLS</a>", Internet-Draft draft-barrett-mobile-dtls-00, March 2009.</td>
+</tr>
+<tr>
+<td class="reference"><b id="IEEE802ah">[IEEE802ah]</b></td>
+<td class="top">"<a>Status of Project IEEE 802.11ah, IEEE P802.11- Task Group AH-Meeting Update.</a>", Web http://www.ieee802.org/11/Reports/tgah_update.htm, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="IIoT">[IIoT]</b></td>
+<td class="top">"<a>Industrial Internet Consortium</a>", Web http://www.iiconsortium.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="IoTSecFoundation">[IoTSecFoundation]</b></td>
+<td class="top">"<a>Establishing Principles for Internet of Things Security</a>", Web https://iotsecurityfoundation.org/establishing-principles-for-internet-of-things-security/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="IPSO">[IPSO]</b></td>
+<td class="top">"<a>IPSO Alliance</a>", Web http://www.ipso-alliance.org, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ISOC-OTA">[ISOC-OTA]</b></td>
+<td class="top">"<a>Internet Society&#8217;s Online Trust Alliance (OTA)</a>", Web https://www.internetsociety.org/ota/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="lora">[lora]</b></td>
+<td class="top">"<a>LoRa - Wide Area Networks for IoT</a>", Web https://www.lora-alliance.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="LWM2M">[LWM2M]</b></td>
+<td class="top">"<a>OMA LWM2M</a>", Web http://openmobilealliance.org/iot/lightweight-m2m-lwm2m, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="mirai">[mirai]</b></td>
+<td class="top">
+<a>Kolias, C.</a>, <a>Kambourakis, G.</a>, <a>Stavrou, A.</a> and <a>J. Voas,</a>, "<a>DDoS in the IoT: Mirai and Other Botnets</a>", IEEE Computer , 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="nbiot">[nbiot]</b></td>
+<td class="top">"<a>NarrowBand IoT</a>", Web http://www.3gpp.org/ftp/tsg_ran/TSG_RAN/TSGR_69/Docs/RP-151621.zip, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="NHTSA">[NHTSA]</b></td>
+<td class="top">"<a>Cybersecurity Best Practices for Modern Vehicles</a>", Web https://www.nhtsa.gov/staticfiles/nvs/pdf/812333_CybersecurityForModernVehicles.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="NIST-Guide">[NIST-Guide]</b></td>
+<td class="top">
+<a>Ross, R.</a>, <a>McEvilley, M.</a> and <a>J. Oren</a>, "<a>Systems Security Engineering</a>", Web http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-160.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="nist-lightweight-project">[nist-lightweight-project]</b></td>
+<td class="top">"<a>NIST lightweight Project</a>", Web www.nist.gov/programs-projects/lightweight-cryptography, www.nist.gov/sites/default/files/documents/2016/10/17/sonmez-turan-presentation-lwc2016.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="NISTSP800-122">[NISTSP800-122]</b></td>
+<td class="top">
+<a>Erika McCallister, .</a>, <a>Tim Grance, .</a> and <a>. Karen Scarfone</a>, "<a>NIST SP800-122 - Guide to Protecting the Confidentiality of Personally Identifiable Information</a>", Web https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-122.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="NISTSP800-30r1">[NISTSP800-30r1]</b></td>
+<td class="top">"<a>NIST SP 800-30r1 - Guide for Conducting Risk Assessments</a>", Web https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-30r1.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="NISTSP800-34r1">[NISTSP800-34r1]</b></td>
+<td class="top">
+<a>Marianne Swanson, .</a>, <a>Pauline Bowen, .</a>, <a>Amy Wohl Phillips, .</a>, <a>Dean Gallup, .</a> and <a>. David Lynes</a>, "<a>NIST SP800-34r1 - Contingency Planning Guide for Federal Information Systems</a>", Web https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-34r1.pdf, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="OCF">[OCF]</b></td>
+<td class="top">"<a>Open Connectivity Foundation</a>", Web https://openconnectivity.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="OneM2M">[OneM2M]</b></td>
+<td class="top">"<a>OneM2M</a>", Web http://www.onem2m.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="OWASP">[OWASP]</b></td>
+<td class="top">"<a>IoT Security Guidance</a>", Web https://www.owasp.org/index.php/IoT_Security_Guidance, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC2818">[RFC2818]</b></td>
+<td class="top">
+<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/rfc2818">HTTP Over TLS</a>", RFC 2818, DOI 10.17487/RFC2818, May 2000.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3748">[RFC3748]</b></td>
+<td class="top">
+<a>Aboba, B.</a>, <a>Blunk, L.</a>, <a>Vollbrecht, J.</a>, <a>Carlson, J.</a> and <a>H. Levkowetz</a>, "<a href="https://tools.ietf.org/html/rfc3748">Extensible Authentication Protocol (EAP)</a>", RFC 3748, DOI 10.17487/RFC3748, June 2004.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3756">[RFC3756]</b></td>
+<td class="top">
+<a>Nikander, P.</a>, <a>Kempf, J.</a> and <a>E. Nordmark</a>, "<a href="https://tools.ietf.org/html/rfc3756">IPv6 Neighbor Discovery (ND) Trust Models and Threats</a>", RFC 3756, DOI 10.17487/RFC3756, May 2004.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC3833">[RFC3833]</b></td>
+<td class="top">
+<a>Atkins, D.</a> and <a>R. Austein</a>, "<a href="https://tools.ietf.org/html/rfc3833">Threat Analysis of the Domain Name System (DNS)</a>", RFC 3833, DOI 10.17487/RFC3833, August 2004.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4016">[RFC4016]</b></td>
+<td class="top">
+<a>Parthasarathy, M.</a>, "<a href="https://tools.ietf.org/html/rfc4016">Protocol for Carrying Authentication and Network Access (PANA) Threat Analysis and Security Requirements</a>", RFC 4016, DOI 10.17487/RFC4016, March 2005.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4108">[RFC4108]</b></td>
+<td class="top">
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc4108">Using Cryptographic Message Syntax (CMS) to Protect Firmware Packages</a>", RFC 4108, DOI 10.17487/RFC4108, August 2005.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4120">[RFC4120]</b></td>
+<td class="top">
+<a>Neuman, C.</a>, <a>Yu, T.</a>, <a>Hartman, S.</a> and <a>K. Raeburn</a>, "<a href="https://tools.ietf.org/html/rfc4120">The Kerberos Network Authentication Service (V5)</a>", RFC 4120, DOI 10.17487/RFC4120, July 2005.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4422">[RFC4422]</b></td>
+<td class="top">
+<a>Melnikov, A.</a> and <a>K. Zeilenga</a>, "<a href="https://tools.ietf.org/html/rfc4422">Simple Authentication and Security Layer (SASL)</a>", RFC 4422, DOI 10.17487/RFC4422, June 2006.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4555">[RFC4555]</b></td>
+<td class="top">
+<a>Eronen, P.</a>, "<a href="https://tools.ietf.org/html/rfc4555">IKEv2 Mobility and Multihoming Protocol (MOBIKE)</a>", RFC 4555, DOI 10.17487/RFC4555, June 2006.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4621">[RFC4621]</b></td>
+<td class="top">
+<a>Kivinen, T.</a> and <a>H. Tschofenig</a>, "<a href="https://tools.ietf.org/html/rfc4621">Design of the IKEv2 Mobility and Multihoming (MOBIKE) Protocol</a>", RFC 4621, DOI 10.17487/RFC4621, August 2006.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4738">[RFC4738]</b></td>
+<td class="top">
+<a>Ignjatic, D.</a>, <a>Dondeti, L.</a>, <a>Audet, F.</a> and <a>P. Lin</a>, "<a href="https://tools.ietf.org/html/rfc4738">MIKEY-RSA-R: An Additional Mode of Key Distribution in Multimedia Internet KEYing (MIKEY)</a>", RFC 4738, DOI 10.17487/RFC4738, November 2006.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4919">[RFC4919]</b></td>
+<td class="top">
+<a>Kushalnagar, N.</a>, <a>Montenegro, G.</a> and <a>C. Schumacher</a>, "<a href="https://tools.ietf.org/html/rfc4919">IPv6 over Low-Power Wireless Personal Area Networks (6LoWPANs): Overview, Assumptions, Problem Statement, and Goals</a>", RFC 4919, DOI 10.17487/RFC4919, August 2007.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC4944">[RFC4944]</b></td>
+<td class="top">
+<a>Montenegro, G.</a>, <a>Kushalnagar, N.</a>, <a>Hui, J.</a> and <a>D. Culler</a>, "<a href="https://tools.ietf.org/html/rfc4944">Transmission of IPv6 Packets over IEEE 802.15.4 Networks</a>", RFC 4944, DOI 10.17487/RFC4944, September 2007.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5191">[RFC5191]</b></td>
+<td class="top">
+<a>Forsberg, D.</a>, <a>Ohba, Y.</a>, <a>Patil, B.</a>, <a>Tschofenig, H.</a> and <a>A. Yegin</a>, "<a href="https://tools.ietf.org/html/rfc5191">Protocol for Carrying Authentication for Network Access (PANA)</a>", RFC 5191, DOI 10.17487/RFC5191, May 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5246">[RFC5246]</b></td>
+<td class="top">
+<a>Dierks, T.</a> and <a>E. Rescorla</a>, "<a href="https://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>", RFC 5246, DOI 10.17487/RFC5246, August 2008.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5652">[RFC5652]</b></td>
+<td class="top">
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc5652">Cryptographic Message Syntax (CMS)</a>", STD 70, RFC 5652, DOI 10.17487/RFC5652, September 2009.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5713">[RFC5713]</b></td>
+<td class="top">
+<a>Moustafa, H.</a>, <a>Tschofenig, H.</a> and <a>S. De Cnodder</a>, "<a href="https://tools.ietf.org/html/rfc5713">Security Threats and Security Requirements for the Access Node Control Protocol (ANCP)</a>", RFC 5713, DOI 10.17487/RFC5713, January 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC5903">[RFC5903]</b></td>
+<td class="top">
+<a>Fu, D.</a> and <a>J. Solinas</a>, "<a href="https://tools.ietf.org/html/rfc5903">Elliptic Curve Groups modulo a Prime (ECP Groups) for IKE and IKEv2</a>", RFC 5903, DOI 10.17487/RFC5903, June 2010.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6272">[RFC6272]</b></td>
+<td class="top">
+<a>Baker, F.</a> and <a>D. Meyer</a>, "<a href="https://tools.ietf.org/html/rfc6272">Internet Protocols for the Smart Grid</a>", RFC 6272, DOI 10.17487/RFC6272, June 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6347">[RFC6347]</b></td>
+<td class="top">
+<a>Rescorla, E.</a> and <a>N. Modadugu</a>, "<a href="https://tools.ietf.org/html/rfc6347">Datagram Transport Layer Security Version 1.2</a>", RFC 6347, DOI 10.17487/RFC6347, January 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6550">[RFC6550]</b></td>
+<td class="top">
+<a>Winter, T.</a>, <a>Thubert, P.</a>, <a>Brandt, A.</a>, <a>Hui, J.</a>, <a>Kelsey, R.</a>, <a>Levis, P.</a>, <a>Pister, K.</a>, <a>Struik, R.</a>, <a>Vasseur, JP.</a> and <a>R. Alexander</a>, "<a href="https://tools.ietf.org/html/rfc6550">RPL: IPv6 Routing Protocol for Low-Power and Lossy Networks</a>", RFC 6550, DOI 10.17487/RFC6550, March 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6551">[RFC6551]</b></td>
+<td class="top">
+<a>Vasseur, JP.</a>, <a>Kim, M.</a>, <a>Pister, K.</a>, <a>Dejean, N.</a> and <a>D. Barthel</a>, "<a href="https://tools.ietf.org/html/rfc6551">Routing Metrics Used for Path Calculation in Low-Power and Lossy Networks</a>", RFC 6551, DOI 10.17487/RFC6551, March 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6568">[RFC6568]</b></td>
+<td class="top">
+<a>Kim, E.</a>, <a>Kaspar, D.</a> and <a>JP. Vasseur</a>, "<a href="https://tools.ietf.org/html/rfc6568">Design and Application Spaces for IPv6 over Low-Power Wireless Personal Area Networks (6LoWPANs)</a>", RFC 6568, DOI 10.17487/RFC6568, April 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6690">[RFC6690]</b></td>
+<td class="top">
+<a>Shelby, Z.</a>, "<a href="https://tools.ietf.org/html/rfc6690">Constrained RESTful Environments (CoRE) Link Format</a>", RFC 6690, DOI 10.17487/RFC6690, August 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6749">[RFC6749]</b></td>
+<td class="top">
+<a>Hardt, D.</a>, "<a href="https://tools.ietf.org/html/rfc6749">The OAuth 2.0 Authorization Framework</a>", RFC 6749, DOI 10.17487/RFC6749, October 2012.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC6973">[RFC6973]</b></td>
+<td class="top">
+<a>Cooper, A.</a>, <a>Tschofenig, H.</a>, <a>Aboba, B.</a>, <a>Peterson, J.</a>, <a>Morris, J.</a>, <a>Hansen, M.</a> and <a>R. Smith</a>, "<a href="https://tools.ietf.org/html/rfc6973">Privacy Considerations for Internet Protocols</a>", RFC 6973, DOI 10.17487/RFC6973, July 2013.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7049">[RFC7049]</b></td>
+<td class="top">
+<a>Bormann, C.</a> and <a>P. Hoffman</a>, "<a href="https://tools.ietf.org/html/rfc7049">Concise Binary Object Representation (CBOR)</a>", RFC 7049, DOI 10.17487/RFC7049, October 2013.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7228">[RFC7228]</b></td>
+<td class="top">
+<a>Bormann, C.</a>, <a>Ersue, M.</a> and <a>A. Keranen</a>, "<a href="https://tools.ietf.org/html/rfc7228">Terminology for Constrained-Node Networks</a>", RFC 7228, DOI 10.17487/RFC7228, May 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7252">[RFC7252]</b></td>
+<td class="top">
+<a>Shelby, Z.</a>, <a>Hartke, K.</a> and <a>C. Bormann</a>, "<a href="https://tools.ietf.org/html/rfc7252">The Constrained Application Protocol (CoAP)</a>", RFC 7252, DOI 10.17487/RFC7252, June 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7296">[RFC7296]</b></td>
+<td class="top">
+<a>Kaufman, C.</a>, <a>Hoffman, P.</a>, <a>Nir, Y.</a>, <a>Eronen, P.</a> and <a>T. Kivinen</a>, "<a href="https://tools.ietf.org/html/rfc7296">Internet Key Exchange Protocol Version 2 (IKEv2)</a>", STD 79, RFC 7296, DOI 10.17487/RFC7296, October 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7401">[RFC7401]</b></td>
+<td class="top">
+<a>Moskowitz, R.</a>, <a>Heer, T.</a>, <a>Jokela, P.</a> and <a>T. Henderson</a>, "<a href="https://tools.ietf.org/html/rfc7401">Host Identity Protocol Version 2 (HIPv2)</a>", RFC 7401, DOI 10.17487/RFC7401, April 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7515">[RFC7515]</b></td>
+<td class="top">
+<a>Jones, M.</a>, <a>Bradley, J.</a> and <a>N. Sakimura</a>, "<a href="https://tools.ietf.org/html/rfc7515">JSON Web Signature (JWS)</a>", RFC 7515, DOI 10.17487/RFC7515, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7516">[RFC7516]</b></td>
+<td class="top">
+<a>Jones, M.</a> and <a>J. Hildebrand</a>, "<a href="https://tools.ietf.org/html/rfc7516">JSON Web Encryption (JWE)</a>", RFC 7516, DOI 10.17487/RFC7516, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7517">[RFC7517]</b></td>
+<td class="top">
+<a>Jones, M.</a>, "<a href="https://tools.ietf.org/html/rfc7517">JSON Web Key (JWK)</a>", RFC 7517, DOI 10.17487/RFC7517, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7519">[RFC7519]</b></td>
+<td class="top">
+<a>Jones, M.</a>, <a>Bradley, J.</a> and <a>N. Sakimura</a>, "<a href="https://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>", RFC 7519, DOI 10.17487/RFC7519, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7520">[RFC7520]</b></td>
+<td class="top">
+<a>Miller, M.</a>, "<a href="https://tools.ietf.org/html/rfc7520">Examples of Protecting Content Using JSON Object Signing and Encryption (JOSE)</a>", RFC 7520, DOI 10.17487/RFC7520, May 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7668">[RFC7668]</b></td>
+<td class="top">
+<a>Nieminen, J.</a>, <a>Savolainen, T.</a>, <a>Isomaki, M.</a>, <a>Patil, B.</a>, <a>Shelby, Z.</a> and <a>C. Gomez</a>, "<a href="https://tools.ietf.org/html/rfc7668">IPv6 over BLUETOOTH(R) Low Energy</a>", RFC 7668, DOI 10.17487/RFC7668, October 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7696">[RFC7696]</b></td>
+<td class="top">
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc7696">Guidelines for Cryptographic Algorithm Agility and Selecting Mandatory-to-Implement Algorithms</a>", BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7744">[RFC7744]</b></td>
+<td class="top">
+<a>Seitz, L.</a>, <a>Gerdes, S.</a>, <a>Selander, G.</a>, <a>Mani, M.</a> and <a>S. Kumar</a>, "<a href="https://tools.ietf.org/html/rfc7744">Use Cases for Authentication and Authorization in Constrained Environments</a>", RFC 7744, DOI 10.17487/RFC7744, January 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7815">[RFC7815]</b></td>
+<td class="top">
+<a>Kivinen, T.</a>, "<a href="https://tools.ietf.org/html/rfc7815">Minimal Internet Key Exchange Version 2 (IKEv2) Initiator Implementation</a>", RFC 7815, DOI 10.17487/RFC7815, March 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7925">[RFC7925]</b></td>
+<td class="top">
+<a>Tschofenig, H.</a> and <a>T. Fossati</a>, "<a href="https://tools.ietf.org/html/rfc7925">Transport Layer Security (TLS) / Datagram Transport Layer Security (DTLS) Profiles for the Internet of Things</a>", RFC 7925, DOI 10.17487/RFC7925, July 2016.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8046">[RFC8046]</b></td>
+<td class="top">
+<a>Henderson, T.</a>, <a>Vogt, C.</a> and <a>J. Arkko</a>, "<a href="https://tools.ietf.org/html/rfc8046">Host Mobility with the Host Identity Protocol</a>", RFC 8046, DOI 10.17487/RFC8046, February 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8105">[RFC8105]</b></td>
+<td class="top">
+<a>Mariager, P.</a>, <a>Petersen, J.</a>, <a>Shelby, Z.</a>, <a>Van de Logt, M.</a> and <a>D. Barthel</a>, "<a href="https://tools.ietf.org/html/rfc8105">Transmission of IPv6 Packets over Digital Enhanced Cordless Telecommunications (DECT) Ultra Low Energy (ULE)</a>", RFC 8105, DOI 10.17487/RFC8105, May 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8152">[RFC8152]</b></td>
+<td class="top">
+<a>Schaad, J.</a>, "<a href="https://tools.ietf.org/html/rfc8152">CBOR Object Signing and Encryption (COSE)</a>", RFC 8152, DOI 10.17487/RFC8152, July 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8240">[RFC8240]</b></td>
+<td class="top">
+<a>Tschofenig, H.</a> and <a>S. Farrell</a>, "<a href="https://tools.ietf.org/html/rfc8240">Report from the Internet of Things Software Update (IoTSU) Workshop 2016</a>", RFC 8240, DOI 10.17487/RFC8240, September 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8259">[RFC8259]</b></td>
+<td class="top">
+<a>Bray, T.</a>, "<a href="https://tools.ietf.org/html/rfc8259">The JavaScript Object Notation (JSON) Data Interchange Format</a>", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8446">[RFC8446]</b></td>
+<td class="top">
+<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/rfc8446">The Transport Layer Security (TLS) Protocol Version 1.3</a>", RFC 8446, DOI 10.17487/RFC8446, August 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RG-T2TRG">[RG-T2TRG]</b></td>
+<td class="top">"<a>IRTF Thing-to-Thing (T2TRG) Research Group</a>", Web https://datatracker.ietf.org/rg/t2trg/charter/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="SchneierSecurity">[SchneierSecurity]</b></td>
+<td class="top">"<a>The Internet of Things Is Wildly Insecure&#8212;And Often Unpatchable</a>", Web https://www.schneier.com/essays/archives/2014/01/the_internet_of_thin.html, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="SEAL">[SEAL]</b></td>
+<td class="top">"<a>Simple Encrypted Arithmetic Library - SEAL</a>", Web https://www.microsoft.com/en-us/research/publication/simple-encrypted-arithmetic-library-seal-v2-0/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="shodan">[shodan]</b></td>
+<td class="top">"<a>Shodan</a>", Web https://www.shodan.io/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="sigfox">[sigfox]</b></td>
+<td class="top">"<a>Sigfox - The Global Communications Service Provider for the Internet of Things (IoT)</a>", Web https://www.sigfox.com/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="Thread">[Thread]</b></td>
+<td class="top">"<a>Thread Group</a>", Web http://threadgroup.org/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="TR69">[TR69]</b></td>
+<td class="top">"<a>Too Many Cooks - Exploiting the Internet-of-TR-069-Things</a>", Web https://media.ccc.de/v/31c3_-_6166_-_en_-_saal_6_-_201412282145_-_too_many_cooks_-_exploiting_the_internet-of-tr-069-things_-_lior_oppenheim_-_shahar_tal, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="venona-project">[venona-project]</b></td>
+<td class="top">"<a>Venona Project</a>", Web https://www.nsa.gov/news-features/declassified-documents/venona/index.shtml, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-6lo">[WG-6lo]</b></td>
+<td class="top">"<a>IETF IPv6 over Networks of Resource-constrained Nodes (6lo) Working Group</a>", Web https://datatracker.ietf.org/wg/6lo/charter/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-6LoWPAN">[WG-6LoWPAN]</b></td>
+<td class="top">"<a>IETF IPv6 over Low power WPAN (6lowpan) Working Group</a>", Web http://tools.ietf.org/wg/6lowpan/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-ACE">[WG-ACE]</b></td>
+<td class="top">"<a>IETF Authentication and Authorization for Constrained Environments (ACE) Working Group</a>", Web https://datatracker.ietf.org/wg/ace/charter/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-ACME">[WG-ACME]</b></td>
+<td class="top">"<a>Automated Certificate Management Environment Working Group</a>", Web https://datatracker.ietf.org/wg/acme/about/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-CoRE">[WG-CoRE]</b></td>
+<td class="top">"<a>IETF Constrained RESTful Environment (CoRE) Working Group</a>", Web https://datatracker.ietf.org/wg/core/charter/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-LPWAN">[WG-LPWAN]</b></td>
+<td class="top">"<a>IETF Low Power Wide-Area Networks Working Group</a>", Web https://datatracker.ietf.org/wg/lpwan/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-LWIG">[WG-LWIG]</b></td>
+<td class="top">"<a>IETF Light-Weight Implementation Guidance (LWIG) Working Group</a>", Web https://datatracker.ietf.org/wg/lwig/charter/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-MSEC">[WG-MSEC]</b></td>
+<td class="top">"<a>IETF MSEC Working Group</a>", Web https://datatracker.ietf.org/wg/msec/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-SUIT">[WG-SUIT]</b></td>
+<td class="top">"<a>IETF Software Updates for Internet of Things (suit)</a>", Web https://datatracker.ietf.org/group/suit/about/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="WG-TEEP">[WG-TEEP]</b></td>
+<td class="top">"<a>IETF Trusted Execution Environment Provisioning (teep)</a>", Web https://datatracker.ietf.org/wg/teep/about/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="wink">[wink]</b></td>
+<td class="top">"<a>Wink&#8217;s Outage Shows Us How Frustrating Smart Homes Could Be</a>", Web http://www.wired.com/2015/04/smart-home-headaches/, n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="ZB">[ZB]</b></td>
+<td class="top">"<a>ZigBee Alliance</a>", Web http://www.zigbee.org/, February 2011.</td>
+</tr>
+<tr>
+<td class="reference"><b id="Ziegeldorf">[Ziegeldorf]</b></td>
+<td class="top">
+<a>Ziegeldorf, J.</a>, <a>Garcia-Morchon, O.</a> and <a>K. Wehrle,</a>, "<a>Privacy in the Internet of Things: Threats and Challenges</a>", Security and Communication Networks - Special Issue on Security in a Completely Interconnected World , 2013.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Oscar Garcia-Morchon</span> 
+	  <span class="n hidden">
+		<span class="family-name">Garcia-Morchon</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Philips IP&S</span>
+	<span class="adr">
+	  <span class="vcardline">High Tech Campus 5</span>
+
+	  <span class="vcardline">
+		<span class="locality">Eindhoven, 5656 AA</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">The Netherlands</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:oscar.garcia-morchon@philips.com">oscar.garcia-morchon@philips.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Sandeep S. Kumar</span> 
+	  <span class="n hidden">
+		<span class="family-name">Kumar</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Philips Research</span>
+	<span class="adr">
+	  <span class="vcardline">High Tech Campus</span>
+
+	  <span class="vcardline">
+		<span class="locality">Eindhoven, 5656 AA</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">The Netherlands</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:sandeep.kumar@philips.com">sandeep.kumar@philips.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Mohit Sethi</span> 
+	  <span class="n hidden">
+		<span class="family-name">Sethi</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Ericsson</span>
+	<span class="adr">
+	  <span class="vcardline">Hirsalantie 11</span>
+
+	  <span class="vcardline">
+		<span class="locality">Jorvas, 02420</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">Finland</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:mohit@piuha.net">mohit@piuha.net</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
