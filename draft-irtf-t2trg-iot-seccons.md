@@ -21,20 +21,15 @@ informative:
   ID-multicast: I-D.ietf-core-oscore-groupcomm
   ID-c2pq: I-D.hoffman-c2pq
   ID-lpwan: I-D.ietf-lpwan-overview
-  ENISA_ICS:
-    title: "Communication network dependencies for ICS/SCADA Systems"
-    date: 2017-02
-    seriesinfo: European Union Agency For Network And Information Security
   ID-bootstrap: I-D.sarikaya-t2trg-sbootstrapping
-  RFC1510:
-  RFC4120:
-  RFC6649:
   RFC2818:
   RFC3748:
   RFC3756:
   RFC3833:
   RFC4016:
   RFC4108:
+  RFC4120:  
+  RFC4422:
   RFC4555:
   RFC4621:
   RFC4738:
@@ -73,6 +68,7 @@ informative:
   RFC8152:
   RFC8240:
   RFC8259:
+  RFC8446:
   AUTO-ID:
     title: AUTO-ID LABS
     date: 2010-09
@@ -179,7 +175,7 @@ informative:
     title: 'LoRa - Wide Area Networks for IoT'
     seriesinfo:
       Web: https://www.lora-alliance.org/
-  nist_lightweight_project:
+  nist-lightweight-project:
     title: 'NIST lightweight Project'
     seriesinfo:
       Web: www.nist.gov/programs-projects/lightweight-cryptography, www.nist.gov/sites/default/files/documents/2016/10/17/sonmez-turan-presentation-lwc2016.pdf
@@ -236,6 +232,14 @@ informative:
     - ins: J. C. Oren
     seriesinfo:
       Web: http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-160.pdf
+  ISOC-OTA:
+    title: Internet Society’s Online Trust Alliance (OTA)
+    seriesinfo:
+      Web: https://www.internetsociety.org/ota/
+  ENISA-ICS:
+    title: "Communication network dependencies for ICS/SCADA Systems"
+    date: 2017-02
+    seriesinfo: European Union Agency For Network And Information Security      
   DHS:
     title: Strategic Principles For Securing the Internet of Things (IoT)
     seriesinfo:
@@ -310,7 +314,7 @@ informative:
     title: "Backdoor In MVPower DVR Firmware Sends CCTV Stills To an Email Address In China"
     seriesinfo:
       Web: https://hardware.slashdot.org/story/16/02/17/0422259/backdoor-in-mvpower-dvr-firmware-sends-cctv-stills-to-an-email-address-in-china
-  ETSI_GR_QSC_001:
+  ETSI-GR-QSC-001:
     title: Quantum-Safe Cryptography (QSC);Quantum-safe algorithmic framework
     date: 2016-06
     seriesinfo: European Telecommunications Standards Institute (ETSI)
@@ -419,7 +423,7 @@ Bootstrapping  /      Maintenance &   \     Maintenance &
 
 Security is a key requirement in any communication system. However, security is an even more critical requirement in real-world IoT deployments for several reasons. First, compromised IoT systems can not only endanger the privacy and security of a user, but can also cause physical harm. This is because IoT systems often comprise sensors, actuators and other connected devices in the physical environment of the user which could adversely affect the user if they are compromised. Second, a vulnerable IoT system means that an attacker can alter the functionality of a device from a given manufacturer. This not only affects the manufacturer's brand image, but can also leak information that is very valuable for the manufacturer (such as proprietary algorithms). Third, the impact of attacking an IoT system goes beyond a specific device or an isolated system since compromised IoT systems can be misused at scale. For example, they may be used to perform a Distributed Denial of Service (DDoS) attack that limits the availability of other networks and services. The fact that many IoT systems rely on standard IP protocols allows for easier system integration, but this also makes attacks on standard IP protocols widely applicable in other environments. This results in new requirements regarding the implementation of security.
 
-The term security subsumes a wide range of primitives, protocols, and procedures. For instance, it includes the basic provision of security services that include confidentiality, authentication, integrity, authorization, source authentication, and availability along with some augmented services, such as duplicate detection and detection of stale packets (timeliness). These security services can be implemented by means of a combination of cryptographic mechanisms, such as block ciphers, hash functions, or signature algorithms, and non-cryptographic mechanisms, which implement authorization and other security policy enforcement aspects. For ensuring security in IoT networks, we should not only focus on the required security services, but also pay special attention to the security procedures, i.e., how these services are realized in the overall system and how the security functionalities are executed in practice.
+The term security subsumes a wide range of primitives, protocols, and procedures. For instance, the term security includes services such as confidentiality, authentication, integrity, authorization, source authentication, and availability. The term security often also includes augmented services such as duplicate detection and detection of stale packets (timeliness). These security services can be implemented through a combination of cryptographic mechanisms such as block ciphers, hash functions, and signature algorithms; as well as non-cryptographic mechanisms that implement authorization and other security policy enforcement aspects. For ensuring security in IoT networks, one should not only focus on the required security services, but also pay special attention to how the services are realized in the overall system.
 
 
 # Security Threats and Managing Risk {#sec3}
@@ -520,7 +524,7 @@ There are three main security objectives for IoT networks:
 2. protecting IoT applications and thus, the things and users.
 3. protecting the rest of the Internet and other things from attacks that use compromised things as an attack platform.
 
-In the context of the IP-based IoT deployments, consideration of existing Internet security protocols is important. There are a wide range of specialized as well as general-purpose security solutions for the Internet domain such as IKEv2/IPsec {{RFC7296}}, TLS {{RFC5246}}, DTLS {{RFC6347}}, HIP {{RFC7401}}, PANA {{RFC5191}}, and EAP {{RFC3748}}.
+In the context of the IP-based IoT deployments, consideration of existing Internet security protocols is important. There are a wide range of specialized as well as general-purpose security solutions for the Internet domain such as IKEv2/IPsec {{RFC7296}}, Transport Layer Security (TLS) {{RFC8446}}, Datagram Transport Layer Security (DTLS) {{RFC6347}}, Host Identity Protocol (HIP) {{RFC7401}}, PANA {{RFC5191}}, Kerberos ({{RFC4120}}), Simple Authentication and Security Layer (SASL) {{RFC4422}}, and Extensible Authentication Protocol (EAP) {{RFC3748}}.
 
 TLS provides security for TCP and requires a reliable transport. DTLS secures and uses datagram-oriented protocols such as UDP. Both protocols are intentionally kept similar and share the same ideology and cipher suites. The CoAP base specification {{RFC7252}} provides a description of how DTLS can be used for securing CoAP. It proposes three different modes for using DTLS: the PreSharedKey mode, where nodes have pre-provisioned keys for initiating a DTLS session with another node, RawPublicKey mode, where nodes have asymmetric-key pairs but no certificates to verify the ownership, and Certificate mode, where public keys are certified by a certification authority. An IoT implementation profile {{RFC7925}} is defined for TLS version 1.2 and DTLS version 1.2 that offers communication security for resource-constrained nodes.
 
@@ -536,14 +540,10 @@ Migault et al. {{ID-dietesp}} are working on a compressed version of IPsec so th
 
 The Extensible Authentication Protocol (EAP) {{RFC3748}} is an authentication framework supporting multiple authentication methods. EAP runs directly over the data link layer and, thus, does not require the deployment of IP. It supports duplicate detection and retransmission, but does not allow for packet fragmentation. The Protocol for Carrying Authentication for Network Access (PANA) is a network-layer transport for EAP that enables network access authentication between clients and the network infrastructure. In EAP terms, PANA is a UDP-based EAP lower layer that runs between the EAP peer and the EAP authenticator.
 
-Finally, there are many protocols based on a key distribution center allowing, e.g., for authentication. One of those protocols is Kerberos {{RFC1510}}, {{RFC4120}}, {{RFC6649}}. Some IoT control standards such as ZigBee {{ZB}} offer similar solutions.
-
 
 ## IoT Security Guidelines {#sec4-3}
 
-Attacks on and from IoT devices have become common in the last years, for instance, large scale Denial of Service (DoS) attacks on the Internet Infrastructure from compromised IoT devices.
-This fact has prompted many different standards bodies and consortia to provide guidelines for developers and the Internet community at large to build secure IoT devices and services.
-A subset of the different guidelines and ongoing projects are as follows:
+Attacks on and from IoT devices have become common in the last years, for instance, large scale Denial of Service (DoS) attacks on the Internet Infrastructure from compromised IoT devices. This fact has prompted many different standards bodies and consortia to provide guidelines for developers and the Internet community at large to build secure IoT devices and services. A subset of the different guidelines and ongoing projects are as follows:
 
 1. Global System for Mobile Communications (GSM) Association (GSMA) IoT security guidelines {{GSMAsecurity}}: GSMA has published a set of security guidelines for the benefit of new IoT product and service providers. The guidelines are aimed at device manufacturers, service providers, developers and network operators. An enterprise can complete an IoT Security Self-Assessment to demonstrate that its products and services are aligned with the security guidelines of the GSMA.
 
@@ -557,7 +557,7 @@ A subset of the different guidelines and ongoing projects are as follows:
 
 6. National Institute of Standards and Technology (NIST) {{NIST-Guide}}: The NIST special publication urges enterprise and US federal agencies to address security throughout the systems engineering process. The publication builds upon the International Organization for Standardization (ISO)/International Electrotechnical Commission (IEC) 15288 standard and augments each process in the system lifecycle with security enhancements.
 
-7. National Institute of Standards and Technology (NIST) {{nist_lightweight_project}}: NIST is running a project on lightweight cryptography with the purpose of: (i) identifying application areas for which standard cryptographic algorithms are too heavy, classifying them according to some application profiles to be determined; (ii) determining limitations in those existing cryptographic standards; and (iii) standardizing lightweight algorithms that can be used in specific application profiles.
+7. National Institute of Standards and Technology (NIST) {{nist-lightweight-project}}: NIST is running a project on lightweight cryptography with the purpose of: (i) identifying application areas for which standard cryptographic algorithms are too heavy, classifying them according to some application profiles to be determined; (ii) determining limitations in those existing cryptographic standards; and (iii) standardizing lightweight algorithms that can be used in specific application profiles.
 
 8. Open Web Application Security Project (OWASP) {{OWASP}}: OWASP provides security guidance for IoT manufactures, developers and consumers. OWASP also includes guidelines for those who intend to test and analyze IoT devices and applications.
 
@@ -567,7 +567,9 @@ A subset of the different guidelines and ongoing projects are as follows:
 
 11. Best Current Practices (BCP) for IoT devices {{ID-Moore}}: This document provides a list of minimum requirements that vendors of Internet of Things (IoT) devices should to take into account while developing applications, services and firmware updates in order to reduce the frequency and severity of security incidents that arise from compromised IoT devices.
 
-12. European Union Agency for Network and Information Security (ENISA) {{ENISA_ICS}}: ENISA published a document on communication network dependencies for Industrial Control Systems (ICS)/Supervisory Control And Data Acquisition (SCADA) systems in which security vulnerabilities, guidelines and general recommendations are summarized.
+12. European Union Agency for Network and Information Security (ENISA) {{ENISA-ICS}}: ENISA published a document on communication network dependencies for Industrial Control Systems (ICS)/Supervisory Control And Data Acquisition (SCADA) systems in which security vulnerabilities, guidelines and general recommendations are summarized.
+
+13. Internet Society Online Trust Alliance {{ISOC-OTA}}: The Internet Society’s IoT Trust Framework identifies the core requirements manufacturers, service providers, distributors, purchasers and policymakers need to understand, assess and embrace for effective security and privacy as part of the Internet of Things.
 
 Other guideline and recommendation documents may exist or may later be published. This list should be considered non-exhaustive. Despite the acknowledgment that security in the Internet is needed and the existence of multiple guidelines, the fact is that many IoT devices and systems have very limited security. There are multiple reasons for this. For instance, some manufactures focus on delivering a product without paying enough attention to security. This may be because of lack of expertise or limited budget. However, the deployment of such insecure devices poses a severe threat on the privacy and safety of users. The vast amount of devices and their inherent mobile nature also implies that an initially secure system can become insecure if a compromised device gains access to the system at some point in time. Even if all other devices in a given environment are secure, this does not prevent external attacks caused by insecure devices. Recently the Federal Communications Commission (FCC) {{FCC}} has stated the need for additional regulation of IoT systems. It is possible that we may see other such regional regulations in the future.
 
@@ -683,7 +685,7 @@ Software updates in IoT systems are also needed to update old and insecure crypt
 2. Will the new software-based implementation fit on the device given the limited resources?
 3. Would the normal operation of existing IoT applications on the device be severely hindered by the update?
 
-Finally, we would like to highlight the previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC5652}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the recommendations to the standards community derived from the discussions during that workshop have been documented {{RFC8240}}. A new working group called Software Updates for Internet of Things (suit) {{WG-SUIT}} is currently being chartered at the IETF. The working group aims to standardize a new version {{RFC4108}} that reflects the best current practices for firmware update based on experience with IoT deployments. It will specifically work on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package. Finally, the Trusted Execution Environment Provisioning working group {{WG-TEEP}} aims at developing a protocol for lifecycle management of trusted applications running on the secure area of a processor (Trusted Execution Enviornment (TEE)).
+Finally, we would like to highlight the previous and ongoing work in the area of secure software and firmware updates at the IETF. {{RFC4108}} describes how Cryptographic Message Syntax (CMS) {{RFC5652}} can be used to protect firmware packages. The IAB has also organized a workshop to understand the challenges for secure software update of IoT devices. A summary of the recommendations to the standards community derived from the discussions during that workshop have been documented {{RFC8240}}. A working group called Software Updates for Internet of Things (suit) {{WG-SUIT}} is currently working on a new version {{RFC4108}} to reflect the best current practices for firmware update based on experience from IoT deployments. It is specifically working on describing an IoT firmware update architecture and specifying a manifest format that contains meta-data about the firmware update package. Finally, the Trusted Execution Environment Provisioning working group {{WG-TEEP}} aims at developing a protocol for lifecycle management of trusted applications running on the secure area of a processor (Trusted Execution Enviornment (TEE)).
 
 
 ## End-of-Life {#sec5-5}
@@ -718,7 +720,7 @@ Many IoT systems that are being deployed today will remain operational for many 
 
 The above scenario becomes more urgent when we consider the so called "harvest and decrypt" attack in which an attacker can start to harvest (store) encrypted data today, before a quantum-computer is available, and decrypt it years later, once a quantum computer is available. Such "harvest and decrypt" attacks are not new and were used in the Venona project {{venona-project}}. Many IoT devices that are being deployed today will remain operational for a decade or even longer. During this time, digital signatures used to sign software updates might become obsolete making the secure update of IoT devices challenging.
 
-This situation would require us to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. {{ID-c2pq}} describes when quantum computers may become widely available and what steps are necessary for transition to cryptographic algorithms that provide security even in presence of quantum computers. While future planning is hard, it may be a necessity in certain critical IoT deployments which are expected to last decades or more. Although increasing the key-size of the different algorithms is definitely an option, it would also incur additional computational overhead and network traffic. This would be undesirable in most scenarios. There have been recent advancements in quantum-resistant cryptography. We refer to {{ETSI_GR_QSC_001}} for an extensive overview of existing quantum-resistant cryptography and {{RFC7696}} provides guidelines for cryptographic algorithm agility.
+This situation would require us to move to quantum-resistant alternatives, in particular, for those functionalities involving key exchange, public-key encryption and signatures. {{ID-c2pq}} describes when quantum computers may become widely available and what steps are necessary for transition to cryptographic algorithms that provide security even in presence of quantum computers. While future planning is hard, it may be a necessity in certain critical IoT deployments which are expected to last decades or more. Although increasing the key-size of the different algorithms is definitely an option, it would also incur additional computational overhead and network traffic. This would be undesirable in most scenarios. There have been recent advancements in quantum-resistant cryptography. We refer to {{ETSI-GR-QSC-001}} for an extensive overview of existing quantum-resistant cryptography and {{RFC7696}} provides guidelines for cryptographic algorithm agility.
 
 ## Privacy protection {#sec5-9}
 
