@@ -6,7 +6,6 @@ cat: info
 stand_alone: true
 informative:
   ID-dietesp: I-D.mglt-6lo-diet-esp
-  ID-senml: I-D.ietf-core-senml
   ID-rd: I-D.ietf-core-resource-directory
   ID-6lonfc: I-D.ietf-6lo-nfc
   ID-6tisch: I-D.ietf-6tisch-architecture
@@ -20,7 +19,6 @@ informative:
   ID-OSCORE: I-D.ietf-core-object-security
   ID-multicast: I-D.ietf-core-oscore-groupcomm
   ID-c2pq: I-D.hoffman-c2pq
-  ID-lpwan: I-D.ietf-lpwan-overview
   ID-bootstrap: I-D.sarikaya-t2trg-sbootstrapping
   RFC2818:
   RFC3748:
@@ -36,7 +34,6 @@ informative:
   RFC4919:
   RFC4944:
   RFC5191:
-  RFC5246:
   RFC5652:
   RFC5713:
   RFC5903:
@@ -68,6 +65,8 @@ informative:
   RFC8152:
   RFC8240:
   RFC8259:
+  RFC8376:
+  RFC8428:
   RFC8446:
   AUTO-ID:
     title: AUTO-ID LABS
@@ -482,7 +481,7 @@ The CoRE working group {{WG-CoRE}} has specified the Constrained Application Pro
 
 In many smart object networks, the smart objects are dispersed and have intermittent reachability either because of network outages or because they sleep during their operational phase to save energy. In such scenarios, direct discovery of resources hosted on the constrained server might not be possible. To overcome this barrier, the CoRE working group is specifying the concept of a Resource Directory (RD) {{ID-rd}}. The Resource Directory hosts descriptions of resources which are located on other nodes. These resource descriptions are specified as CoRE link format {{RFC6690}}.
 
-While CoAP defines a standard communication protocol, a format for representing sensor measurements and parameters over CoAP is required. The Sensor Measurement Lists (SenML) {{ID-senml}} is a specification that defines media types for simple sensor measurements and parameters. It has a minimalistic design so that constrained devices with limited computational capabilities can easily encode their measurements and, at the same time, servers can efficiently collect large number of measurements.
+While CoAP defines a standard communication protocol, a format for representing sensor measurements and parameters over CoAP is required. The Sensor Measurement Lists (SenML) {{RFC8428}} is a specification that defines media types for simple sensor measurements and parameters. It has a minimalistic design so that constrained devices with limited computational capabilities can easily encode their measurements and, at the same time, servers can efficiently collect large number of measurements.
 
 In many IoT deployments, the resource-constrained smart objects are connected to the Internet via a gateway that is directly reachable. For example, an IEEE 802.11 Access Point (AP) typically connects the client devices to the Internet over just one wireless hop. However, some deployments of smart object networks require routing between the smart objects themselves. The IETF has therefore defined the IPv6 Routing Protocol for Low-Power and Lossy Networks (RPL) {{RFC6550}}. RPL provides support for multipoint-to-point traffic from resource-constrained smart objects towards a more resourceful central control point, as well as point-to-multipoint traffic in the reverse direction. It also supports point-to-point traffic between the resource-constrained devices. A set of routing metrics and constraints for path calculation in RPL are also specified {{RFC6551}}.
 
@@ -592,7 +591,7 @@ The size and number of messages should be minimized to reduce memory requirement
 
 Small CPUs and scarce memory limit the usage of resource-expensive cryptographic primitives such as public-key cryptography as used in most Internet security standards. This is especially true if the basic cryptographic blocks need to be frequently used or the underlying application demands low delay.
 
-There are ongoing efforts to reduce the resource consumption of security protocols by using more efficient underlying cryptographic primitives such as Elliptic Curve Cryptography {{RFC5246}}. The specification of elliptic curve X25519 {{ecc25519}}, stream ciphers such as ChaCha {{ChaCha}}, Diet HIP {{ID-HIP-DEX}}, and ECC goups for IKEv2 {{RFC5903}} are all examples of efforts to make security protocols more resource efficient. Additionally, most modern security protocols have been revised in the last few years to enable cryptographic agility, making cryptographic primitives interchangeable. However, these improvements are only a first step in reducing the computation and communication overhead of Internet protocols. The question remains if other approaches can be applied to leverage key agreement in these heavily resource-constrained environments.
+There are ongoing efforts to reduce the resource consumption of security protocols by using more efficient underlying cryptographic primitives such as Elliptic Curve Cryptography {{RFC8446}}. The specification of elliptic curve X25519 {{ecc25519}}, stream ciphers such as ChaCha {{ChaCha}}, Diet HIP {{ID-HIP-DEX}}, and ECC goups for IKEv2 {{RFC5903}} are all examples of efforts to make security protocols more resource efficient. Additionally, most modern security protocols have been revised in the last few years to enable cryptographic agility, making cryptographic primitives interchangeable. However, these improvements are only a first step in reducing the computation and communication overhead of Internet protocols. The question remains if other approaches can be applied to leverage key agreement in these heavily resource-constrained environments.
 
 
 A further fundamental need refers to the limited energy budget available to IoT nodes. Careful protocol (re)design and usage is required to reduce not only the energy consumption during normal operation, but also under DoS attacks. Since the energy consumption of IoT devices differs from other device classes, judgments on the energy consumption of a particular protocol cannot be made without tailor-made IoT implementations.
@@ -635,7 +634,7 @@ To the best of our knowledge, none of the mentioned security approaches that foc
 ### New network architectures and paradigm {#sec5-1-4}
 
 
-There is a multitude of new link layer protocols that aim to address the resource-constrained nature of IoT devices. For example, the IEEE 802.11 ah {{IEEE802ah}} has been specified for extended range and lower energy consumption to support Internet of Things (IoT) devices. Similarly, Low-Power Wide-Area Network (LPWAN) protocols such as LoRa {{lora}}, Sigfox {{sigfox}}, NarrowBand IoT (NB-IoT) {{nbiot}} are all designed for resource-constrained devices that require long range and low bit rates. {{ID-lpwan}} provides an informational overview of the set of LPWAN technologies being considered by the IETF. It also identifies the potential gaps that exist between the needs of those technologies and the goal of running IP in such networks. While these protocols allow IoT devices to conserve energy and operate efficiently, they also add additional security challenges. For example, the relatively small MTU can make security handshakes with large X509 certificates a significant overhead. At the same time, new communication paradigms also allow IoT devices to communicate directly amongst themselves with or without support from the network. This communication paradigm is also referred to as Device-to-Device (D2D) or Machine-to-Machine (M2M) or Thing-to-Thing (T2T) communication and it is motivated by a number of features such as improved network performance, lower latency and lower energy requirements.
+There is a multitude of new link layer protocols that aim to address the resource-constrained nature of IoT devices. For example, the IEEE 802.11 ah {{IEEE802ah}} has been specified for extended range and lower energy consumption to support Internet of Things (IoT) devices. Similarly, Low-Power Wide-Area Network (LPWAN) protocols such as LoRa {{lora}}, Sigfox {{sigfox}}, NarrowBand IoT (NB-IoT) {{nbiot}} are all designed for resource-constrained devices that require long range and low bit rates. {{RFC8376}} provides an informational overview of the set of LPWAN technologies being considered by the IETF. It also identifies the potential gaps that exist between the needs of those technologies and the goal of running IP in such networks. While these protocols allow IoT devices to conserve energy and operate efficiently, they also add additional security challenges. For example, the relatively small MTU can make security handshakes with large X509 certificates a significant overhead. At the same time, new communication paradigms also allow IoT devices to communicate directly amongst themselves with or without support from the network. This communication paradigm is also referred to as Device-to-Device (D2D) or Machine-to-Machine (M2M) or Thing-to-Thing (T2T) communication and it is motivated by a number of features such as improved network performance, lower latency and lower energy requirements.
 
 
 ## Bootstrapping of a Security Domain {#sec5-2}
